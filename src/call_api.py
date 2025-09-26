@@ -437,7 +437,7 @@ def create_gemini_generate_content_config(
     max_output_tokens: Optional[int] = None,
     enable_tools: bool = True,
     enable_thinking: bool = True,
-    thinking_budget: int = 16000
+    thinking_budget: int = 8192
 ) -> Optional[Any]:
     """Create GenerateContentConfig for regular Gemini models with tools and thinking support"""
     try:

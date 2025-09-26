@@ -1910,10 +1910,6 @@ async def on_message(message: discord.Message):
     
     except Exception as e:
         logger.exception("Error adding request to queue")
-        await message.channel.send(
-            f"Error adding request to queue: {e}",
-            allowed_mentions=discord.AllowedMentions.none()
-        )
 
 # ------------------------------------------------------------------
 # Setup – register commands, listeners, load data (updated for slash commands)
