@@ -1928,7 +1928,7 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     # Check if we're using MongoDB
     _use_mongodb_auth = _config.USE_MONGODB
     if _use_mongodb_auth:
-        from mongodb_store import get_mongodb_store
+        from database import get_mongodb_store
         _mongodb_store = get_mongodb_store()
         logger.info("Using MongoDB for data storage")
     else:

@@ -38,7 +38,7 @@ class UserConfigManager:
         
         if self.use_mongodb:
             # MongoDB mode
-            from mongodb_store import get_mongodb_store
+            from database import get_mongodb_store
             self.mongo_store = get_mongodb_store()
             logger.info("UserConfigManager initialized with MongoDB")
         else:

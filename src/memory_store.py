@@ -29,7 +29,7 @@ class MemoryStore:
         if self.use_mongodb:
             # MongoDB mode - delegate to MongoDB store
             try:
-                from mongodb_store import get_mongodb_store
+                from database import get_mongodb_store
                 self.mongo_store = get_mongodb_store()
                 logger.info("MemoryStore initialized with MongoDB backend")
             except Exception as e:

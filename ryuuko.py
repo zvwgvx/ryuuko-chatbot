@@ -11,7 +11,7 @@ The project layout is
             call_api.py
             functions.py
             memory_store.py
-            mongodb_store.py
+            database.py
             user_config.py
             request_queue.py
             main.py            ← contains the bot definition

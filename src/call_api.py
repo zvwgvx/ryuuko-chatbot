@@ -3,7 +3,7 @@ from typing import List, Dict, Any, Tuple, Optional, AsyncIterator, Union
 from openai import OpenAI
 import google.generativeai as genai
 import load_config
-from mongodb_store import get_mongodb_store
+from database import get_mongodb_store
 from ratelimit import get_rate_limiter
 import logging
 
