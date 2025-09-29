@@ -10,10 +10,15 @@ class RateLimiter:
     def __init__(self):
         # Default rate limits per model
         self.rate_limits = {
-            "gemini-2.5-pro": {
+            "ryuuko-r1-vnm-pro": {
                 "min_interval": 12,  # seconds between requests
                 "retries": 1,        # number of retries on rate limit
                 "backoff": 60        # backoff time in seconds
+            },
+            "ryuuko-r1-eng-pro": {
+                "min_interval": 12,  # seconds between requests
+                "retries": 1,  # number of retries on rate limit
+                "backoff": 60  # backoff time in seconds
             },
             "default": {
                 "min_interval": 2,   # default interval for other models
