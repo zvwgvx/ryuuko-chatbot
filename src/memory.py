@@ -1,4 +1,4 @@
-# Fixed memory_store.py - Replace the entire file
+# Fixed memory.py - Replace the entire file
 
 import json
 import tiktoken
@@ -8,7 +8,7 @@ from collections import deque
 from typing import Dict, List, Union, TypedDict
 import load_config
 
-logger = logging.getLogger("memory_store")
+logger = logging.getLogger("Memory")
 
 # Configuration
 CONFIG_DIR = Path(__file__).parent.parent / "config"
@@ -64,23 +64,16 @@ class MemoryStore:
 
     def clear_user(self, user_id: int) -> bool:
         """Clear user's conversation history"""
-        if self.use_mongodb:
-            try:
-                success = self.mongo_store.clear_user_memory(user_id)
-                if success:
-                    logger.info(f"Successfully cleared memory for user {user_id} from MongoDB")
-                else:
-                    logger.warning(f"Failed to clear memory for user {user_id} from MongoDB")
-                return success
-            except Exception as e:
-                logger.exception(f"Error clearing memory from MongoDB for user {user_id}: {e}")
-                return False
-        else:
-            # File-based storage
-            self._cache.pop(user_id, None)
-            self._token_cnt.pop(user_id, None)
-            self._save()
-            return True
+        try:
+            success = self.mongo_store.clear_user_memory(user_id)
+            if success:
+                logger.info(f"Successfully cleared memory for user {user_id} from MongoDB")
+            else:
+                logger.warning(f"Failed to clear memory for user {user_id} from MongoDB")
+            return success
+        except Exception as e:
+            logger.exception(f"Error clearing memory from MongoDB for user {user_id}: {e}")
+            return False
 
     def remove_last_message(self, user_id: int) -> bool:
         """Remove the last message from user's conversation history"""

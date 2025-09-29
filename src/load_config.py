@@ -20,7 +20,8 @@ from database import init_mongodb_store, get_mongodb_store
 # --------------------------------------------------------------------
 # Logger
 # --------------------------------------------------------------------
-logger = logging.getLogger("config")
+logger = logging.getLogger("Config")
+
 if not logger.handlers:
     hdlr = logging.StreamHandler()
     fmt = "%(asctime)s %(name)s %(levelname)s: %(message)s"
@@ -33,7 +34,6 @@ if not logger.handlers:
 # --------------------------------------------------------------------
 BASE_DIR = Path(__file__).resolve().parent.parent
 ENV_FILE = BASE_DIR / "config.json"
-
 
 # --------------------------------------------------------------------
 # Helpers

@@ -6,7 +6,7 @@ import httpx
 import load_config
 from ratelimit import get_rate_limiter
 
-logger = logging.getLogger("call_api")
+logger = logging.getLogger("Call API")
 
 class UnifiedAPIClient:
     """Unified API client for all models"""
@@ -96,7 +96,6 @@ def build_api_request(
 
     return payload
 
-
 def is_thinking_model(model_name: str) -> bool:
     """Check if the model supports thinking (reasoning)"""
     thinking_patterns = [
@@ -109,13 +108,11 @@ def is_thinking_model(model_name: str) -> bool:
     model_lower = model_name.lower()
     return any(pattern in model_lower for pattern in thinking_patterns)
 
-
 def is_model_available(model: str) -> Tuple[bool, str]:
     """Check if a model is available for use"""
     # For unified API, we assume all models are available
     # The API server will handle model availability
     return True, ""
-
 
 async def call_unified_api(
         messages: List[Dict[str, Any]],

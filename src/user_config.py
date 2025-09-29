@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Dict, Any, Optional, Set
 import load_config
 
-logger = logging.getLogger("user_config")
+logger = logging.getLogger("Config")
 
 # User config file path (fallback for file mode)
 BASE_DIR = Path(__file__).resolve().parent.parent

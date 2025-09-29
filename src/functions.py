@@ -23,11 +23,11 @@ from discord.ext import commands
 
 # ────────────────────────────────────────────────────────────────────────────
 # ***Absolute import — no package, so we use the plain module name ***
-from memory_store import MemoryStore
+from memory import MemoryStore
 from user_config import get_user_config_manager
 from request_queue import get_request_queue
 
-logger = logging.getLogger("functions")
+logger = logging.getLogger("Functions")
 
 # ---------------------------- module‑level state -----------------------------
 _bot: Optional[commands.Bot] = None
@@ -631,7 +631,6 @@ async def help_command(ctx):
 
     lines = [
         "**Available commands:**",
-        "`.getid [user]` – Show your ID (or mention a user)",
         "`.ping` – Check bot responsiveness",
         "",
         "**Configuration commands (authorized users):**",
@@ -641,11 +640,6 @@ async def help_command(ctx):
         "`.showprompt [user]` – View system prompt",
         "`.models` – Show all supported models",
         "`.clearmemory [user]` – Clear conversation history",
-        "",
-        "**🖼️ Image Analysis (Gemini models only):**",
-        "• Attach images (JPG, PNG, GIF, WebP, BMP) with your message",
-        "• Images work with regular Gemini models (not Live models)",
-        "• Max 10MB per image, multiple images supported"
     ]
 
     if is_owner:
@@ -654,14 +648,13 @@ async def help_command(ctx):
             "**Owner‑only commands:**",
             "`.auth <user>` – Add a user to authorized list",
             "`.deauth <user>` – Remove user from authorized list",
-            "`.showauth` – List authorized users",
+            "`.auths` – List authorized users",
             "`.memory [user]` – View conversation history",
             "",
             "**Model management (owner only):**",
             "`.addmodel <name> <cost> <level>` – Add a new model",
             "`.removemodel <name>` – Remove a model",
             "`.editmodel <name> <cost> <level>` – Edit model settings",
-            "`.listmodels` – List all models with details",
             "",
             "**Credit management (owner only):**",
             "`.addcredit <user> <amount>` – Add credits to user",
@@ -671,16 +664,6 @@ async def help_command(ctx):
         ]
 
     await ctx.send("\n".join(lines))
-
-
-@commands.command(name="getid")
-async def getid_command(ctx, member: discord.Member = None):
-    """Get user ID"""
-    if member is None:
-        await ctx.send(f"Your ID: {ctx.author.id}")
-    else:
-        await ctx.send(f"{member} ID: {member.id}")
-
 
 @commands.command(name="ping")
 async def ping_command(ctx):
@@ -957,7 +940,7 @@ async def deauth_command(ctx, member: discord.Member):
         await ctx.send(f"❌ Failed to remove {member} from authorized list.")
 
 
-@commands.command(name="showauth")
+@commands.command(name="auths")
 @commands.is_owner()
 async def show_auth_command(ctx):
     """Show authorized users"""
@@ -1088,68 +1071,6 @@ async def edit_model_command(ctx, model_name: str, credit_cost: int, access_leve
     except Exception as e:
         logger.exception(f"Error editing model: {e}")
         await ctx.send(f"❌ Error editing model: {str(e)[:100]}")
-
-
-@commands.command(name="listmodels")
-@commands.is_owner()
-async def list_models_command(ctx):
-    """List all models with details (owner only)"""
-
-    if not _use_mongodb_auth:
-        await ctx.send("❌ Model management requires MongoDB mode.")
-        return
-
-    try:
-        all_models = _mongodb_store.list_all_models()
-
-        if not all_models:
-            await ctx.send("No models found in database.")
-            return
-
-        lines = ["**All Models in Database:**"]
-
-        # Sort by access level then by name
-        sorted_models = sorted(all_models, key=lambda x: (-x.get("access_level", 0), x.get("model_name", "")))
-
-        current_level = None
-        for model in sorted_models:
-            model_name = model.get("model_name", "Unknown")
-            credit_cost = model.get("credit_cost", 0)
-            access_level = model.get("access_level", 0)
-
-            level_names = {0: "Basic", 1: "Advanced", 2: "Premium", 3: "Ultimate"}
-            level_name = level_names.get(access_level, f"Level {access_level}")
-
-            # Add level header if level changed
-            if current_level != access_level:
-                lines.append(f"\n**{level_name} Models (Level {access_level}):**")
-                current_level = access_level
-
-            # Add features
-            features = []
-            if is_gemini_model(model_name):
-                if is_gemini_live_model(model_name):
-                    features.append("⚡Live")
-                else:
-                    features.append("🖼️IMG")
-
-            feature_text = f" {' '.join(features)}" if features else ""
-            lines.append(f"• `{model_name}` - {credit_cost} credits{feature_text}")
-
-        # Send message, split if too long
-        message = "\n".join(lines)
-        if len(message) > 2000:
-            chunks = split_message_smart(message, 2000)
-            for chunk in chunks:
-                await ctx.send(chunk)
-                await asyncio.sleep(0.5)
-        else:
-            await ctx.send(message)
-
-    except Exception as e:
-        logger.exception(f"Error listing models: {e}")
-        await ctx.send(f"❌ Error listing models: {str(e)[:100]}")
-
 
 # ------------------------------------------------------------------
 # Credit Management Commands (Owner only)
@@ -1342,7 +1263,7 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     # Initialize storage backend
     try:
         _config.init_storage()
-        logger.info("✅ Storage initialized")
+        logger.info("Storage initialized")
     except Exception as e:
         logger.error(f"❌ Storage init failed: {e}")
 
@@ -1352,19 +1273,19 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         try:
             from database import get_mongodb_store
             _mongodb_store = get_mongodb_store()
-            logger.info("✅ Using MongoDB for data storage")
+            logger.info("Using MongoDB for data storage")
         except Exception as e:
             logger.error(f"❌ MongoDB init failed: {e}")
             _mongodb_store = None
     else:
         _mongodb_store = None
-        logger.info("✅ Using file-based storage (legacy mode)")
+        logger.info("Using file-based storage (legacy mode)")
 
     # Initialize managers
     try:
         _user_config_manager = get_user_config_manager()
         _request_queue = get_request_queue()
-        logger.info("✅ Managers initialized")
+        logger.info("Managers initialized")
     except Exception as e:
         logger.error(f"❌ Managers init failed: {e}")
 
@@ -1372,14 +1293,14 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     try:
         _request_queue.set_bot(bot)
         _request_queue.set_process_callback(process_ai_request)
-        logger.info("✅ Request queue setup")
+        logger.info("Request queue setup")
     except Exception as e:
         logger.error(f"❌ Request queue setup failed: {e}")
 
     # Load authorized users
     try:
         _authorized_users = load_authorized_users()
-        logger.info(f"✅ Loaded {len(_authorized_users)} authorized users")
+        logger.info(f"Loaded {len(_authorized_users)} authorized users")
     except Exception as e:
         logger.error(f"❌ Failed to load authorized users: {e}")
         _authorized_users = set()
@@ -1387,7 +1308,7 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     # Initialize memory store
     try:
         _memory_store = MemoryStore()
-        logger.info("✅ Memory store initialized")
+        logger.info("Memory store initialized")
     except Exception as e:
         logger.error(f"❌ Memory store init failed: {e}")
 
@@ -1395,7 +1316,6 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     try:
         # Basic commands
         bot.add_command(help_command)
-        bot.add_command(getid_command)
         bot.add_command(ping_command)
 
         # User commands
@@ -1416,7 +1336,6 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         bot.add_command(add_model_command)
         bot.add_command(remove_model_command)
         bot.add_command(edit_model_command)
-        bot.add_command(list_models_command)
 
         # Credit management commands
         bot.add_command(add_credit_command)
@@ -1424,15 +1343,15 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         bot.add_command(set_credit_command)
         bot.add_command(set_level_command)
 
-        logger.info("✅ All prefix commands registered")
+        logger.info("All prefix commands registered")
     except Exception as e:
         logger.error(f"❌ Failed to register commands: {e}")
 
     # Register on_message listener
     try:
         bot.add_listener(on_message, "on_message")
-        logger.info("✅ on_message listener registered")
+        logger.info("on_message listener registered")
     except Exception as e:
         logger.error(f"❌ Failed to register on_message listener: {e}")
 
-    logger.info("🎉 Functions module setup completed!")
+    logger.info("🎉  Functions module setup completed!")

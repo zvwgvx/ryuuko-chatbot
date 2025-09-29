@@ -19,7 +19,7 @@ logging.basicConfig(
     stream=sys.stdout,
 )
 
-logger = logging.getLogger("main")
+logger = logging.getLogger("Main")
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -51,7 +51,6 @@ async def on_ready():
 # Initialize functions module
 logger.info("🔧 Initializing functions module...")
 functions.setup(bot, call_api, load_config)
-
 
 # Add error handler for commands
 @bot.event

@@ -10,7 +10,7 @@ from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
 import tiktoken
 import time
 
-logger = logging.getLogger("database")
+logger = logging.getLogger("Database")
 
 
 class MongoDBStore:

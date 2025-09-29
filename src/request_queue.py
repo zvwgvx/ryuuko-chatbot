@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from typing import Optional, Dict, Set
 import discord
 
-logger = logging.getLogger("request_queue")
+logger = logging.getLogger("Request Queue")
 
 @dataclass
 class QueuedRequest:

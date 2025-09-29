@@ -10,7 +10,7 @@ The project layout is
             load_config.py
             call_api.py
             functions.py
-            memory_store.py
+            memory.py
             database.py
             user_config.py
             request_queue.py

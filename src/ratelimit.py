@@ -3,7 +3,7 @@ import logging
 import asyncio
 from typing import Dict, Optional
 
-logger = logging.getLogger("ratelimit")
+logger = logging.getLogger("Ratelimit")
 
 class RateLimiter:
     """Rate limiter for API calls"""
