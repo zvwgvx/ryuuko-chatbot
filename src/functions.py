@@ -590,7 +590,7 @@ async def process_ai_request(request):
 
             if _memory_store:
                 _memory_store.add_message(user_id, {"role": "user", "content": combined_text})
-                _memory_store.add_message(user_id, {"role": "assistant", "content": resp})
+                _memory_store.add_message(user_id, {"role": "model", "content": resp})
 
             # Deduct credits if using MongoDB
             if _use_mongodb_auth and 'model_info' in locals() and model_info:
@@ -678,7 +678,6 @@ async def ping_command(ctx):
     content = f"Pong! \nResponse: {latency_ms} ms\nWebSocket: {ws_latency} ms"
     await msg.edit(content=content)
 
-
 # ------------------------------------------------------------------
 # PREFIX COMMANDS - User Configuration Commands
 # ------------------------------------------------------------------
@@ -709,7 +708,6 @@ async def set_sys_prompt_command(ctx, *, prompt: str):
 
     success, message = _user_config_manager.set_user_system_prompt(ctx.author.id, prompt)
     await ctx.send(f"✅ {message}")
-
 
 @commands.command(name="profile")
 async def show_profile_command(ctx, member: discord.Member = None):
