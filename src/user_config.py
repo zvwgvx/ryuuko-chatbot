@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 # user_config.py - User configuration management with MongoDB support
+# UPDATED: Removed all profile model (pmodel) support - using regular models only
 
 import json
 import logging
@@ -15,13 +16,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CONF_DIR = BASE_DIR / "config"
 USER_CONFIG_FILE = CONF_DIR / "user_config.json"
 
-# Supported models (FALLBACK - will be fetched from database)
+# Supported models (FALLBACK - will be fetched from database in MongoDB mode)
 FALLBACK_SUPPORTED_MODELS = {
     "o3-mini",
     "gpt-4.1",
     "gpt-5",
     "gpt-oss-20b",
-    "gpt-oss-120b", 
+    "gpt-oss-120b",
+    "gemini-2.5-flash",
+    "gemini-2.5-pro",
+    "gpt-3.5-turbo",
+    "gpt-4o-mini"
 }
 
 # Default system prompt
@@ -32,10 +37,11 @@ DEFAULT_SYSTEM_PROMPT = (
 # Default model
 DEFAULT_MODEL = "gemini-2.5-flash"
 
+
 class UserConfigManager:
     def __init__(self):
         self.use_mongodb = load_config.USE_MONGODB
-        
+
         if self.use_mongodb:
             # MongoDB mode
             from database import get_mongodb_store
@@ -47,16 +53,16 @@ class UserConfigManager:
             self._config_cache: Dict[str, Dict[str, Any]] = {}
             self._load_config()
             logger.info("UserConfigManager initialized with file storage")
-    
+
     def _load_config(self) -> None:
         """Load configuration from JSON file (file mode only)"""
         if self.use_mongodb:
             return
-            
+
         if not self.config_file.exists():
             self._config_cache = {}
             return
-            
+
         try:
             content = self.config_file.read_text(encoding="utf-8")
             self._config_cache = json.loads(content) if content.strip() else {}
@@ -67,39 +73,39 @@ class UserConfigManager:
         except Exception as e:
             logger.exception(f"Error loading user_config.json: {e}")
             self._config_cache = {}
-    
+
     def _save_config(self) -> None:
         """Save configuration to JSON file (file mode only)"""
         if self.use_mongodb:
             return
-            
+
         try:
-            # Remove auto-creation of directory
-            # Ghi vào file tạm trước
+            # Ensure directory exists
+            self.config_file.parent.mkdir(parents=True, exist_ok=True)
+
+            # Write to temp file first
             tmp_file = self.config_file.with_suffix('.tmp')
             tmp_file.write_text(
                 json.dumps(self._config_cache, indent=2, ensure_ascii=False),
                 encoding="utf-8"
             )
-            
-            # Sau đó move sang file chính
+
+            # Then move to main file
             tmp_file.replace(self.config_file)
             logger.debug(f"Saved config for {len(self._config_cache)} users")
-            
+
         except Exception as e:
             logger.exception(f"Error saving user_config.json: {e}")
-    
+
     def get_supported_models(self) -> Set[str]:
         """Get set of all supported model names"""
         if self.use_mongodb:
-            # Get both regular and profile models
-            models = self.mongo_store.get_supported_models()
-            profiles = {p['name'] for p in self.mongo_store.list_profile_models()}
-            return models.union(profiles)
+            # Get models from MongoDB
+            return self.mongo_store.get_supported_models()
         else:
-            # Legacy file mode
+            # Legacy file mode - use fallback models
             return FALLBACK_SUPPORTED_MODELS
-    
+
     def add_supported_model(self, model_name: str, credit_cost: int = 1, access_level: int = 0) -> tuple[bool, str]:
         """
         Add a new supported model with credit cost and access level
@@ -107,9 +113,9 @@ class UserConfigManager:
         """
         if not self.use_mongodb:
             return False, "Model management requires MongoDB mode"
-        
+
         return self.mongo_store.add_supported_model(model_name, credit_cost, access_level)
-    
+
     def remove_supported_model(self, model_name: str) -> tuple[bool, str]:
         """
         Remove a supported model (MongoDB only)
@@ -117,16 +123,50 @@ class UserConfigManager:
         """
         if not self.use_mongodb:
             return False, "Model management requires MongoDB mode"
-        
+
         return self.mongo_store.remove_supported_model(model_name)
-    
+
+    def edit_supported_model(self, model_name: str, credit_cost: int = None, access_level: int = None) -> tuple[
+        bool, str]:
+        """
+        Edit a supported model's settings (MongoDB only)
+        Returns: (success: bool, message: str)
+        """
+        if not self.use_mongodb:
+            return False, "Model management requires MongoDB mode"
+
+        return self.mongo_store.edit_supported_model(model_name, credit_cost, access_level)
+
     def list_all_models_detailed(self) -> list:
         """Get detailed list of all models (MongoDB only)"""
         if not self.use_mongodb:
-            return []
-        
+            # Return fallback models in detailed format for consistency
+            return [
+                {
+                    "model_name": model,
+                    "credit_cost": 0,
+                    "access_level": 0,
+                    "is_default": model == DEFAULT_MODEL
+                }
+                for model in FALLBACK_SUPPORTED_MODELS
+            ]
+
         return self.mongo_store.list_all_models()
-    
+
+    def get_model_info(self, model_name: str) -> Optional[Dict[str, Any]]:
+        """Get detailed information about a specific model"""
+        if not self.use_mongodb:
+            if model_name in FALLBACK_SUPPORTED_MODELS:
+                return {
+                    "model_name": model_name,
+                    "credit_cost": 0,
+                    "access_level": 0,
+                    "is_default": model_name == DEFAULT_MODEL
+                }
+            return None
+
+        return self.mongo_store.get_model_info(model_name)
+
     def get_user_config(self, user_id: int) -> Dict[str, Any]:
         """Get user configuration, create default if not exists"""
         if self.use_mongodb:
@@ -137,21 +177,32 @@ class UserConfigManager:
             if user_key not in self._config_cache:
                 self._config_cache[user_key] = {
                     "model": DEFAULT_MODEL,
-                    "system_prompt": DEFAULT_SYSTEM_PROMPT
+                    "system_prompt": DEFAULT_SYSTEM_PROMPT,
+                    "credit": 0,
+                    "access_level": 0
                 }
                 self._save_config()
-            return self._config_cache[user_key]
-    
+
+            # Ensure all fields exist
+            config = self._config_cache[user_key]
+            if "credit" not in config:
+                config["credit"] = 0
+            if "access_level" not in config:
+                config["access_level"] = 0
+
+            return config
+
     def set_user_model(self, user_id: int, model: str) -> tuple[bool, str]:
         """
         Set user's model
         Returns: (success: bool, message: str)
         """
+        # Check if model is supported
         supported_models = self.get_supported_models()
         if model not in supported_models:
             supported_list = ", ".join(sorted(supported_models))
             return False, f"Model '{model}' not supported. Available models: {supported_list}"
-        
+
         if self.use_mongodb:
             success = self.mongo_store.set_user_config(user_id, model=model)
             if success:
@@ -164,7 +215,7 @@ class UserConfigManager:
             user_config["model"] = model
             self._save_config()
             return True, f"Model set to '{model}'"
-    
+
     def set_user_system_prompt(self, user_id: int, prompt: str) -> tuple[bool, str]:
         """
         Set user's system prompt
@@ -172,10 +223,10 @@ class UserConfigManager:
         """
         if not prompt.strip():
             return False, "System prompt cannot be empty"
-        
+
         if len(prompt) > 10000:  # Length limit
             return False, "System prompt too long (max 10,000 characters)"
-        
+
         if self.use_mongodb:
             success = self.mongo_store.set_user_config(user_id, system_prompt=prompt.strip())
             if success:
@@ -188,21 +239,21 @@ class UserConfigManager:
             user_config["system_prompt"] = prompt.strip()
             self._save_config()
             return True, "System prompt updated"
-    
+
     def get_user_model(self, user_id: int) -> str:
         """Get user's current model"""
         if self.use_mongodb:
             return self.mongo_store.get_user_model(user_id)
         else:
             return self.get_user_config(user_id)["model"]
-    
+
     def get_user_system_prompt(self, user_id: int) -> str:
         """Get user's current system prompt"""
         if self.use_mongodb:
             return self.mongo_store.get_user_system_prompt(user_id)
         else:
             return self.get_user_config(user_id)["system_prompt"]
-    
+
     def get_user_system_message(self, user_id: int) -> Dict[str, str]:
         """Get system message in OpenAI format"""
         if self.use_mongodb:
@@ -212,12 +263,26 @@ class UserConfigManager:
                 "role": "system",
                 "content": self.get_user_system_prompt(user_id)
             }
-    
+
+    def get_user_credit(self, user_id: int) -> int:
+        """Get user's credit balance"""
+        config = self.get_user_config(user_id)
+        return config.get("credit", 0)
+
+    def get_user_access_level(self, user_id: int) -> int:
+        """Get user's access level"""
+        config = self.get_user_config(user_id)
+        return config.get("access_level", 0)
+
     def reset_user_config(self, user_id: int) -> str:
         """Reset user config to defaults"""
         if self.use_mongodb:
             # Reset config in MongoDB
-            success = self.mongo_store.set_user_config(user_id, model=DEFAULT_MODEL, system_prompt=DEFAULT_SYSTEM_PROMPT)
+            success = self.mongo_store.set_user_config(
+                user_id,
+                model=DEFAULT_MODEL,
+                system_prompt=DEFAULT_SYSTEM_PROMPT
+            )
             if success:
                 return "Configuration reset to defaults"
             else:
@@ -231,8 +296,10 @@ class UserConfigManager:
                 return "Configuration reset to defaults"
             return "No configuration to reset"
 
+
 # Singleton instance
 _user_config_manager = None
+
 
 def get_user_config_manager() -> UserConfigManager:
     """Get UserConfigManager instance (singleton pattern)"""
@@ -241,11 +308,13 @@ def get_user_config_manager() -> UserConfigManager:
         _user_config_manager = UserConfigManager()
     return _user_config_manager
 
+
 # Legacy functions for backward compatibility (DEPRECATED)
 def get_supported_models() -> Set[str]:
     """DEPRECATED: Use get_user_config_manager().get_supported_models() instead"""
     logger.warning("get_supported_models() is deprecated. Use get_user_config_manager().get_supported_models()")
     return get_user_config_manager().get_supported_models()
+
 
 # Make supported models available as module variable for backward compatibility
 SUPPORTED_MODELS = FALLBACK_SUPPORTED_MODELS  # This will be updated dynamically
