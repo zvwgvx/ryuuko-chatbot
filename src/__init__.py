@@ -2,7 +2,7 @@
 Ryuuko Chatbot - Discord AI Bot
 """
 
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 __author__ = "Zang Vũ"
 
 # Main packages
