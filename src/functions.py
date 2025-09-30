@@ -173,33 +173,11 @@ def should_respond_default(message: discord.Message) -> bool:
         return True
     return False
 
-
-def is_gemini_model(model_name: str) -> bool:
-    """Check if the model is a Gemini model"""
-    return (model_name.startswith("gemini-") or
-            model_name.startswith("gemma-") or
-            "live-preview" in model_name)
-
-
-def is_gemini_live_model(model_name: str) -> bool:
-    """Check if the model requires Live API"""
-    live_model_patterns = [
-        "gemini-2.5-flash-live-preview",
-        "gemini-2.5-flash-preview-native-audio-dialog",
-        "gemini-2.5-flash-exp-native-audio-thinking-dialog",
-        "live-preview"
-    ]
-
-    model_lower = model_name.lower()
-    return any(pattern in model_lower for pattern in live_model_patterns)
-
-
 # ------------------------------------------------------------------
 # Enhanced Attachment helpers - WITH IMAGE SUPPORT
 # ------------------------------------------------------------------
 
 async def _read_image_attachment(attachment: discord.Attachment) -> Dict:
-    """Process an image attachment for Gemini API"""
     entry = {
         "filename": attachment.filename,
         "type": "image",
@@ -537,23 +515,6 @@ async def process_ai_request(request):
         attachment_data = await _read_attachments_enhanced(attachments)
         has_images = attachment_data["has_images"]
 
-        if has_images:
-            if not is_gemini_model(user_model):
-                await message.channel.send(
-                    "🖼️ Images are only supported with Gemini models. Please switch to a Gemini model to use image analysis.",
-                    reference=message,
-                    allowed_mentions=discord.AllowedMentions.none()
-                )
-                return
-
-            if is_gemini_live_model(user_model):
-                await message.channel.send(
-                    "🖼️ Images are not supported with Gemini Live models. Please switch to a regular Gemini model for image analysis.",
-                    reference=message,
-                    allowed_mentions=discord.AllowedMentions.none()
-                )
-                return
-
         # Build final user text with attachments
         combined_text = ""
         if attachment_data["text_summary"]:
@@ -740,19 +701,10 @@ async def show_profile_command(ctx, member: discord.Member = None):
         3: "Ultimate (Level 3)"
     }.get(access_level, f"Unknown (Level {access_level})")
 
-    # Check if model supports images
-    model_features = []
-    if is_gemini_model(model) and not is_gemini_live_model(model):
-        model_features.append("🖼️ Image Analysis")
-    if is_gemini_live_model(model) or "live-preview" in model:
-        model_features.append("⚡ Live Streaming")
-
-    features_text = f"\n**Features**: {', '.join(model_features)}" if model_features else ""
-
     # Build profile display
     lines = [
         f"**Profile for {target_user}:**",
-        f"**Current Model**: {model}{features_text}",
+        f"**Current Model**: {model}",
         f"**Credit Balance**: {credit}",
         f"**Access Level**: {level_desc}",
         "",
@@ -823,11 +775,6 @@ async def show_models_command(ctx):
                     current_level = access_level
 
                 features = []
-                if is_gemini_model(model_name):
-                    if is_gemini_live_model(model_name):
-                        features.append("⚡Live")
-                    else:
-                        features.append("🖼️IMG")
 
                 feature_text = f" {' '.join(features)}" if features else ""
                 models_info.append(f"• `{model_name}` - {credit_cost} credits{feature_text}")
@@ -848,11 +795,6 @@ async def show_models_command(ctx):
         models_list = []
         for model in sorted(supported_models):
             features = []
-            if is_gemini_model(model):
-                if is_gemini_live_model(model):
-                    features.append("⚡Live")
-                else:
-                    features.append("🖼️IMG")
 
             feature_text = f" {' '.join(features)}" if features else ""
             models_list.append(f"• `{model}`{feature_text}")
