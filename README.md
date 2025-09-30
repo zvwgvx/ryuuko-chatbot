@@ -83,7 +83,7 @@ MONGODB_CONNECTION_STRING=mongodb://user:pass@host:27017
 python ryuuko.py
 
 # Or run main module
-python src/main.py
+python src/bot.py
 ```
 
 Notes:

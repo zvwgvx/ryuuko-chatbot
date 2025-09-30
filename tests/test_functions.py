@@ -4,6 +4,7 @@
 Test suite for functions.py module
 Tests core functionality including attachment processing, user management,
 message formatting, and command handling.
+MongoDB is MANDATORY - no file mode tests.
 """
 
 import pytest
@@ -20,9 +21,9 @@ from datetime import datetime, timezone, timedelta
 # Import the module under test
 import sys
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-import functions
+from src.core import functions
 
 
 class TestUtilityFunctions:
@@ -182,69 +183,75 @@ class TestMessageFormatting:
         result = functions.split_message_smart(short_text, 2000)
         assert result == ["Hello world!"]
 
+    def test_split_message_smart_empty(self):
+        """Test splitting empty messages"""
+        result = functions.split_message_smart("", 2000)
+        assert result == ["[Empty response]"]
 
-class TestUserManagement:
-    """Test user management functionality"""
+
+class TestUserManagementMongoDB:
+    """Test user management functionality with MongoDB ONLY"""
 
     @pytest.fixture
-    def setup_storage(self):
-        """Setup temporary storage for testing"""
-        with tempfile.TemporaryDirectory() as temp_dir:
-            temp_path = Path(temp_dir) / "authorized.json"
+    def setup_mongodb_mock(self):
+        """Setup MongoDB mock"""
+        # Reset global state
+        functions._authorized_users = set()
+        functions._use_mongodb_auth = True
+        functions._mongodb_store = Mock()
+        functions._config = Mock()
+        functions._config.USE_MONGODB = True
 
-            # Mock config
-            functions._config = Mock()
-            functions._config.AUTHORIZED_STORE = temp_path
+        yield functions._mongodb_store
 
-            # Reset global state
-            functions._authorized_users = set()
-            functions._use_mongodb_auth = False
-            functions._mongodb_store = None
+        # Cleanup
+        functions._use_mongodb_auth = False
+        functions._mongodb_store = None
 
-            yield temp_path
+    def test_load_authorized_users_mongodb(self, setup_mongodb_mock):
+        """Test loading authorized users from MongoDB"""
+        mock_store = setup_mongodb_mock
+        mock_store.get_authorized_users.return_value = {123, 456, 789}
 
-    def test_load_authorized_from_path_empty(self, setup_storage):
-        """Test loading from non-existent file"""
-        temp_path = setup_storage
-        result = functions.load_authorized_from_path(temp_path)
-        assert result == set()
+        result = functions.load_authorized_users()
 
-    def test_load_save_authorized_users(self, setup_storage):
-        """Test saving and loading authorized users"""
-        temp_path = setup_storage
-        test_users = {123456789, 987654321}
+        assert result == {123, 456, 789}
+        mock_store.get_authorized_users.assert_called_once()
 
-        # Save users
-        functions.save_authorized_to_path(temp_path, test_users)
+    def test_add_authorized_user_mongodb_success(self, setup_mongodb_mock):
+        """Test adding authorized user via MongoDB"""
+        mock_store = setup_mongodb_mock
+        mock_store.add_authorized_user.return_value = True
+        functions._authorized_users = set()
 
-        # Load users
-        loaded_users = functions.load_authorized_from_path(temp_path)
-        assert loaded_users == test_users
+        result = functions.add_authorized_user(123)
 
-    def test_add_authorized_user_file_mode(self, setup_storage):
-        """Test adding authorized user in file mode"""
-        temp_path = setup_storage
-
-        result = functions.add_authorized_user(123456789)
         assert result == True
-        assert 123456789 in functions._authorized_users
+        assert 123 in functions._authorized_users
+        mock_store.add_authorized_user.assert_called_once_with(123)
 
-        # Verify it was saved to file
-        loaded = functions.load_authorized_from_path(temp_path)
-        assert 123456789 in loaded
+    def test_add_authorized_user_mongodb_failure(self, setup_mongodb_mock):
+        """Test adding authorized user via MongoDB failure"""
+        mock_store = setup_mongodb_mock
+        mock_store.add_authorized_user.return_value = False
+        functions._authorized_users = set()
 
-    def test_remove_authorized_user_file_mode(self, setup_storage):
-        """Test removing authorized user in file mode"""
-        temp_path = setup_storage
+        result = functions.add_authorized_user(123)
 
-        # Add user first
-        functions.add_authorized_user(123456789)
-        assert 123456789 in functions._authorized_users
+        assert result == False
+        assert 123 not in functions._authorized_users
 
-        # Remove user
-        result = functions.remove_authorized_user(123456789)
+    def test_remove_authorized_user_mongodb_success(self, setup_mongodb_mock):
+        """Test removing authorized user via MongoDB"""
+        mock_store = setup_mongodb_mock
+        mock_store.remove_authorized_user.return_value = True
+        functions._authorized_users = {123, 456}
+
+        result = functions.remove_authorized_user(123)
+
         assert result == True
-        assert 123456789 not in functions._authorized_users
+        assert 123 not in functions._authorized_users
+        mock_store.remove_authorized_user.assert_called_once_with(123)
 
     @pytest.mark.asyncio
     async def test_is_authorized_user_owner(self):
@@ -286,75 +293,93 @@ class TestUserManagement:
         assert result == False
 
 
-class TestMongoDBIntegration:
-    """Test MongoDB integration functionality"""
-
-    @pytest.fixture
-    def setup_mongodb_mock(self):
-        """Setup MongoDB mock"""
-        functions._use_mongodb_auth = True
-        functions._mongodb_store = Mock()
-        return functions._mongodb_store
-
-    def test_load_authorized_users_mongodb(self, setup_mongodb_mock):
-        """Test loading authorized users from MongoDB"""
-        mock_store = setup_mongodb_mock
-        mock_store.get_authorized_users.return_value = {123, 456, 789}
-
-        result = functions.load_authorized_users()
-        assert result == {123, 456, 789}
-        mock_store.get_authorized_users.assert_called_once()
-
-    def test_add_authorized_user_mongodb_success(self, setup_mongodb_mock):
-        """Test adding authorized user via MongoDB"""
-        mock_store = setup_mongodb_mock
-        mock_store.add_authorized_user.return_value = True
-        functions._authorized_users = set()
-
-        result = functions.add_authorized_user(123)
-        assert result == True
-        assert 123 in functions._authorized_users
-        mock_store.add_authorized_user.assert_called_once_with(123)
-
-    def test_add_authorized_user_mongodb_failure(self, setup_mongodb_mock):
-        """Test adding authorized user via MongoDB failure"""
-        mock_store = setup_mongodb_mock
-        mock_store.add_authorized_user.return_value = False
-        functions._authorized_users = set()
-
-        result = functions.add_authorized_user(123)
-        assert result == False
-        assert 123 not in functions._authorized_users
-
-
 class TestSetupFunction:
-    """Test the setup function"""
+    """Test the setup function with MongoDB MANDATORY"""
 
-    def test_setup_basic(self):
-        """Test basic setup functionality"""
+    @patch('src.storage.database.get_mongodb_store')
+    @patch('src.config.get_user_config_manager')
+    @patch('src.utils.get_request_queue')
+    @patch('src.storage.MemoryStore')
+    def test_setup_mongodb_success(self, mock_ms, mock_rq, mock_ucm, mock_get_store):
+        """Test successful setup with MongoDB"""
         mock_bot = Mock()
         mock_call_api = Mock()
         mock_config = Mock()
 
-        # Mock required attributes
-        mock_config.USE_MONGODB = False
+        # Mock config for MongoDB
+        mock_config.USE_MONGODB = True
         mock_config.init_storage = Mock()
 
+        # Mock successful MongoDB store
+        mock_store = Mock()
+        mock_store.get_authorized_users.return_value = {123, 456}
+        mock_get_store.return_value = mock_store
+
         # Mock managers
-        with patch('functions.get_user_config_manager') as mock_ucm, \
-                patch('functions.get_request_queue') as mock_rq, \
-                patch('functions.MemoryStore') as mock_ms:
-            mock_ucm.return_value = Mock()
-            mock_rq.return_value = Mock()
-            mock_ms.return_value = Mock()
+        mock_ucm.return_value = Mock()
+        mock_rq_instance = Mock()
+        mock_rq.return_value = mock_rq_instance
+        mock_ms.return_value = Mock()
 
-            # Should not raise an exception
-            functions.setup(mock_bot, mock_call_api, mock_config)
+        # Run setup
+        functions.setup(mock_bot, mock_call_api, mock_config)
 
-            # Verify setup calls
-            mock_config.init_storage.assert_called_once()
-            mock_ucm.assert_called_once()
-            mock_rq.assert_called_once()
+        # Verify setup calls
+        mock_config.init_storage.assert_called_once()
+        mock_get_store.assert_called_once()
+        mock_ucm.assert_called_once()
+        mock_rq.assert_called_once()
+        mock_rq_instance.set_bot.assert_called_once_with(mock_bot)
+
+        # Verify MongoDB store is set
+        assert functions._mongodb_store == mock_store
+        assert functions._use_mongodb_auth == True
+
+    @patch('src.storage.database.get_mongodb_store')
+    def test_setup_mongodb_failure_no_fallback(self, mock_get_store):
+        """Test setup fails when MongoDB is not available - NO FALLBACK"""
+        mock_bot = Mock()
+        mock_call_api = Mock()
+        mock_config = Mock()
+
+        # Mock config for MongoDB
+        mock_config.USE_MONGODB = True
+        mock_config.init_storage = Mock()
+
+        # Mock MongoDB failure
+        mock_get_store.side_effect = RuntimeError("MongoDB not available")
+
+        # Setup should handle the error but MongoDB will be None
+        functions.setup(mock_bot, mock_call_api, mock_config)
+
+        # Verify MongoDB is not set due to failure
+        assert functions._mongodb_store is None
+        assert functions._use_mongodb_auth == False  # Falls back to False on error
+
+
+class TestProcessAIRequest:
+    """Test AI request processing"""
+
+    @pytest.mark.asyncio
+    async def test_process_ai_request_no_user_config_manager(self):
+        """Test handling when user config manager is not available"""
+        mock_request = Mock()
+        mock_message = Mock()
+        mock_channel = Mock()
+        mock_message.channel = mock_channel
+        mock_request.message = mock_message
+        mock_request.final_user_text = "test"
+        mock_message.author.id = 123
+
+        # Set user config manager to None
+        functions._user_config_manager = None
+
+        await functions.process_ai_request(mock_request)
+
+        # Should send error message
+        mock_channel.send.assert_called_once()
+        args = mock_channel.send.call_args[1]
+        assert "Bot configuration not ready" in args['content']
 
 
 class TestErrorHandling:
@@ -374,16 +399,32 @@ class TestErrorHandling:
         assert result["skipped"] == True
         assert "read error" in result["reason"]
 
-    def test_save_authorized_users_io_error(self):
-        """Test handling IO errors when saving authorized users"""
-        with tempfile.TemporaryDirectory() as temp_dir:
-            # Create a read-only directory to cause write error
-            temp_path = Path(temp_dir) / "readonly" / "authorized.json"
-            temp_path.parent.mkdir()
-            temp_path.parent.chmod(0o444)  # Read-only
 
-            # Should not raise exception, just log error
-            functions.save_authorized_to_path(temp_path, {123})
+class TestOnMessage:
+    """Test on_message event handler"""
+
+    @pytest.mark.asyncio
+    async def test_on_message_no_user_config_manager(self):
+        """Test on_message when user config manager is not available"""
+        mock_message = Mock()
+        mock_message.author.bot = False
+        mock_message.content = "test"
+
+        # Mock bot context
+        mock_bot = Mock()
+        mock_ctx = Mock()
+        mock_ctx.valid = False
+        mock_bot.get_context = AsyncMock(return_value=mock_ctx)
+        functions._bot = mock_bot
+
+        # Set user config manager to None
+        functions._user_config_manager = None
+
+        # Should return early without error
+        await functions.on_message(mock_message)
+
+        # No further processing should happen
+        assert mock_message.channel.send.call_count == 0
 
 
 if __name__ == "__main__":

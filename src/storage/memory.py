@@ -1,12 +1,10 @@
 # Fixed memory.py - Replace the entire file
 
-import json
 import tiktoken
 import logging
 from pathlib import Path
-from collections import deque
-from typing import Dict, List, Union, TypedDict
-import load_config
+from typing import List, Union, TypedDict
+from src.config import loader
 
 logger = logging.getLogger("Memory")
 
@@ -24,12 +22,12 @@ class Msg(TypedDict):
 
 class MemoryStore:
     def __init__(self, path: Union[Path, str] = None):
-        self.use_mongodb = getattr(load_config, 'USE_MONGODB', False)
+        self.use_mongodb = getattr(loader, 'USE_MONGODB', False)
         
         if self.use_mongodb:
             # MongoDB mode - delegate to MongoDB store
             try:
-                from database import get_mongodb_store
+                from src.storage.database import get_mongodb_store
                 self.mongo_store = get_mongodb_store()
                 logger.info("MemoryStore initialized with MongoDB backend")
             except Exception as e:
@@ -49,8 +47,8 @@ class MemoryStore:
     def add_message(self, user_id: int, msg: Msg) -> bool:
         """Add message to user's conversation history"""
         try:
-            max_messages = getattr(load_config, 'MEMORY_MAX_PER_USER', 25)
-            max_tokens = getattr(load_config, 'MEMORY_MAX_TOKENS', 4000)
+            max_messages = getattr(loader, 'MEMORY_MAX_PER_USER', 25)
+            max_tokens = getattr(loader, 'MEMORY_MAX_TOKENS', 4000)
 
             success = self.mongo_store.add_message(user_id, msg, max_messages, max_tokens)
             if success:

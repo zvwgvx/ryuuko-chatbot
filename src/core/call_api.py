@@ -3,8 +3,8 @@ import json
 import logging
 from typing import List, Dict, Any, Tuple, Optional
 import httpx
-import load_config
-from ratelimit import get_rate_limiter
+from src.config import loader
+from ..utils.ratelimit import get_rate_limiter
 
 logger = logging.getLogger("Call API")
 
@@ -22,9 +22,9 @@ class UnifiedAPIClient:
         if self._initialized:
             return
 
-        self.api_server = load_config.API_SERVER
-        self.api_key = load_config.API_KEY
-        self.timeout = load_config.REQUEST_TIMEOUT
+        self.api_server = loader.API_SERVER
+        self.api_key = loader.API_KEY
+        self.timeout = loader.REQUEST_TIMEOUT
 
         # HTTP client configuration
         self.headers = {

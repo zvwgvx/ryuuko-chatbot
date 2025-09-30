@@ -8,9 +8,9 @@ import os
 from discord.ext import commands
 import discord
 
-import load_config
-import call_api
-import functions
+from src.config import loader
+from . import call_api
+from . import functions
 
 # logging setup
 logging.basicConfig(
@@ -50,7 +50,7 @@ async def on_ready():
 
 # Initialize functions module
 logger.info("🔧 Initializing functions module...")
-functions.setup(bot, call_api, load_config)
+functions.setup(bot, call_api, loader)
 
 # Add error handler for commands
 @bot.event
@@ -70,14 +70,18 @@ async def on_command_error(ctx, error):
     logger.exception(f"Command error in {ctx.command}: {error}")
     await ctx.send("❌ Đã xảy ra lỗi khi thực hiện lệnh.", allowed_mentions=discord.AllowedMentions.none())
 
-
-if __name__ == "__main__":
+# ✅ ADD MAIN FUNCTION
+def main():
+    """Main entry point for the bot"""
     try:
         logger.info("🚀 Starting bot...")
-        bot.run(load_config.DISCORD_TOKEN)
+        bot.run(loader.DISCORD_TOKEN)
     except KeyboardInterrupt:
         logger.info("🛑 Bot interrupted by user")
     except Exception:
         logger.exception("💥 Bot exited with exception")
     finally:
         logger.info("👋 Main process exiting")
+
+if __name__ == "__main__":
+    main()

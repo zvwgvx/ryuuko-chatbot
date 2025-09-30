@@ -15,17 +15,15 @@ import time
 import base64
 import mimetypes
 from pathlib import Path
-from typing import Set, Optional, List, Dict, Union
+from typing import Set, Optional, List, Dict
 from datetime import datetime, timezone, timedelta
 
 import discord
 from discord.ext import commands
 
 # ────────────────────────────────────────────────────────────────────────────
-# ***Absolute import — no package, so we use the plain module name ***
-from memory import MemoryStore
-from user_config import get_user_config_manager
-from request_queue import get_request_queue
+# ***Relative imports for the new package structure***
+from ..storage.memory import MemoryStore
 
 logger = logging.getLogger("Functions")
 
@@ -172,6 +170,7 @@ def should_respond_default(message: discord.Message) -> bool:
     if _bot.user in message.mentions:
         return True
     return False
+
 
 # ------------------------------------------------------------------
 # Enhanced Attachment helpers - WITH IMAGE SUPPORT
@@ -394,6 +393,9 @@ def convert_latex_to_discord(text: str) -> str:
 
 def split_message_smart(text: str, max_length: int = 2000) -> list[str]:
     """Smart message splitting"""
+    if not text:
+        return ["[Empty response]"]
+
     if len(text) <= max_length:
         return [text]
 
@@ -475,6 +477,16 @@ async def process_ai_request(request):
     final_user_text = request.final_user_text
     user_id = message.author.id
 
+    # ✅ Safety check
+    if _user_config_manager is None:
+        logger.error("UserConfigManager not available for request processing")
+        await message.channel.send(
+            "⚠️ Bot configuration not ready. Please try again later.",
+            reference=message,
+            allowed_mentions=discord.AllowedMentions.none()
+        )
+        return
+
     try:
         # Get user configuration
         user_model = _user_config_manager.get_user_model(user_id)
@@ -482,7 +494,7 @@ async def process_ai_request(request):
         is_live = "live-preview" in user_model
 
         # Check model access if using MongoDB
-        if _use_mongodb_auth:
+        if _use_mongodb_auth and _mongodb_store:
             model_info = _mongodb_store.get_model_info(user_model)
             if model_info:
                 # Check access level
@@ -554,7 +566,7 @@ async def process_ai_request(request):
                 _memory_store.add_message(user_id, {"role": "model", "content": resp})
 
             # Deduct credits if using MongoDB
-            if _use_mongodb_auth and 'model_info' in locals() and model_info:
+            if _use_mongodb_auth and _mongodb_store and 'model_info' in locals() and model_info:
                 cost = model_info.get("credit_cost", 0)
                 if cost > 0:
                     success, remaining = _mongodb_store.deduct_user_credit(user_id, cost)
@@ -626,6 +638,7 @@ async def help_command(ctx):
 
     await ctx.send("\n".join(lines))
 
+
 @commands.command(name="ping")
 async def ping_command(ctx):
     """Ping command"""
@@ -639,6 +652,7 @@ async def ping_command(ctx):
     content = f"Pong! \nResponse: {latency_ms} ms\nWebSocket: {ws_latency} ms"
     await msg.edit(content=content)
 
+
 # ------------------------------------------------------------------
 # PREFIX COMMANDS - User Configuration Commands
 # ------------------------------------------------------------------
@@ -648,6 +662,11 @@ async def set_model_command(ctx, *, model: str):
     """Set user model"""
     if not await is_authorized_user(ctx.author):
         await ctx.send("❌ You do not have permission to use this command.")
+        return
+
+    # ✅ Safety check
+    if _user_config_manager is None:
+        await ctx.send("❌ Bot configuration not ready.")
         return
 
     # Regular model handling
@@ -667,12 +686,23 @@ async def set_sys_prompt_command(ctx, *, prompt: str):
         await ctx.send("❌ You do not have permission to use this command.")
         return
 
+    # ✅ Safety check
+    if _user_config_manager is None:
+        await ctx.send("❌ Bot configuration not ready.")
+        return
+
     success, message = _user_config_manager.set_user_system_prompt(ctx.author.id, prompt)
     await ctx.send(f"✅ {message}")
+
 
 @commands.command(name="profile")
 async def show_profile_command(ctx, member: discord.Member = None):
     """Show user profile"""
+    # ✅ Safety check
+    if _user_config_manager is None:
+        await ctx.send("❌ Bot configuration not ready.")
+        return
+
     target_user = member or ctx.author
 
     if target_user != ctx.author:
@@ -717,6 +747,11 @@ async def show_profile_command(ctx, member: discord.Member = None):
 @commands.command(name="showprompt")
 async def show_sys_prompt_command(ctx, member: discord.Member = None):
     """Show user system prompt"""
+    # ✅ Safety check
+    if _user_config_manager is None:
+        await ctx.send("❌ Bot configuration not ready.")
+        return
+
     target_user = member or ctx.author
 
     # Check if viewer is owner when viewing other's prompt
@@ -748,7 +783,12 @@ async def show_sys_prompt_command(ctx, member: discord.Member = None):
 @commands.command(name="models")
 async def show_models_command(ctx):
     """Show available models"""
-    if _use_mongodb_auth:
+    # ✅ Safety check
+    if _user_config_manager is None:
+        await ctx.send("❌ Bot configuration not ready.")
+        return
+
+    if _use_mongodb_auth and _mongodb_store:
         # Get models from MongoDB
         all_models = _mongodb_store.list_all_models()
 
@@ -952,6 +992,10 @@ async def add_model_command(ctx, model_name: str, credit_cost: int, access_level
         await ctx.send("❌ Model management requires MongoDB mode to be enabled.")
         return
 
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
+        return
+
     try:
         success, message = _mongodb_store.add_supported_model(model_name, credit_cost, access_level)
         if success:
@@ -971,6 +1015,10 @@ async def remove_model_command(ctx, model_name: str):
     # Check if MongoDB is enabled
     if not _config.USE_MONGODB:
         await ctx.send("❌ Model management requires MongoDB mode to be enabled.")
+        return
+
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
         return
 
     try:
@@ -1002,6 +1050,10 @@ async def edit_model_command(ctx, model_name: str, credit_cost: int, access_leve
         await ctx.send("❌ Model management requires MongoDB mode to be enabled.")
         return
 
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
+        return
+
     try:
         success, message = _mongodb_store.edit_supported_model(model_name, credit_cost, access_level)
         if success:
@@ -1011,6 +1063,7 @@ async def edit_model_command(ctx, model_name: str, credit_cost: int, access_leve
     except Exception as e:
         logger.exception(f"Error editing model: {e}")
         await ctx.send(f"❌ Error editing model: {str(e)[:100]}")
+
 
 # ------------------------------------------------------------------
 # Credit Management Commands (Owner only)
@@ -1027,6 +1080,10 @@ async def add_credit_command(ctx, member: discord.Member, amount: int):
 
     if not _use_mongodb_auth:
         await ctx.send("❌ Credit system requires MongoDB mode.")
+        return
+
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
         return
 
     try:
@@ -1053,6 +1110,10 @@ async def deduct_credit_command(ctx, member: discord.Member, amount: int):
         await ctx.send("❌ Credit system requires MongoDB mode.")
         return
 
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
+        return
+
     try:
         success, new_balance = _mongodb_store.deduct_user_credit(member.id, amount)
         if success:
@@ -1075,6 +1136,10 @@ async def set_credit_command(ctx, member: discord.Member, amount: int):
 
     if not _use_mongodb_auth:
         await ctx.send("❌ Credit system requires MongoDB mode.")
+        return
+
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
         return
 
     try:
@@ -1101,6 +1166,10 @@ async def set_level_command(ctx, member: discord.Member, level: int):
         await ctx.send("❌ User levels require MongoDB mode.")
         return
 
+    if not _mongodb_store:
+        await ctx.send("❌ MongoDB not available.")
+        return
+
     try:
         success = _mongodb_store.set_user_level(member.id, level)
         if success:
@@ -1118,6 +1187,11 @@ async def set_level_command(ctx, member: discord.Member, level: int):
 # ------------------------------------------------------------------
 async def on_message(message: discord.Message):
     if message.author.bot:
+        return
+
+    # ✅ Safety check
+    if _user_config_manager is None:
+        logger.error("UserConfigManager not initialized")
         return
 
     content = (message.content or "").strip()
@@ -1140,6 +1214,14 @@ async def on_message(message: discord.Message):
                                        allowed_mentions=discord.AllowedMentions.none())
         except Exception:
             logger.exception("Failed to send unauthorized message")
+        return
+
+    # ✅ Check if request queue is available
+    if _request_queue is None:
+        await message.channel.send(
+            "⚠️ Bot is not ready yet. Please try again in a moment.",
+            allowed_mentions=discord.AllowedMentions.none()
+        )
         return
 
     # Build the user prompt (after stripping the bot mention)
@@ -1188,7 +1270,7 @@ async def on_message(message: discord.Message):
 
 
 # ------------------------------------------------------------------
-# Setup function
+# Setup function - ✅ FIXED ORDER AND SAFETY CHECKS
 # ------------------------------------------------------------------
 def setup(bot: commands.Bot, call_api_module, config_module):
     global _bot, _call_api, _config, _authorized_users, _memory_store, _user_config_manager, _request_queue
@@ -1200,44 +1282,55 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     _call_api = call_api_module
     _config = config_module
 
-    # Initialize storage backend
+    # ✅ 1. Initialize storage backend FIRST
     try:
         _config.init_storage()
         logger.info("Storage initialized")
     except Exception as e:
         logger.error(f"❌ Storage init failed: {e}")
 
-    # Check if we're using MongoDB
+    # ✅ 2. Setup MongoDB globals AFTER storage init
     _use_mongodb_auth = _config.USE_MONGODB
     if _use_mongodb_auth:
         try:
-            from database import get_mongodb_store
+            from src.storage.database import get_mongodb_store
             _mongodb_store = get_mongodb_store()
             logger.info("Using MongoDB for data storage")
         except Exception as e:
             logger.error(f"❌ MongoDB init failed: {e}")
             _mongodb_store = None
+            _use_mongodb_auth = False  # ✅ Fallback to file mode
     else:
         _mongodb_store = None
         logger.info("Using file-based storage (legacy mode)")
 
-    # Initialize managers
+    # ✅ 3. Initialize managers AFTER storage is ready
     try:
+        # Import here to avoid circular imports
+        from src.config import get_user_config_manager
+        from src.utils import get_request_queue
+
         _user_config_manager = get_user_config_manager()
         _request_queue = get_request_queue()
         logger.info("Managers initialized")
     except Exception as e:
         logger.error(f"❌ Managers init failed: {e}")
+        # ✅ Don't fail completely, create fallbacks
+        _user_config_manager = None
+        _request_queue = None
 
-    # Setup queue
-    try:
-        _request_queue.set_bot(bot)
-        _request_queue.set_process_callback(process_ai_request)
-        logger.info("Request queue setup")
-    except Exception as e:
-        logger.error(f"❌ Request queue setup failed: {e}")
+    # ✅ 4. Setup queue ONLY if it exists
+    if _request_queue is not None:
+        try:
+            _request_queue.set_bot(bot)
+            _request_queue.set_process_callback(process_ai_request)
+            logger.info("Request queue setup")
+        except Exception as e:
+            logger.error(f"❌ Request queue setup failed: {e}")
+    else:
+        logger.warning("⚠️  Request queue not available")
 
-    # Load authorized users
+    # ✅ 5. Load authorized users
     try:
         _authorized_users = load_authorized_users()
         logger.info(f"Loaded {len(_authorized_users)} authorized users")
@@ -1245,12 +1338,14 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         logger.error(f"❌ Failed to load authorized users: {e}")
         _authorized_users = set()
 
-    # Initialize memory store
+    # ✅ 6. Initialize memory store
     try:
+        from src.storage import MemoryStore
         _memory_store = MemoryStore()
         logger.info("Memory store initialized")
     except Exception as e:
         logger.error(f"❌ Memory store init failed: {e}")
+        _memory_store = None
 
     # Register prefix commands
     try:
