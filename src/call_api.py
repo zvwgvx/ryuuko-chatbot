@@ -91,7 +91,7 @@ def build_api_request(
         "model": model,
         "messages": filtered_messages,
         "config": config,
-        "system_instruction": system_instructions if system_instructions else [""]
+        "system_instruction": system_instructions if system_instructions else [""] # conflict
     }
 
     return payload
