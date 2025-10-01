@@ -1,17 +1,9 @@
-#!/usr/bin/env python3
 """
-Ryuuko Discord Bot - Entry Point
+Legacy entry point for backward compatibility.
+Recommended: Use 'python -m src' instead.
 """
 
-import sys
-import os
-
-# Add src to path if needed
-current_dir = os.path.dirname(__file__)
-src_path = os.path.join(current_dir, 'src')
-if src_path not in sys.path:
-    sys.path.insert(0, src_path)
+from src.__main__ import main
 
 if __name__ == "__main__":
-    from src.core.bot import main
     main()
