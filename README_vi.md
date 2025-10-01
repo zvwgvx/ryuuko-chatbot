@@ -80,7 +80,7 @@ MONGODB_CONNECTION_STRING=mongodb://user:pass@host:27017
 
 ```bash
 # Chạy từ thư mục gốc
-python ryuuko.py
+python main.py
 
 # Hoặc chạy module chính
 python src/bot.py

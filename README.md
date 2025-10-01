@@ -80,7 +80,7 @@ MONGODB_CONNECTION_STRING=mongodb://user:pass@host:27017
 
 ```bash
 # From repo root
-python ryuuko.py
+python main.py
 
 # Or run main module
 python src/bot.py
