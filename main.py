@@ -1,9 +1,6 @@
-"""
-Legacy entry point for backward compatibility.
-Recommended: Use 'python -m src' instead.
-"""
+#!/usr/bin/env python
 
-from src.__main__ import main
+from runpy import run_module
 
 if __name__ == "__main__":
-    main()
+    run_module("src", run_name="__main__")
