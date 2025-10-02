@@ -6,8 +6,7 @@ Contains main bot logic, API clients, and bot functions
 # Import from call_api.py
 from .call_api import (
     UnifiedAPIClient,
-    call_unified_api,
-    call_openai_proxy,
+    call_api,
     is_model_available,
     is_thinking_model,
     build_api_request,
@@ -43,8 +42,7 @@ from .functions import (
 __all__ = [
     # API client
     'UnifiedAPIClient',
-    'call_unified_api',
-    'call_openai_proxy',
+    'call_api',
     'is_model_available',
     'is_thinking_model',
     'build_api_request',
