@@ -177,7 +177,6 @@ def should_respond_default(message: discord.Message) -> bool:
 # ------------------------------------------------------------------
 
 async def _read_image_attachment(attachment: discord.Attachment) -> Dict:
-    """Process an image attachment and convert to base64"""
     entry = {
         "filename": attachment.filename,
         "type": "image",
@@ -277,7 +276,6 @@ async def _read_text_attachment(attachment: discord.Attachment) -> Dict:
             text = text[:MAX_CHARS_PER_FILE] + "\n\n...[truncated]..."
 
         entry["text"] = text
-        logger.info(f"Successfully processed text file: {attachment.filename} ({size} bytes)")
     except Exception as e:
         logger.exception("Error reading attachment %s", attachment.filename)
         entry["skipped"] = True
@@ -287,14 +285,12 @@ async def _read_text_attachment(attachment: discord.Attachment) -> Dict:
 
 
 async def _read_attachments_enhanced(attachments: List[discord.Attachment]) -> Dict:
-    """Enhanced attachment processing with image support - reads and stores base64 data"""
+    """Enhanced attachment processing with image support"""
     result = {
         "text_files": [],
         "images": [],
         "text_summary": "",
-        "has_images": False,
-        "has_valid_images": False,
-        "has_text_files": False
+        "has_images": False
     }
 
     for att in attachments:
@@ -306,15 +302,12 @@ async def _read_attachments_enhanced(attachments: List[discord.Attachment]) -> D
             # Process as image
             image_entry = await _read_image_attachment(att)
             result["images"].append(image_entry)
-            result["has_images"] = True
             if not image_entry["skipped"]:
-                result["has_valid_images"] = True
+                result["has_images"] = True
         else:
             # Process as text file
             text_entry = await _read_text_attachment(att)
             result["text_files"].append(text_entry)
-            if not text_entry["skipped"]:
-                result["has_text_files"] = True
 
     # Build text summary for text files
     attach_summary = []
@@ -479,31 +472,12 @@ def get_vietnam_timestamp() -> str:
 
 
 async def process_ai_request(request):
-    """Process a single AI request from the queue with enhanced image support"""
+    """Process a single AI request from the queue with enhanced image support (Gemini format)"""
     message = request.message
     final_user_text = request.final_user_text
     user_id = message.author.id
 
-    # Get attachment_data from request (already processed and stored)
-    attachment_data = getattr(request, 'attachment_data', None)
-
-    if attachment_data is None:
-        # Fallback: empty data structure
-        logger.warning("⚠️ No attachment_data in request, using empty structure")
-        attachment_data = {
-            "images": [],
-            "text_files": [],
-            "has_valid_images": False,
-            "has_text_files": False,
-            "text_summary": ""
-        }
-    else:
-        # Log that we're using stored data
-        if attachment_data.get("has_valid_images"):
-            image_count = len([img for img in attachment_data["images"] if not img.get("skipped")])
-            logger.info(f"✅ Using {image_count} pre-loaded image(s) from queue for user {user_id}")
-
-    # Safety check
+    # ✅ Safety check
     if _user_config_manager is None:
         logger.error("UserConfigManager not available for request processing")
         await message.channel.send(
@@ -547,150 +521,116 @@ async def process_ai_request(request):
                         )
                         return
 
-        # Use attachment_data from request (already processed)
-        has_images = attachment_data["has_valid_images"]
-        has_text_files = attachment_data["has_text_files"]
+        # Check for images and model compatibility
+        attachments = list(message.attachments or [])
+        attachment_data = await _read_attachments_enhanced(attachments)
+        has_images = attachment_data["has_images"]
 
-        # Build text content (text files + user text)
-        text_files_content = ""
-        for fi in attachment_data.get("text_files", []):
-            if not fi.get("skipped"):
-                text_files_content += f"Filename: {fi['filename']}\n---\n{fi['text']}\n\n"
-
-        # Clean user text - remove the attachment summary lines
-        user_text_clean = final_user_text
+        # Build final user text with text attachments only
+        combined_text = ""
         if attachment_data["text_summary"]:
-            # Remove summary lines from final_user_text
-            for line in attachment_data["text_summary"].split('\n'):
-                if line.strip():
-                    user_text_clean = user_text_clean.replace(line, '')
-        user_text_clean = user_text_clean.strip()
-
-        combined_text = text_files_content + user_text_clean
+            combined_text += attachment_data["text_summary"]
+        if final_user_text:
+            combined_text += final_user_text
 
         if not combined_text.strip() and not has_images:
             await message.channel.send(
-                "Please send a message with your question or attach some files/images.",
+                "Please send a message with your question or attach some files.",
                 reference=message,
                 allowed_mentions=discord.AllowedMentions.none()
             )
             return
 
-        # Build message payload
-        payload_messages = [user_system_message]
+        # ✅ BUILD MESSAGE PAYLOAD (GEMINI FORMAT)
+        payload_messages = []
+
+        # Add system message (keep old format)
+        payload_messages.append(user_system_message)
+
+        # Add conversation history from memory
         if _memory_store:
-            payload_messages.extend(_memory_store.get_user_messages(user_id))
+            history = _memory_store.get_user_messages(user_id)
+            payload_messages.extend(history)
 
-        # Create the user message content
-        timestamp_prefix = get_vietnam_timestamp() if _memory_store else ""
-        final_text_content = f"{timestamp_prefix}{combined_text}" if combined_text.strip() else ""
+        # Build current user message with timestamp
+        final_text = f"{get_vietnam_timestamp()}{combined_text}" if _memory_store else combined_text
 
-        # Build the user message with proper format for images
-        if has_images:
-            # Build content array for vision models
-            content_parts = []
+        # ✅ CREATE MESSAGE WITH GEMINI FORMAT
+        if has_images and attachment_data["images"]:
+            # Multimodal message with parts
+            message_parts = []
 
-            # Add text content first
-            if final_text_content.strip():
-                content_parts.append({
-                    "type": "text",
-                    "text": final_text_content
-                })
+            # Add text part first
+            if final_text.strip():
+                message_parts.append({"text": final_text})
 
-            # Add images from stored attachment_data
-            valid_images_added = 0
+            # Add image parts
+            valid_image_count = 0
             for img in attachment_data["images"]:
                 if not img.get("skipped") and img.get("data"):
-                    # Use pre-loaded base64 data
-                    content_parts.append({
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:{img['mime_type']};base64,{img['data']}"
+                    message_parts.append({
+                        "inline_data": {
+                            "mime_type": img.get("mime_type", "image/jpeg"),
+                            "data": img["data"]  # base64 string
                         }
                     })
-                    valid_images_added += 1
-                    logger.info(f"✅ Added pre-loaded image to API payload: {img['filename']} ({img['mime_type']})")
+                    valid_image_count += 1
+                    logger.info(f"Added image to payload: {img.get('filename')} ({img.get('mime_type')})")
 
-            if not content_parts:
-                await message.channel.send(
-                    "No valid content to process. Please check your attachments.",
-                    reference=message,
-                    allowed_mentions=discord.AllowedMentions.none()
-                )
-                return
-
+            # Create user message with parts
             user_message = {
                 "role": "user",
-                "content": content_parts
+                "parts": message_parts
             }
 
-            logger.info(f"🖼️ Built vision message with {valid_images_added} image(s) for user {user_id}")
-
-            # DEBUG: Log structure
-            for i, part in enumerate(content_parts):
-                if part["type"] == "text":
-                    logger.debug(f"  Part {i}: text ({len(part['text'])} chars)")
-                elif part["type"] == "image_url":
-                    url = part["image_url"]["url"]
-                    mime = url.split(";")[0].replace("data:", "")
-                    b64_len = len(url.split(",", 1)[1]) if "," in url else 0
-                    logger.debug(f"  Part {i}: image ({mime}, {b64_len} base64 chars)")
-
+            logger.info(f"Built multimodal message with {len(message_parts)} parts ({valid_image_count} images)")
         else:
-            # Text-only message
-            if not final_text_content.strip():
-                await message.channel.send(
-                    "Please provide some text content.",
-                    reference=message,
-                    allowed_mentions=discord.AllowedMentions.none()
-                )
-                return
-
+            # Text-only message (backward compatible)
             user_message = {
                 "role": "user",
-                "content": final_text_content
+                "content": final_text
             }
-
-            logger.info(f"📝 Built text-only message for user {user_id}")
+            logger.info("Built text-only message")
 
         payload_messages.append(user_message)
 
-        # Log payload structure
-        logger.debug(f"📦 Message payload for user {user_id}: {len(payload_messages)} messages, "
-                     f"last message type: {'vision' if has_images else 'text'}")
+        # Debug logging
+        logger.debug(f"Payload has {len(payload_messages)} messages")
+        logger.debug(f"Last message type: {'multimodal (parts)' if 'parts' in user_message else 'text (content)'}")
 
-        # ✅ Call API directly (async function, no executor needed)
-        ok, resp = await _call_api(
+        # ✅ CALL API
+        ok, resp = await _call_api.call_unified_api(
             messages=payload_messages,
-            model=user_model
+            model=user_model,
+            temperature=1.1,
+            top_p=0.85,
+            enable_tools=True,
+            thinking_budget=-1
         )
 
         if ok and resp:
             await send_long_message_with_reference(message.channel, resp, message)
 
-            # Add to memory (simplified version)
+            # ✅ Save to memory (text only, no images to save space)
             if _memory_store:
-                memory_user_content = combined_text if combined_text.strip() else "[Image(s) sent]"
-                if has_images:
-                    image_count = len([img for img in attachment_data["images"] if not img.get("skipped")])
-                    if combined_text.strip():
-                        memory_user_content = f"{combined_text}\n[{image_count} image(s) attached]"
-                    else:
-                        memory_user_content = f"[{image_count} image(s) sent]"
+                # Save user message (text only)
+                _memory_store.add_message(user_id, {
+                    "role": "user",
+                    "content": combined_text
+                })
+                # Save AI response
+                _memory_store.add_message(user_id, {
+                    "role": "model",
+                    "content": resp
+                })
 
-                _memory_store.add_message(user_id, {"role": "user", "content": memory_user_content})
-                _memory_store.add_message(user_id, {"role": "model", "content": resp})
-
-            # Deduct credits
+            # Deduct credits if using MongoDB
             if _use_mongodb_auth and _mongodb_store and 'model_info' in locals() and model_info:
                 cost = model_info.get("credit_cost", 0)
                 if cost > 0:
                     success, remaining = _mongodb_store.deduct_user_credit(user_id, cost)
                     if success:
                         logger.info(f"Deducted {cost} credits from user {user_id}. Remaining: {remaining}")
-
-            logger.info(f"✅ Successfully processed request for user {user_id} with model {user_model}")
-
         else:
             error_msg = resp or "Unknown error"
             await message.channel.send(
@@ -698,7 +638,6 @@ async def process_ai_request(request):
                 reference=message,
                 allowed_mentions=discord.AllowedMentions.none()
             )
-            logger.error(f"API call failed for user {user_id}: {error_msg}")
 
     except Exception as e:
         logger.exception(f"Error in request processing for user {user_id}")
@@ -733,10 +672,6 @@ async def help_command(ctx):
         "`.showprompt [user]` – View system prompt",
         "`.models` – Show all supported models",
         "`.clearmemory [user]` – Clear conversation history",
-        "",
-        "**File & Image Support:**",
-        "• Send images directly (JPG, PNG, GIF, WebP, BMP)",
-        "• Attach text files (TXT, MD, PY, JSON, etc.)",
     ]
 
     if is_owner:
@@ -788,10 +723,12 @@ async def set_model_command(ctx, *, model: str):
         await ctx.send("❌ You do not have permission to use this command.")
         return
 
+    # ✅ Safety check
     if _user_config_manager is None:
         await ctx.send("❌ Bot configuration not ready.")
         return
 
+    # Regular model handling
     available, error = _call_api.is_model_available(model.strip())
     if not available:
         await ctx.send(f"❌ {error}")
@@ -808,6 +745,7 @@ async def set_sys_prompt_command(ctx, *, prompt: str):
         await ctx.send("❌ You do not have permission to use this command.")
         return
 
+    # ✅ Safety check
     if _user_config_manager is None:
         await ctx.send("❌ Bot configuration not ready.")
         return
@@ -819,6 +757,7 @@ async def set_sys_prompt_command(ctx, *, prompt: str):
 @commands.command(name="profile")
 async def show_profile_command(ctx, member: discord.Member = None):
     """Show user profile"""
+    # ✅ Safety check
     if _user_config_manager is None:
         await ctx.send("❌ Bot configuration not ready.")
         return
@@ -867,6 +806,7 @@ async def show_profile_command(ctx, member: discord.Member = None):
 @commands.command(name="showprompt")
 async def show_sys_prompt_command(ctx, member: discord.Member = None):
     """Show user system prompt"""
+    # ✅ Safety check
     if _user_config_manager is None:
         await ctx.send("❌ Bot configuration not ready.")
         return
@@ -902,6 +842,7 @@ async def show_sys_prompt_command(ctx, member: discord.Member = None):
 @commands.command(name="models")
 async def show_models_command(ctx):
     """Show available models"""
+    # ✅ Safety check
     if _user_config_manager is None:
         await ctx.send("❌ Bot configuration not ready.")
         return
@@ -932,11 +873,16 @@ async def show_models_command(ctx):
                     models_info.append(f"\n**{level_name} Models:**")
                     current_level = access_level
 
-                models_info.append(f"• `{model_name}` - {credit_cost} credits")
+                features = []
+
+                feature_text = f" {' '.join(features)}" if features else ""
+                models_info.append(f"• `{model_name}` - {credit_cost} credits{feature_text}")
 
             lines = [
                 "**Available AI Models:**",
                 *models_info,
+                "",
+                "**Legend:** 🖼️IMG = Image support, ⚡Live = Live streaming",
                 "",
                 "Use `.model <model_name>` to change your model."
             ]
@@ -947,11 +893,16 @@ async def show_models_command(ctx):
         supported_models = _user_config_manager.get_supported_models()
         models_list = []
         for model in sorted(supported_models):
-            models_list.append(f"• `{model}`")
+            features = []
+
+            feature_text = f" {' '.join(features)}" if features else ""
+            models_list.append(f"• `{model}`{feature_text}")
 
         lines = [
             "**Supported AI Models:**",
             "\n".join(models_list),
+            "",
+            "**Legend:** 🖼️IMG = Image support, ⚡Live = Live streaming",
             "",
             "Use `.model <model_name>` to change your model."
         ]
@@ -1095,6 +1046,7 @@ async def add_model_command(ctx, model_name: str, credit_cost: int, access_level
         await ctx.send("❌ Access level must be 0-3 (0=Basic, 1=Advanced, 2=Premium, 3=Ultimate)")
         return
 
+    # Check if MongoDB is enabled
     if not _config.USE_MONGODB:
         await ctx.send("❌ Model management requires MongoDB mode to be enabled.")
         return
@@ -1119,6 +1071,7 @@ async def add_model_command(ctx, model_name: str, credit_cost: int, access_level
 async def remove_model_command(ctx, model_name: str):
     """Remove a model (owner only)"""
 
+    # Check if MongoDB is enabled
     if not _config.USE_MONGODB:
         await ctx.send("❌ Model management requires MongoDB mode to be enabled.")
         return
@@ -1151,6 +1104,7 @@ async def edit_model_command(ctx, model_name: str, credit_cost: int, access_leve
         await ctx.send("❌ Access level must be 0-3 (0=Basic, 1=Advanced, 2=Premium, 3=Ultimate)")
         return
 
+    # Check if MongoDB is enabled
     if not _config.USE_MONGODB:
         await ctx.send("❌ Model management requires MongoDB mode to be enabled.")
         return
@@ -1288,12 +1242,13 @@ async def set_level_command(ctx, member: discord.Member, level: int):
 
 
 # ------------------------------------------------------------------
-# on_message listener - ✅ FIXED: Pass attachment_data to queue
+# on_message listener
 # ------------------------------------------------------------------
 async def on_message(message: discord.Message):
     if message.author.bot:
         return
 
+    # ✅ Safety check
     if _user_config_manager is None:
         logger.error("UserConfigManager not initialized")
         return
@@ -1320,6 +1275,7 @@ async def on_message(message: discord.Message):
             logger.exception("Failed to send unauthorized message")
         return
 
+    # ✅ Check if request queue is available
     if _request_queue is None:
         await message.channel.send(
             "⚠️ Bot is not ready yet. Please try again in a moment.",
@@ -1332,54 +1288,28 @@ async def on_message(message: discord.Message):
     if _bot.user in message.mentions:
         user_text = re.sub(rf"<@!?{_bot.user.id}>", "", content).strip()
 
-    # ✅ FIX: Read attachments ONCE and keep the base64 data
-    attachment_data = {
-        "images": [],
-        "text_files": [],
-        "has_valid_images": False,
-        "has_text_files": False,
-        "text_summary": ""
-    }
-
+    # Handle attachments with enhanced image support
+    attachment_text = ""
+    attachment_data = {"images": []}
     if attachments:
-        logger.info(f"📎 Processing {len(attachments)} attachment(s) for user {message.author.id}")
         attachment_data = await _read_attachments_enhanced(attachments)
+        attachment_text = attachment_data["text_summary"]
 
-        if attachment_data["has_valid_images"]:
+        if attachment_data["has_images"]:
             image_count = len([img for img in attachment_data["images"] if not img.get("skipped")])
-            logger.info(f"✅ Loaded {image_count} valid image(s) into memory")
+            logger.info(f"User {message.author.id} sent {image_count} valid images")
 
-            # DEBUG: Log base64 sizes
-            for img in attachment_data["images"]:
-                if not img.get("skipped"):
-                    b64_len = len(img.get("data", ""))
-                    logger.debug(f"  Image '{img['filename']}': {b64_len} base64 chars (~{b64_len * 3 // 4} bytes)")
-
-    # Build text for queue display
-    attachment_text = attachment_data["text_summary"]
     final_user_text = (attachment_text + user_text).strip()
-
-    # Check if there's any valid content
-    has_valid_content = (
-            final_user_text.strip() or
-            attachment_data.get("has_valid_images", False)
-    )
-
-    if not has_valid_content:
+    if not final_user_text and not any(not img.get("skipped") for img in attachment_data.get("images", [])):
         await message.channel.send(
             "Please send a message (mention me or DM me) with your question or attach some files/images.",
             allowed_mentions=discord.AllowedMentions.none(),
         )
         return
 
-    # ✅ FIX: Pass attachment_data to queue (with base64 image data)
+    # Add request to queue
     try:
-        success, status_message = await _request_queue.add_request(
-            message,
-            final_user_text,
-            attachment_data  # ✅ This contains the base64 images!
-        )
-
+        success, status_message = await _request_queue.add_request(message, final_user_text)
         if not success:
             await message.channel.send(status_message, allowed_mentions=discord.AllowedMentions.none())
             return
@@ -1399,7 +1329,7 @@ async def on_message(message: discord.Message):
 
 
 # ------------------------------------------------------------------
-# Setup function
+# Setup function - ✅ FIXED ORDER AND SAFETY CHECKS
 # ------------------------------------------------------------------
 def setup(bot: commands.Bot, call_api_module, config_module):
     global _bot, _call_api, _config, _authorized_users, _memory_store, _user_config_manager, _request_queue
@@ -1411,14 +1341,14 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     _call_api = call_api_module
     _config = config_module
 
-    # 1. Initialize storage backend FIRST
+    # ✅ 1. Initialize storage backend FIRST
     try:
         _config.init_storage()
         logger.info("Storage initialized")
     except Exception as e:
         logger.error(f"❌ Storage init failed: {e}")
 
-    # 2. Setup MongoDB globals AFTER storage init
+    # ✅ 2. Setup MongoDB globals AFTER storage init
     _use_mongodb_auth = _config.USE_MONGODB
     if _use_mongodb_auth:
         try:
@@ -1428,13 +1358,14 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         except Exception as e:
             logger.error(f"❌ MongoDB init failed: {e}")
             _mongodb_store = None
-            _use_mongodb_auth = False
+            _use_mongodb_auth = False  # ✅ Fallback to file mode
     else:
         _mongodb_store = None
         logger.info("Using file-based storage (legacy mode)")
 
-    # 3. Initialize managers AFTER storage is ready
+    # ✅ 3. Initialize managers AFTER storage is ready
     try:
+        # Import here to avoid circular imports
         from src.config import get_user_config_manager
         from src.utils import get_request_queue
 
@@ -1443,10 +1374,11 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         logger.info("Managers initialized")
     except Exception as e:
         logger.error(f"❌ Managers init failed: {e}")
+        # ✅ Don't fail completely, create fallbacks
         _user_config_manager = None
         _request_queue = None
 
-    # 4. Setup queue ONLY if it exists
+    # ✅ 4. Setup queue ONLY if it exists
     if _request_queue is not None:
         try:
             _request_queue.set_bot(bot)
@@ -1457,7 +1389,7 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     else:
         logger.warning("⚠️  Request queue not available")
 
-    # 5. Load authorized users
+    # ✅ 5. Load authorized users
     try:
         _authorized_users = load_authorized_users()
         logger.info(f"Loaded {len(_authorized_users)} authorized users")
@@ -1465,7 +1397,7 @@ def setup(bot: commands.Bot, call_api_module, config_module):
         logger.error(f"❌ Failed to load authorized users: {e}")
         _authorized_users = set()
 
-    # 6. Initialize memory store
+    # ✅ 6. Initialize memory store
     try:
         from src.storage import MemoryStore
         _memory_store = MemoryStore()
