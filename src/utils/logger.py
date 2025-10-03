@@ -358,6 +358,6 @@ class Loggers:
     CONFIG = "Config"
     DATABASE = "Database"
     API = "Call API"
-    FUNCTIONS = "Functions"
+    HANDLERS = "Handlers"
     STORAGE = "Storage"
     LOGGER = "Logger"

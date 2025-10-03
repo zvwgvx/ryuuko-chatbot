@@ -18,7 +18,7 @@ from discord.ext import commands
 
 from src.config import loader
 from . import call_api
-from . import functions
+from . import handlers
 
 # Use centralized logger
 logger = logging.getLogger("Bot")
@@ -152,7 +152,7 @@ class Bot:
             bot: Discord bot instance to initialize modules for.
         """
         logger.info("🔧 Initializing functions module...")
-        functions.setup(bot, call_api, loader)
+        handlers.setup(bot, call_api, loader)
         logger.info("✅ All modules initialized successfully")
 
     def _resolve_token(self) -> str:

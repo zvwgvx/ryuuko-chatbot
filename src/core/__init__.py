@@ -11,8 +11,8 @@ from .call_api import (
     build_api_request,
 )
 
-# Import from functions.py
-from .functions import (
+# Import from handlers.py
+from .handlers import (
     # Main setup function
     setup,
 

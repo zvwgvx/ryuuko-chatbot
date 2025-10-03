@@ -25,7 +25,7 @@ from discord.ext import commands
 # ***Relative imports for the new package structure***
 from ..storage.memory import MemoryStore
 
-logger = logging.getLogger("Functions")
+logger = logging.getLogger("Handlers")
 
 # ---------------------------- module‑level state -----------------------------
 _bot: Optional[commands.Bot] = None
@@ -1335,7 +1335,7 @@ def setup(bot: commands.Bot, call_api_module, config_module):
     global _bot, _call_api, _config, _authorized_users, _memory_store, _user_config_manager, _request_queue
     global _use_mongodb_auth, _mongodb_store
 
-    logger.info("🔧 Starting functions.py setup...")
+    logger.info("🔧 Starting handlers.py setup...")
 
     _bot = bot
     _call_api = call_api_module

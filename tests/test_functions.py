@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 """
-Test suite for functions.py module
+Test suite for handlers.py module
 Tests core functionality including attachment processing, user management,
 message formatting, and command handling.
 MongoDB is MANDATORY - no file mode tests.
@@ -23,7 +23,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.core import functions
+from src.core import handlers
 
 
 class TestUtilityFunctions:
@@ -32,11 +32,11 @@ class TestUtilityFunctions:
     def test_extract_user_id_from_str_valid_id(self):
         """Test extracting valid user ID from string"""
         # Test Discord mention format
-        assert functions._extract_user_id_from_str("<@123456789012345678>") == 123456789012345678
+        assert handlers._extract_user_id_from_str("<@123456789012345678>") == 123456789012345678
         assert functions._extract_user_id_from_str("<@!123456789012345678>") == 123456789012345678
 
         # Test plain number
-        assert functions._extract_user_id_from_str("123456789012345678") == 123456789012345678
+        assert handlers._extract_user_id_from_str("123456789012345678") == 123456789012345678
 
         # Test number in text
         assert functions._extract_user_id_from_str("User ID: 123456789012345678") == 123456789012345678
@@ -71,7 +71,7 @@ class TestAttachmentProcessing:
         """Test reading valid text attachment"""
         attachment = setup_mock_attachment("test.txt", 100, "text/plain", b"Hello world!")
 
-        result = await functions._read_text_attachment(attachment)
+        result = await handlers._read_text_attachment(attachment)
 
         assert result["filename"] == "test.txt"
         assert result["type"] == "text"
@@ -82,10 +82,10 @@ class TestAttachmentProcessing:
     @pytest.mark.asyncio
     async def test_read_text_attachment_too_large(self, setup_mock_attachment):
         """Test reading text attachment that's too large"""
-        large_size = functions.FILE_MAX_BYTES + 1
+        large_size = handlers.FILE_MAX_BYTES + 1
         attachment = setup_mock_attachment("large.txt", large_size, "text/plain")
 
-        result = await functions._read_text_attachment(attachment)
+        result = await handlers._read_text_attachment(attachment)
 
         assert result["skipped"] == True
         assert "too large" in result["reason"]
@@ -108,7 +108,7 @@ class TestAttachmentProcessing:
             "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==")
         attachment = setup_mock_attachment("test.png", len(image_content), "image/png", image_content)
 
-        result = await functions._read_image_attachment(attachment)
+        result = await handlers._read_image_attachment(attachment)
 
         assert result["filename"] == "test.png"
         assert result["type"] == "image"
@@ -122,7 +122,7 @@ class TestAttachmentProcessing:
         large_size = functions.IMAGE_MAX_BYTES + 1
         attachment = setup_mock_attachment("large.jpg", large_size, "image/jpeg")
 
-        result = await functions._read_image_attachment(attachment)
+        result = await handlers._read_image_attachment(attachment)
 
         assert result["skipped"] == True
         assert "too large" in result["reason"]
@@ -136,7 +136,7 @@ class TestAttachmentProcessing:
             setup_mock_attachment("code.py", 200, "text/x-python", b"print('hello')")
         ]
 
-        result = await functions._read_attachments_enhanced(attachments)
+        result = await handlers._read_attachments_enhanced(attachments)
 
         assert len(result["text_files"]) == 2
         assert len(result["images"]) == 1
@@ -162,16 +162,16 @@ class TestMessageFormatting:
 
     def test_convert_latex_to_discord_fractions(self):
         """Test fraction conversion"""
-        result = functions.convert_latex_to_discord("\\frac{1}{2}")
+        result = handlers.convert_latex_to_discord("\\frac{1}{2}")
         assert result == "1/2"
 
-        result = functions.convert_latex_to_discord("\\frac{numerator}{denominator}")
+        result = handlers.convert_latex_to_discord("\\frac{numerator}{denominator}")
         assert result == "(numerator)/(denominator)"
 
     def test_convert_latex_to_discord_protected_regions(self):
         """Test that code blocks are protected from LaTeX conversion"""
         text = "```python\n\\alpha = 5\n```\n\\alpha"
-        result = functions.convert_latex_to_discord(text)
+        result = handlers.convert_latex_to_discord(text)
 
         # Code block should be unchanged, but outside LaTeX should be converted
         assert "\\alpha = 5" in result  # Inside code block
@@ -180,7 +180,7 @@ class TestMessageFormatting:
     def test_split_message_smart_short(self):
         """Test splitting short messages"""
         short_text = "Hello world!"
-        result = functions.split_message_smart(short_text, 2000)
+        result = handlers.split_message_smart(short_text, 2000)
         assert result == ["Hello world!"]
 
     def test_split_message_smart_empty(self):
@@ -196,24 +196,24 @@ class TestUserManagementMongoDB:
     def setup_mongodb_mock(self):
         """Setup MongoDB mock"""
         # Reset global state
-        functions._authorized_users = set()
-        functions._use_mongodb_auth = True
+        handlers._authorized_users = set()
+        handlers._use_mongodb_auth = True
         functions._mongodb_store = Mock()
         functions._config = Mock()
-        functions._config.USE_MONGODB = True
+        handlers._config.USE_MONGODB = True
 
         yield functions._mongodb_store
 
         # Cleanup
-        functions._use_mongodb_auth = False
-        functions._mongodb_store = None
+        handlers._use_mongodb_auth = False
+        handlers._mongodb_store = None
 
     def test_load_authorized_users_mongodb(self, setup_mongodb_mock):
         """Test loading authorized users from MongoDB"""
         mock_store = setup_mongodb_mock
         mock_store.get_authorized_users.return_value = {123, 456, 789}
 
-        result = functions.load_authorized_users()
+        result = handlers.load_authorized_users()
 
         assert result == {123, 456, 789}
         mock_store.get_authorized_users.assert_called_once()
@@ -222,21 +222,21 @@ class TestUserManagementMongoDB:
         """Test adding authorized user via MongoDB"""
         mock_store = setup_mongodb_mock
         mock_store.add_authorized_user.return_value = True
-        functions._authorized_users = set()
+        handlers._authorized_users = set()
 
         result = functions.add_authorized_user(123)
 
         assert result == True
-        assert 123 in functions._authorized_users
+        assert 123 in handlers._authorized_users
         mock_store.add_authorized_user.assert_called_once_with(123)
 
     def test_add_authorized_user_mongodb_failure(self, setup_mongodb_mock):
         """Test adding authorized user via MongoDB failure"""
         mock_store = setup_mongodb_mock
         mock_store.add_authorized_user.return_value = False
-        functions._authorized_users = set()
+        handlers._authorized_users = set()
 
-        result = functions.add_authorized_user(123)
+        result = handlers.add_authorized_user(123)
 
         assert result == False
         assert 123 not in functions._authorized_users
@@ -245,32 +245,32 @@ class TestUserManagementMongoDB:
         """Test removing authorized user via MongoDB"""
         mock_store = setup_mongodb_mock
         mock_store.remove_authorized_user.return_value = True
-        functions._authorized_users = {123, 456}
+        handlers._authorized_users = {123, 456}
 
-        result = functions.remove_authorized_user(123)
+        result = handlers.remove_authorized_user(123)
 
         assert result == True
-        assert 123 not in functions._authorized_users
+        assert 123 not in handlers._authorized_users
         mock_store.remove_authorized_user.assert_called_once_with(123)
 
     @pytest.mark.asyncio
     async def test_is_authorized_user_owner(self):
         """Test authorization check for bot owner"""
         functions._bot = Mock()
-        functions._bot.is_owner = AsyncMock(return_value=True)
+        handlers._bot.is_owner = AsyncMock(return_value=True)
         functions._authorized_users = set()
 
         mock_user = Mock()
         mock_user.id = 123456789
 
-        result = await functions.is_authorized_user(mock_user)
+        result = await handlers.is_authorized_user(mock_user)
         assert result == True
 
     @pytest.mark.asyncio
     async def test_is_authorized_user_in_list(self):
         """Test authorization check for user in authorized list"""
-        functions._bot = Mock()
-        functions._bot.is_owner = AsyncMock(return_value=False)
+        handlers._bot = Mock()
+        handlers._bot.is_owner = AsyncMock(return_value=False)
         functions._authorized_users = {123456789}
 
         mock_user = Mock()
@@ -282,14 +282,14 @@ class TestUserManagementMongoDB:
     @pytest.mark.asyncio
     async def test_is_authorized_user_not_authorized(self):
         """Test authorization check for unauthorized user"""
-        functions._bot = Mock()
-        functions._bot.is_owner = AsyncMock(return_value=False)
-        functions._authorized_users = set()
+        handlers._bot = Mock()
+        handlers._bot.is_owner = AsyncMock(return_value=False)
+        handlers._authorized_users = set()
 
         mock_user = Mock()
         mock_user.id = 123456789
 
-        result = await functions.is_authorized_user(mock_user)
+        result = await handlers.is_authorized_user(mock_user)
         assert result == False
 
 
@@ -322,7 +322,7 @@ class TestSetupFunction:
         mock_ms.return_value = Mock()
 
         # Run setup
-        functions.setup(mock_bot, mock_call_api, mock_config)
+        handlers.setup(mock_bot, mock_call_api, mock_config)
 
         # Verify setup calls
         mock_config.init_storage.assert_called_once()
@@ -372,9 +372,9 @@ class TestProcessAIRequest:
         mock_message.author.id = 123
 
         # Set user config manager to None
-        functions._user_config_manager = None
+        handlers._user_config_manager = None
 
-        await functions.process_ai_request(mock_request)
+        await handlers.process_ai_request(mock_request)
 
         # Should send error message
         mock_channel.send.assert_called_once()
@@ -394,7 +394,7 @@ class TestErrorHandling:
         mock_attachment.content_type = "text/plain"
         mock_attachment.read = AsyncMock(side_effect=Exception("Network error"))
 
-        result = await functions._read_text_attachment(mock_attachment)
+        result = await handlers._read_text_attachment(mock_attachment)
 
         assert result["skipped"] == True
         assert "read error" in result["reason"]
@@ -418,10 +418,10 @@ class TestOnMessage:
         functions._bot = mock_bot
 
         # Set user config manager to None
-        functions._user_config_manager = None
+        handlers._user_config_manager = None
 
         # Should return early without error
-        await functions.on_message(mock_message)
+        await handlers.on_message(mock_message)
 
         # No further processing should happen
         assert mock_message.channel.send.call_count == 0

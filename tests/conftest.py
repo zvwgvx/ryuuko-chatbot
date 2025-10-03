@@ -20,15 +20,15 @@ sys.path.insert(0, str(src_path))
 def reset_global_state():
     """Reset global state before each test"""
     # This ensures tests don't interfere with each other
-    from src.core import functions
+    from src.core import handlers
 
     # Reset module-level variables
-    functions._bot = None
+    handlers._bot = None
     functions._call_api = None
     functions._config = None
     functions._user_config_manager = None
     functions._request_queue = None
-    functions._authorized_users = set()
+    handlers._authorized_users = set()
     functions._use_mongodb_auth = False
     functions._mongodb_store = None
     functions._memory_store = None
