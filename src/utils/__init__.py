@@ -1,6 +1,6 @@
 """
 Utils package for Ryuuko Chatbot
-Provides rate limiting and request queue functionality
+Provides rate limiting, request queue, and health check functionality
 """
 
 # Import from rate_limiter.py
@@ -22,6 +22,15 @@ from .request_queue import (
     get_request_queue,
 )
 
+# Import from health_check.py
+from .health_check import (
+    # Main class
+    ServiceHealthChecker,
+
+    # Main function
+    perform_startup_checks,
+)
+
 __all__ = [
     # Rate limiting
     'RateLimiter',
@@ -31,4 +40,8 @@ __all__ = [
     'RequestQueue',
     'QueuedRequest',
     'get_request_queue',
+
+    # Health check
+    'ServiceHealthChecker',
+    'perform_startup_checks',
 ]

@@ -11,6 +11,7 @@ management.
 import logging
 import sys
 import os
+import asyncio
 from typing import Optional, Dict, Any
 
 import discord
@@ -30,6 +31,9 @@ from src.utils import get_request_queue
 from src.storage import MemoryStore
 from src.storage.database import get_mongodb_store
 from src.core.services import auth_service
+
+# Import health check
+from src.utils.health_check import perform_startup_checks
 
 # Use centralized logger
 logger = logging.getLogger("Bot")
@@ -114,21 +118,21 @@ class Bot:
 
             if isinstance(error, commands.CheckFailure):
                 await ctx.send(
-                    "❌ Bạn không có quyền sử dụng lệnh này.",
+                    "❌ Bạn không có quyền sử dụng lệnh này.",  # Keep emoji for user
                     allowed_mentions=discord.AllowedMentions.none()
                 )
                 return
 
             if isinstance(error, commands.MissingRequiredArgument):
                 await ctx.send(
-                    f"❌ Thiếu tham số: {error.param.name}",
+                    f"❌ Thiếu tham số: {error.param.name}",  # Keep emoji for user
                     allowed_mentions=discord.AllowedMentions.none()
                 )
                 return
 
             logger.exception(f"Command error in '{ctx.command}': {error}")
             await ctx.send(
-                "❌ Đã xảy ra lỗi khi thực hiện lệnh.",
+                "❌ Đã xảy ra lỗi khi thực hiện lệnh.",  # Keep emoji for user
                 allowed_mentions=discord.AllowedMentions.none()
             )
 
@@ -137,7 +141,7 @@ class Bot:
         NEW: A centralized function to set up all bot functionality by
         initializing dependencies and registering commands/events.
         """
-        logger.info("🔧 Initializing bot modules and functionality...")
+        logger.info("[INIT] Initializing bot modules and functionality...")  # Changed: log only
 
         # 1. Initialize managers and stores
         config_loader.init_storage()  # Ensure storage paths are ready
@@ -168,15 +172,7 @@ class Bot:
         register_all_commands(bot, dependencies)
         register_all_events(bot, dependencies)
 
-        # Link the AI processor to the request queue
-        if request_queue:
-            # We need to access the processor function which is now inside the event module
-            # A cleaner way would be for the event module to return it, but for now we can access it
-            # if the event setup function attaches it to the bot.
-            # Assuming setup_message_events attaches the callback.
-            pass
-
-        logger.info("✅ All modules initialized successfully")
+        logger.info("[OK] All modules initialized successfully")  # Changed: log only
 
     def _resolve_token(self) -> str:
         """
@@ -190,28 +186,59 @@ class Bot:
 
     def run(self) -> None:
         """
-        Start the Discord bot.
+        Start the Discord bot with pre-startup health checks.
         """
         try:
+            # Create bot instance if not exists
             if not self._client:
                 self._client = self._create_bot_instance()
 
+            # Run health checks before initializing bot functionality
             if not self._initialized:
-                # REPLACED the old _initialize_modules call
+                logger.info("[HEALTH] Running pre-startup health checks...")  # Changed: log only
+
+                # Create new event loop for health checks
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+
+                try:
+                    # Run all health checks
+                    health_check_passed = loop.run_until_complete(
+                        perform_startup_checks(config_loader)
+                    )
+
+                    if not health_check_passed:
+                        logger.error("[ERROR] Health checks failed. Bot startup aborted.")  # Changed: log only
+                        logger.error("Please fix the issues above and try again.")
+                        sys.exit(1)
+
+                    logger.info("[OK] All health checks passed! Proceeding with bot initialization...")  # Changed: log only
+
+                except KeyboardInterrupt:
+                    logger.info("[STOP] Health check interrupted by user")  # Changed: log only
+                    sys.exit(0)
+                except Exception as e:
+                    logger.exception("[CRASH] Error during health checks: %s", e)  # Changed: log only
+                    sys.exit(1)
+                finally:
+                    loop.close()
+
+                # Initialize bot functionality after health checks pass
                 self._setup_bot_functionality(self._client)
                 self._initialized = True
 
+            # Resolve token and start bot
             token = self._resolve_token()
-            logger.info("🚀 Starting bot...")
+            logger.info("[START] Starting Discord bot...")  # Changed: log only
             self._client.run(token)
 
         except KeyboardInterrupt:
-            logger.info("🛑 Bot interrupted by user")
+            logger.info("[STOP] Bot interrupted by user")  # Changed: log only
         except Exception:
-            logger.exception("💥 Bot crashed with a critical exception")
+            logger.exception("[CRASH] Bot crashed with a critical exception")  # Changed: log only
             raise
         finally:
-            logger.info("👋 Bot process exiting")
+            logger.info("[EXIT] Bot process exiting")  # Changed: log only
 
 
 # Module-level function for backward compatibility

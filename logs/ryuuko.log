@@ -719,3 +719,791 @@ cho anh biết nội dung bức ảnh này
 2025-10-04 21:16:01,829 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=29166
 2025-10-04 21:16:01,829 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
 2025-10-04 21:21:32,829 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:30:09,873 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:30:09,873 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:30:09,873 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:30:09,873 INFO root: ============================================================
+2025-10-04 21:30:09,873 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:30:09,873 INFO root: ============================================================
+2025-10-04 21:30:09,873 INFO root: Starting application...
+2025-10-04 21:30:09,873 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:30:09,890 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:30:09,903 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:30:09,903 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:30:09,904 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:30:09,904 INFO root: Storage initialized successfully
+2025-10-04 21:30:09,904 INFO root: Configuration loaded successfully
+2025-10-04 21:30:09,904 INFO root: Bot initialized, starting...
+2025-10-04 21:30:09,904 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:30:09,905 INFO Bot: 🏥 Running pre-startup health checks...
+2025-10-04 21:30:09,905 INFO HealthCheck: Starting health checks...
+2025-10-04 21:30:10,335 ERROR HealthCheck: Health checks failed: api_server, mongodb
+2025-10-04 21:30:10,335 ERROR Bot: ❌ Health checks failed. Bot startup aborted.
+2025-10-04 21:30:10,335 ERROR Bot: Please fix the issues above and try again.
+2025-10-04 21:30:10,335 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:32:59,156 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:32:59,156 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:32:59,156 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:32:59,156 INFO root: ============================================================
+2025-10-04 21:32:59,156 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:32:59,156 INFO root: ============================================================
+2025-10-04 21:32:59,156 INFO root: Starting application...
+2025-10-04 21:32:59,156 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:32:59,173 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:32:59,185 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:32:59,185 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:32:59,186 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:32:59,186 INFO root: Storage initialized successfully
+2025-10-04 21:32:59,186 INFO root: Configuration loaded successfully
+2025-10-04 21:32:59,186 INFO root: Bot initialized, starting...
+2025-10-04 21:32:59,186 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:32:59,186 INFO Bot: 🏥 Running pre-startup health checks...
+2025-10-04 21:32:59,186 INFO HealthCheck: Starting health checks...
+2025-10-04 21:32:59,608 INFO Database: MongoDB connection closed
+2025-10-04 21:32:59,609 INFO Bot: ✅ All health checks passed! Proceeding with bot initialization...
+2025-10-04 21:32:59,609 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 21:32:59,609 INFO Config: MongoDB already initialized
+2025-10-04 21:32:59,610 ERROR Memory: Failed to initialize MongoDB backend: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:32:59,610 ERROR UserConfig: ❌ Failed to get MongoDB store: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:32:59,610 ERROR Bot: 💥 Bot crashed with a critical exception
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 36, in __init__
+    self.mongo_store = get_mongodb_store()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/storage/database.py", line 695, in get_mongodb_store
+    raise RuntimeError("MongoDB store not initialized. Call init_mongodb_store() first.")
+RuntimeError: MongoDB store not initialized. Call init_mongodb_store() first.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 227, in run
+    self._setup_bot_functionality(self._client)
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 149, in _setup_bot_functionality
+    user_config_manager = get_user_config_manager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 153, in get_user_config_manager
+    _user_config_manager = UserConfigManager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 40, in __init__
+    raise RuntimeError(f"❌ MongoDB is MANDATORY but not available: {e}")
+RuntimeError: ❌ MongoDB is MANDATORY but not available: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:32:59,613 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:32:59,613 ERROR root: Fatal error occurred: ❌ MongoDB is MANDATORY but not available: MongoDB store not initialized. Call init_mongodb_store() first.
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 36, in __init__
+    self.mongo_store = get_mongodb_store()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/storage/database.py", line 695, in get_mongodb_store
+    raise RuntimeError("MongoDB store not initialized. Call init_mongodb_store() first.")
+RuntimeError: MongoDB store not initialized. Call init_mongodb_store() first.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/__main__.py", line 56, in main
+    bot.run()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 227, in run
+    self._setup_bot_functionality(self._client)
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 149, in _setup_bot_functionality
+    user_config_manager = get_user_config_manager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 153, in get_user_config_manager
+    _user_config_manager = UserConfigManager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 40, in __init__
+    raise RuntimeError(f"❌ MongoDB is MANDATORY but not available: {e}")
+RuntimeError: ❌ MongoDB is MANDATORY but not available: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:33:29,668 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:33:29,669 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:33:29,669 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:33:29,669 INFO root: ============================================================
+2025-10-04 21:33:29,669 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:33:29,669 INFO root: ============================================================
+2025-10-04 21:33:29,669 INFO root: Starting application...
+2025-10-04 21:33:29,669 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:33:29,685 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:33:29,697 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:33:29,697 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:33:29,698 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:33:29,698 INFO root: Storage initialized successfully
+2025-10-04 21:33:29,698 INFO root: Configuration loaded successfully
+2025-10-04 21:33:29,698 INFO root: Bot initialized, starting...
+2025-10-04 21:33:29,698 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:33:29,698 INFO Bot: 🏥 Running pre-startup health checks...
+2025-10-04 21:33:29,698 INFO HealthCheck: Starting health checks...
+2025-10-04 21:33:30,216 INFO Database: MongoDB connection closed
+2025-10-04 21:33:30,216 INFO Bot: ✅ All health checks passed! Proceeding with bot initialization...
+2025-10-04 21:33:30,216 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 21:33:30,216 INFO Config: MongoDB already initialized
+2025-10-04 21:33:30,217 ERROR Memory: Failed to initialize MongoDB backend: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:33:30,217 ERROR UserConfig: ❌ Failed to get MongoDB store: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:33:30,217 ERROR Bot: 💥 Bot crashed with a critical exception
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 36, in __init__
+    self.mongo_store = get_mongodb_store()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/storage/database.py", line 695, in get_mongodb_store
+    raise RuntimeError("MongoDB store not initialized. Call init_mongodb_store() first.")
+RuntimeError: MongoDB store not initialized. Call init_mongodb_store() first.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 227, in run
+    self._setup_bot_functionality(self._client)
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 149, in _setup_bot_functionality
+    user_config_manager = get_user_config_manager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 153, in get_user_config_manager
+    _user_config_manager = UserConfigManager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 40, in __init__
+    raise RuntimeError(f"❌ MongoDB is MANDATORY but not available: {e}")
+RuntimeError: ❌ MongoDB is MANDATORY but not available: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:33:30,220 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:33:30,220 ERROR root: Fatal error occurred: ❌ MongoDB is MANDATORY but not available: MongoDB store not initialized. Call init_mongodb_store() first.
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 36, in __init__
+    self.mongo_store = get_mongodb_store()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/storage/database.py", line 695, in get_mongodb_store
+    raise RuntimeError("MongoDB store not initialized. Call init_mongodb_store() first.")
+RuntimeError: MongoDB store not initialized. Call init_mongodb_store() first.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/__main__.py", line 56, in main
+    bot.run()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 227, in run
+    self._setup_bot_functionality(self._client)
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/bot.py", line 149, in _setup_bot_functionality
+    user_config_manager = get_user_config_manager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 153, in get_user_config_manager
+    _user_config_manager = UserConfigManager()
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/config/user_config.py", line 40, in __init__
+    raise RuntimeError(f"❌ MongoDB is MANDATORY but not available: {e}")
+RuntimeError: ❌ MongoDB is MANDATORY but not available: MongoDB store not initialized. Call init_mongodb_store() first.
+2025-10-04 21:42:59,313 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:42:59,313 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:42:59,313 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:42:59,313 INFO root: ============================================================
+2025-10-04 21:42:59,313 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:42:59,313 INFO root: ============================================================
+2025-10-04 21:42:59,313 INFO root: Starting application...
+2025-10-04 21:42:59,313 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:42:59,330 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:42:59,342 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:42:59,342 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:42:59,343 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:42:59,343 INFO root: Storage initialized successfully
+2025-10-04 21:42:59,343 INFO root: Configuration loaded successfully
+2025-10-04 21:42:59,343 INFO root: Bot initialized, starting...
+2025-10-04 21:42:59,343 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:42:59,343 INFO Bot: 🏥 Running pre-startup health checks...
+2025-10-04 21:42:59,343 INFO HealthCheck: Starting health checks...
+2025-10-04 21:42:59,863 INFO Bot: ✅ All health checks passed! Proceeding with bot initialization...
+2025-10-04 21:42:59,863 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 21:42:59,864 INFO Config: MongoDB already initialized
+2025-10-04 21:42:59,864 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 21:42:59,864 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 21:42:59,865 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 21:42:59,866 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 21:42:59,866 INFO Commands.User: User commands have been registered.
+2025-10-04 21:42:59,866 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 21:42:59,867 INFO Commands.System: System commands have been registered.
+2025-10-04 21:42:59,867 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 21:42:59,867 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 21:42:59,867 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 21:42:59,867 INFO Bot: 🚀 Starting Discord bot...
+2025-10-04 21:42:59,868 INFO discord.client: logging in using static token
+2025-10-04 21:43:06,981 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=30271
+2025-10-04 21:43:06,981 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 21:52:14,693 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:52:15,552 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:52:15,552 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:52:15,552 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:52:15,552 INFO root: ============================================================
+2025-10-04 21:52:15,552 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:52:15,552 INFO root: ============================================================
+2025-10-04 21:52:15,552 INFO root: Starting application...
+2025-10-04 21:52:15,552 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:52:15,569 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:52:15,580 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:52:15,580 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:52:15,581 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:52:15,581 INFO root: Storage initialized successfully
+2025-10-04 21:52:15,581 INFO root: Configuration loaded successfully
+2025-10-04 21:52:15,581 INFO root: Bot initialized, starting...
+2025-10-04 21:52:15,581 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:52:15,581 INFO Bot: 🏥 Running pre-startup health checks...
+2025-10-04 21:52:15,582 INFO HealthCheck: Starting health checks...
+2025-10-04 21:52:16,205 INFO Bot: ✅ All health checks passed! Proceeding with bot initialization...
+2025-10-04 21:52:16,205 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 21:52:16,205 INFO Config: MongoDB already initialized
+2025-10-04 21:52:16,205 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 21:52:16,205 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 21:52:16,207 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 21:52:16,207 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 21:52:16,208 INFO Commands.User: User commands have been registered.
+2025-10-04 21:52:16,208 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 21:52:16,208 INFO Commands.System: System commands have been registered.
+2025-10-04 21:52:16,208 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 21:52:16,208 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 21:52:16,209 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 21:52:16,209 INFO Bot: 🚀 Starting Discord bot...
+2025-10-04 21:52:16,209 INFO discord.client: logging in using static token
+2025-10-04 21:52:27,061 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=30386
+2025-10-04 21:52:27,063 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 21:59:52,215 INFO Bot: 👋 Bot process exiting
+2025-10-04 22:01:45,163 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:01:45,163 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:01:45,163 INFO [34mroot[0m: Starting application...
+2025-10-04 22:01:45,163 INFO [34mConfig[0m: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:01:45,183 INFO [34mConfig[0m: [32m✅ MongoDB connection test successful[0m
+2025-10-04 22:01:45,194 INFO [34mDatabase[0m: [32mMongoDB indexes created successfully[0m
+2025-10-04 22:01:45,195 INFO [34mDatabase[0m: [32mSuccessfully connected to MongoDB: polydevsdb[0m
+2025-10-04 22:01:45,196 INFO [34mConfig[0m: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 22:01:45,196 INFO [34mroot[0m: [32mStorage initialized successfully[0m
+2025-10-04 22:01:45,196 INFO [34mroot[0m: [32mConfiguration loaded successfully[0m
+2025-10-04 22:01:45,196 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:01:45,196 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:01:45,196 INFO [34mBot[0m: 🏥 Running pre-startup health checks...
+2025-10-04 22:01:45,196 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:01:45,682 INFO [34mBot[0m: [32m✅ All health checks passed! Proceeding with bot initialization...[0m
+2025-10-04 22:01:45,683 INFO [34mBot[0m: 🔧 Initializing bot modules and functionality...
+2025-10-04 22:01:45,683 INFO [34mConfig[0m: [32mMongoDB already initialized[0m
+2025-10-04 22:01:45,683 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:01:45,683 INFO [34mUserConfig[0m: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 22:01:45,684 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:01:45,685 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:01:45,685 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:01:45,685 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:01:45,686 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:01:45,686 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:01:45,686 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:01:45,686 INFO [34mBot[0m: [32m✅ All modules initialized successfully[0m
+2025-10-04 22:01:45,686 INFO [34mBot[0m: 🚀 Starting Discord bot...
+2025-10-04 22:01:45,687 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:01:53,419 INFO [34mBot[0m: [32mBot is ready: Ryuuko#4024 (id=1405869084528087050) pid=30796[0m
+2025-10-04 22:01:53,419 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:02:31,981 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: helu
+2025-10-04 22:02:31,983 INFO [34mRequest Queue[0m: Request queue worker started
+2025-10-04 22:02:31,989 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:02:32,080 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 400 Bad Request"
+2025-10-04 22:02:32,081 ERROR [34mCall API[0m: [31mHTTP error calling unified API: HTTP 400 - Bad Request[0m
+2025-10-04 22:02:32,081 ERROR [34mEvents.Messages[0m: [31mAPI request failed for user 1109867946601349130. Error: HTTP 400 - Bad Request[0m
+2025-10-04 22:03:46,897 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: helu
+2025-10-04 22:04:25,824 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: helu
+2025-10-04 22:04:25,836 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:04:26,204 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:04:32,162 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:04:32,637 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 1
+2025-10-04 22:04:32,641 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 2
+2025-10-04 22:04:32,641 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:04:32,645 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 999000
+2025-10-04 22:05:00,723 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: chào em yêu
+2025-10-04 22:05:00,732 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:05:01,084 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:05:12,040 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:05:12,662 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 3
+2025-10-04 22:05:12,665 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 4
+2025-10-04 22:05:12,665 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:05:12,670 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 998000
+2025-10-04 22:05:55,162 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: helu
+2025-10-04 22:05:55,173 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:05:55,520 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:06:07,677 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:06:08,417 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 5
+2025-10-04 22:06:08,424 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 6
+2025-10-04 22:06:08,424 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:06:08,428 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 997000
+2025-10-04 22:06:16,172 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: helu
+2025-10-04 22:06:16,184 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:06:19,715 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:06:21,746 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:06:22,159 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 7
+2025-10-04 22:06:22,163 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 8
+2025-10-04 22:06:22,163 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:06:22,168 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 996000
+2025-10-04 22:06:27,998 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: chẳng lmj
+2025-10-04 22:06:28,009 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:06:33,781 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:06:44,982 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:06:45,499 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 9
+2025-10-04 22:06:45,503 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 10
+2025-10-04 22:06:45,503 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:06:45,508 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 995000
+2025-10-04 22:07:07,464 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: chán chó luôn e, có gì làm k
+2025-10-04 22:07:07,474 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:07:07,515 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:07:21,920 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:07:22,472 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 11
+2025-10-04 22:07:22,477 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 12
+2025-10-04 22:07:22,478 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:07:22,483 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 994000
+2025-10-04 22:07:40,225 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: đang sớm ngủ cái j
+2025-10-04 22:07:40,238 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:07:40,331 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:07:53,338 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:07:54,087 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 13
+2025-10-04 22:07:54,092 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 14
+2025-10-04 22:07:54,093 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:07:54,097 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 993000
+2025-10-04 22:08:15,508 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: thì ngủ trước đi
+2025-10-04 22:08:15,519 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:08:15,852 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:08:25,941 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:08:26,496 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 15
+2025-10-04 22:08:26,500 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 16
+2025-10-04 22:08:26,501 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:08:26,505 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 992000
+2025-10-04 22:08:34,310 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: chịu rồi biết sao h
+2025-10-04 22:08:34,322 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:08:37,974 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:08:51,278 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:08:51,799 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 17
+2025-10-04 22:08:51,805 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 18
+2025-10-04 22:08:51,805 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:08:51,810 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 991000
+2025-10-04 22:10:33,763 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: sửa lỗi login acc discord trên android bị logout/crash
+2025-10-04 22:10:33,778 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:10:34,091 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:10:43,464 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:10:44,447 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 19
+2025-10-04 22:10:44,452 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 20
+2025-10-04 22:10:44,452 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:10:44,459 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 990000
+2025-10-04 22:10:50,000 INFO [34mRequest Queue[0m: Request queue worker cancelled
+2025-10-04 22:10:50,008 INFO [34mBot[0m: 👋 Bot process exiting
+2025-10-04 22:10:51,254 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:10:51,254 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:10:51,254 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:10:51,254 INFO [34mroot[0m: Starting application...
+2025-10-04 22:10:51,254 INFO [34mConfig[0m: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:10:51,274 INFO [34mConfig[0m: ✅ MongoDB connection test successful
+2025-10-04 22:10:51,311 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:10:51,312 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:10:51,319 INFO [34mConfig[0m: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 22:10:51,320 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:10:51,320 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:10:51,320 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:10:51,321 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:10:51,321 INFO [34mBot[0m: 🏥 Running pre-startup health checks...
+2025-10-04 22:10:51,321 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:10:51,808 INFO [34mBot[0m: ✅ All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:10:51,808 INFO [34mBot[0m: 🔧 Initializing bot modules and functionality...
+2025-10-04 22:10:51,808 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:10:51,808 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:10:51,808 INFO [34mUserConfig[0m: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 22:10:51,809 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:10:51,810 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:10:51,810 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:10:51,810 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:10:51,810 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:10:51,810 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:10:51,810 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:10:51,810 INFO [34mBot[0m: ✅ All modules initialized successfully
+2025-10-04 22:10:51,810 INFO [34mBot[0m: 🚀 Starting Discord bot...
+2025-10-04 22:10:51,811 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:10:56,722 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: có bt fix đâu chỉ hộ
+2025-10-04 22:10:56,723 INFO [34mRequest Queue[0m: Request queue worker started
+2025-10-04 22:10:56,743 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:10:56,834 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:10:58,764 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=30939
+2025-10-04 22:10:58,764 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:11:09,182 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:11:09,570 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 21
+2025-10-04 22:11:09,574 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 22
+2025-10-04 22:11:09,575 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:11:09,579 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 989000
+2025-10-04 22:11:20,260 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: vl phế vật vậy huhu
+2025-10-04 22:11:20,270 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:11:21,212 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:11:30,140 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:11:30,583 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 23
+2025-10-04 22:11:30,589 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 24
+2025-10-04 22:11:30,589 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:11:30,593 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 988000
+2025-10-04 22:12:47,437 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: oke đuổi thì đi
+2025-10-04 22:12:47,453 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:12:47,761 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:12:58,743 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:12:59,298 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 25
+2025-10-04 22:12:59,304 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 26
+2025-10-04 22:12:59,304 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:12:59,309 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 987000
+2025-10-04 22:13:31,430 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: thử đưa 1 vài shop bán dịch vụ steam waller đi, tìm search mãi không biết shop nào
+2025-10-04 22:13:31,440 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:13:31,501 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:13:44,843 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:13:45,395 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 27
+2025-10-04 22:13:45,401 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 28
+2025-10-04 22:13:45,401 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:13:45,406 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 986000
+2025-10-04 22:14:05,742 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: thế cho xin 1 vài shop bán steam wallet đi, tìm mãi không biết shop nào
+2025-10-04 22:14:05,752 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:14:05,790 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:14:15,099 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:14:15,665 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 29
+2025-10-04 22:14:15,670 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 30
+2025-10-04 22:14:15,670 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:14:15,675 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 985000
+2025-10-04 22:15:49,421 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: thế có biết ví điện tử nào đăng ký được visa ở vn k
+2025-10-04 22:15:49,438 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:15:49,531 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:16:03,277 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:16:03,767 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 31
+2025-10-04 22:16:03,772 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 32
+2025-10-04 22:16:03,773 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:16:03,778 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 984000
+2025-10-04 22:16:23,319 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: gì mà viettel money cũng làm được cả visa hả
+2025-10-04 22:16:23,332 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:16:23,724 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:16:35,398 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:16:35,977 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 33
+2025-10-04 22:16:35,983 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 34
+2025-10-04 22:16:35,983 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:16:35,989 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 983000
+2025-10-04 22:17:03,231 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: làm sao mà làm được visa, search gg có thấy cách đâu cha
+2025-10-04 22:17:03,241 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:17:03,548 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:17:18,400 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:17:18,958 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 35
+2025-10-04 22:17:18,963 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 36
+2025-10-04 22:17:18,963 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:17:18,967 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 982000
+2025-10-04 22:17:39,453 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: phải trên 18 tuổi mới làm được à
+2025-10-04 22:17:39,464 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:17:39,554 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:17:39,933 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:17:40,731 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 37
+2025-10-04 22:17:40,740 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 38
+2025-10-04 22:17:40,740 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:17:40,748 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 981000
+2025-10-04 22:19:02,577 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: mấy giờ còn biết đường đi ngủ nè
+2025-10-04 22:19:02,589 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:19:02,656 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:19:03,195 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:19:03,733 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 39
+2025-10-04 22:19:03,739 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 40
+2025-10-04 22:19:03,740 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:19:03,744 INFO [34mEvents.Messages[0m: Deducted 1000 credits from user 1109867946601349130. Remaining: 980000
+2025-10-04 22:21:09,763 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: hallu
+2025-10-04 22:21:09,773 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:21:09,826 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:21:11,280 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:21:11,680 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 41
+2025-10-04 22:21:11,687 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 42
+2025-10-04 22:21:11,687 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:21:11,693 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979900
+2025-10-04 22:21:41,603 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: mấy h rồi còn đi ngủ nè
+2025-10-04 22:21:41,612 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:21:41,657 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:21:44,028 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:21:44,703 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 43
+2025-10-04 22:21:44,710 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 44
+2025-10-04 22:21:44,710 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:21:44,715 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979800
+2025-10-04 22:21:53,202 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: thấy buồn ngủ
+2025-10-04 22:21:53,212 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:21:53,260 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:21:55,250 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:21:55,634 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 45
+2025-10-04 22:21:55,641 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 46
+2025-10-04 22:21:55,642 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:21:55,647 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979700
+2025-10-04 22:22:03,943 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: tuổi đéo nào r còn ru ngủ
+2025-10-04 22:22:03,955 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:22:04,004 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:22:08,098 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:22:08,517 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 47
+2025-10-04 22:22:08,524 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 48
+2025-10-04 22:22:08,524 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:22:08,529 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979600
+2025-10-04 22:22:25,337 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: sao lại thích ru :))
+2025-10-04 22:22:25,348 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:22:25,394 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:22:27,292 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:22:27,883 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 49
+2025-10-04 22:22:27,890 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 50
+2025-10-04 22:22:27,890 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:22:27,896 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979500
+2025-10-04 22:22:38,277 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: không ngủ thì làm gì được nhau
+2025-10-04 22:22:38,286 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:22:38,323 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:22:43,711 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:22:44,246 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 51
+2025-10-04 22:22:44,253 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 52
+2025-10-04 22:22:44,253 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:22:44,259 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979400
+2025-10-04 22:23:12,356 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: tắm chưa
+2025-10-04 22:23:12,367 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:23:12,433 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:23:13,793 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:23:14,237 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 53
+2025-10-04 22:23:14,243 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 54
+2025-10-04 22:23:14,244 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:23:14,250 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979300
+2025-10-04 22:23:26,173 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: chưa tắm mà đòi ôm ngủ bẩn bỏ mẹ
+2025-10-04 22:23:26,182 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:23:26,220 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:23:27,458 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:23:28,020 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 55
+2025-10-04 22:23:28,029 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 56
+2025-10-04 22:23:28,029 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:23:28,033 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979200
+2025-10-04 22:23:35,288 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: tắm r
+2025-10-04 22:23:35,297 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:23:35,349 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:23:36,387 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:23:36,837 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 57
+2025-10-04 22:23:36,845 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 58
+2025-10-04 22:23:36,845 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:23:36,851 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979100
+2025-10-04 22:23:50,055 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: không cần bt tắm r là đc
+2025-10-04 22:23:50,063 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:23:50,097 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:23:51,580 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:23:51,970 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 59
+2025-10-04 22:23:51,975 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 60
+2025-10-04 22:23:51,975 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:23:51,980 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 979000
+2025-10-04 22:24:01,084 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: mai chủ nhật mà học gì
+2025-10-04 22:24:01,095 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:24:01,130 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:24:04,680 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:24:05,488 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 61
+2025-10-04 22:24:05,496 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 62
+2025-10-04 22:24:05,496 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:24:05,502 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 978900
+2025-10-04 22:25:09,201 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: chưa muốn ngủ
+2025-10-04 22:25:09,214 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:25:09,255 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:25:12,353 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:25:12,937 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 63
+2025-10-04 22:25:12,943 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 64
+2025-10-04 22:25:12,943 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:25:12,947 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 978800
+2025-10-04 22:25:27,652 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: đang nóng ôm vào lmj
+2025-10-04 22:25:27,660 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:25:27,693 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:25:30,334 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:25:30,887 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 65
+2025-10-04 22:25:30,893 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 66
+2025-10-04 22:25:30,893 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:25:30,898 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 978700
+2025-10-04 22:25:58,795 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: k có tiền
+2025-10-04 22:25:58,806 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:25:58,926 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:26:02,235 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:26:02,748 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 67
+2025-10-04 22:26:02,754 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 68
+2025-10-04 22:26:02,755 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:26:02,759 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 978600
+2025-10-04 22:26:27,323 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: k có tiền đóng điều hòa thì mở kiểu j??
+2025-10-04 22:26:27,339 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:26:27,646 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:26:29,324 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:26:29,860 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 69
+2025-10-04 22:26:29,867 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 70
+2025-10-04 22:26:29,867 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:26:29,872 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 978500
+2025-10-04 22:26:46,302 INFO [34mRequest Queue[0m: Adding request to queue for user 1109867946601349130: e là đá lạnh hay sao mà ôm mát v
+2025-10-04 22:26:46,314 INFO [34mEvents.Messages[0m: Built text-only message
+2025-10-04 22:26:46,369 INFO [34mhttpx[0m: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 22:26:48,887 INFO [34mCall API[0m: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 22:26:49,414 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 71
+2025-10-04 22:26:49,420 INFO [34mDatabase[0m: Successfully added message for user 1109867946601349130. Total messages: 72
+2025-10-04 22:26:49,420 INFO [34mEvents.Messages[0m: Saved conversation to memory for user 1109867946601349130
+2025-10-04 22:26:49,425 INFO [34mEvents.Messages[0m: Deducted 100 credits from user 1109867946601349130. Remaining: 978400
+2025-10-04 22:27:03,080 INFO [34mRequest Queue[0m: Request queue worker cancelled
+2025-10-04 22:27:03,092 INFO [34mBot[0m: 👋 Bot process exiting
+2025-10-04 22:27:04,919 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:27:04,919 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:27:04,919 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:27:04,919 INFO [34mroot[0m: Starting application...
+2025-10-04 22:27:04,919 INFO [34mConfig[0m: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:27:04,936 INFO [34mConfig[0m: ✅ MongoDB connection test successful
+2025-10-04 22:27:04,947 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:27:04,947 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:27:04,948 INFO [34mConfig[0m: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 22:27:04,948 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:27:04,948 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:27:04,948 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:27:04,948 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:27:04,948 INFO [34mBot[0m: 🏥 Running pre-startup health checks...
+2025-10-04 22:27:04,949 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:27:05,389 INFO [34mBot[0m: ✅ All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:27:05,390 INFO [34mBot[0m: 🔧 Initializing bot modules and functionality...
+2025-10-04 22:27:05,390 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:27:05,390 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:27:05,390 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:27:05,391 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:27:05,392 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:27:05,392 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:27:05,393 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:27:05,393 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:27:05,393 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:27:05,393 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:27:05,393 INFO [34mBot[0m: ✅ All modules initialized successfully
+2025-10-04 22:27:05,393 INFO [34mBot[0m: 🚀 Starting Discord bot...
+2025-10-04 22:27:05,394 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:27:12,420 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=31139
+2025-10-04 22:27:12,421 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:28:41,143 INFO [34mBot[0m: 👋 Bot process exiting
+2025-10-04 22:28:42,243 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:28:42,243 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:28:42,243 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:28:42,243 INFO [34mroot[0m: Starting application...
+2025-10-04 22:28:42,243 INFO [34mConfig[0m: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:28:42,260 INFO [34mConfig[0m: ✅ MongoDB connection test successful
+2025-10-04 22:28:42,272 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:28:42,272 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:28:42,273 INFO [34mConfig[0m: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 22:28:42,273 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:28:42,273 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:28:42,273 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:28:42,273 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:28:42,273 INFO [34mBot[0m: [HEALTH] Running pre-startup health checks...
+2025-10-04 22:28:42,273 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:28:42,794 INFO [34mBot[0m: [OK] All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:28:42,794 INFO [34mBot[0m: [INIT] Initializing bot modules and functionality...
+2025-10-04 22:28:42,794 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:28:42,794 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:28:42,794 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:28:42,795 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:28:42,795 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:28:42,795 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:28:42,795 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:28:42,796 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:28:42,796 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:28:42,796 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:28:42,796 INFO [34mBot[0m: [OK] All modules initialized successfully
+2025-10-04 22:28:42,796 INFO [34mBot[0m: [START] Starting Discord bot...
+2025-10-04 22:28:42,796 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:28:50,074 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=31216
+2025-10-04 22:28:50,074 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:30:58,699 INFO [34mBot[0m: [EXIT] Bot process exiting
+2025-10-04 22:30:59,943 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:30:59,943 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:30:59,944 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:30:59,944 INFO [34mroot[0m: Starting application...
+2025-10-04 22:30:59,944 INFO [34mConfig[0m: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:30:59,960 INFO [34mConfig[0m: ✅ MongoDB connection test successful
+2025-10-04 22:30:59,972 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:30:59,972 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:30:59,973 INFO [34mConfig[0m: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 22:30:59,973 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:30:59,973 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:30:59,973 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:30:59,973 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:30:59,973 INFO [34mBot[0m: [HEALTH] Running pre-startup health checks...
+2025-10-04 22:30:59,973 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:31:00,393 INFO [34mBot[0m: [OK] All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:31:00,393 INFO [34mBot[0m: [INIT] Initializing bot modules and functionality...
+2025-10-04 22:31:00,393 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:31:00,393 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:31:00,393 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:31:00,394 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:31:00,394 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:31:00,394 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:31:00,394 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:31:00,394 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:31:00,395 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:31:00,395 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:31:00,395 INFO [34mBot[0m: [OK] All modules initialized successfully
+2025-10-04 22:31:00,395 INFO [34mBot[0m: [START] Starting Discord bot...
+2025-10-04 22:31:00,395 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:31:07,487 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=31263
+2025-10-04 22:31:07,488 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:33:10,548 INFO [34mBot[0m: [EXIT] Bot process exiting
+2025-10-04 22:33:11,614 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:33:11,614 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:33:11,614 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:33:11,614 INFO [34mroot[0m: Starting application...
+2025-10-04 22:33:11,614 INFO [34mConfig[0m: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:33:11,631 INFO [34mConfig[0m: ✅ MongoDB connection test successful
+2025-10-04 22:33:11,646 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:33:11,646 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:33:11,647 INFO [34mConfig[0m: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 22:33:11,647 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:33:11,647 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:33:11,647 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:33:11,648 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:33:11,648 INFO [34mBot[0m: [HEALTH] Running pre-startup health checks...
+2025-10-04 22:33:11,648 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:33:12,111 INFO [34mBot[0m: [OK] All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:33:12,111 INFO [34mBot[0m: [INIT] Initializing bot modules and functionality...
+2025-10-04 22:33:12,111 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:33:12,111 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:33:12,111 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:33:12,112 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:33:12,112 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:33:12,112 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:33:12,112 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:33:12,113 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:33:12,113 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:33:12,113 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:33:12,113 INFO [34mBot[0m: [OK] All modules initialized successfully
+2025-10-04 22:33:12,113 INFO [34mBot[0m: [START] Starting Discord bot...
+2025-10-04 22:33:12,113 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:33:19,284 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=31344
+2025-10-04 22:33:19,284 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:35:08,464 INFO [34mBot[0m: [EXIT] Bot process exiting
+2025-10-04 22:35:09,501 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:35:09,501 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:35:09,501 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:35:09,501 INFO [34mroot[0m: Starting application...
+2025-10-04 22:35:09,501 INFO [34mConfig[0m: [SYNC] Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:35:09,518 INFO [34mConfig[0m: [OK] MongoDB connection test successful
+2025-10-04 22:35:09,544 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:35:09,544 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:35:09,548 INFO [34mConfig[0m: [OK] MongoDB store initialized: polydevsdb
+2025-10-04 22:35:09,549 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:35:09,549 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:35:09,549 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:35:09,549 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:35:09,549 INFO [34mBot[0m: [HEALTH] Running pre-startup health checks...
+2025-10-04 22:35:09,556 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:35:10,020 INFO [34mBot[0m: [OK] All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:35:10,021 INFO [34mBot[0m: [INIT] Initializing bot modules and functionality...
+2025-10-04 22:35:10,021 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:35:10,021 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:35:10,021 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:35:10,022 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:35:10,022 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:35:10,022 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:35:10,022 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:35:10,022 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:35:10,022 INFO [34mEvents.Messages[0m: AI request processor registered with queue
+2025-10-04 22:35:10,022 INFO [34mEvents.Messages[0m: Message event listeners have been registered
+2025-10-04 22:35:10,023 INFO [34mBot[0m: [OK] All modules initialized successfully
+2025-10-04 22:35:10,023 INFO [34mBot[0m: [START] Starting Discord bot...
+2025-10-04 22:35:10,023 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:35:17,072 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=31395
+2025-10-04 22:35:17,073 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 22:39:16,929 INFO [34mBot[0m: [EXIT] Bot process exiting
+2025-10-04 22:39:17,986 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:39:17,986 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:39:17,986 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:39:17,986 INFO [34mroot[0m: Starting application...
+2025-10-04 22:39:17,986 INFO [34mConfig[0m: [SYNC] Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:39:18,003 INFO [34mConfig[0m: [OK] MongoDB connection test successful
+2025-10-04 22:39:18,015 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:39:18,015 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:39:18,016 INFO [34mConfig[0m: [OK] MongoDB store initialized: polydevsdb
+2025-10-04 22:39:18,017 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:39:18,018 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:39:18,018 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:39:18,018 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:39:18,018 INFO [34mBot[0m: [HEALTH] Running pre-startup health checks...
+2025-10-04 22:39:18,018 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:39:18,511 INFO [34mBot[0m: [OK] All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:39:18,512 INFO [34mBot[0m: [INIT] Initializing bot modules and functionality...
+2025-10-04 22:39:18,512 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:39:18,512 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:39:18,512 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:39:18,514 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:39:18,515 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:39:18,515 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:39:18,515 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:39:18,516 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:39:18,516 INFO [34mEvents.Messages[0m: [OK] AI request processor registered with queue
+2025-10-04 22:39:18,516 INFO [34mEvents.Messages[0m: [OK] Message event listeners have been registered
+2025-10-04 22:39:18,516 INFO [34mBot[0m: [OK] All modules initialized successfully
+2025-10-04 22:39:18,516 INFO [34mBot[0m: [START] Starting Discord bot...
+2025-10-04 22:39:18,517 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:39:25,485 INFO [34mBot[0m: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=31533
+2025-10-04 22:39:25,497 INFO [34mBot[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']

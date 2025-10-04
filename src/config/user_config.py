@@ -26,18 +26,18 @@ class UserConfigManager:
     """User configuration manager - MongoDB ONLY, NO FALLBACK"""
 
     def __init__(self):
-        # ✅ MANDATORY MongoDB check
+        # MANDATORY MongoDB check
         if not loader.USE_MONGODB:
-            raise RuntimeError("❌ MongoDB is MANDATORY for UserConfigManager")
+            raise RuntimeError("❌ MongoDB is MANDATORY for UserConfigManager")  # Keep emoji for user error
 
         # Initialize MongoDB store
         try:
             from src.storage.database import get_mongodb_store
             self.mongo_store = get_mongodb_store()
-            logger.info("✅ UserConfigManager initialized with MongoDB")
+            logger.info("[OK] UserConfigManager initialized with MongoDB")  # Changed: log only
         except Exception as e:
-            logger.error(f"❌ Failed to get MongoDB store: {e}")
-            raise RuntimeError(f"❌ MongoDB is MANDATORY but not available: {e}")
+            logger.error("[ERROR] Failed to get MongoDB store: %s", e)  # Changed: log only
+            raise RuntimeError(f"❌ MongoDB is MANDATORY but not available: {e}")  # Keep emoji for user error
 
     def get_supported_models(self) -> Set[str]:
         """Get supported models from MongoDB"""
