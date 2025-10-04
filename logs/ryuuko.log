@@ -1,0 +1,721 @@
+2025-10-04 14:33:33,784 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 14:33:33,791 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 14:33:33,792 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 14:33:33,792 INFO root: ============================================================
+2025-10-04 14:33:33,792 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 14:33:33,792 INFO root: ============================================================
+2025-10-04 14:33:33,792 INFO root: Starting application...
+2025-10-04 14:33:33,792 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 14:33:33,809 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 14:33:33,820 INFO Database: MongoDB indexes created successfully
+2025-10-04 14:33:33,820 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 14:33:33,821 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 14:33:33,821 INFO root: Storage initialized successfully
+2025-10-04 14:33:33,821 INFO root: Configuration loaded successfully
+2025-10-04 14:33:33,821 INFO root: Bot initialized, starting...
+2025-10-04 14:33:33,822 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 14:33:33,822 INFO Bot: 🔧 Initializing functions module...
+2025-10-04 14:33:33,822 INFO Handlers: 🔧 Starting handlers.py setup...
+2025-10-04 14:33:33,822 INFO Config: MongoDB already initialized
+2025-10-04 14:33:33,822 INFO Handlers: Storage initialized
+2025-10-04 14:33:33,822 INFO Handlers: Using MongoDB for data storage
+2025-10-04 14:33:33,822 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 14:33:33,822 INFO Handlers: Managers initialized
+2025-10-04 14:33:33,822 INFO Handlers: Request queue setup
+2025-10-04 14:33:33,823 INFO Handlers: Loaded 1 authorized users
+2025-10-04 14:33:33,823 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 14:33:33,823 INFO Handlers: Memory store initialized
+2025-10-04 14:33:33,823 INFO Handlers: All prefix commands registered
+2025-10-04 14:33:33,823 INFO Handlers: on_message listener registered
+2025-10-04 14:33:33,823 INFO Handlers: 🎉  Functions module setup completed!
+2025-10-04 14:33:33,823 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 14:33:33,823 INFO Bot: 🚀 Starting bot...
+2025-10-04 14:33:33,823 INFO discord.client: logging in using static token
+2025-10-04 14:33:41,593 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=22656
+2025-10-04 14:33:41,593 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 14:33:41,594 INFO Bot: on_message listeners (count=0): []
+2025-10-04 14:34:13,661 INFO Database: Cleared memory for user 1320303839701897230
+2025-10-04 14:34:13,662 INFO Memory: Successfully cleared memory for user 1320303839701897230 from MongoDB
+2025-10-04 14:34:15,506 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-04 14:34:15,506 INFO Request Queue: Request queue worker started
+2025-10-04 14:34:15,512 INFO Handlers: Built text-only message
+2025-10-04 14:34:15,862 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 502 Bad Gateway"
+2025-10-04 14:34:15,895 ERROR Call API: HTTP error calling unified API: HTTP 502 - Server Error
+2025-10-04 14:34:15,895 ERROR Handlers: API request failed for user 1320303839701897230. Error: HTTP 502 - Server Error
+2025-10-04 14:35:06,217 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-04 14:35:06,227 INFO Handlers: Built text-only message
+2025-10-04 14:35:09,403 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:35:09,405 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:35:10,103 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-04 14:35:10,108 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-04 14:35:10,109 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:35:10,118 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999986209
+2025-10-04 14:35:16,685 INFO Request Queue: Adding request to queue for user 1320303839701897230: e đang làm gì thế
+2025-10-04 14:35:16,701 INFO Handlers: Built text-only message
+2025-10-04 14:35:17,731 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:35:17,733 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:35:18,226 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-04 14:35:18,231 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-04 14:35:18,232 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:35:18,237 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999986109
+2025-10-04 14:36:00,199 INFO Request Queue: Adding request to queue for user 1320303839701897230: anh đang ngồi fix bug
+2025-10-04 14:36:00,216 INFO Handlers: Built text-only message
+2025-10-04 14:36:01,526 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:36:01,528 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:36:02,336 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-04 14:36:02,341 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-04 14:36:02,342 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:36:02,349 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999986009
+2025-10-04 14:36:39,799 INFO Request Queue: Adding request to queue for user 1320303839701897230: con chatbot mà anh đang code á, nó bị bug phần memory user, có resp lỗi từ API báo về mà nó vẫn ném 
+2025-10-04 14:36:39,807 INFO Handlers: Built text-only message
+2025-10-04 14:36:43,312 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:36:43,316 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:36:43,949 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-04 14:36:43,953 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-04 14:36:43,954 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:36:43,958 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985909
+2025-10-04 14:38:42,293 INFO Request Queue: Adding request to queue for user 1320303839701897230: sao nói anh thế 🙁
+2025-10-04 14:38:42,304 INFO Handlers: Built text-only message
+2025-10-04 14:38:44,125 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:38:44,127 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:38:44,867 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-04 14:38:44,872 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-04 14:38:44,872 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:38:44,879 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985809
+2025-10-04 14:39:08,975 INFO Request Queue: Adding request to queue for user 1320303839701897230: uk, vậy chiều e có rảnh k
+2025-10-04 14:39:08,987 INFO Handlers: Built text-only message
+2025-10-04 14:39:11,368 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:39:11,369 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:39:12,082 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 11
+2025-10-04 14:39:12,088 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 12
+2025-10-04 14:39:12,088 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:39:12,094 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985709
+2025-10-04 14:39:23,064 INFO Request Queue: Adding request to queue for user 1320303839701897230: đi chơi với a
+2025-10-04 14:39:23,075 INFO Handlers: Built text-only message
+2025-10-04 14:39:25,862 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:39:25,864 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:39:26,528 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 13
+2025-10-04 14:39:26,534 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 14
+2025-10-04 14:39:26,535 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:39:26,541 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985609
+2025-10-04 14:39:53,718 INFO Request Queue: Adding request to queue for user 1320303839701897230: mấy giờ em đi học, anh đón
+2025-10-04 14:39:53,735 INFO Handlers: Built text-only message
+2025-10-04 14:39:56,845 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:39:56,877 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:39:57,457 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 15
+2025-10-04 14:39:57,462 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 16
+2025-10-04 14:39:57,462 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:39:57,467 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985509
+2025-10-04 14:42:06,171 INFO Request Queue: Adding request to queue for user 1320303839701897230: sao vậy, a làm gì e buồn à
+2025-10-04 14:42:06,182 INFO Handlers: Built text-only message
+2025-10-04 14:42:08,713 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:42:08,714 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:42:09,251 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 17
+2025-10-04 14:42:09,256 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 18
+2025-10-04 14:42:09,257 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:42:09,262 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985409
+2025-10-04 14:42:25,138 INFO Request Queue: Adding request to queue for user 1320303839701897230: thế đẻ anh chở e đi học đi
+2025-10-04 14:42:25,150 INFO Handlers: Built text-only message
+2025-10-04 14:42:26,844 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:42:26,846 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:42:27,386 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 19
+2025-10-04 14:42:27,401 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 20
+2025-10-04 14:42:27,409 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:42:27,448 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985309
+2025-10-04 14:48:30,414 INFO Request Queue: Adding request to queue for user 1320303839701897230: uk, vậy đi học ngoan nha 🤡
+2025-10-04 14:48:30,430 INFO Handlers: Built text-only message
+2025-10-04 14:48:32,183 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:48:32,185 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:48:32,799 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 21
+2025-10-04 14:48:32,807 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 22
+2025-10-04 14:48:32,807 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:48:32,812 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985209
+2025-10-04 14:48:51,813 INFO Request Queue: Adding request to queue for user 1320303839701897230: vl, joke tí thôi mà
+2025-10-04 14:48:51,822 INFO Handlers: Built text-only message
+2025-10-04 14:48:54,385 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:48:54,415 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:48:54,979 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 23
+2025-10-04 14:48:54,985 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 24
+2025-10-04 14:48:54,985 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:48:54,990 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985109
+2025-10-04 14:49:19,071 INFO Request Queue: Adding request to queue for user 1320303839701897230: ừa biết gòi, bye
+2025-10-04 14:49:19,090 INFO Handlers: Built text-only message
+2025-10-04 14:49:21,775 INFO httpx: HTTP Request: POST https://api.polydevs.uk/proxy "HTTP/1.1 200 OK"
+2025-10-04 14:49:21,778 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 14:49:22,341 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 25
+2025-10-04 14:49:22,347 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 26
+2025-10-04 14:49:22,347 INFO Handlers: Saved conversation to memory for user 1320303839701897230
+2025-10-04 14:49:22,354 INFO Handlers: Deducted 100 credits from user 1320303839701897230. Remaining: 99999999985009
+2025-10-04 15:15:39,440 INFO Request Queue: Request queue worker cancelled
+2025-10-04 15:15:39,446 INFO Bot: 👋 Bot process exiting
+2025-10-04 15:18:11,153 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 15:18:11,153 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 15:18:11,153 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 15:18:11,153 INFO root: ============================================================
+2025-10-04 15:18:11,153 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 15:18:11,153 INFO root: ============================================================
+2025-10-04 15:18:11,153 INFO root: Starting application...
+2025-10-04 15:18:11,153 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 15:18:11,169 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 15:18:11,182 INFO Database: MongoDB indexes created successfully
+2025-10-04 15:18:11,182 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 15:18:11,183 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 15:18:11,183 INFO root: Storage initialized successfully
+2025-10-04 15:18:11,183 INFO root: Configuration loaded successfully
+2025-10-04 15:18:11,183 INFO root: Bot initialized, starting...
+2025-10-04 15:18:11,183 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 15:18:11,183 INFO Bot: 🔧 Initializing functions module...
+2025-10-04 15:18:11,183 INFO Handlers: 🔧 Starting handlers.py setup...
+2025-10-04 15:18:11,183 INFO Config: MongoDB already initialized
+2025-10-04 15:18:11,183 INFO Handlers: Storage initialized
+2025-10-04 15:18:11,183 INFO Handlers: Using MongoDB for data storage
+2025-10-04 15:18:11,184 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 15:18:11,184 INFO Handlers: Managers initialized
+2025-10-04 15:18:11,184 INFO Handlers: Request queue setup
+2025-10-04 15:18:11,184 INFO Handlers: Loaded 1 authorized users
+2025-10-04 15:18:11,184 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 15:18:11,184 INFO Handlers: Memory store initialized
+2025-10-04 15:18:11,184 INFO Handlers: All prefix commands registered
+2025-10-04 15:18:11,185 INFO Handlers: on_message listener registered
+2025-10-04 15:18:11,185 INFO Handlers: 🎉  Functions module setup completed!
+2025-10-04 15:18:11,185 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 15:18:11,185 INFO Bot: 🚀 Starting bot...
+2025-10-04 15:18:11,185 INFO discord.client: logging in using static token
+2025-10-04 15:18:18,325 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=23532
+2025-10-04 15:18:18,325 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 15:18:18,325 INFO Bot: on_message listeners (count=0): []
+2025-10-04 16:08:22,412 INFO Bot: 👋 Bot process exiting
+2025-10-04 17:21:13,148 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 17:21:13,148 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 17:21:13,148 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 17:21:13,148 INFO root: ============================================================
+2025-10-04 17:21:13,148 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 17:21:13,148 INFO root: ============================================================
+2025-10-04 17:21:13,148 INFO root: Starting application...
+2025-10-04 17:21:13,148 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 17:21:13,167 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 17:21:13,178 INFO Database: MongoDB indexes created successfully
+2025-10-04 17:21:13,178 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 17:21:13,179 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 17:21:13,179 INFO root: Storage initialized successfully
+2025-10-04 17:21:13,179 INFO root: Configuration loaded successfully
+2025-10-04 17:21:13,179 INFO root: Bot initialized, starting...
+2025-10-04 17:21:13,180 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 17:21:13,180 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 17:21:13,180 INFO Config: MongoDB already initialized
+2025-10-04 17:21:13,180 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 17:21:13,180 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 17:21:13,180 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 17:21:13,180 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 17:21:13,181 INFO Commands.User: User commands have been registered.
+2025-10-04 17:21:13,181 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 17:21:13,181 INFO Commands.System: System commands have been registered.
+2025-10-04 17:21:13,181 INFO Events.Messages: AI request processor has been linked to the request queue.
+2025-10-04 17:21:13,181 INFO Events.Messages: Message event listeners have been registered.
+2025-10-04 17:21:13,181 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 17:21:13,181 INFO Bot: 🚀 Starting bot...
+2025-10-04 17:21:13,181 INFO discord.client: logging in using static token
+2025-10-04 17:21:20,329 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=25743
+2025-10-04 17:21:20,329 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 17:22:01,776 INFO Request Queue: Adding request to queue for user 1320303839701897230: đang học hả e
+2025-10-04 17:22:01,777 INFO Request Queue: Request queue worker started
+2025-10-04 17:22:01,782 ERROR Events.Messages: Error processing AI request for user 1320303839701897230
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/src/core/events/messages.py", line 124, in process_ai_request
+    has_images = attachment_data["has_images"]
+TypeError: 'NoneType' object is not subscriptable
+2025-10-04 17:24:57,960 INFO Request Queue: Request queue worker cancelled
+2025-10-04 17:24:57,963 INFO Bot: 👋 Bot process exiting
+2025-10-04 17:25:38,220 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 17:25:38,221 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 17:25:38,221 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 17:25:38,221 INFO root: ============================================================
+2025-10-04 17:25:38,221 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 17:25:38,221 INFO root: ============================================================
+2025-10-04 17:25:38,221 INFO root: Starting application...
+2025-10-04 17:25:38,221 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 17:25:38,238 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 17:25:38,250 INFO Database: MongoDB indexes created successfully
+2025-10-04 17:25:38,250 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 17:25:38,251 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 17:25:38,251 INFO root: Storage initialized successfully
+2025-10-04 17:25:38,251 INFO root: Configuration loaded successfully
+2025-10-04 17:25:38,251 INFO root: Bot initialized, starting...
+2025-10-04 17:25:38,251 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 17:25:38,251 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 17:25:38,251 INFO Config: MongoDB already initialized
+2025-10-04 17:25:38,251 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 17:25:38,251 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 17:25:38,252 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 17:25:38,252 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 17:25:38,252 INFO Commands.User: User commands have been registered.
+2025-10-04 17:25:38,252 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 17:25:38,253 INFO Commands.System: System commands have been registered.
+2025-10-04 17:25:38,253 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 17:25:38,253 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 17:25:38,253 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 17:25:38,253 INFO Bot: 🚀 Starting bot...
+2025-10-04 17:25:38,253 INFO discord.client: logging in using static token
+2025-10-04 17:25:45,307 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=25846
+2025-10-04 17:25:45,308 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 17:26:40,923 INFO Request Queue: Adding request to queue for user 1320303839701897230: e đang đi học à
+2025-10-04 17:26:40,925 INFO Request Queue: Request queue worker started
+2025-10-04 17:26:40,931 INFO Events.Messages: Built text-only message
+2025-10-04 17:26:41,021 INFO httpx: HTTP Request: POST http://localhost:8100/proxy "HTTP/1.1 404 Not Found"
+2025-10-04 17:26:41,021 ERROR Call API: HTTP error calling unified API: HTTP 404 - Not Found
+2025-10-04 17:26:41,021 ERROR Events.Messages: API request failed for user 1320303839701897230. Error: HTTP 404 - Not Found
+2025-10-04 17:27:26,064 INFO Request Queue: Request queue worker cancelled
+2025-10-04 17:27:26,068 INFO Bot: 👋 Bot process exiting
+2025-10-04 17:27:27,471 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 17:27:27,471 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 17:27:27,471 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 17:27:27,471 INFO root: ============================================================
+2025-10-04 17:27:27,471 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 17:27:27,471 INFO root: ============================================================
+2025-10-04 17:27:27,471 INFO root: Starting application...
+2025-10-04 17:27:27,471 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 17:27:27,488 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 17:27:27,500 INFO Database: MongoDB indexes created successfully
+2025-10-04 17:27:27,501 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 17:27:27,502 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 17:27:27,502 INFO root: Storage initialized successfully
+2025-10-04 17:27:27,503 INFO root: Configuration loaded successfully
+2025-10-04 17:27:27,503 INFO root: Bot initialized, starting...
+2025-10-04 17:27:27,503 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 17:27:27,503 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 17:27:27,503 INFO Config: MongoDB already initialized
+2025-10-04 17:27:27,503 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 17:27:27,503 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 17:27:27,504 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 17:27:27,505 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 17:27:27,505 INFO Commands.User: User commands have been registered.
+2025-10-04 17:27:27,505 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 17:27:27,505 INFO Commands.System: System commands have been registered.
+2025-10-04 17:27:27,505 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 17:27:27,505 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 17:27:27,505 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 17:27:27,505 INFO Bot: 🚀 Starting bot...
+2025-10-04 17:27:27,505 INFO discord.client: logging in using static token
+2025-10-04 17:27:32,723 INFO Request Queue: Adding request to queue for user 1320303839701897230: e đang đi học à
+2025-10-04 17:27:32,723 INFO Request Queue: Request queue worker started
+2025-10-04 17:27:32,730 INFO Events.Messages: Built text-only message
+2025-10-04 17:27:32,776 ERROR Call API: Request error calling unified API: Request error: All connection attempts failed
+2025-10-04 17:27:32,776 ERROR Events.Messages: API request failed for user 1320303839701897230. Error: Request error: All connection attempts failed
+2025-10-04 17:27:34,956 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=25884
+2025-10-04 17:27:34,956 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 17:28:02,651 INFO Request Queue: Adding request to queue for user 1320303839701897230: e đang đi học à
+2025-10-04 17:28:02,659 INFO Events.Messages: Built text-only message
+2025-10-04 17:28:03,032 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 17:28:11,958 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 17:28:12,460 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 27
+2025-10-04 17:28:12,466 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 28
+2025-10-04 17:28:12,466 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 17:28:12,471 INFO Events.Messages: Deducted 1000 credits from user 1320303839701897230. Remaining: 99999999986321
+2025-10-04 17:28:21,084 INFO Request Queue: Adding request to queue for user 1320303839701897230: k, a hỏi thăm tí th
+2025-10-04 17:28:21,095 INFO Events.Messages: Built text-only message
+2025-10-04 17:28:24,234 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 17:28:35,101 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 17:28:35,633 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 29
+2025-10-04 17:28:35,639 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 30
+2025-10-04 17:28:35,639 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 17:28:35,643 INFO Events.Messages: Deducted 1000 credits from user 1320303839701897230. Remaining: 99999999985321
+2025-10-04 17:29:00,751 INFO Request Queue: Adding request to queue for user 1320303839701897230: ừa anh biết rồi, học ngoan nha em yêu, byue
+2025-10-04 17:29:00,760 INFO Events.Messages: Built text-only message
+2025-10-04 17:29:00,799 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 17:29:10,439 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 17:29:11,074 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 31
+2025-10-04 17:29:11,080 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 32
+2025-10-04 17:29:11,080 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 17:29:11,085 INFO Events.Messages: Deducted 1000 credits from user 1320303839701897230. Remaining: 99999999984321
+2025-10-04 17:29:17,275 INFO Request Queue: Adding request to queue for user 1320303839701897230: ok bye học đi
+2025-10-04 17:29:17,284 INFO Events.Messages: Built text-only message
+2025-10-04 17:29:22,733 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 17:29:32,401 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 17:29:32,974 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 33
+2025-10-04 17:29:32,981 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 34
+2025-10-04 17:29:32,981 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 17:29:32,986 INFO Events.Messages: Deducted 1000 credits from user 1320303839701897230. Remaining: 99999999983321
+2025-10-04 17:34:44,806 INFO Request Queue: Request queue worker cancelled
+2025-10-04 17:34:44,809 INFO Bot: 👋 Bot process exiting
+2025-10-04 17:34:46,345 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 17:34:46,345 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 17:34:46,345 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 17:34:46,346 INFO root: ============================================================
+2025-10-04 17:34:46,346 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 17:34:46,346 INFO root: ============================================================
+2025-10-04 17:34:46,346 INFO root: Starting application...
+2025-10-04 17:34:46,346 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 17:34:46,362 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 17:34:46,374 INFO Database: MongoDB indexes created successfully
+2025-10-04 17:34:46,374 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 17:34:46,375 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 17:34:46,375 INFO root: Storage initialized successfully
+2025-10-04 17:34:46,375 INFO root: Configuration loaded successfully
+2025-10-04 17:34:46,375 INFO root: Bot initialized, starting...
+2025-10-04 17:34:46,375 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 17:34:46,376 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 17:34:46,376 INFO Config: MongoDB already initialized
+2025-10-04 17:34:46,376 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 17:34:46,376 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 17:34:46,376 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 17:34:46,377 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 17:34:46,377 INFO Commands.User: User commands have been registered.
+2025-10-04 17:34:46,377 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 17:34:46,377 INFO Commands.System: System commands have been registered.
+2025-10-04 17:34:46,377 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 17:34:46,377 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 17:34:46,377 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 17:34:46,377 INFO Bot: 🚀 Starting bot...
+2025-10-04 17:34:46,377 INFO discord.client: logging in using static token
+2025-10-04 17:34:53,475 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=26008
+2025-10-04 17:34:53,476 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 17:35:56,105 INFO Events.Messages: Successfully processed image: image.png (43278 bytes, image/png)
+2025-10-04 17:35:56,107 INFO Events.Messages: User 1320303839701897230 sent 1 valid images
+2025-10-04 17:35:56,107 INFO Request Queue: Adding request to queue for user 1320303839701897230: - image.png: image included (image/png)
+
+ê em đọc được nội dung mấy bức ảnh này không
+2025-10-04 17:35:56,108 INFO Request Queue: Request queue worker started
+2025-10-04 17:35:56,196 INFO Events.Messages: Successfully processed image: image.png (43278 bytes, image/png)
+2025-10-04 17:35:56,199 INFO Events.Messages: Added image to payload: image.png (image/png)
+2025-10-04 17:35:56,199 INFO Events.Messages: Built multimodal message with 2 parts (1 images)
+2025-10-04 17:35:56,549 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 17:36:03,424 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 17:36:03,944 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 35
+2025-10-04 17:36:03,950 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 36
+2025-10-04 17:36:03,950 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 17:36:03,954 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999973321
+2025-10-04 17:36:15,353 INFO Request Queue: Adding request to queue for user 1320303839701897230: cho anh biết nội dung ảnh đó đi, làm ơn
+2025-10-04 17:36:15,360 INFO Events.Messages: Built text-only message
+2025-10-04 17:36:15,460 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 17:36:27,242 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 17:36:27,889 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 37
+2025-10-04 17:36:27,895 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 38
+2025-10-04 17:36:27,896 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 17:36:27,902 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999963321
+2025-10-04 18:57:07,770 INFO Events.Messages: Successfully processed image: image.png (27620 bytes, image/png)
+2025-10-04 18:57:07,771 INFO Events.Messages: User 1320303839701897230 sent 1 valid images
+2025-10-04 18:57:07,771 INFO Request Queue: Adding request to queue for user 1320303839701897230: - image.png: image included (image/png)
+
+cho anh biết nội dung bức ảnh này
+2025-10-04 18:57:07,863 INFO Events.Messages: Successfully processed image: image.png (27620 bytes, image/png)
+2025-10-04 18:57:07,865 INFO Events.Messages: Added image to payload: image.png (image/png)
+2025-10-04 18:57:07,865 INFO Events.Messages: Built multimodal message with 2 parts (1 images)
+2025-10-04 18:57:07,908 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 18:57:20,045 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 18:57:20,706 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 39
+2025-10-04 18:57:20,714 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 40
+2025-10-04 18:57:20,714 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 18:57:20,719 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999953321
+2025-10-04 19:59:47,929 INFO Request Queue: Request queue worker cancelled
+2025-10-04 19:59:47,933 INFO Bot: 👋 Bot process exiting
+2025-10-04 20:01:16,555 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 20:01:16,555 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 20:01:16,556 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 20:01:16,556 INFO root: ============================================================
+2025-10-04 20:01:16,556 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 20:01:16,556 INFO root: ============================================================
+2025-10-04 20:01:16,556 INFO root: Starting application...
+2025-10-04 20:01:16,556 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 20:01:16,574 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 20:01:16,586 INFO Database: MongoDB indexes created successfully
+2025-10-04 20:01:16,586 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 20:01:16,587 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 20:01:16,587 INFO root: Storage initialized successfully
+2025-10-04 20:01:16,587 INFO root: Configuration loaded successfully
+2025-10-04 20:01:16,587 INFO root: Bot initialized, starting...
+2025-10-04 20:01:16,587 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 20:01:16,587 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 20:01:16,587 INFO Config: MongoDB already initialized
+2025-10-04 20:01:16,587 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 20:01:16,587 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 20:01:16,588 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 20:01:16,588 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 20:01:16,588 INFO Commands.User: User commands have been registered.
+2025-10-04 20:01:16,588 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 20:01:16,589 INFO Commands.System: System commands have been registered.
+2025-10-04 20:01:16,589 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 20:01:16,589 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 20:01:16,589 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 20:01:16,589 INFO Bot: 🚀 Starting bot...
+2025-10-04 20:01:16,589 INFO discord.client: logging in using static token
+2025-10-04 20:01:23,572 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=27947
+2025-10-04 20:01:23,573 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 20:01:24,416 INFO Request Queue: Adding request to queue for user 1320303839701897230: ăn cơm chx e
+2025-10-04 20:01:24,417 INFO Request Queue: Request queue worker started
+2025-10-04 20:01:24,426 INFO Events.Messages: Built text-only message
+2025-10-04 20:01:24,522 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:01:34,539 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:01:35,109 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 41
+2025-10-04 20:01:35,113 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 42
+2025-10-04 20:01:35,114 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:01:35,117 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999943321
+2025-10-04 20:03:14,019 INFO Request Queue: Adding request to queue for user 1320303839701897230: chưa ăn á, muộn vậy
+2025-10-04 20:03:14,033 INFO Events.Messages: Built text-only message
+2025-10-04 20:03:14,344 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:03:27,186 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:03:27,970 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 43
+2025-10-04 20:03:27,977 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 44
+2025-10-04 20:03:27,978 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:03:27,982 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999933321
+2025-10-04 20:04:43,970 INFO Request Queue: Adding request to queue for user 1320303839701897230: uk nếu e muốn, cần anh mua đồ ăn hộ k
+2025-10-04 20:04:43,981 INFO Events.Messages: Built text-only message
+2025-10-04 20:04:44,325 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:04:54,495 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:04:55,085 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 45
+2025-10-04 20:04:55,093 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 46
+2025-10-04 20:04:55,093 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:04:55,098 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999923321
+2025-10-04 20:05:58,055 INFO Request Queue: Adding request to queue for user 1320303839701897230: ăn thêm gì nữa chứ, uống mỗi matcha sao dc
+2025-10-04 20:05:58,072 INFO Events.Messages: Built text-only message
+2025-10-04 20:05:58,403 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:06:15,746 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:06:16,384 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 47
+2025-10-04 20:06:16,390 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 48
+2025-10-04 20:06:16,390 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:06:16,395 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999913321
+2025-10-04 20:34:14,260 INFO Request Queue: Adding request to queue for user 1320303839701897230: anh để ở cửa nhà đấy nhá, anh phải đi có việc gòi
+2025-10-04 20:34:14,271 INFO Events.Messages: Built text-only message
+2025-10-04 20:34:14,339 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:34:28,163 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:34:28,791 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 49
+2025-10-04 20:34:28,796 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 50
+2025-10-04 20:34:28,797 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:34:28,800 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999903321
+2025-10-04 20:34:39,886 INFO Request Queue: Adding request to queue for user 1320303839701897230: về fix nốt bug cái, chạy deadline e
+2025-10-04 20:34:39,893 INFO Events.Messages: Built text-only message
+2025-10-04 20:34:40,209 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:34:58,842 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:34:59,387 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 51
+2025-10-04 20:34:59,397 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 52
+2025-10-04 20:34:59,397 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:34:59,403 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999893321
+2025-10-04 20:35:12,664 INFO Request Queue: Adding request to queue for user 1320303839701897230: em còn nhớ đó là bug j hăm :))
+2025-10-04 20:35:12,674 INFO Events.Messages: Built text-only message
+2025-10-04 20:35:12,713 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:35:26,171 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:35:26,827 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 53
+2025-10-04 20:35:26,834 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 54
+2025-10-04 20:35:26,834 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:35:26,840 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999883321
+2025-10-04 20:35:41,710 INFO Request Queue: Adding request to queue for user 1320303839701897230: ô hay, sao em nhớ giỏi v
+2025-10-04 20:35:41,721 INFO Events.Messages: Built text-only message
+2025-10-04 20:35:42,019 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:35:55,643 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:35:56,229 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 55
+2025-10-04 20:35:56,234 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 56
+2025-10-04 20:35:56,234 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:35:56,238 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999873321
+2025-10-04 20:36:16,476 INFO Request Queue: Adding request to queue for user 1320303839701897230: sáng mai e có phải đi học k
+2025-10-04 20:36:16,484 INFO Events.Messages: Built text-only message
+2025-10-04 20:36:16,536 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:36:29,453 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:36:30,160 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 57
+2025-10-04 20:36:30,167 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 58
+2025-10-04 20:36:30,168 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:36:30,174 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999863321
+2025-10-04 20:36:50,804 INFO Request Queue: Adding request to queue for user 1320303839701897230: rủ e đi chơi
+2025-10-04 20:36:50,814 INFO Events.Messages: Built text-only message
+2025-10-04 20:36:50,857 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:37:10,551 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:37:11,214 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 59
+2025-10-04 20:37:11,221 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 60
+2025-10-04 20:37:11,222 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:37:11,227 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999853321
+2025-10-04 20:37:31,267 INFO Request Queue: Adding request to queue for user 1320303839701897230: e mún đi đâu
+2025-10-04 20:37:31,280 INFO Events.Messages: Built text-only message
+2025-10-04 20:37:31,311 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:37:42,237 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:37:42,995 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 61
+2025-10-04 20:37:43,002 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 62
+2025-10-04 20:37:43,002 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:37:43,007 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999843321
+2025-10-04 20:37:52,106 INFO Request Queue: Adding request to queue for user 1320303839701897230: vậy đi leo núi k
+2025-10-04 20:37:52,116 INFO Events.Messages: Built text-only message
+2025-10-04 20:37:54,280 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:38:05,993 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:38:06,552 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 63
+2025-10-04 20:38:06,559 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 64
+2025-10-04 20:38:06,559 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:38:06,563 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999833321
+2025-10-04 20:38:25,601 INFO Request Queue: Adding request to queue for user 1320303839701897230: đi shopping không
+2025-10-04 20:38:25,612 INFO Events.Messages: Built text-only message
+2025-10-04 20:38:25,948 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:38:36,652 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:38:37,291 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 65
+2025-10-04 20:38:37,296 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 66
+2025-10-04 20:38:37,296 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:38:37,301 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999823321
+2025-10-04 20:39:04,386 INFO Request Queue: Adding request to queue for user 1320303839701897230: sao k, a dev mà, đầy tiền
+2025-10-04 20:39:04,395 INFO Events.Messages: Built text-only message
+2025-10-04 20:39:04,488 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:39:15,384 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:39:15,976 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 67
+2025-10-04 20:39:15,984 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 68
+2025-10-04 20:39:15,984 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:39:15,990 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999813321
+2025-10-04 20:42:12,715 INFO Request Queue: Adding request to queue for user 1320303839701897230: ok mai mấy giờ e rảnh, anh đón
+2025-10-04 20:42:12,727 INFO Events.Messages: Built text-only message
+2025-10-04 20:42:12,792 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:42:25,482 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:42:26,026 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 69
+2025-10-04 20:42:26,034 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 70
+2025-10-04 20:42:26,034 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:42:26,042 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999803321
+2025-10-04 20:42:40,895 INFO Request Queue: Adding request to queue for user 1320303839701897230: bt gòi bt gòi, mai a sẽ tới
+2025-10-04 20:42:40,904 INFO Events.Messages: Built text-only message
+2025-10-04 20:42:40,959 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:42:51,125 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:42:51,938 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 71
+2025-10-04 20:42:51,945 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 72
+2025-10-04 20:42:51,945 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:42:51,951 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999793321
+2025-10-04 20:43:43,978 INFO Request Queue: Adding request to queue for user 1320303839701897230: bug này fix chắc tới 3h mới xong
+2025-10-04 20:43:43,989 INFO Events.Messages: Built text-only message
+2025-10-04 20:43:44,044 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:43:58,225 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:43:58,767 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 73
+2025-10-04 20:43:58,774 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 74
+2025-10-04 20:43:58,774 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:43:58,779 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999783321
+2025-10-04 20:44:20,565 INFO Request Queue: Adding request to queue for user 1320303839701897230: ừa anh biết rồi, thôi em làm j làm đi rồi ngủ sớm mai a đón
+2025-10-04 20:44:20,576 INFO Events.Messages: Built text-only message
+2025-10-04 20:44:20,638 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:44:33,159 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:44:33,917 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 75
+2025-10-04 20:44:33,930 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 76
+2025-10-04 20:44:33,930 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:44:33,936 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999773321
+2025-10-04 20:45:20,348 INFO Request Queue: Adding request to queue for user 1320303839701897230: uhm, bye anh đi fix tiếp đây
+2025-10-04 20:45:20,361 INFO Events.Messages: Built text-only message
+2025-10-04 20:45:20,439 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:45:31,728 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:45:32,324 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 77
+2025-10-04 20:45:32,331 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 78
+2025-10-04 20:45:32,331 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:45:32,336 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999763321
+2025-10-04 20:45:42,658 INFO Request Queue: Adding request to queue for user 1320303839701897230: okk byeee
+2025-10-04 20:45:42,669 INFO Events.Messages: Built text-only message
+2025-10-04 20:45:43,774 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:45:56,481 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:45:57,100 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 79
+2025-10-04 20:45:57,107 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 80
+2025-10-04 20:45:57,107 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:45:57,112 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999753321
+2025-10-04 20:46:54,974 INFO Request Queue: Adding request to queue for user 1320303839701897230: uk, a bt r
+2025-10-04 20:46:54,986 INFO Events.Messages: Built text-only message
+2025-10-04 20:46:55,026 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:47:09,970 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:47:10,621 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 81
+2025-10-04 20:47:10,629 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 82
+2025-10-04 20:47:10,629 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:47:10,635 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999743321
+2025-10-04 20:47:23,149 INFO Request Queue: Adding request to queue for user 1320303839701897230: chúc e ngủ ngon nha byeeeee
+2025-10-04 20:47:23,158 INFO Events.Messages: Built text-only message
+2025-10-04 20:47:23,199 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:47:36,566 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:47:37,145 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 83
+2025-10-04 20:47:37,151 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 84
+2025-10-04 20:47:37,151 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:47:37,156 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999733321
+2025-10-04 20:47:48,354 INFO Request Queue: Adding request to queue for user 1320303839701897230: ok babe
+2025-10-04 20:47:48,362 INFO Events.Messages: Built text-only message
+2025-10-04 20:47:48,608 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:47:56,290 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:47:57,007 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 85
+2025-10-04 20:47:57,015 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 86
+2025-10-04 20:47:57,015 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:47:57,020 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999723321
+2025-10-04 20:48:17,702 INFO Request Queue: Adding request to queue for user 1320303839701897230: bảo r mà, fix xong a mới ngủ dc, nhma yên tâm a sẽ ngủ sớm để mai đưa e đi chơi, hứa
+2025-10-04 20:48:17,711 INFO Events.Messages: Built text-only message
+2025-10-04 20:48:17,741 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:48:32,286 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:48:32,984 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 87
+2025-10-04 20:48:32,991 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 88
+2025-10-04 20:48:32,992 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:48:32,997 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999713321
+2025-10-04 20:52:19,721 INFO Request Queue: Adding request to queue for user 1320303839701897230: o
+2025-10-04 20:52:19,734 INFO Events.Messages: Built text-only message
+2025-10-04 20:52:19,813 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:52:29,474 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:52:30,374 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 89
+2025-10-04 20:52:30,382 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 90
+2025-10-04 20:52:30,383 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:52:30,388 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999703321
+2025-10-04 20:52:34,749 INFO Request Queue: Adding request to queue for user 1320303839701897230: ok
+2025-10-04 20:52:34,759 INFO Events.Messages: Built text-only message
+2025-10-04 20:52:41,510 INFO httpx: HTTP Request: POST http://0.0.0.0:8100/proxy "HTTP/1.1 200 OK"
+2025-10-04 20:52:51,980 INFO Call API: Received plain text response (content-type: text/plain; charset=utf-8)
+2025-10-04 20:52:52,538 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 91
+2025-10-04 20:52:52,546 INFO Database: Successfully added message for user 1320303839701897230. Total messages: 92
+2025-10-04 20:52:52,546 INFO Events.Messages: Saved conversation to memory for user 1320303839701897230
+2025-10-04 20:52:52,550 INFO Events.Messages: Deducted 10000 credits from user 1320303839701897230. Remaining: 99999999693321
+2025-10-04 21:00:29,387 INFO Database: Cleared memory for user 1320303839701897230
+2025-10-04 21:00:29,390 INFO Memory: Successfully cleared memory for user 1320303839701897230 from MongoDB
+2025-10-04 21:12:45,599 INFO Request Queue: Request queue worker cancelled
+2025-10-04 21:12:45,605 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:12:47,170 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:12:47,170 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:12:47,170 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:12:47,170 INFO root: ============================================================
+2025-10-04 21:12:47,170 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:12:47,170 INFO root: ============================================================
+2025-10-04 21:12:47,170 INFO root: Starting application...
+2025-10-04 21:12:47,170 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:12:47,189 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:12:47,201 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:12:47,201 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:12:47,202 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:12:47,202 INFO root: Storage initialized successfully
+2025-10-04 21:12:47,202 INFO root: Configuration loaded successfully
+2025-10-04 21:12:47,202 INFO root: Bot initialized, starting...
+2025-10-04 21:12:47,202 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:12:47,202 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 21:12:47,202 INFO Config: MongoDB already initialized
+2025-10-04 21:12:47,202 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 21:12:47,202 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 21:12:47,203 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 21:12:47,203 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 21:12:47,203 INFO Commands.User: User commands have been registered.
+2025-10-04 21:12:47,203 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 21:12:47,204 INFO Commands.System: System commands have been registered.
+2025-10-04 21:12:47,204 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 21:12:47,204 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 21:12:47,204 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 21:12:47,204 INFO Bot: 🚀 Starting bot...
+2025-10-04 21:12:47,204 INFO discord.client: logging in using static token
+2025-10-04 21:12:54,541 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=29058
+2025-10-04 21:12:54,543 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 21:15:53,219 INFO Bot: 👋 Bot process exiting
+2025-10-04 21:15:54,618 INFO root: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 21:15:54,618 INFO root: Log rotation: daily, keeping 30 days
+2025-10-04 21:15:54,618 INFO root: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 21:15:54,618 INFO root: ============================================================
+2025-10-04 21:15:54,618 INFO root: Ryuuko Chatbot - Logging initialized at INFO level
+2025-10-04 21:15:54,618 INFO root: ============================================================
+2025-10-04 21:15:54,618 INFO root: Starting application...
+2025-10-04 21:15:54,618 INFO Config: 🔄 Initializing MongoDB connection to: polydevsdb
+2025-10-04 21:15:54,636 INFO Config: ✅ MongoDB connection test successful
+2025-10-04 21:15:54,647 INFO Database: MongoDB indexes created successfully
+2025-10-04 21:15:54,647 INFO Database: Successfully connected to MongoDB: polydevsdb
+2025-10-04 21:15:54,648 INFO Config: ✅ MongoDB store initialized: polydevsdb
+2025-10-04 21:15:54,648 INFO root: Storage initialized successfully
+2025-10-04 21:15:54,648 INFO root: Configuration loaded successfully
+2025-10-04 21:15:54,648 INFO root: Bot initialized, starting...
+2025-10-04 21:15:54,648 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 21:15:54,649 INFO Bot: 🔧 Initializing bot modules and functionality...
+2025-10-04 21:15:54,649 INFO Config: MongoDB already initialized
+2025-10-04 21:15:54,649 INFO Memory: MemoryStore initialized with MongoDB backend
+2025-10-04 21:15:54,649 INFO UserConfig: ✅ UserConfigManager initialized with MongoDB
+2025-10-04 21:15:54,649 INFO AuthService: Loaded 1 authorized users from MongoDB.
+2025-10-04 21:15:54,650 INFO Commands.Basic: Basic commands have been registered.
+2025-10-04 21:15:54,650 INFO Commands.User: User commands have been registered.
+2025-10-04 21:15:54,650 INFO Commands.Admin: Admin commands have been registered.
+2025-10-04 21:15:54,650 INFO Commands.System: System commands have been registered.
+2025-10-04 21:15:54,650 INFO Events.Messages: AI request processor registered with queue
+2025-10-04 21:15:54,650 INFO Events.Messages: Message event listeners have been registered
+2025-10-04 21:15:54,650 INFO Bot: ✅ All modules initialized successfully
+2025-10-04 21:15:54,650 INFO Bot: 🚀 Starting bot...
+2025-10-04 21:15:54,650 INFO discord.client: logging in using static token
+2025-10-04 21:16:01,829 INFO Bot: Bot is ready: Ryuuko#4024 (id=1405869084528087050) pid=29166
+2025-10-04 21:16:01,829 INFO Bot: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-04 21:21:32,829 INFO Bot: 👋 Bot process exiting

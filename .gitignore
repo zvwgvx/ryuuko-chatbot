@@ -1,4 +1,4 @@
 .env
 .venv
 src/__pycache__
-logs/*
+logs/*.gz
