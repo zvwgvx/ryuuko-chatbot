@@ -2,4 +2,4 @@
 
 **Version** : 1.2.3 (Mới nhất)
 
-(Cập nhật **README** sớm nhất có thể)
+(Sẽ cập nhật **README** sớm nhất có thể)
