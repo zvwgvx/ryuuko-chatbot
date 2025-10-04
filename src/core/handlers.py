@@ -544,7 +544,7 @@ async def process_ai_request(request):
         # ✅ BUILD MESSAGE PAYLOAD (GEMINI FORMAT)
         payload_messages = []
 
-        # Add system message (keep old format)
+        # Add system message
         payload_messages.append(user_system_message)
 
         # Add conversation history from memory
@@ -608,45 +608,76 @@ async def process_ai_request(request):
             thinking_budget=-1
         )
 
-        if ok and resp:
-            await send_long_message_with_reference(message.channel, resp, message)
+        # ✅ XỬ LÝ RESPONSE - CHỈ LƯU VÀO MEMORY KHI THÀNH CÔNG
+        if ok:  # API call successful
+            if resp:  # Have valid response
+                # Send response to user
+                await send_long_message_with_reference(message.channel, resp, message)
 
-            # ✅ Save to memory (text only, no images to save space)
-            if _memory_store:
-                # Save user message (text only)
-                _memory_store.add_message(user_id, {
-                    "role": "user",
-                    "content": combined_text
-                })
-                # Save AI response
-                _memory_store.add_message(user_id, {
-                    "role": "model",
-                    "content": resp
-                })
+                # ✅ CHỈ lưu vào memory khi request THÀNH CÔNG
+                if _memory_store:
+                    # Save user message (text only, no images to save space)
+                    _memory_store.add_message(user_id, {
+                        "role": "user",
+                        "content": combined_text  # Không lưu image data
+                    })
+                    # Save AI response
+                    _memory_store.add_message(user_id, {
+                        "role": "model",
+                        "content": resp
+                    })
+                    logger.info(f"Saved conversation to memory for user {user_id}")
 
-            # Deduct credits if using MongoDB
-            if _use_mongodb_auth and _mongodb_store and 'model_info' in locals() and model_info:
-                cost = model_info.get("credit_cost", 0)
-                if cost > 0:
-                    success, remaining = _mongodb_store.deduct_user_credit(user_id, cost)
-                    if success:
-                        logger.info(f"Deducted {cost} credits from user {user_id}. Remaining: {remaining}")
-        else:
+                # Deduct credits if using MongoDB
+                if _use_mongodb_auth and _mongodb_store and 'model_info' in locals() and model_info:
+                    cost = model_info.get("credit_cost", 0)
+                    if cost > 0:
+                        success, remaining = _mongodb_store.deduct_user_credit(user_id, cost)
+                        if success:
+                            logger.info(f"Deducted {cost} credits from user {user_id}. Remaining: {remaining}")
+            else:
+                # ok=True but no response
+                await message.channel.send(
+                    "⚠️ Received empty response from API.",
+                    reference=message,
+                    allowed_mentions=discord.AllowedMentions.none()
+                )
+                # KHÔNG lưu vào memory
+
+        else:  # API call failed (ok=False)
+            # ❌ KHÔNG LƯU VÀO MEMORY KHI CÓ LỖI
             error_msg = resp or "Unknown error"
+
+            # Log error để debug
+            logger.error(f"API request failed for user {user_id}. Error: {error_msg}")
+
+            # Parse error message nếu là JSON
+            try:
+                if isinstance(error_msg, str) and error_msg.strip().startswith('{'):
+                    error_json = json.loads(error_msg)
+                    if "detail" in error_json:
+                        error_msg = error_json["detail"]
+                    elif "error" in error_json:
+                        error_msg = error_json["error"]
+            except:
+                pass  # Keep original error message
+
+            # Gửi thông báo lỗi cho user
             await message.channel.send(
-                f"⚠️ Error: {error_msg}",
+                f"⚠️ Error: {str(error_msg)[:500]}",  # Limit error message length
                 reference=message,
                 allowed_mentions=discord.AllowedMentions.none()
             )
+            # ❌ KHÔNG lưu conversation này vào memory
 
     except Exception as e:
         logger.exception(f"Error in request processing for user {user_id}")
         await message.channel.send(
-            f"⚠️ Internal error: {e}",
+            f"⚠️ Internal error: {str(e)[:200]}",
             reference=message,
             allowed_mentions=discord.AllowedMentions.none()
         )
-
+        # ❌ KHÔNG lưu vào memory khi có exception
 
 # ------------------------------------------------------------------
 # PREFIX COMMANDS - Basic Commands
