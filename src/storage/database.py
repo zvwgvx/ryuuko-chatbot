@@ -410,8 +410,8 @@ class MongoDBStore:
             if credit_cost < 0:
                 return False, "Credit cost cannot be negative"
 
-            if access_level not in [0, 1, 2, 3]:
-                return False, "Access level must be 0, 1, 2, or 3"
+            if access_level not in [0, 1, 2]:
+                return False, "Access level must be 0, 1, 2"
 
             existing = self.db[self.COLLECTIONS['models']].find_one({"model_name": model_name})
             if existing:
@@ -480,8 +480,8 @@ class MongoDBStore:
                 update_data["credit_cost"] = credit_cost
 
             if access_level is not None:
-                if access_level not in [0, 1, 2, 3]:
-                    return False, "Access level must be 0, 1, 2, or 3"
+                if access_level not in [0, 1, 2]:
+                    return False, "Access level must be 0, 1, 2"
                 update_data["access_level"] = access_level
 
             result = self.db[self.COLLECTIONS['models']].update_one(

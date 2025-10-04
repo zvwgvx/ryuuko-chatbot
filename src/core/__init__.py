@@ -1,60 +1,27 @@
 """
-Core package for Ryuuko Chatbot
-Contains main bot logic, API clients, and bot functions
+Core package for Ryuuko Chatbot.
+
+This package contains the main bot logic, command handlers, event listeners,
+and service layers for the application.
 """
 
-# Import from call_api.py
-from .call_api import (
-    UnifiedAPIClient,
-    call_unified_api,
-    is_thinking_model,
-    build_api_request,
-)
+# Import the main Bot class from bot.py
+from .bot import Bot
 
-# Import from handlers.py
-from .handlers import (
-    # Main setup function
-    setup,
+# Import API client - GIỮ NGUYÊN VỊ TRÍ CŨ
+from .call_api import UnifiedAPIClient
 
-    # User authorization functions
-    is_authorized_user,
-    add_authorized_user,
-    remove_authorized_user,
-    load_authorized_users,
+# Import the registration functions
+from .commands import register_all_commands
+from .events import register_all_events
 
-    # Utility functions
-    should_respond_default,
-    get_vietnam_timestamp,
-
-    # Message formatting
-    convert_latex_to_discord,
-    split_message_smart,
-    send_long_message_with_reference,
-
-    # AI processing
-    process_ai_request,
-)
-
-# Note: bot.py is the main entry point, doesn't export functions
-# from .bot import ... (nothing to export)
+# Import the authentication service
+from .services import auth_service
 
 __all__ = [
-    # API client
+    'Bot',
     'UnifiedAPIClient',
-    'call_unified_api',
-    'is_thinking_model',
-    'build_api_request',
-
-    # Bot functions
-    'setup',
-    'is_authorized_user',
-    'add_authorized_user',
-    'remove_authorized_user',
-    'load_authorized_users',
-    'should_respond_default',
-    'get_vietnam_timestamp',
-    'convert_latex_to_discord',
-    'split_message_smart',
-    'send_long_message_with_reference',
-    'process_ai_request',
+    'register_all_commands',
+    'register_all_events',
+    'auth_service',
 ]
