@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # coding: utf-8
-# request_queue.py - Request queue system with owner priority handling
+# queue.py - Request queue system with owner priority handling
 
 import asyncio
 import logging
@@ -68,9 +68,9 @@ class RequestQueue:
         except Exception:
             return False
     
-    # Replace the add_request method in request_queue.py
+    # Replace the add_request method in queue.py
 
-    # Replace the add_request method in request_queue.py with this fixed version:
+    # Replace the add_request method in queue.py with this fixed version:
 
     async def add_request(self, message: discord.Message, final_user_text: str) -> tuple[bool, str]:
         """

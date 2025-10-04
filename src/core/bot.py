@@ -33,7 +33,7 @@ from src.storage.database import get_mongodb_store
 from src.core.services import auth_service
 
 # Import health check
-from src.utils.health_check import perform_startup_checks
+from src.utils.health import perform_startup_checks
 
 # Use centralized logger
 logger = logging.getLogger("Bot")

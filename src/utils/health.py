@@ -1,4 +1,4 @@
-# src/utils/health_check.py
+# src/utils/health.py
 """
 Health check module to verify all services before bot startup.
 Ensures API server, database, and other dependencies are operational.
