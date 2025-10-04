@@ -4,7 +4,7 @@ import logging
 from typing import List, Dict, Any, Tuple, Optional
 import httpx
 from src.config import loader
-from ..utils.ratelimiter import get_rate_limiter
+from ..utils.ratelimit import get_rate_limiter
 
 logger = logging.getLogger("Call API")
 

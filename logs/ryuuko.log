@@ -1603,3 +1603,34 @@ RuntimeError: ❌ MongoDB is MANDATORY but not available: MongoDB store not init
 2025-10-04 22:53:17,434 INFO [34mBot[0m: [START] Starting Discord bot...
 2025-10-04 22:53:17,434 INFO [34mdiscord.client[0m: logging in using static token
 2025-10-04 22:53:17,581 INFO [34mBot[0m: [EXIT] Bot process exiting
+2025-10-04 22:54:13,531 INFO [34mroot[0m: File logging enabled: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs/ryuuko.log
+2025-10-04 22:54:13,532 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-04 22:54:13,532 INFO [34mroot[0m: Compressed archives will be created in: /Users/zvwgvx/PycharmProjects/Ryuuko-Chatbot/logs
+2025-10-04 22:54:13,532 INFO [34mroot[0m: Starting application...
+2025-10-04 22:54:13,532 INFO [34mConfig[0m: [SYNC] Initializing MongoDB connection to: polydevsdb
+2025-10-04 22:54:13,548 INFO [34mConfig[0m: [OK] MongoDB connection test successful
+2025-10-04 22:54:13,560 INFO [34mDatabase[0m: MongoDB indexes created successfully
+2025-10-04 22:54:13,560 INFO [34mDatabase[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-04 22:54:13,561 INFO [34mConfig[0m: [OK] MongoDB store initialized: polydevsdb
+2025-10-04 22:54:13,561 INFO [34mroot[0m: Storage initialized successfully
+2025-10-04 22:54:13,561 INFO [34mroot[0m: Configuration loaded successfully
+2025-10-04 22:54:13,561 INFO [34mroot[0m: Bot initialized, starting...
+2025-10-04 22:54:13,562 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-04 22:54:13,562 INFO [34mBot[0m: [HEALTH] Running pre-startup health checks...
+2025-10-04 22:54:13,562 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-04 22:54:13,992 INFO [34mBot[0m: [OK] All health checks passed! Proceeding with bot initialization...
+2025-10-04 22:54:13,992 INFO [34mBot[0m: [INIT] Initializing bot modules and functionality...
+2025-10-04 22:54:13,992 INFO [34mConfig[0m: MongoDB already initialized
+2025-10-04 22:54:13,993 INFO [34mMemory[0m: MemoryStore initialized with MongoDB backend
+2025-10-04 22:54:13,993 INFO [34mUserConfig[0m: [OK] UserConfigManager initialized with MongoDB
+2025-10-04 22:54:13,994 INFO [34mAuthService[0m: Loaded 1 authorized users from MongoDB.
+2025-10-04 22:54:13,994 INFO [34mCommands.Basic[0m: Basic commands have been registered.
+2025-10-04 22:54:13,994 INFO [34mCommands.User[0m: User commands have been registered.
+2025-10-04 22:54:13,994 INFO [34mCommands.Admin[0m: Admin commands have been registered.
+2025-10-04 22:54:13,995 INFO [34mCommands.System[0m: System commands have been registered.
+2025-10-04 22:54:13,995 INFO [34mEvents.Messages[0m: [OK] AI request processor registered with queue
+2025-10-04 22:54:13,995 INFO [34mEvents.Messages[0m: [OK] Message event listeners have been registered
+2025-10-04 22:54:13,995 INFO [34mBot[0m: [OK] All modules initialized successfully
+2025-10-04 22:54:13,995 INFO [34mBot[0m: [START] Starting Discord bot...
+2025-10-04 22:54:13,995 INFO [34mdiscord.client[0m: logging in using static token
+2025-10-04 22:54:14,686 INFO [34mBot[0m: [EXIT] Bot process exiting
