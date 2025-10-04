@@ -467,8 +467,8 @@ def get_vietnam_timestamp() -> str:
     """Get current timestamp in GMT+7 (Vietnam timezone)"""
     vietnam_tz = timezone(timedelta(hours=7))
     now = datetime.now(vietnam_tz)
-    formatted_time = now.strftime("%A, %B %d, %Y - %H:%M:%S")
-    return f"Current time: {formatted_time} (GMT+7) : "
+    # Format ngắn gọn hơn
+    return now.strftime("[%Y-%m-%d %H:%M:%S GMT+7] ")
 
 
 async def process_ai_request(request):
