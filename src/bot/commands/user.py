@@ -1,4 +1,4 @@
-# src/bot/commands/user.py
+# src/bot/commands/user_config.py
 """
 Handles commands for authorized users to manage their personal settings.
 """

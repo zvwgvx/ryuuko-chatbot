@@ -3,11 +3,16 @@
 Command registration module.
 Aggregates all command groups and provides a single function to register them all.
 """
+import logging
 from discord.ext import commands
+
+# Import setup functions from each command module
 from .basic import setup_basic_commands
 from .user import setup_user_commands
 from .admin import setup_admin_commands
 from .system import setup_system_commands
+
+logger = logging.getLogger("Bot.Commands")
 
 
 def register_all_commands(bot: commands.Bot, dependencies: dict):
@@ -19,37 +24,45 @@ def register_all_commands(bot: commands.Bot, dependencies: dict):
         dependencies (dict): A dictionary containing all required dependencies
                            (managers, stores, helper functions, etc.)
     """
-    # Create auth helpers for admin commands
-    auth_helpers = {
-        'add': dependencies['add_authorized_user'],
-        'remove': dependencies['remove_authorized_user'],
-        'get_set': lambda: dependencies['authorized_users']
-    }
+    logger.info("[INIT] Registering all command groups...")
 
-    # Attach the authorized_users set to bot for easy access
+    # --- CORE FIX: Lấy trực tiếp `auth_helpers` từ dependencies ---
+    # `auth_helpers` đã được tạo sẵn trong `bot/main.py`.
+    # Chúng ta không cần tạo lại nó ở đây.
+    auth_helpers = dependencies['auth_helpers']
+
+    # Attach the authorized_users set to the bot for easy access in other parts of the code
     bot.authorized_users = dependencies['authorized_users']
 
-    # Register each command group
+    # --- Register each command group with its required dependencies ---
+
+    # Basic commands have no external dependencies
     setup_basic_commands(bot)
 
+    # User commands require several managers and the API client
     setup_user_commands(
         bot,
         dependencies['user_config_manager'],
         dependencies['call_api'],
         dependencies['memory_store'],
-        dependencies.get('mongodb_store')
+        dependencies.get('mongodb_store')  # .get() is safer in case it's optional
     )
 
+    # Admin commands require the memory store and the auth helpers dictionary
     setup_admin_commands(
         bot,
         dependencies['memory_store'],
-        auth_helpers
+        auth_helpers  # Pass the `auth_helpers` dictionary directly
     )
 
+    # System commands require the MongoDB store
     setup_system_commands(
         bot,
         dependencies.get('mongodb_store')
     )
 
+    logger.info("[OK] All command groups have been registered.")
+
 
 __all__ = ['register_all_commands']
+

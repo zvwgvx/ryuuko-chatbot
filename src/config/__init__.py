@@ -1,56 +1,28 @@
 """
-Configuration package for Ryuuko Chatbot
-Provides unified access to configuration and user management
+Configuration package for the unified Ryuuko Chatbot application.
+Provides access to bot settings, gateway settings, and user management.
 """
 
-# Import individual items
-from .loader import (
-    DISCORD_TOKEN,
-    API_SERVER,
-    API_KEY,
-    USE_MONGODB,
-    MONGODB_CONNECTION_STRING,
-    MONGODB_DATABASE_NAME,
-    REQUEST_TIMEOUT,
-    MAX_MSG,
-    MEMORY_MAX_PER_USER,
-    MEMORY_MAX_TOKENS,
-    WEBHOOK_URL,
-    init_storage,
-    get_storage_type,
-    load_system_prompt,
-)
+# Import the entire loader module. This is the recommended way to access config.
+# Example: from src.config import loader; print(loader.DISCORD_TOKEN)
+from . import loader
 
-from .user import (
+# Import user_config management separately as it contains a class and factory function.
+from .user_config import (
     UserConfigManager,
     get_user_config_manager,
     DEFAULT_SYSTEM_PROMPT,
     DEFAULT_MODEL,
-    FALLBACK_SUPPORTED_MODELS,
-    SUPPORTED_MODELS,
-    get_supported_models,
+    FALLBACK_SUPPORTED_MODELS
 )
 
-# ⭐ BACKWARD COMPATIBILITY:
-# Import the entire loader module as 'loader' for legacy code
-from . import loader
-
-# Create alias for old import style
-# This allows: import src.config as load_config
-# Or: from src.config import loader as load_config
-load_config = loader  # This creates the module object needed for functions.setup()
-
+# Define what gets imported with 'from src.config import *'
+# It's generally better to import the loader module directly.
 __all__ = [
-    # Individual exports
-    'DISCORD_TOKEN', 'API_SERVER', 'API_KEY', 'USE_MONGODB',
-    'MONGODB_CONNECTION_STRING', 'MONGODB_DATABASE_NAME',
-    'REQUEST_TIMEOUT', 'MAX_MSG', 'MEMORY_MAX_PER_USER', 'MEMORY_MAX_TOKENS',
-    'WEBHOOK_URL', 'init_storage', 'get_storage_type', 'load_system_prompt',
-    'UserConfigManager', 'get_user_config_manager', 'DEFAULT_SYSTEM_PROMPT',
-    'DEFAULT_MODEL', 'FALLBACK_SUPPORTED_MODELS', 'SUPPORTED_MODELS',
-    'get_supported_models',
-
-    # Module objects for backward compatibility
     'loader',
-    'load_config',
+    'UserConfigManager',
+    'get_user_config_manager',
+    'DEFAULT_SYSTEM_PROMPT',
+    'DEFAULT_MODEL',
+    'FALLBACK_SUPPORTED_MODELS'
 ]

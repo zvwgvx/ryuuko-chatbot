@@ -2,250 +2,155 @@
 # coding: utf-8
 """
 Discord Bot implementation for Ryuuko Chatbot.
-
-This module provides the main Bot class that encapsulates all Discord bot
-functionality, including event handlers, command processing, and lifecycle
-management.
 """
 
 import logging
 import sys
 import os
 import asyncio
-from typing import Optional, Dict, Any
+from typing import Optional
 
 import discord
 from discord.ext import commands
 
 # --- Refactored Imports ---
+# Import the unified config loader directly
 from src.config import loader as config_loader
-from src.bot import api as call_api  # Import the entire api package as call_api
+from src.config import get_user_config_manager
 
-# Import the new registration functions
+# Import API client functions
+from src.bot import api as call_api
+
+# Import registration functions
 from src.bot.commands import register_all_commands
 from src.bot.events import register_all_events
 
-# Import managers and auth service
-from src.config import get_user_config_manager
-from src.utils import get_request_queue
+# Import managers and services
 from src.storage import MemoryStore
 from src.storage.database import get_mongodb_store
-from src.bot.services import auth # Import module 'auth'
-
-# Import health check
-from src.utils.health import perform_startup_checks # Corrected import path
+from src.bot.services import auth as auth_service
+from src.utils.health import perform_startup_checks
+from src.utils.queue import get_request_queue
 
 # Use centralized logger
 logger = logging.getLogger("Bot.Main")
 
-class Bot:
+
+class Bot(commands.Bot):
     """
-    Main Discord bot class that encapsulates all bot functionality.
-
-    This class follows the single responsibility principle by managing
-    the Discord bot lifecycle and delegating specific functionality to
-    appropriate modules.
-
-    Attributes:
-        config: Configuration object containing bot settings
-        client: Discord bot client instance
+    Main Discord bot class, inheriting directly from commands.Bot for simplicity.
     """
 
-    def __init__(self, config: Optional[Dict[str, Any]] = None):
-        """
-        Initialize the bot with configuration.
-
-        Args:
-            config: Optional configuration dictionary. If not provided,
-                   will use default configuration from loader module.
-        """
-        self.config = config or {}
-        self._client: Optional[commands.Bot] = None
-        self._initialized = False
-
-    def _create_bot_instance(self) -> commands.Bot:
-        """
-        Create and configure the Discord bot instance.
-
-        Returns:
-            Configured Discord bot instance with all intents and settings.
-        """
-        # Configure intents
+    def __init__(self):
+        # 1. Initialize the parent class (commands.Bot) with intents
         intents = discord.Intents.default()
         intents.message_content = True
         intents.members = True
 
-        # Create bot instance
-        bot = commands.Bot(
-            command_prefix=".",
-            intents=intents,
-            help_command=None
-        )
+        # Call the parent constructor
+        super().__init__(command_prefix=".", intents=intents, help_command=None)
 
-        # Register bot event handlers
-        self._register_core_events(bot)
+        # 2. Register core, built-in event handlers
+        self._register_core_events()
 
-        return bot
+        # 3. Setup all other bot functionality (commands, custom events, etc.)
+        self._setup_bot_functionality()
 
-    def _register_core_events(self, bot: commands.Bot) -> None:
-        """
-        Register essential, built-in event handlers for the bot.
+    def _register_core_events(self):
+        """Register essential, built-in event handlers for the bot."""
 
-        Args:
-            bot: Discord bot instance to register events on.
-        """
-
-        @bot.event
+        @self.event
         async def on_ready():
             """Handle bot ready event."""
-            logger.info(
-                f"Bot is ready: {bot.user} (id={bot.user.id}) pid={os.getpid()}"
-            )
+            logger.info(f"[OK] Bot is ready: {self.user} (id={self.user.id})")
             try:
-                cmds = sorted([c.name for c in bot.commands])
-                logger.info("Registered prefix commands: %s", cmds)
+                cmds = sorted([c.name for c in self.commands])
+                logger.info(f"Registered prefix commands: {cmds}")
             except Exception:
                 logger.exception("Failed to list commands")
 
-        @bot.event
+        @self.event
         async def on_command_error(ctx: commands.Context, error: Exception):
-            """
-            Handle command errors gracefully.
-            """
+            """Handle command errors gracefully."""
             if isinstance(error, commands.CommandNotFound):
                 return  # Silently ignore unknown commands
 
             if isinstance(error, commands.CheckFailure):
-                await ctx.send(
-                    "❌ Bạn không có quyền sử dụng lệnh này.",  # Keep emoji for user
-                    allowed_mentions=discord.AllowedMentions.none()
-                )
+                await ctx.send("❌ Bạn không có quyền sử dụng lệnh này.")
                 return
 
             if isinstance(error, commands.MissingRequiredArgument):
-                await ctx.send(
-                    f"❌ Thiếu tham số: {error.param.name}",  # Keep emoji for user
-                    allowed_mentions=discord.AllowedMentions.none()
-                )
+                await ctx.send(f"❌ Thiếu tham số bắt buộc: `{error.param.name}`")
                 return
 
             logger.exception(f"Command error in '{ctx.command}': {error}")
-            await ctx.send(
-                "❌ Đã xảy ra lỗi khi thực hiện lệnh.",  # Keep emoji for user
-                allowed_mentions=discord.AllowedMentions.none()
-            )
+            await ctx.send("❌ Đã xảy ra lỗi khi thực hiện lệnh.")
 
-    def _setup_bot_functionality(self, bot: commands.Bot) -> None:
+    def _setup_bot_functionality(self):
         """
-        NEW: A centralized function to set up all bot functionality by
+        A centralized function to set up all bot functionality by
         initializing dependencies and registering commands/events.
         """
-        logger.info("[INIT] Initializing bot modules and functionality...")
+        logger.info("[INIT] Initializing bot modules...")
 
-        # 1. Initialize managers and stores
-        config_loader.init_storage()  # Ensure storage paths are ready
+        # Initialize managers and stores
         memory_store = MemoryStore()
         user_config_manager = get_user_config_manager()
+        mongodb_store = get_mongodb_store()
         request_queue = get_request_queue()
-        mongodb_store = get_mongodb_store() if config_loader.USE_MONGODB else None
 
-        # 2. Load data and setup auth service
-        authorized_users_set = auth.load_authorized_users(config_loader, mongodb_store)
+        # Load authorized users
+        authorized_users_set = auth_service.load_authorized_users(mongodb_store)
 
-        # 3. Create a single dictionary of all dependencies for injection
+        # Create a single dictionary of all dependencies for injection
         dependencies = {
-            "call_api": call_api, # This is now defined from the import
-            "config": config_loader,
+            "config": config_loader, # <<< THÊM DÒNG NÀY
+            "call_api": call_api,
             "user_config_manager": user_config_manager,
-            "request_queue": request_queue,
             "memory_store": memory_store,
             "mongodb_store": mongodb_store,
             "authorized_users": authorized_users_set,
-            # Wrap auth functions to pass their own dependencies
-            "add_authorized_user": lambda uid: auth.add_authorized_user(uid, config_loader, mongodb_store),
-            "remove_authorized_user": lambda uid: auth.remove_authorized_user(uid, config_loader,
-                                                                              mongodb_store),
+            "request_queue": request_queue,
+            "auth_helpers": {
+                'add': lambda uid: auth_service.add_authorized_user(uid, mongodb_store),
+                'remove': lambda uid: auth_service.remove_authorized_user(uid, mongodb_store),
+                'get_set': lambda: authorized_users_set
+            }
         }
 
-        # 4. Register all commands and events, passing the dependencies
-        register_all_commands(bot, dependencies)
-        register_all_events(bot, dependencies)
+        # Register all commands and events, passing the dependencies
+        register_all_commands(self, dependencies)
+        register_all_events(self, dependencies)
 
-        logger.info("[OK] All modules initialized successfully")
+        logger.info("[OK] All bot modules initialized successfully.")
 
-    def _resolve_token(self) -> str:
-        """
-        Resolve Discord bot token from various sources.
-        """
-        token = self.config.get("discord_token") or getattr(config_loader, "DISCORD_TOKEN", None) or os.getenv(
-            "DISCORD_TOKEN")
-        if not token:
-            raise RuntimeError("Discord token not found in config, loader, or environment variables.")
-        return token
+    async def _run_startup_checks(self):
+        """Run pre-startup health checks in an async context."""
+        logger.info("[HEALTH] Running pre-startup health checks...")
+        if not await perform_startup_checks(config_loader):
+            logger.critical("[CRASH] Health checks failed. Bot startup aborted.")
+            sys.exit(1)
+        logger.info("[OK] All health checks passed!")
 
-    def run(self) -> None:
+    def run(self, token: str, **kwargs):
         """
-        Start the Discord bot with pre-startup health checks.
+        Override the default run method to include startup checks.
         """
+
+        async def runner():
+            # Use 'async with' which is the recommended way to run the bot
+            async with self:
+                await self._run_startup_checks()
+                logger.info("[START] Starting Discord bot...")
+                await self.start(token)
+
         try:
-            # Create bot instance if not exists
-            if not self._client:
-                self._client = self._create_bot_instance()
-
-            # Run health checks before initializing bot functionality
-            if not self._initialized:
-                logger.info("[HEALTH] Running pre-startup health checks...")
-
-                # Create new event loop for health checks
-                loop = asyncio.new_event_loop()
-                asyncio.set_event_loop(loop)
-
-                try:
-                    # Run all health checks
-                    health_check_passed = loop.run_until_complete(
-                        perform_startup_checks(config_loader)
-                    )
-
-                    if not health_check_passed:
-                        logger.error("[ERROR] Health checks failed. Bot startup aborted.")
-                        logger.error("Please fix the issues above and try again.")
-                        sys.exit(1)
-
-                    logger.info("[OK] All health checks passed! Proceeding with bot initialization...")
-
-                except KeyboardInterrupt:
-                    logger.info("[STOP] Health check interrupted by user")
-                    sys.exit(0)
-                except Exception as e:
-                    logger.exception("[CRASH] Error during health checks: %s", e)
-                    sys.exit(1)
-                finally:
-                    loop.close()
-
-                # Initialize bot functionality after health checks pass
-                self._setup_bot_functionality(self._client)
-                self._initialized = True
-
-            # Resolve token and start bot
-            token = self._resolve_token()
-            logger.info("[START] Starting Discord bot...")
-            self._client.run(token)
-
+            # Run the async runner
+            asyncio.run(runner())
         except KeyboardInterrupt:
-            logger.info("[STOP] Bot interrupted by user")
-        except Exception:
-            logger.exception("[CRASH] Bot crashed with a critical exception")
-            raise
+            logger.info("[STOP] Bot interrupted by user.")
+        except Exception as e:
+            logger.critical(f"[CRASH] Bot crashed with a critical exception: {e}", exc_info=True)
+            sys.exit(1)
         finally:
-            logger.info("[EXIT] Bot process exiting")
-
-
-# Module-level function for backward compatibility
-def main():
-    """Main entry point when running this module directly."""
-    bot = Bot()
-    bot.run()
-
-
-if __name__ == "__main__":
-    main()
+            logger.info("[EXIT] Bot process exiting.")
