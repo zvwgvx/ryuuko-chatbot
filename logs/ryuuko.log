@@ -1094,3 +1094,82 @@ NoneType: None
 2025-10-05 23:21:40,443 INFO [34mBot.Main[0m: [START] Starting Discord bot...
 2025-10-05 23:21:43,076 INFO [34mBot.Main[0m: [STOP] Bot shutdown initiated.
 2025-10-05 23:21:43,076 INFO [34mBot.Main[0m: [EXIT] Bot process exiting.
+2025-10-05 23:32:47,766 INFO [34mroot[0m: File logging enabled: logs/ryuuko.log
+2025-10-05 23:32:47,766 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-05 23:32:47,766 INFO [34mroot[0m: Compressed archives will be created in: logs
+2025-10-05 23:32:47,766 INFO [34mroot[0m: Starting application...
+2025-10-05 23:32:47,766 INFO [34mroot[0m: Initializing storage...
+2025-10-05 23:32:47,766 INFO [34mConfig.Loader[0m: Initializing MongoDB connection to database: polydevsdb
+2025-10-05 23:32:47,795 INFO [34mStorage.Database[0m: MongoDB indexes created successfully
+2025-10-05 23:32:47,795 INFO [34mStorage.Database[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-05 23:32:47,796 INFO [34mConfig.Loader[0m: MongoDB store initialized successfully.
+2025-10-05 23:32:47,796 INFO [34mroot[0m: Storage initialized successfully.
+2025-10-05 23:32:47,796 INFO [34mroot[0m: ==================================================
+2025-10-05 23:32:47,796 INFO [34mroot[0m: Ryuuko Chatbot Initializing...
+2025-10-05 23:32:47,796 INFO [34mroot[0m: Storage Type: MongoDB
+2025-10-05 23:32:47,796 INFO [34mroot[0m: Database Name: polydevsdb
+2025-10-05 23:32:47,796 INFO [34mroot[0m: AI Gateway Mode: Integrated (Direct Call)
+2025-10-05 23:32:47,796 INFO [34mroot[0m: ==================================================
+2025-10-05 23:32:47,797 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-05 23:32:47,797 INFO [34mBot.Main[0m: [INIT] Initializing bot modules...
+2025-10-05 23:32:47,797 INFO [34mStorage.Memory[0m: MemoryStore initialized with MongoDB backend.
+2025-10-05 23:32:47,797 INFO [34mConfig.UserConfig[0m: UserConfigManager initialized with MongoDB.
+2025-10-05 23:32:47,798 INFO [34mBot.Services.Auth[0m: [OK] Loaded 1 authorized users from MongoDB.
+2025-10-05 23:32:47,798 INFO [34mBot.Commands[0m: [INIT] Registering all command groups...
+2025-10-05 23:32:47,798 INFO [34mBot.Commands.Basic[0m: Basic commands have been registered.
+2025-10-05 23:32:47,798 INFO [34mBot.Commands.User[0m: User commands have been registered.
+2025-10-05 23:32:47,798 INFO [34mBot.Commands.Admin[0m: Admin commands have been registered.
+2025-10-05 23:32:47,798 INFO [34mBot.Commands.System[0m: System commands have been registered.
+2025-10-05 23:32:47,798 INFO [34mBot.Commands[0m: [OK] All command groups have been registered.
+2025-10-05 23:32:47,798 INFO [34mBot.Events.Messages[0m: [OK] Message event listeners have been registered
+2025-10-05 23:32:47,798 INFO [34mBot.Main[0m: [OK] All bot modules initialized successfully.
+2025-10-05 23:32:47,798 INFO [34mroot[0m: Bot instance created. Starting bot...
+2025-10-05 23:32:47,798 INFO [34mBot.Main[0m: [HEALTH] Running pre-startup health checks...
+2025-10-05 23:32:47,798 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-05 23:32:48,224 INFO [34mBot.Main[0m: [OK] All health checks passed!
+2025-10-05 23:32:48,224 INFO [34mBot.Main[0m: [START] Starting Discord bot...
+2025-10-05 23:32:49,496 INFO [34mBot.Main[0m: [STOP] Bot shutdown initiated.
+2025-10-05 23:32:49,497 INFO [34mBot.Main[0m: [EXIT] Bot process exiting.
+2025-10-05 23:34:16,673 INFO [34mroot[0m: File logging enabled: logs/ryuuko.log
+2025-10-05 23:34:16,674 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-05 23:34:16,674 INFO [34mroot[0m: Compressed archives will be created in: logs
+2025-10-05 23:34:16,674 INFO [34mroot[0m: Starting application...
+2025-10-05 23:34:16,674 INFO [34mroot[0m: Initializing storage...
+2025-10-05 23:34:16,674 INFO [34mConfig.Loader[0m: Initializing MongoDB connection to database: polydevsdb
+2025-10-05 23:34:16,704 INFO [34mStorage.Database[0m: MongoDB indexes created successfully
+2025-10-05 23:34:16,704 INFO [34mStorage.Database[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-05 23:34:16,705 INFO [34mConfig.Loader[0m: MongoDB store initialized successfully.
+2025-10-05 23:34:16,705 INFO [34mroot[0m: Storage initialized successfully.
+2025-10-05 23:34:16,705 INFO [34mroot[0m: ==================================================
+2025-10-05 23:34:16,705 INFO [34mroot[0m: Ryuuko Chatbot Initializing...
+2025-10-05 23:34:16,705 INFO [34mroot[0m: Storage Type: MongoDB
+2025-10-05 23:34:16,705 INFO [34mroot[0m: Database Name: polydevsdb
+2025-10-05 23:34:16,705 INFO [34mroot[0m: AI Gateway Mode: Integrated (Direct Call)
+2025-10-05 23:34:16,705 INFO [34mroot[0m: ==================================================
+2025-10-05 23:34:16,705 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-05 23:34:16,705 INFO [34mBot.Main[0m: [INIT] Initializing bot modules...
+2025-10-05 23:34:16,705 INFO [34mStorage.Memory[0m: MemoryStore initialized with MongoDB backend.
+2025-10-05 23:34:16,705 INFO [34mConfig.UserConfig[0m: UserConfigManager initialized with MongoDB.
+2025-10-05 23:34:16,706 INFO [34mBot.Services.Auth[0m: [OK] Loaded 1 authorized users from MongoDB.
+2025-10-05 23:34:16,706 INFO [34mBot.Commands[0m: [INIT] Registering all command groups...
+2025-10-05 23:34:16,706 INFO [34mBot.Commands.Basic[0m: Basic commands have been registered.
+2025-10-05 23:34:16,706 INFO [34mBot.Commands.User[0m: User commands have been registered.
+2025-10-05 23:34:16,707 INFO [34mBot.Commands.Admin[0m: Admin commands have been registered.
+2025-10-05 23:34:16,707 INFO [34mBot.Commands.System[0m: System commands have been registered.
+2025-10-05 23:34:16,707 INFO [34mBot.Commands[0m: [OK] All command groups have been registered.
+2025-10-05 23:34:16,707 INFO [34mBot.Events.Messages[0m: [OK] Message event listeners have been registered
+2025-10-05 23:34:16,707 INFO [34mBot.Main[0m: [OK] All bot modules initialized successfully.
+2025-10-05 23:34:16,707 INFO [34mroot[0m: Bot instance created. Starting bot...
+2025-10-05 23:34:16,707 INFO [34mBot.Main[0m: [HEALTH] Running pre-startup health checks...
+2025-10-05 23:34:16,707 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-05 23:34:17,112 INFO [34mBot.Main[0m: [OK] All health checks passed!
+2025-10-05 23:34:17,112 INFO [34mBot.Main[0m: [START] Starting Discord bot...
+2025-10-05 23:34:24,600 INFO [34mBot.Main[0m: [OK] Bot is ready: Ryuuko#4024 (id=1405869084528087050)
+2025-10-05 23:34:24,600 INFO [34mBot.Main[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-05 23:34:24,735 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: ê
+2025-10-05 23:34:24,736 INFO [34mRequest Queue[0m: Request queue worker started
+2025-10-05 23:34:25,077 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-05 23:34:27,252 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-05 23:34:27,917 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-05 23:34:27,921 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-05 23:34:37,318 INFO [34mStorage.Database[0m: Cleared memory for user 1320303839701897230
