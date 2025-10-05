@@ -1,4 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# Environment
 .env
-.venv
-src/__pycache__
-logs/*.gz
+
+# IDEs
+.idea/
+.vscode/
+
+# Other
+*.log
+*.swp

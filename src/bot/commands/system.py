@@ -20,14 +20,12 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     """
     bot.mongodb_store = mongodb_store
 
-    def is_mongo_ready(ctx) -> bool:
-        """Check if MongoDB is configured."""
+    async def is_mongo_ready(ctx: commands.Context) -> bool:
+        """
+        Asynchronously checks if MongoDB is configured and sends a message if not.
+        """
         if not bot.mongodb_store:
-            # This is an async context, so we need to create a task
-            async def send_msg():
-                await ctx.send("❌ This feature requires MongoDB to be configured.")
-
-            bot.loop.create_task(send_msg())
+            await ctx.send("❌ This feature requires MongoDB to be configured.")
             return False
         return True
 
@@ -35,7 +33,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def add_model_command(ctx: commands.Context, model_name: str, credit_cost: int, access_level: int):
         """Adds a new model to the database."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         if credit_cost < 0:
             await ctx.send("❌ Credit cost must be non-negative.")
             return
@@ -50,7 +48,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def remove_model_command(ctx: commands.Context, model_name: str):
         """Removes a model from the database."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         success, message = bot.mongodb_store.remove_supported_model(model_name)
         await ctx.send(f"✅ {message}" if success else f"❌ {message}")
 
@@ -58,7 +56,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def edit_model_command(ctx: commands.Context, model_name: str, credit_cost: int, access_level: int):
         """Edits an existing model in the database."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         if credit_cost < 0:
             await ctx.send("❌ Credit cost must be non-negative.")
             return
@@ -73,7 +71,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def add_credit_command(ctx: commands.Context, member: discord.Member, amount: int):
         """Adds credits to a user."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         if amount <= 0:
             await ctx.send("❌ Amount must be positive.")
             return
@@ -88,7 +86,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def deduct_credit_command(ctx: commands.Context, member: discord.Member, amount: int):
         """Deducts credits from a user."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         if amount <= 0:
             await ctx.send("❌ Amount must be positive.")
             return
@@ -103,7 +101,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def set_credit_command(ctx: commands.Context, member: discord.Member, amount: int):
         """Sets a user's credit balance."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         if amount < 0:
             await ctx.send("❌ Amount must be non-negative.")
             return
@@ -118,7 +116,7 @@ def setup_system_commands(bot: commands.Bot, mongodb_store):
     @commands.is_owner()
     async def set_level_command(ctx: commands.Context, member: discord.Member, level: int):
         """Sets a user's access level."""
-        if not is_mongo_ready(ctx): return
+        if not await is_mongo_ready(ctx): return
         if level not in [0, 1, 2]:
             await ctx.send("❌ Level must be 0 (Basic), 1 (Advanced), or 2 (Ultimate).")
             return
