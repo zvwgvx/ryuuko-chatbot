@@ -1,4 +1,4 @@
-# src/core/services/auth.py
+# src/bot/services/auth.py
 """
 Handles loading and managing authorized users from storage.
 """
@@ -7,7 +7,7 @@ import logging
 from pathlib import Path
 from typing import Set
 
-logger = logging.getLogger("Core.Services.Auth")
+logger = logging.getLogger("Bot.Services.Auth")
 
 # This is a module-level state, managed by the setup function.
 _authorized_users: Set[int] = set()

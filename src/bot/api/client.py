@@ -6,7 +6,7 @@ import httpx
 from src.config import loader
 from src.utils.ratelimit import get_rate_limiter
 
-logger = logging.getLogger("Core.API.Client")
+logger = logging.getLogger("Bot.API.Client")
 
 class UnifiedAPIClient:
     """Unified API client for all models"""

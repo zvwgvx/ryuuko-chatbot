@@ -1,4 +1,4 @@
-# src/core/api/__init__.py
+# src/bot/api/__init__.py
 """
 API integration layer.
 Contains clients for interacting with external AI services.

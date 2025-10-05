@@ -20,7 +20,7 @@ sys.path.insert(0, str(src_path))
 def reset_global_state():
     """Reset global state before each test"""
     # This ensures tests don't interfere with each other
-    from src.core import handlers
+    from src.bot import handlers
 
     # Reset module-level variables
     handlers._bot = None

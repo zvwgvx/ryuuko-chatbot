@@ -1,4 +1,4 @@
-# src/core/commands/user.py
+# src/bot/commands/user.py
 """
 Handles commands for authorized users to manage their personal settings.
 """
@@ -6,7 +6,7 @@ import logging
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Core.Commands.User")
+logger = logging.getLogger("Bot.Commands.User")
 
 async def _is_authorized_user(ctx: commands.Context) -> bool:
     """Helper to check if the user is authorized or the bot owner."""

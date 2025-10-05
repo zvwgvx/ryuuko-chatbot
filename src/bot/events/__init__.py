@@ -1,4 +1,4 @@
-# src/core/events/__init__.py
+# src/bot/events/__init__.py
 """
 Event listener registration module.
 Aggregates all event handlers and provides a single function to register them all.

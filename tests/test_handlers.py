@@ -2,7 +2,7 @@
 # coding: utf-8
 """
 Test suite for handlers.py module
-Tests core functionality including attachment processing, user management,
+Tests bot functionality including attachment processing, user management,
 message formatting, and command handling.
 MongoDB is MANDATORY - no file mode tests.
 """
@@ -23,7 +23,7 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-from src.core import handlers
+from src.bot import handlers
 
 
 class TestUtilityFunctions:

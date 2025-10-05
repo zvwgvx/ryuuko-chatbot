@@ -1,4 +1,4 @@
-# src/core/commands/basic.py
+# src/bot/commands/basic.py
 """
 Handles basic bot commands like ping and help.
 """
@@ -7,7 +7,7 @@ import logging
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Core.Commands.Basic")
+logger = logging.getLogger("Bot.Commands.Basic")
 
 def setup_basic_commands(bot: commands.Bot):
     """

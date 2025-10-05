@@ -1,4 +1,4 @@
-# src/core/commands/admin.py
+# src/bot/commands/admin.py
 """
 Handles owner-only commands for user management.
 """
@@ -8,7 +8,7 @@ import tempfile
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Core.Commands.Admin")
+logger = logging.getLogger("Bot.Commands.Admin")
 
 def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
     """

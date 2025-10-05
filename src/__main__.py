@@ -11,7 +11,7 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root))
 
-from src.core.bot import Bot
+from src.bot.main import Bot
 from src.config import loader
 from src.utils.logger import setup_logger, configure_discord_logging
 

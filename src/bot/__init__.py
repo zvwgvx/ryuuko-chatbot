@@ -5,11 +5,11 @@ This package contains the main bot logic, command handlers, event listeners,
 and service layers for the application.
 """
 
-# Import the main Bot class from bot.py
-from .bot import Bot
+# Import the main Bot class from main.py
+from .main import Bot
 
 # Import API client - GIỮ NGUYÊN VỊ TRÍ CŨ
-from src.core.api.client import UnifiedAPIClient
+from src.bot.api.client import UnifiedAPIClient
 
 # Import the registration functions
 from .commands import register_all_commands

@@ -1,4 +1,4 @@
-# src/core/services/__init__.py
+# src/bot/services/__init__.py
 """
 Service layer modules.
 Contains business logic and data management services.

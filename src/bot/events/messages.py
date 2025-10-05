@@ -1,4 +1,4 @@
-# src/core/events/messages.py
+# src/bot/events/messages.py
 """
 Handles the on_message event and AI request processing logic.
 Contains all message handling, attachment processing, and AI interaction.
@@ -16,7 +16,7 @@ from datetime import datetime, timezone, timedelta
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Core.Events.Messages")
+logger = logging.getLogger("Bot.Events.Messages")
 
 # ---------------------------------------------------------------
 # Attachment handling constants

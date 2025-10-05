@@ -7,7 +7,7 @@ __author__ = "Zang Vũ"
 
 # Main packages
 from . import config
-from . import core
+from . import bot
 from . import storage
 from . import utils
 

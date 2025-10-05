@@ -1,4 +1,4 @@
-# src/core/commands/system.py
+# src/bot/commands/system.py
 """
 Handles owner-only commands for system management (models, credits).
 Requires MongoDB.
@@ -7,7 +7,7 @@ import logging
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Core.Commands.System")
+logger = logging.getLogger("Bot.Commands.System")
 
 
 def setup_system_commands(bot: commands.Bot, mongodb_store):

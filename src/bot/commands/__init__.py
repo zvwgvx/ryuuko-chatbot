@@ -1,4 +1,4 @@
-# src/core/commands/__init__.py
+# src/bot/commands/__init__.py
 """
 Command registration module.
 Aggregates all command groups and provides a single function to register them all.

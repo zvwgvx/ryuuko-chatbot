@@ -19,25 +19,24 @@ from discord.ext import commands
 
 # --- Refactored Imports ---
 from src.config import loader as config_loader
-from src.core import api as call_api  # Import the entire api package as call_api
+from src.bot import api as call_api  # Import the entire api package as call_api
 
 # Import the new registration functions
-from src.core.commands import register_all_commands
-from src.core.events import register_all_events
+from src.bot.commands import register_all_commands
+from src.bot.events import register_all_events
 
 # Import managers and auth service
 from src.config import get_user_config_manager
 from src.utils import get_request_queue
 from src.storage import MemoryStore
 from src.storage.database import get_mongodb_store
-from src.core.services import auth # Import module 'auth'
+from src.bot.services import auth # Import module 'auth'
 
 # Import health check
 from src.utils.health import perform_startup_checks # Corrected import path
 
 # Use centralized logger
-logger = logging.getLogger("Core.Bot")
-
+logger = logging.getLogger("Bot.Main")
 
 class Bot:
     """
@@ -83,7 +82,7 @@ class Bot:
             help_command=None
         )
 
-        # Register core event handlers
+        # Register bot event handlers
         self._register_core_events(bot)
 
         return bot
