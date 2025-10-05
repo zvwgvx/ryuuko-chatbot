@@ -19,7 +19,7 @@ from discord.ext import commands
 
 # --- Refactored Imports ---
 from src.config import loader as config_loader
-from . import call_api
+from src.core import api as call_api  # Import the entire api package as call_api
 
 # Import the new registration functions
 from src.core.commands import register_all_commands
@@ -30,13 +30,13 @@ from src.config import get_user_config_manager
 from src.utils import get_request_queue
 from src.storage import MemoryStore
 from src.storage.database import get_mongodb_store
-from src.core.services import auth_service
+from src.core.services import auth # Import module 'auth'
 
 # Import health check
-from src.utils.health import perform_startup_checks
+from src.utils.health import perform_startup_checks # Corrected import path
 
 # Use centralized logger
-logger = logging.getLogger("Bot")
+logger = logging.getLogger("Core.Bot")
 
 
 class Bot:
@@ -141,7 +141,7 @@ class Bot:
         NEW: A centralized function to set up all bot functionality by
         initializing dependencies and registering commands/events.
         """
-        logger.info("[INIT] Initializing bot modules and functionality...")  # Changed: log only
+        logger.info("[INIT] Initializing bot modules and functionality...")
 
         # 1. Initialize managers and stores
         config_loader.init_storage()  # Ensure storage paths are ready
@@ -151,11 +151,11 @@ class Bot:
         mongodb_store = get_mongodb_store() if config_loader.USE_MONGODB else None
 
         # 2. Load data and setup auth service
-        authorized_users_set = auth_service.load_authorized_users(config_loader, mongodb_store)
+        authorized_users_set = auth.load_authorized_users(config_loader, mongodb_store)
 
         # 3. Create a single dictionary of all dependencies for injection
         dependencies = {
-            "call_api": call_api,
+            "call_api": call_api, # This is now defined from the import
             "config": config_loader,
             "user_config_manager": user_config_manager,
             "request_queue": request_queue,
@@ -163,16 +163,16 @@ class Bot:
             "mongodb_store": mongodb_store,
             "authorized_users": authorized_users_set,
             # Wrap auth functions to pass their own dependencies
-            "add_authorized_user": lambda uid: auth_service.add_authorized_user(uid, config_loader, mongodb_store),
-            "remove_authorized_user": lambda uid: auth_service.remove_authorized_user(uid, config_loader,
-                                                                                      mongodb_store),
+            "add_authorized_user": lambda uid: auth.add_authorized_user(uid, config_loader, mongodb_store),
+            "remove_authorized_user": lambda uid: auth.remove_authorized_user(uid, config_loader,
+                                                                              mongodb_store),
         }
 
         # 4. Register all commands and events, passing the dependencies
         register_all_commands(bot, dependencies)
         register_all_events(bot, dependencies)
 
-        logger.info("[OK] All modules initialized successfully")  # Changed: log only
+        logger.info("[OK] All modules initialized successfully")
 
     def _resolve_token(self) -> str:
         """
@@ -195,7 +195,7 @@ class Bot:
 
             # Run health checks before initializing bot functionality
             if not self._initialized:
-                logger.info("[HEALTH] Running pre-startup health checks...")  # Changed: log only
+                logger.info("[HEALTH] Running pre-startup health checks...")
 
                 # Create new event loop for health checks
                 loop = asyncio.new_event_loop()
@@ -208,17 +208,17 @@ class Bot:
                     )
 
                     if not health_check_passed:
-                        logger.error("[ERROR] Health checks failed. Bot startup aborted.")  # Changed: log only
+                        logger.error("[ERROR] Health checks failed. Bot startup aborted.")
                         logger.error("Please fix the issues above and try again.")
                         sys.exit(1)
 
-                    logger.info("[OK] All health checks passed! Proceeding with bot initialization...")  # Changed: log only
+                    logger.info("[OK] All health checks passed! Proceeding with bot initialization...")
 
                 except KeyboardInterrupt:
-                    logger.info("[STOP] Health check interrupted by user")  # Changed: log only
+                    logger.info("[STOP] Health check interrupted by user")
                     sys.exit(0)
                 except Exception as e:
-                    logger.exception("[CRASH] Error during health checks: %s", e)  # Changed: log only
+                    logger.exception("[CRASH] Error during health checks: %s", e)
                     sys.exit(1)
                 finally:
                     loop.close()
@@ -229,16 +229,16 @@ class Bot:
 
             # Resolve token and start bot
             token = self._resolve_token()
-            logger.info("[START] Starting Discord bot...")  # Changed: log only
+            logger.info("[START] Starting Discord bot...")
             self._client.run(token)
 
         except KeyboardInterrupt:
-            logger.info("[STOP] Bot interrupted by user")  # Changed: log only
+            logger.info("[STOP] Bot interrupted by user")
         except Exception:
-            logger.exception("[CRASH] Bot crashed with a critical exception")  # Changed: log only
+            logger.exception("[CRASH] Bot crashed with a critical exception")
             raise
         finally:
-            logger.info("[EXIT] Bot process exiting")  # Changed: log only
+            logger.info("[EXIT] Bot process exiting")
 
 
 # Module-level function for backward compatibility

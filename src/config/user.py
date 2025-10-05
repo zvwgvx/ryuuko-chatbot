@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # coding: utf-8
-# user_config.py - User configuration management with MANDATORY MongoDB
+# user.py - User configuration management with MANDATORY MongoDB
 
 import logging
 from typing import Dict, Any, Optional, Set
 from src.config import loader
 
-logger = logging.getLogger("UserConfig")
+logger = logging.getLogger("Config.User")
 
 # Default values
 DEFAULT_SYSTEM_PROMPT = "Tên của bạn là Ryuuko (nữ), nói tiếng việt"

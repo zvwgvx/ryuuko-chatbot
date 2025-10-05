@@ -16,7 +16,7 @@ from datetime import datetime, timezone, timedelta
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Events.Messages")
+logger = logging.getLogger("Core.Events.Messages")
 
 # ---------------------------------------------------------------
 # Attachment handling constants

@@ -7,7 +7,7 @@ import logging
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Commands.Basic")
+logger = logging.getLogger("Core.Commands.Basic")
 
 def setup_basic_commands(bot: commands.Bot):
     """

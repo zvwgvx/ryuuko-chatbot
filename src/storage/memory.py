@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import List, Union, TypedDict
 from src.config import loader
 
-logger = logging.getLogger("Memory")
+logger = logging.getLogger("Storage.Memory")
 
 # Configuration
 CONFIG_DIR = Path(__file__).parent.parent / "config"

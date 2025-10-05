@@ -4,9 +4,9 @@ import logging
 from typing import List, Dict, Any, Tuple, Optional
 import httpx
 from src.config import loader
-from ..utils.ratelimit import get_rate_limiter
+from src.utils.ratelimit import get_rate_limiter
 
-logger = logging.getLogger("Call API")
+logger = logging.getLogger("Core.API.Client")
 
 class UnifiedAPIClient:
     """Unified API client for all models"""

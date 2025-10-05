@@ -21,7 +21,7 @@ from .loader import (
     load_system_prompt,
 )
 
-from .user_config import (
+from .user import (
     UserConfigManager,
     get_user_config_manager,
     DEFAULT_SYSTEM_PROMPT,

@@ -7,7 +7,7 @@ import logging
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Commands.System")
+logger = logging.getLogger("Core.Commands.System")
 
 
 def setup_system_commands(bot: commands.Bot, mongodb_store):

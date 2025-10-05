@@ -8,7 +8,7 @@ import tempfile
 import discord
 from discord.ext import commands
 
-logger = logging.getLogger("Commands.Admin")
+logger = logging.getLogger("Core.Commands.Admin")
 
 def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
     """
