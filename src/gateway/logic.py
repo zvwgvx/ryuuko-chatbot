@@ -47,14 +47,6 @@ def _normalize_request_payload(data: Dict[str, Any]) -> None:
 async def handle_proxy_request(payload: Dict[str, Any]) -> Tuple[bool, Any]:
     """
     Core logic for processing an AI request. Can be called directly by the bot.
-
-    Args:
-        payload (Dict[str, Any]): The request data, same format as sent to the API.
-
-    Returns:
-        Tuple[bool, Any]: A tuple of (success, result).
-                          If success is True, result is the AI's response content (dict or str).
-                          If success is False, result is an error message (str).
     """
     try:
         # 1. Determine Provider
@@ -63,54 +55,54 @@ async def handle_proxy_request(payload: Dict[str, Any]) -> Tuple[bool, Any]:
             return False, f"Provider '{provider}' not specified or not supported."
 
         # 2. Determine Model
-        model = payload.get("model", "").strip()
-        if not model:
-            model = loader.PROVIDER_DEFAULT_MODEL.get(provider)
-        if not model:
-             return False, f"No model specified and no default model for provider '{provider}'."
+        model = payload.get("model", "").strip() or loader.PROVIDER_DEFAULT_MODEL.get(provider)
+        if not model: return False, f"No model specified or default for provider '{provider}'."
 
         allowed_models = loader.PROVIDER_ALLOWED_MODELS.get(provider, set())
         if allowed_models and model not in allowed_models:
             return False, f"Model '{model}' is not allowed for provider '{provider}'."
-        payload["model"] = model # Ensure model is in payload
+        payload["model"] = model
 
-        # 3. Get Upstream API Key
-        # This part needs to map provider names to env var names defined in config
-        # Assuming a simple mapping for now. Example: 'openai' -> 'OPENAI_API_KEY'
-        key_name = provider.upper() + "_API_KEY"
-        upstream_api_key = loader.UPSTREAM_API_KEYS.get(key_name)
-        if provider == "aistudio" and not upstream_api_key: # Special fallback for aistudio/gemini
-             upstream_api_key = loader.UPSTREAM_API_KEYS.get("GEMINI_API_KEY")
-
+        # --- CORE FIX for Lỗi 3: Simplified and corrected API Key lookup ---
+        # 3. Get Upstream API Key directly by provider name
+        upstream_api_key = loader.UPSTREAM_API_KEYS.get(provider)
         if not upstream_api_key:
             return False, f"API key for provider '{provider}' is not configured on the server."
+        # ------------------------------------------------------------------
 
         # 4. Get the forwarding function for the provider
         forward_fn = get_provider_forward(provider)
-        if not forward_fn:
-            return False, f"Provider '{provider}' is not implemented."
+        if not forward_fn: return False, f"Provider '{provider}' is not implemented."
 
         # 5. Normalize payload
         _normalize_request_payload(payload)
 
         # 6. Call the provider's forwarding function
-        # The forward_fn is expected to return a FastAPI Response object
-        response: JSONResponse = await forward_fn(payload, upstream_api_key)
+        # The forward function expects (request, data, api_key).
+        # Since this is an internal call, we pass None for the FastAPI request object.
+        # The payload becomes the 'data' argument.
+        response = await forward_fn(None, payload, upstream_api_key)
 
         # 7. Process the response
-        if 200 <= response.status_code < 300:
-            # Success
-            response_body = json.loads(response.body.decode("utf-8"))
-            return True, response_body
-        else:
-            # Error
-            try:
-                error_body = json.loads(response.body.decode("utf-8"))
-                error_message = error_body.get("error", "Unknown error from provider.")
-            except:
-                error_message = response.body.decode("utf-8", errors="ignore")
-            logger.error(f"Error from provider '{provider}' (Status {response.status_code}): {error_message}")
-            return False, f"API Error from {provider}: {error_message}"
+        # The response can be a StreamingResponse or a JSONResponse.
+        # We need to consume the body differently for each.
+        full_body_bytes = b""
+        if hasattr(response, "body"):  # For JSONResponse (errors)
+            full_body_bytes = response.body
+        elif hasattr(response, "body_iterator"):  # For StreamingResponse (success)
+            async for chunk in response.body_iterator:
+                full_body_bytes += chunk
+
+        full_body_str = full_body_bytes.decode("utf-8", errors="ignore")
+
+        if not (200 <= response.status_code < 300):
+            logger.error(f"Error from '{provider}' (Status {response.status_code}): {full_body_str}")
+            return False, f"API Error from {provider}: {full_body_str}"
+
+        # For successful streaming responses, the content is plain text, not JSON.
+        # For successful JSON responses, we need to parse it.
+        try: return True, json.loads(full_body_str)
+        except json.JSONDecodeError: return True, {"text": full_body_str}
 
     except Exception as e:
         logger.exception(f"Unexpected error in gateway logic: {e}")

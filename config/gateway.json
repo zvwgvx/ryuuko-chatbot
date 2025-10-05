@@ -3,10 +3,10 @@
   "TRUSTED_PROXY": ["127.0.0.1"],
   "ALLOWED_PROVIDERS": ["aistudio", "proxyvn", "polydevs"],
 
-  "PROVIDER_ENV_NAMES": {
+   "PROVIDER_ENV_NAMES": {
+    "polydevs": "POLYDEVS_API_KEY",
     "aistudio": "AISTUDIO_API_KEY",
-    "proxyvn": "PROXYVN_API_KEY",
-    "polydevs": "POLYDEVS_API_KEY"
+    "proxyvn": "PROXYVN_API_KEY"
   },
 
   "PROVIDER_DEFAULT_MODEL": {

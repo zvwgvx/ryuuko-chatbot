@@ -6,9 +6,11 @@ Contains clients for interacting with external AI services.
 from .client import (
     call_unified_api,
     build_api_request,
+    is_model_available  # <<< THÊM DÒNG NÀY
 )
 
 __all__ = [
     'call_unified_api',
     'build_api_request',
+    'is_model_available', # <<< VÀ THÊM VÀO ĐÂY
 ]

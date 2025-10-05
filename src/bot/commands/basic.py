@@ -4,7 +4,6 @@ Handles basic bot commands like ping and help.
 """
 import time
 import logging
-import discord
 from discord.ext import commands
 
 logger = logging.getLogger("Bot.Commands.Basic")
@@ -66,7 +65,7 @@ def setup_basic_commands(bot: commands.Bot):
                 "`.addcredit <user> <amount>` – Add credits to user",
                 "`.deductcredit <user> <amount>` – Deduct credits from user",
                 "`.setcredit <user> <amount>` – Set user's credit balance",
-                "`.setlevel <user> <level>` – Set user access level (0-3)"
+                "`.setlevel <user> <level>` – Set user access level (0-2)"
             ]
 
         await ctx.send("\n".join(lines))
