@@ -16,41 +16,18 @@ src_path = project_root / "src"
 sys.path.insert(0, str(src_path))
 
 
-@pytest.fixture(autouse=True)
-def reset_global_state():
-    """Reset global state before each test"""
-    # This ensures tests don't interfere with each other
-    from src.bot import handlers
-
-    # Reset module-level variables
-    handlers._bot = None
-    functions._call_api = None
-    functions._config = None
-    functions._user_config_manager = None
-    functions._request_queue = None
-    handlers._authorized_users = set()
-    functions._use_mongodb_auth = False
-    functions._mongodb_store = None
-    functions._memory_store = None
-
-    yield
-
-    # Cleanup after test if needed
-    pass
-
-
 @pytest.fixture
 def mock_discord_objects():
     """Create commonly used Discord mock objects"""
-    from unittest.mock import Mock
+    from unittest.mock import Mock, AsyncMock
 
     mock_user = Mock()
     mock_user.id = 123456789012345678
-    mock_user.name = "zvwgvx"
+    mock_user.name = "testuser"
     mock_user.bot = False
 
     mock_channel = Mock()
-    mock_channel.send = Mock()
+    mock_channel.send = AsyncMock()
 
     mock_message = Mock()
     mock_message.author = mock_user
