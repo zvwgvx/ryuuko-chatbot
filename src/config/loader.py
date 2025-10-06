@@ -79,17 +79,17 @@ logger.info("Bot configuration loaded.")
 # =================================================================
 #  II. GATEWAY CONFIGURATION
 # =================================================================
-logger.info("Loading gateway configuration...")
-_gateway_config_data = _load_json_config("gateway.json")
+logger.info("Loading llm_services configuration...")
+_gateway_config_data = _load_json_config("llm_services.json")
 
-# Provider settings from gateway.json
+# Provider settings from llm_services.json
 ALLOWED_PROVIDERS: Set[str] = set(_gateway_config_data.get("ALLOWED_PROVIDERS", []))
 PROVIDER_DEFAULT_MODEL: Dict[str, str] = dict(_gateway_config_data.get("PROVIDER_DEFAULT_MODEL", {}))
 PROVIDER_ALLOWED_MODELS: Dict[str, Set[str]] = {
     k: set(v) for k, v in _gateway_config_data.get("PROVIDER_ALLOWED_MODELS", {}).items()
 }
 
-# Load API keys from environment variables based on mappings in gateway.json
+# Load API keys from environment variables based on mappings in llm_services.json
 _provider_env_names: Dict[str, str] = _gateway_config_data.get("PROVIDER_ENV_NAMES", {})
 UPSTREAM_API_KEYS: Dict[str, str] = {}
 for provider_name, env_var_name in _provider_env_names.items():

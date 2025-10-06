@@ -3,8 +3,8 @@ import json
 import logging
 from typing import List, Dict, Any, Tuple, Optional
 
-# --- CORE CHANGE: Import gateway logic directly instead of httpx ---
-from src.gateway.logic import handle_proxy_request
+# --- CORE CHANGE: Import llm_services logic directly instead of httpx ---
+from src.llm_services.main import handle_proxy_request
 # -------------------------------------------------------------------
 
 from src.utils.ratelimit import get_rate_limiter
@@ -50,7 +50,7 @@ def build_api_request(
     if top_k is not None: config["top_k"] = top_k
     if max_output_tokens is not None: config["max_output_tokens"] = max_output_tokens
 
-    # The provider is now selected based on the model by the gateway logic,
+    # The provider is now selected based on the model by the llm_services logic,
     # but we can provide a default. Let's assume 'polydevs' is the primary.
     payload = {
         "provider": "polydevs", # Or determine this dynamically
@@ -101,7 +101,7 @@ async def call_unified_api(
             enable_tools=enable_tools,
             thinking_budget=thinking_budget
         )
-        logger.debug(f"Calling gateway logic with payload: {json.dumps(payload, indent=2, ensure_ascii=False)}")
+        logger.debug(f"Calling ai_services logic with payload: {json.dumps(payload, indent=2, ensure_ascii=False)}")
 
         # --- CORE CHANGE: Call the function directly ---
         success, result = await handle_proxy_request(payload)
@@ -131,7 +131,7 @@ async def call_unified_api(
         else:
              # If the result is not a dict, it might be an error message we missed
             logger.error(f"Gateway returned an unexpected format: {result}")
-            return False, f"Unexpected response format from gateway: {type(result)}"
+            return False, f"Unexpected response format from ai_services: {type(result)}"
 
     except Exception as e:
         error_msg = f"Unexpected error in API client: {str(e)}"

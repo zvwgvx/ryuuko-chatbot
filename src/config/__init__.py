@@ -1,6 +1,6 @@
 """
 Configuration package for the unified Ryuuko Chatbot application.
-Provides access to bot settings, gateway settings, and user management.
+Provides access to bot settings, llm_services settings, and user management.
 """
 
 # Import the entire loader module. This is the recommended way to access config.

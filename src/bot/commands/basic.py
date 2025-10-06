@@ -22,7 +22,7 @@ def setup_basic_commands(bot: commands.Bot):
         """
         Measures the bot's latency.
 
-        Calculates both the API response time and the Discord gateway (WebSocket) latency.
+        Calculates both the API response time and the Discord llm_services (WebSocket) latency.
         """
         # Record the time before sending a message to measure response latency.
         start_time = time.perf_counter()

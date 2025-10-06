@@ -33,7 +33,7 @@ def register_all_commands(bot: commands.Bot, dependencies: dict):
 
     # --- Register each command group with its required dependencies ---
 
-    # Basic commands have no external dependencies
+    # Basic commands have no llm_services dependencies
     setup_basic_commands(bot)
 
     # User commands require several managers and the API client

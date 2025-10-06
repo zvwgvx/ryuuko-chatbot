@@ -1,11 +1,11 @@
-# src/gateway/logic.py
+# src/llm_services/main.py
 import logging
 from typing import Dict, Any, Tuple
 from fastapi.responses import JSONResponse
 import json
 
 from src.config import loader
-from src.gateway.providers import get_provider_forward
+from src.llm_services.providers import get_provider_forward
 
 logger = logging.getLogger("Gateway.Logic")
 
@@ -105,5 +105,5 @@ async def handle_proxy_request(payload: Dict[str, Any]) -> Tuple[bool, Any]:
         except json.JSONDecodeError: return True, {"text": full_body_str}
 
     except Exception as e:
-        logger.exception(f"Unexpected error in gateway logic: {e}")
-        return False, f"An internal error occurred in the gateway: {str(e)}"
+        logger.exception(f"Unexpected error in ai_services logic: {e}")
+        return False, f"An internal error occurred in the ai_services: {str(e)}"

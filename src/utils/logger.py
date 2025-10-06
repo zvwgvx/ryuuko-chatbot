@@ -318,7 +318,7 @@ def configure_discord_logging(level: str = "WARNING"):
     http_logger = logging.getLogger("discord.http")
     http_logger.setLevel(logging.WARNING)
 
-    gateway_logger = logging.getLogger("discord.gateway")
+    gateway_logger = logging.getLogger("discord.llm_services")
     gateway_logger.setLevel(logging.WARNING)
 
 

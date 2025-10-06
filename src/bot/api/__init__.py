@@ -1,7 +1,7 @@
 # src/bot/api/__init__.py
 """
 API integration layer.
-Contains clients for interacting with external AI services.
+Contains clients for interacting with llm_services AI services.
 """
 from .client import (
     call_unified_api,
