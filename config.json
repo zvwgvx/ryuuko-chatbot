@@ -1,9 +1,0 @@
-{
-  "USE_MONGODB": true,
-  "MONGODB_DATABASE_NAME": "polydevsdb",
-
-  "REQUEST_TIMEOUT": 100,
-  "MAX_MSG": 1900,
-  "MEMORY_MAX_PER_USER": 100,
-  "MEMORY_MAX_TOKENS": 10000
-}

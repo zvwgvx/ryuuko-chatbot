@@ -3,10 +3,10 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "discord-bot"
-version = "0.1.0"
+name = "ryuuko-chatbot"
+version = "1.3.1"
 authors = [
-  { name="Your Name", email="you@example.com" },
+  { name="Zang Vũ", email="zvwgvx@polydevs.uk" },
 ]
 description = "A Discord bot."
 readme = "README.md"
