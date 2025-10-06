@@ -5,7 +5,7 @@ Test suite for the admin command module.
 import pytest
 import discord
 from discord.ext import commands
-from unittest.mock import Mock, AsyncMock, MagicMock
+from unittest.mock import Mock, AsyncMock, MagicMock, ANY
 
 # Import the setup function to be tested
 from src.bot.commands.admin import setup_admin_commands
@@ -18,15 +18,10 @@ def mock_bot():
     bot = MagicMock(spec=commands.Bot)
     bot.add_command = Mock()
 
-    # This side effect simulates the @bot.command decorator.
-    # It returns a decorator that, when called with a function,
-    # wraps it in a mock Command object and adds it to the bot.
     def command_decorator(**kwargs):
         def decorator(func):
             cmd = Mock(spec=commands.Command, callback=func, **kwargs)
             cmd.name = kwargs.get('name', func.__name__)
-            # Simulate checks like @commands.is_owner()
-            # In a real scenario, these would be complex checks. Here we just mock success.
             cmd.checks = [lambda ctx: True]
             bot.add_command(cmd)
             return cmd
@@ -73,8 +68,10 @@ def mock_member():
 def get_command_callback(bot, name):
     """Helper to find a command's callback from the mock bot."""
     command_mock = next(
-        call.args[0] for call in bot.add_command.call_args_list if call.args[0].name == name
+        (call.args[0] for call in bot.add_command.call_args_list if call.args[0].name == name),
+        None
     )
+    assert command_mock is not None, f"Command '{name}' not found"
     return command_mock.callback
 
 # --- Test Suite ---
@@ -95,19 +92,15 @@ class TestAuthCommand:
     async def test_auth_new_user_success(self, mock_bot, mock_ctx, mock_member, mock_auth_helpers):
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         auth_callback = get_command_callback(mock_bot, "auth")
-
         await auth_callback(mock_ctx, member=mock_member)
-
         mock_auth_helpers['add'].assert_called_once_with(12345)
-        mock_ctx.send.assert_called_once_with("✅ Added TestUser to the authorized list.")
+        mock_ctx.send.assert_called_once_with("✅ Added TestUser to the authorized user list.")
 
     async def test_auth_user_already_authorized(self, mock_bot, mock_ctx, mock_member, mock_auth_helpers):
         mock_auth_helpers['get_set'].return_value = {12345}
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         auth_callback = get_command_callback(mock_bot, "auth")
-
         await auth_callback(mock_ctx, member=mock_member)
-
         mock_auth_helpers['add'].assert_not_called()
         mock_ctx.send.assert_called_once_with("❌ User TestUser is already authorized.")
 
@@ -115,10 +108,8 @@ class TestAuthCommand:
         mock_auth_helpers['add'].return_value = False
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         auth_callback = get_command_callback(mock_bot, "auth")
-
         await auth_callback(mock_ctx, member=mock_member)
-
-        mock_ctx.send.assert_called_once_with("❌ Failed to add TestUser.")
+        mock_ctx.send.assert_called_once_with("❌ An error occurred while trying to authorize TestUser.")
 
 @pytest.mark.asyncio
 class TestDeauthCommand:
@@ -127,21 +118,17 @@ class TestDeauthCommand:
         mock_auth_helpers['get_set'].return_value = {12345}
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         deauth_callback = get_command_callback(mock_bot, "deauth")
-
         await deauth_callback(mock_ctx, member=mock_member)
-
         mock_auth_helpers['remove'].assert_called_once_with(12345)
-        mock_ctx.send.assert_called_once_with("✅ Removed TestUser from the authorized list.")
+        mock_ctx.send.assert_called_once_with("✅ Removed TestUser from the authorized user list.")
 
     async def test_deauth_user_not_authorized(self, mock_bot, mock_ctx, mock_member, mock_auth_helpers):
         mock_auth_helpers['get_set'].return_value = {999}
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         deauth_callback = get_command_callback(mock_bot, "deauth")
-
         await deauth_callback(mock_ctx, member=mock_member)
-
         mock_auth_helpers['remove'].assert_not_called()
-        mock_ctx.send.assert_called_once_with("❌ User TestUser is not in the authorized list.")
+        mock_ctx.send.assert_called_once_with("❌ User TestUser is not on the authorized list.")
 
 @pytest.mark.asyncio
 class TestShowAuthsCommand:
@@ -150,20 +137,30 @@ class TestShowAuthsCommand:
         mock_auth_helpers['get_set'].return_value = set()
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         show_auth_callback = get_command_callback(mock_bot, "auths")
-
         await show_auth_callback(mock_ctx)
-        mock_ctx.send.assert_called_once_with("The authorized users list is empty.")
+        mock_ctx.send.assert_called_once_with("The authorized users list is currently empty.")
 
     async def test_show_auths_short_list(self, mock_bot, mock_ctx, mock_auth_helpers):
         users = {1, 2, 3}
         mock_auth_helpers['get_set'].return_value = users
         setup_admin_commands(mock_bot, None, mock_auth_helpers)
         show_auth_callback = get_command_callback(mock_bot, "auths")
-
         await show_auth_callback(mock_ctx)
-
-        expected_output = "**Authorized users:**\n1\n2\n3"
+        expected_output = "**Authorized User IDs:**\n```\n1\n2\n3\n```"
         mock_ctx.send.assert_called_once_with(expected_output)
+
+    async def test_show_auths_long_list(self, mock_bot, mock_ctx, mock_auth_helpers):
+        # Generate a large set of users to exceed the Discord message limit.
+        # 300 users with IDs up to 20 digits plus newline should be > 1900 chars.
+        users = {10000000000000000000 + i for i in range(300)}
+        mock_auth_helpers['get_set'].return_value = users
+        setup_admin_commands(mock_bot, None, mock_auth_helpers)
+        show_auth_callback = get_command_callback(mock_bot, "auths")
+        await show_auth_callback(mock_ctx)
+        mock_ctx.send.assert_called_once_with(
+            "The list of authorized users is too long to display, sending it as a file.",
+            file=ANY
+        )
 
 @pytest.mark.asyncio
 class TestMemoryCommand:
@@ -172,33 +169,27 @@ class TestMemoryCommand:
         mock_memory_store.get_user_messages.return_value = [{'role': 'user', 'content': 'Hello there'}]
         setup_admin_commands(mock_bot, mock_memory_store, mock_auth_helpers)
         memory_callback = get_command_callback(mock_bot, "memory")
-
         await memory_callback(mock_ctx, member=None)
-
         mock_memory_store.get_user_messages.assert_called_once_with(mock_ctx.author.id)
         mock_ctx.send.assert_called_once()
         sent_message = mock_ctx.send.call_args[0][0]
-        assert "Memory for TestOwner" in sent_message
-        assert "user**: Hello there" in sent_message
+        assert "Conversation Memory for TestOwner" in sent_message
+        assert "**User**: Hello there" in sent_message
 
     async def test_memory_for_other_member(self, mock_bot, mock_ctx, mock_member, mock_memory_store, mock_auth_helpers):
         mock_memory_store.get_user_messages.return_value = [{'role': 'assistant', 'content': 'General Kenobi'}]
         setup_admin_commands(mock_bot, mock_memory_store, mock_auth_helpers)
         memory_callback = get_command_callback(mock_bot, "memory")
-
         await memory_callback(mock_ctx, member=mock_member)
-
         mock_memory_store.get_user_messages.assert_called_once_with(mock_member.id)
         mock_ctx.send.assert_called_once()
         sent_message = mock_ctx.send.call_args[0][0]
-        assert "Memory for TestUser" in sent_message
-        assert "assistant**: General Kenobi" in sent_message
+        assert "Conversation Memory for TestUser" in sent_message
+        assert "**Assistant**: General Kenobi" in sent_message
 
     async def test_memory_not_found(self, mock_bot, mock_ctx, mock_member, mock_memory_store, mock_auth_helpers):
         mock_memory_store.get_user_messages.return_value = []
         setup_admin_commands(mock_bot, mock_memory_store, mock_auth_helpers)
         memory_callback = get_command_callback(mock_bot, "memory")
-
         await memory_callback(mock_ctx, member=mock_member)
-
-        mock_ctx.send.assert_called_once_with("No memory found for TestUser.")
+        mock_ctx.send.assert_called_once_with("No conversation memory found for TestUser.")

@@ -39,13 +39,19 @@ class Bot(commands.Bot):
 
         @self.event
         async def on_command_error(ctx: commands.Context, error: Exception):
-            if isinstance(error, commands.CommandNotFound): return
+            """Handles common command errors globally."""
+            if isinstance(error, commands.CommandNotFound):
+                return  # Ignore commands that don't exist.
+
             if isinstance(error, commands.CheckFailure):
+                # User does not have permission to use this command.
                 await ctx.send("❌ Bạn không có quyền sử dụng lệnh này.")
             elif isinstance(error, commands.MissingRequiredArgument):
+                # A required argument is missing from the command call.
                 await ctx.send(f"❌ Thiếu tham số bắt buộc: `{error.param.name}`")
             else:
-                logger.exception(f"Command error in '{ctx.command}': {error}")
+                # Log any other exceptions and notify the user.
+                logger.exception(f"An unexpected error occurred in command '{ctx.command}': {error}")
                 await ctx.send("❌ Đã xảy ra lỗi khi thực hiện lệnh.")
 
     def _setup_bot_functionality(self):
@@ -53,9 +59,9 @@ class Bot(commands.Bot):
 
         mongodb_store = get_mongodb_store()
 
-        # --- CORE FIX for Lỗi 1: Pass mongodb_store to MemoryStore ---
+        # Initialize the MemoryStore with the MongoDB store instance.
+        # This allows the MemoryStore to access the database for conversation history.
         memory_store = MemoryStore(mongodb_store)
-        # -----------------------------------------------------------
 
         user_config_manager = get_user_config_manager()
         request_queue = get_request_queue()

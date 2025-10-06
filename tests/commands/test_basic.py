@@ -4,7 +4,7 @@ Test suite for the basic command module.
 """
 import pytest
 import discord
-from unittest.mock import Mock, AsyncMock, MagicMock, patch
+from unittest.mock import Mock, AsyncMock, MagicMock, patch, ANY
 
 from discord.ext import commands
 
@@ -79,7 +79,11 @@ class TestPingCommand:
         # Assert
         mock_ctx.send.assert_called_once_with("Pinging...")
 
-        expected_content = "Pong! \nResponse: 500 ms\nWebSocket: 123 ms"
+        expected_content = (
+            f"Pong! 🏓\n"
+            f"Response Time: `500ms`\n"
+            f"WebSocket Latency: `123ms`"
+        )
         mock_message.edit.assert_called_once_with(content=expected_content)
 
 @pytest.mark.asyncio
@@ -94,12 +98,14 @@ class TestHelpCommand:
         # Act
         await help_callback(mock_ctx)
 
-        # Assert
-        mock_ctx.send.assert_called_once()
-        sent_message = mock_ctx.send.call_args[0][0]
-        assert "**Available commands:**" in sent_message
-        assert "**Configuration commands (authorized users):**" in sent_message
-        assert "Owner‑only commands:" not in sent_message
+        # Assert: Check that send was called with an embed
+        mock_ctx.send.assert_called_once_with(embed=ANY)
+        sent_embed = mock_ctx.send.call_args.kwargs['embed']
+
+        assert isinstance(sent_embed, discord.Embed)
+        # Normal user should only see one field for user commands
+        assert len(sent_embed.fields) == 1
+        assert sent_embed.fields[0].name == "👤 User Commands"
 
     async def test_help_for_owner_user(self, mock_bot, mock_ctx):
         # Arrange: User is an owner
@@ -110,11 +116,15 @@ class TestHelpCommand:
         # Act
         await help_callback(mock_ctx)
 
-        # Assert
-        mock_ctx.send.assert_called_once()
-        sent_message = mock_ctx.send.call_args[0][0]
-        assert "**Available commands:**" in sent_message
-        assert "**Configuration commands (authorized users):**" in sent_message
-        assert "**Owner‑only commands:**" in sent_message
-        assert "`.auth <user>`" in sent_message
-        assert "`.addcredit <user> <amount>`" in sent_message
+        # Assert: Check that send was called with an embed containing all sections
+        mock_ctx.send.assert_called_once_with(embed=ANY)
+        sent_embed = mock_ctx.send.call_args.kwargs['embed']
+
+        assert isinstance(sent_embed, discord.Embed)
+        # Owner should see all four fields
+        assert len(sent_embed.fields) == 4
+        field_names = [field.name for field in sent_embed.fields]
+        assert "👤 User Commands" in field_names
+        assert "👑 Owner Commands" in field_names
+        assert "🛠️ Model Management (Owner)" in field_names
+        assert "💰 Credit & Access Management (Owner)" in field_names

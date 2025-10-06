@@ -1,6 +1,11 @@
 # src/bot/commands/admin.py
 """
-Handles owner-only commands for user management.
+Handles owner-only commands for bot administration and user management.
+
+This module includes commands for:
+- Authorizing and de-authorizing users.
+- Listing authorized users.
+- Inspecting user conversation history (memory).
 """
 import logging
 from pathlib import Path
@@ -12,87 +17,99 @@ logger = logging.getLogger("Bot.Commands.Admin")
 
 def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
     """
-    Registers owner-only user management commands.
+    Registers owner-only administrative commands with the bot.
 
     Args:
-        bot (commands.Bot): The bot instance.
-        memory_store: The conversation memory store instance.
-        auth_helpers (dict): A dict containing functions for auth management.
+        bot (commands.Bot): The instance of the bot.
+        memory_store: The instance of the conversation memory store.
+        auth_helpers (dict): A dictionary of helper functions for authorization management.
     """
+    # Attach stores and helpers to the bot object for easy access within commands.
     bot.memory_store = memory_store
     bot.auth_helpers = auth_helpers
 
     @bot.command(name="auth")
     @commands.is_owner()
     async def auth_command(ctx: commands.Context, member: discord.Member):
-        """Authorizes a user to use the bot."""
-        uid = member.id
-        if uid in bot.auth_helpers['get_set']():
+        """Authorizes a specific user to interact with the bot."""
+        user_id = member.id
+        if user_id in bot.auth_helpers['get_set']():
             await ctx.send(f"❌ User {member.display_name} is already authorized.")
             return
 
-        success = bot.auth_helpers['add'](uid)
+        success = bot.auth_helpers['add'](user_id)
         if success:
-            await ctx.send(f"✅ Added {member.display_name} to the authorized list.")
+            await ctx.send(f"✅ Added {member.display_name} to the authorized user list.")
         else:
-            await ctx.send(f"❌ Failed to add {member.display_name}.")
+            await ctx.send(f"❌ An error occurred while trying to authorize {member.display_name}.")
 
     @bot.command(name="deauth")
     @commands.is_owner()
     async def deauth_command(ctx: commands.Context, member: discord.Member):
-        """Deauthorizes a user."""
-        uid = member.id
-        if uid not in bot.auth_helpers['get_set']():
-            await ctx.send(f"❌ User {member.display_name} is not in the authorized list.")
+        """De-authorizes a user, revoking their access."""
+        user_id = member.id
+        if user_id not in bot.auth_helpers['get_set']():
+            await ctx.send(f"❌ User {member.display_name} is not on the authorized list.")
             return
 
-        success = bot.auth_helpers['remove'](uid)
+        success = bot.auth_helpers['remove'](user_id)
         if success:
-            await ctx.send(f"✅ Removed {member.display_name} from the authorized list.")
+            await ctx.send(f"✅ Removed {member.display_name} from the authorized user list.")
         else:
-            await ctx.send(f"❌ Failed to remove {member.display_name}.")
+            await ctx.send(f"❌ An error occurred while trying to de-authorize {member.display_name}.")
 
     @bot.command(name="auths")
     @commands.is_owner()
     async def show_auth_command(ctx: commands.Context):
-        """Shows the list of authorized users."""
+        """Shows the complete list of authorized user IDs."""
         authorized_users = bot.auth_helpers['get_set']()
         if not authorized_users:
-            await ctx.send("The authorized users list is empty.")
+            await ctx.send("The authorized users list is currently empty.")
             return
 
-        body = "\n".join(str(x) for x in sorted(authorized_users))
-        if len(body) > 1900:
-            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
-                f.write("Authorized Users:\n" + body)
-                temp_path = f.name
+        # Format the list of user IDs for the response.
+        user_list_str = "\n".join(str(uid) for uid in sorted(authorized_users))
+
+        # If the list is too long for a standard Discord message, send it as a file.
+        if len(user_list_str) > 1900:
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as temp_f:
+                temp_f.write("Authorized User IDs:\n" + user_list_str)
+                temp_path = temp_f.name
+
             try:
-                await ctx.send("The list is too long, sending as a file.", file=discord.File(temp_path, filename="authorized_users.txt"))
+                await ctx.send("The list of authorized users is too long to display, sending it as a file.", file=discord.File(temp_path, filename="authorized_users.txt"))
             finally:
+                # Clean up the temporary file after sending.
                 Path(temp_path).unlink(missing_ok=True)
         else:
-            await ctx.send(f"**Authorized users:**\n{body}")
+            await ctx.send(f"**Authorized User IDs:**\n```\n{user_list_str}\n```")
 
     @bot.command(name="memory")
     @commands.is_owner()
     async def memory_command(ctx: commands.Context, member: discord.Member = None):
-        """Views the recent conversation history of a user."""
-        target = member or ctx.author
+        """
+        Inspects the recent conversation history for a user.
+
+        If no user is specified, it shows the history of the command author.
+        """
+        target_user = member or ctx.author
         if not bot.memory_store:
-            await ctx.send("❌ Memory feature is not initialized.")
+            await ctx.send("❌ The memory store is not initialized.")
             return
 
-        mem = bot.memory_store.get_user_messages(target.id)
-        if not mem:
-            await ctx.send(f"No memory found for {target.display_name}.")
+        messages = bot.memory_store.get_user_messages(target_user.id)
+        if not messages:
+            await ctx.send(f"No conversation memory found for {target_user.display_name}.")
             return
 
-        lines = [f"**Memory for {target.display_name}:**"]
-        for i, msg in enumerate(mem[-10:], start=1):
-            content = msg.get("content", "[No content]")
+        # Format the last 10 messages for a concise overview.
+        lines = [f"**Conversation Memory for {target_user.display_name}:**"]
+        for i, msg in enumerate(messages[-10:], start=1):
+            content = msg.get("content", "[Message content not available]")
+            # Truncate long messages for readability.
             preview = (content[:120] + "…") if len(content) > 120 else content
-            lines.append(f"{i:02d}. **{msg.get('role', 'N/A')}**: {preview}")
+            lines.append(f"`{i:02d}.` **{msg.get('role', 'N/A').capitalize()}**: {preview}")
 
         await ctx.send("\n".join(lines))
 
-    logger.info("Admin commands have been registered.")
+    logger.info("Admin commands have been successfully registered.")
