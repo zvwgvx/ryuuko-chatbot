@@ -31,7 +31,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 2.  **Install dependencies:**
     ```bash
-    pip install -r requirements.txt
+    # Install main dependencies
+    pip install .
+
+    # To install testing dependencies as well
+    pip install .[test]
     ```
 
 3.  **Configure the bot:**
@@ -50,10 +54,14 @@ These instructions will get you a copy of the project up and running on your loc
 
 ## Usage
 
-To run the bot, use the following command:
+To run the bot, use one of the following commands:
 
 ```bash
+# Using the python module directly
 python -m src
+
+# Using the installed script
+start
 ```
 
 Once the bot is running, you can interact with it on Discord using the `.` prefix. For a full list of commands, see the [Commands Reference](docs/COMMANDS.md).
