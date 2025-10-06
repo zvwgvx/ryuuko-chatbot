@@ -25,8 +25,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-github-username/your-repository-name.git
-    cd your-repository-name
+    git clone https://github.com/zvwgvx/ryuuko-chatbot.git
+    cd ryuuko-chatbot
     ```
 
 2.  **Install dependencies:**

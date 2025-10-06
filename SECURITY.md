@@ -13,7 +13,7 @@ We are committed to providing security updates for the latest major release.
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it to us by **creating a new issue** on our [GitHub repository](https://github.com/your-github-username/your-repository-name/issues).
+If you discover a security vulnerability, please report it to us by **creating a new issue** on our [GitHub repository](https://github.com/zvwgvx/ryuuko-chatbot/issues).
 
 When reporting a vulnerability, please include the following details:
 

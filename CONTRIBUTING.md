@@ -10,7 +10,7 @@ This project and everyone participating in it is governed by the [Contributor Co
 
 ### Reporting Bugs
 
-If you find a bug, please open an issue on our [GitHub repository](httpss://github.com/your-github-username/your-repository-name/issues). Please include a clear title, a description of the issue, and steps to reproduce it.
+If you find a bug, please open an issue on our [GitHub repository](https://github.com/zvwgvx/ryuuko-chatbot/issues). Please include a clear title, a description of the issue, and steps to reproduce it.
 
 ### Suggesting Enhancements
 
@@ -25,8 +25,8 @@ Unsure where to begin contributing? You can start by looking through `good first
 1.  **Fork the repository** on GitHub.
 2.  **Clone your fork** locally:
     ```bash
-    git clone https://github.com/your-github-username/your-repository-name.git
-    cd your-repository-name
+    git clone https://github.com/zvwgvx/ryuuko-chatbot.git
+    cd ryuuko-chatbot
     ```
 3.  **Create a new branch** for your changes:
     ```bash

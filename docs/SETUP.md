@@ -16,8 +16,8 @@ Before you begin, ensure you have the following installed on your system:
 
     Open your terminal and clone the repository from GitHub:
     ```bash
-    git clone https://github.com/your-github-username/your-repository-name.git
-    cd your-repository-name
+    git clone https://github.com/zvwgvx/ryuuko-chatbot.git
+    cd ryuuko-chatbot
     ```
 
 2.  **Create a Virtual Environment**
