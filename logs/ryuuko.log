@@ -987,3 +987,121 @@ discord.ext.commands.errors.CommandRegistrationError: The command models is alre
 NoneType: None
 2025-10-06 22:34:16,479 INFO [34mBot.Main[0m: [OK] Bot is ready: Ryuuko#4024 (id=1405869084528087050)
 2025-10-06 22:34:16,479 INFO [34mBot.Main[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-06 22:37:16,707 INFO [34mBot.Main[0m: [STOP] Bot shutdown initiated.
+2025-10-06 22:37:16,708 INFO [34mBot.Main[0m: [EXIT] Bot process exiting.
+2025-10-06 22:37:18,112 INFO [34mroot[0m: File logging enabled: logs/ryuuko.log
+2025-10-06 22:37:18,112 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-06 22:37:18,112 INFO [34mroot[0m: Compressed archives will be created in: logs
+2025-10-06 22:37:18,112 INFO [34mroot[0m: Starting application...
+2025-10-06 22:37:18,112 INFO [34mroot[0m: Initializing storage...
+2025-10-06 22:37:18,112 INFO [34mConfig.Loader[0m: Initializing MongoDB connection to database: polydevsdb
+2025-10-06 22:37:18,132 INFO [34mStorage.Database[0m: MongoDB indexes created successfully
+2025-10-06 22:37:18,132 INFO [34mStorage.Database[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-06 22:37:18,133 INFO [34mConfig.Loader[0m: MongoDB store initialized successfully.
+2025-10-06 22:37:18,133 INFO [34mroot[0m: Storage initialized successfully.
+2025-10-06 22:37:18,133 INFO [34mroot[0m: ==================================================
+2025-10-06 22:37:18,133 INFO [34mroot[0m: Ryuuko Chatbot Initializing...
+2025-10-06 22:37:18,133 INFO [34mroot[0m: Storage Type: MongoDB
+2025-10-06 22:37:18,133 INFO [34mroot[0m: Database Name: polydevsdb
+2025-10-06 22:37:18,133 INFO [34mroot[0m: AI Gateway Mode: Integrated (Direct Call)
+2025-10-06 22:37:18,133 INFO [34mroot[0m: ==================================================
+2025-10-06 22:37:18,133 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-06 22:37:18,133 INFO [34mBot.Main[0m: [INIT] Initializing bot modules...
+2025-10-06 22:37:18,134 INFO [34mStorage.Memory[0m: MemoryStore initialized with MongoDB backend.
+2025-10-06 22:37:18,134 INFO [34mConfig.UserConfig[0m: UserConfigManager initialized successfully with MongoDB.
+2025-10-06 22:37:18,134 INFO [34mBot.Services.Auth[0m: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-06 22:37:18,134 INFO [34mBot.Commands[0m: [INIT] Registering all command groups...
+2025-10-06 22:37:18,134 INFO [34mBot.Commands.Basic[0m: Basic commands have been successfully registered.
+2025-10-06 22:37:18,135 INFO [34mBot.Commands.User[0m: User commands have been successfully registered.
+2025-10-06 22:37:18,135 INFO [34mBot.Commands.Admin[0m: Admin commands have been successfully registered.
+2025-10-06 22:37:18,135 INFO [34mBot.Commands.System[0m: System commands have been successfully registered.
+2025-10-06 22:37:18,135 INFO [34mBot.Commands[0m: [OK] All command groups have been registered.
+2025-10-06 22:37:18,135 INFO [34mBot.Events.Messages[0m: [OK] Message event listeners have been registered
+2025-10-06 22:37:18,135 INFO [34mBot.Main[0m: [OK] All bot modules initialized successfully.
+2025-10-06 22:37:18,135 INFO [34mroot[0m: Bot instance created. Starting bot...
+2025-10-06 22:37:18,135 INFO [34mBot.Main[0m: [HEALTH] Running pre-startup health checks...
+2025-10-06 22:37:18,135 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-06 22:37:18,588 INFO [34mBot.Main[0m: [OK] All health checks passed!
+2025-10-06 22:37:18,588 INFO [34mBot.Main[0m: [START] Starting Discord bot...
+2025-10-06 22:37:25,638 INFO [34mBot.Main[0m: [OK] Bot is ready: Ryuuko#4024 (id=1405869084528087050)
+2025-10-06 22:37:25,639 INFO [34mBot.Main[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-06 22:41:15,977 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: a+b+c+d+e+f+g+h=?
+2025-10-06 22:41:15,978 INFO [34mRequest Queue[0m: Request queue worker started
+2025-10-06 22:41:16,401 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:41:25,257 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:41:25,886 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 7
+2025-10-06 22:41:25,890 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 8
+2025-10-06 22:42:30,685 INFO [34mStorage.Database[0m: Cleared memory for user 1043809717769740308
+2025-10-06 22:43:35,109 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: hey
+2025-10-06 22:43:35,144 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:43:37,121 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:43:37,634 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-06 22:43:37,637 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-06 22:43:42,183 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: huh ?
+2025-10-06 22:43:42,223 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:43:43,202 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:43:43,702 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-06 22:43:43,708 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-06 22:43:54,137 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: what u r doing
+2025-10-06 22:43:54,181 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:43:55,582 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:43:56,299 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-06 22:43:56,304 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-06 22:44:04,764 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: lmao
+2025-10-06 22:44:04,823 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:05,581 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:44:06,058 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-06 22:44:06,062 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-06 22:44:13,046 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: u so dump
+2025-10-06 22:44:13,083 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:14,017 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:44:14,500 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-06 22:44:14,504 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-06 22:44:20,929 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: because u so cute
+2025-10-06 22:44:20,968 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:21,782 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:44:22,435 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 11
+2025-10-06 22:44:22,440 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 12
+2025-10-06 22:44:32,437 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: so what can i call u
+2025-10-06 22:44:32,528 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:33,525 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:44:33,961 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 13
+2025-10-06 22:44:33,966 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 14
+2025-10-06 22:44:42,140 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: alr, hi baby
+2025-10-06 22:44:42,205 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:43,397 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:44:44,033 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 15
+2025-10-06 22:44:44,037 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 16
+2025-10-06 22:44:52,961 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: ok babe
+2025-10-06 22:44:53,019 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:54,278 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:44:54,753 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 17
+2025-10-06 22:44:54,757 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 18
+2025-10-06 22:44:58,487 INFO [34mRequest Queue[0m: Adding request to queue for user 1320303839701897230: ale
+2025-10-06 22:44:58,524 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:44:59,999 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:45:00,691 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 19
+2025-10-06 22:45:00,697 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 20
+2025-10-06 22:45:05,393 INFO [34mStorage.Database[0m: Cleared memory for user 1320303839701897230
+2025-10-06 22:48:16,738 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: đố bt ai đây
+2025-10-06 22:48:17,370 INFO [34mBot.Events.Messages[0m: [DONE] Processed image: donald-trump_673626fb92a5f.png
+2025-10-06 22:48:17,388 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:48:28,362 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:48:28,959 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 1
+2025-10-06 22:48:28,963 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 2
+2025-10-06 22:51:03,033 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: giải đi bae
+2025-10-06 22:51:03,697 INFO [34mBot.Events.Messages[0m: [DONE] Processed image: image.png
+2025-10-06 22:51:03,724 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:51:16,542 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:51:17,080 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 3
+2025-10-06 22:51:17,085 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 4
+2025-10-06 22:51:34,417 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: anh kbt lm
+2025-10-06 22:51:34,463 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:51:46,914 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:51:47,544 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 5
+2025-10-06 22:51:47,548 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 6
+2025-10-06 22:53:33,773 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: vật lý thì liên quan quái gì tới CP đâu em :))
+2025-10-06 22:53:33,822 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:53:46,919 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:53:47,701 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 7
+2025-10-06 22:53:47,707 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 8
