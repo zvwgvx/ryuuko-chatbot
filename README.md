@@ -45,7 +45,7 @@ These instructions will get you a copy of the project up and running on your loc
         AISTUDIO_API_KEY="your_aistudio_api_key"
         POLYDEVS_API_KEY="your_polydevs_api_key"
         PROXYVN_API_KEY="your_proxyvn_api_key"
-        ```
+
     *   Modify `config.json` for additional settings if needed.
 
 ## Usage
