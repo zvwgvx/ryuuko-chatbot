@@ -26,9 +26,6 @@ def register_all_commands(bot: commands.Bot, dependencies: dict):
     """
     logger.info("[INIT] Registering all command groups...")
 
-    # --- CORE FIX: Lấy trực tiếp `auth_helpers` từ dependencies ---
-    # `auth_helpers` đã được tạo sẵn trong `bot/main.py`.
-    # Chúng ta không cần tạo lại nó ở đây.
     auth_helpers = dependencies['auth_helpers']
 
     # Attach the authorized_users set to the bot for easy access in other parts of the code
