@@ -870,3 +870,120 @@ TypeError: cannot unpack non-iterable bool object
 2025-10-06 22:17:28,262 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 1
 2025-10-06 22:17:28,267 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 2
 2025-10-06 22:17:35,528 INFO [34mStorage.Database[0m: Cleared memory for user 1320303839701897230
+2025-10-06 22:20:38,424 INFO [34mRequest Queue[0m: Adding request to queue for user 1086150037777694813: chicken butt
+2025-10-06 22:20:38,469 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:20:40,907 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:20:41,491 INFO [34mStorage.Database[0m: Successfully added message for user 1086150037777694813. Total messages: 1
+2025-10-06 22:20:41,495 INFO [34mStorage.Database[0m: Successfully added message for user 1086150037777694813. Total messages: 2
+2025-10-06 22:21:25,629 ERROR [34mBot.Main[0m: An unexpected error occurred in command 'models': Command raised an exception: AttributeError: 'MongoDBStore' object has no attribute 'list_all_models_detailed'
+NoneType: None
+2025-10-06 22:24:30,153 INFO [34mBot.Services.Auth[0m: Successfully added user 1043809717769740308 to authorized list in MongoDB.
+2025-10-06 22:24:30,153 INFO [34mBot.Main[0m: In-memory auth set updated: added 1043809717769740308
+2025-10-06 22:28:48,636 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: đã bao lâu trôi qua kể từ khi bạn ở trong sv discord này
+2025-10-06 22:28:48,669 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:29:04,321 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:29:04,867 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 1
+2025-10-06 22:29:04,871 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 2
+2025-10-06 22:29:47,741 INFO [34mStorage.Database[0m: Cleared memory for user 1043809717769740308
+2025-10-06 22:30:20,302 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: hát  cho tôi nghe 1 bài của thắng ngọt
+2025-10-06 22:30:20,333 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:30:31,901 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:30:32,457 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 1
+2025-10-06 22:30:32,461 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 2
+2025-10-06 22:30:53,702 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: sao mắng tôi? bạn có vde à
+2025-10-06 22:30:53,728 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:31:04,401 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:31:05,088 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 3
+2025-10-06 22:31:05,091 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 4
+2025-10-06 22:31:24,415 INFO [34mRequest Queue[0m: Adding request to queue for user 1043809717769740308: anh muốn nghe
+2025-10-06 22:31:24,437 INFO [34mgoogle_genai.models[0m: AFC is enabled with max remote calls: 10.
+2025-10-06 22:31:36,652 INFO [34mhttpx[0m: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent "HTTP/1.1 200 OK"
+2025-10-06 22:31:37,243 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 5
+2025-10-06 22:31:37,246 INFO [34mStorage.Database[0m: Successfully added message for user 1043809717769740308. Total messages: 6
+2025-10-06 22:33:59,827 INFO [34mRequest Queue[0m: Request queue worker cancelled
+2025-10-06 22:33:59,830 INFO [34mBot.Main[0m: [STOP] Bot shutdown initiated.
+2025-10-06 22:33:59,830 INFO [34mBot.Main[0m: [EXIT] Bot process exiting.
+2025-10-06 22:34:00,960 INFO [34mroot[0m: File logging enabled: logs/ryuuko.log
+2025-10-06 22:34:00,960 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-06 22:34:00,960 INFO [34mroot[0m: Compressed archives will be created in: logs
+2025-10-06 22:34:00,960 INFO [34mroot[0m: Starting application...
+2025-10-06 22:34:00,961 INFO [34mroot[0m: Initializing storage...
+2025-10-06 22:34:00,961 INFO [34mConfig.Loader[0m: Initializing MongoDB connection to database: polydevsdb
+2025-10-06 22:34:00,988 INFO [34mStorage.Database[0m: MongoDB indexes created successfully
+2025-10-06 22:34:00,988 INFO [34mStorage.Database[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-06 22:34:00,989 INFO [34mConfig.Loader[0m: MongoDB store initialized successfully.
+2025-10-06 22:34:00,989 INFO [34mroot[0m: Storage initialized successfully.
+2025-10-06 22:34:00,989 INFO [34mroot[0m: ==================================================
+2025-10-06 22:34:00,989 INFO [34mroot[0m: Ryuuko Chatbot Initializing...
+2025-10-06 22:34:00,989 INFO [34mroot[0m: Storage Type: MongoDB
+2025-10-06 22:34:00,989 INFO [34mroot[0m: Database Name: polydevsdb
+2025-10-06 22:34:00,989 INFO [34mroot[0m: AI Gateway Mode: Integrated (Direct Call)
+2025-10-06 22:34:00,989 INFO [34mroot[0m: ==================================================
+2025-10-06 22:34:00,990 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-06 22:34:00,990 INFO [34mBot.Main[0m: [INIT] Initializing bot modules...
+2025-10-06 22:34:00,990 INFO [34mStorage.Memory[0m: MemoryStore initialized with MongoDB backend.
+2025-10-06 22:34:00,990 INFO [34mConfig.UserConfig[0m: UserConfigManager initialized successfully with MongoDB.
+2025-10-06 22:34:00,991 INFO [34mBot.Services.Auth[0m: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-06 22:34:00,991 INFO [34mBot.Commands[0m: [INIT] Registering all command groups...
+2025-10-06 22:34:00,991 INFO [34mBot.Commands.Basic[0m: Basic commands have been successfully registered.
+2025-10-06 22:34:00,991 INFO [34mBot.Commands.User[0m: User commands have been successfully registered.
+2025-10-06 22:34:00,991 INFO [34mBot.Commands.Admin[0m: Admin commands have been successfully registered.
+2025-10-06 22:34:00,991 CRITICAL [34m__main__[0m: A fatal error occurred: The command models is already an existing command or alias.
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/src/__main__.py", line 57, in main
+    bot = Bot()
+          ^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/src/bot/main.py", line 32, in __init__
+    self._setup_bot_functionality()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/src/bot/main.py", line 98, in _setup_bot_functionality
+    register_all_commands(self, dependencies)
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/src/bot/commands/__init__.py", line 56, in register_all_commands
+    setup_system_commands(
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/src/bot/commands/system.py", line 35, in setup_system_commands
+    @bot.command(name="models")
+     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/.venv/lib/python3.12/site-packages/discord/ext/commands/core.py", line 1553, in decorator
+    self.add_command(result)
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/.venv/lib/python3.12/site-packages/discord/ext/commands/bot.py", line 264, in add_command
+    super().add_command(command)
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/.venv/lib/python3.12/site-packages/discord/ext/commands/core.py", line 1391, in add_command
+    raise CommandRegistrationError(command.name)
+discord.ext.commands.errors.CommandRegistrationError: The command models is already an existing command or alias.
+2025-10-06 22:34:08,564 INFO [34mroot[0m: File logging enabled: logs/ryuuko.log
+2025-10-06 22:34:08,564 INFO [34mroot[0m: Log rotation: daily, keeping 30 days
+2025-10-06 22:34:08,564 INFO [34mroot[0m: Compressed archives will be created in: logs
+2025-10-06 22:34:08,564 INFO [34mroot[0m: Starting application...
+2025-10-06 22:34:08,564 INFO [34mroot[0m: Initializing storage...
+2025-10-06 22:34:08,564 INFO [34mConfig.Loader[0m: Initializing MongoDB connection to database: polydevsdb
+2025-10-06 22:34:08,584 INFO [34mStorage.Database[0m: MongoDB indexes created successfully
+2025-10-06 22:34:08,584 INFO [34mStorage.Database[0m: Successfully connected to MongoDB: polydevsdb
+2025-10-06 22:34:08,585 INFO [34mConfig.Loader[0m: MongoDB store initialized successfully.
+2025-10-06 22:34:08,585 INFO [34mroot[0m: Storage initialized successfully.
+2025-10-06 22:34:08,585 INFO [34mroot[0m: ==================================================
+2025-10-06 22:34:08,585 INFO [34mroot[0m: Ryuuko Chatbot Initializing...
+2025-10-06 22:34:08,586 INFO [34mroot[0m: Storage Type: MongoDB
+2025-10-06 22:34:08,586 INFO [34mroot[0m: Database Name: polydevsdb
+2025-10-06 22:34:08,586 INFO [34mroot[0m: AI Gateway Mode: Integrated (Direct Call)
+2025-10-06 22:34:08,586 INFO [34mroot[0m: ==================================================
+2025-10-06 22:34:08,586 WARNING [34mdiscord.client[0m: PyNaCl is not installed, voice will NOT be supported
+2025-10-06 22:34:08,586 INFO [34mBot.Main[0m: [INIT] Initializing bot modules...
+2025-10-06 22:34:08,586 INFO [34mStorage.Memory[0m: MemoryStore initialized with MongoDB backend.
+2025-10-06 22:34:08,586 INFO [34mConfig.UserConfig[0m: UserConfigManager initialized successfully with MongoDB.
+2025-10-06 22:34:08,587 INFO [34mBot.Services.Auth[0m: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-06 22:34:08,587 INFO [34mBot.Commands[0m: [INIT] Registering all command groups...
+2025-10-06 22:34:08,587 INFO [34mBot.Commands.Basic[0m: Basic commands have been successfully registered.
+2025-10-06 22:34:08,587 INFO [34mBot.Commands.User[0m: User commands have been successfully registered.
+2025-10-06 22:34:08,587 INFO [34mBot.Commands.Admin[0m: Admin commands have been successfully registered.
+2025-10-06 22:34:08,587 INFO [34mBot.Commands.System[0m: System commands have been successfully registered.
+2025-10-06 22:34:08,587 INFO [34mBot.Commands[0m: [OK] All command groups have been registered.
+2025-10-06 22:34:08,587 INFO [34mBot.Events.Messages[0m: [OK] Message event listeners have been registered
+2025-10-06 22:34:08,587 INFO [34mBot.Main[0m: [OK] All bot modules initialized successfully.
+2025-10-06 22:34:08,587 INFO [34mroot[0m: Bot instance created. Starting bot...
+2025-10-06 22:34:08,587 INFO [34mBot.Main[0m: [HEALTH] Running pre-startup health checks...
+2025-10-06 22:34:08,587 INFO [34mHealthCheck[0m: Starting health checks...
+2025-10-06 22:34:09,191 INFO [34mBot.Main[0m: [OK] All health checks passed!
+2025-10-06 22:34:09,191 INFO [34mBot.Main[0m: [START] Starting Discord bot...
+2025-10-06 22:34:15,047 ERROR [34mBot.Main[0m: An unexpected error occurred in command 'models': Command raised an exception: AttributeError: 'MongoDBStore' object has no attribute 'list_all_models_detailed'
+NoneType: None
+2025-10-06 22:34:16,479 INFO [34mBot.Main[0m: [OK] Bot is ready: Ryuuko#4024 (id=1405869084528087050)
+2025-10-06 22:34:16,479 INFO [34mBot.Main[0m: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
