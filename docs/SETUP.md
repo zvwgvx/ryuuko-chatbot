@@ -63,6 +63,18 @@ The bot's configuration is managed through a combination of a `.env` file for se
 
     # The connection string for your MongoDB database
     MONGODB_CONNECTION_STRING="mongodb://user:password@host:port/"
+
+    # --- LLM Provider API Keys (add the ones you plan to use) ---
+
+    # For Google AI Studio / Gemini models
+    AISTUDIO_API_KEY="your_google_ai_studio_api_key"
+    # or GEMINI_API_KEY="your_gemini_api_key"
+
+    # For Polydevs models
+    POLYDEVS_API_KEY="your_polydevs_api_key"
+
+    # For ProxyVN models
+    PROXYVN_API_KEY="your_proxyvn_api_key"
     ```
 
     Replace the placeholder values with your actual credentials.

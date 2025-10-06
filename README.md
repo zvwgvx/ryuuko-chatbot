@@ -35,11 +35,17 @@ These instructions will get you a copy of the project up and running on your loc
     ```
 
 3.  **Configure the bot:**
-    *   Create a `.env` file in the root directory and add your Discord token and MongoDB connection string:
+    *   Create a `.env` file in the root directory and add your secrets. For a full list of required API keys, see the [Setup Guide](docs/SETUP.md).
         ```env
-        DISCORD_TOKEN=your_discord_bot_token
-        MONGODB_CONNECTION_STRING=your_mongodb_connection_string
-        ```
+        # Discord and Database
+        DISCORD_TOKEN="your_discord_bot_token"
+        MONGODB_CONNECTION_STRING="your_mongodb_connection_string"
+
+        # LLM API Keys (only add the ones you use)
+        AISTUDIO_API_KEY="your_aistudio_api_key"
+        POLYDEVS_API_KEY="your_polydevs_api_key"
+        PROXYVN_API_KEY="your_proxyvn_api_key"
+
     *   Modify `config.json` for additional settings if needed.
 
 ## Usage
