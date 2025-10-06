@@ -22,7 +22,7 @@ def mock_bot():
         def decorator(func):
             cmd = Mock(spec=commands.Command, callback=func, **kwargs)
             cmd.name = kwargs.get('name', func.__name__)
-            cmd.checks = [lambda ctx: True]
+            cmd.checks = [lambda ctx: True] # Simulate @commands.is_owner()
             bot.add_command(cmd)
             return cmd
         return decorator
@@ -34,10 +34,10 @@ def mock_bot():
 def mock_mongodb_store():
     """Fixture for a mock MongoDB store."""
     store = Mock()
-    store.add_supported_model.return_value = (True, "Model added.")
-    store.remove_supported_model.return_value = (True, "Model removed.")
-    store.edit_supported_model.return_value = (True, "Model edited.")
-    store.add_user_credit.return_value = (True, 100)
+    store.add_supported_model.return_value = (True, "Model added successfully.")
+    store.remove_supported_model.return_value = (True, "Model removed successfully.")
+    store.edit_supported_model.return_value = (True, "Model edited successfully.")
+    store.add_user_credit.return_value = (True, 150)
     store.deduct_user_credit.return_value = (True, 50)
     store.set_user_credit.return_value = True
     store.set_user_level.return_value = True
@@ -78,37 +78,27 @@ class TestSystemCommandSetup:
         assert hasattr(mock_bot, 'mongodb_store')
 
 @pytest.mark.asyncio
-class TestAddModelCommand:
-    """Tests for the 'addmodel' command."""
+class TestModelManagementCommands:
+    """Tests for model management commands: addmodel, removemodel, editmodel."""
     async def test_add_model_success(self, mock_bot, mock_ctx, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "addmodel")
-
         await callback(mock_ctx, "test-model", 10, 1)
-
         mock_mongodb_store.add_supported_model.assert_called_once_with("test-model", 10, 1)
-        mock_ctx.send.assert_called_once_with("✅ Model added.")
+        mock_ctx.send.assert_called_once_with("✅ Model added successfully.")
 
     async def test_add_model_invalid_cost(self, mock_bot, mock_ctx, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "addmodel")
-
         await callback(mock_ctx, "test-model", -5, 1)
-
         mock_mongodb_store.add_supported_model.assert_not_called()
-        mock_ctx.send.assert_called_once_with("❌ Credit cost must be non-negative.")
+        mock_ctx.send.assert_called_once_with("❌ Credit cost must be a non-negative number.")
 
-    async def test_add_model_no_mongo(self, mock_bot, mock_ctx):
-        # Arrange: Setup with no MongoDB store
-        setup_system_commands(mock_bot, None)
+    async def test_command_fails_without_mongo(self, mock_bot, mock_ctx):
+        setup_system_commands(mock_bot, None) # No mongo store
         callback = get_command_callback(mock_bot, "addmodel")
-
-        # Act
         await callback(mock_ctx, "test-model", 10, 1)
-
-        # Assert: The check should now directly send the message
-        mock_ctx.send.assert_called_once_with("❌ This feature requires MongoDB to be configured.")
-
+        mock_ctx.send.assert_called_once_with("❌ This command requires a connection to the MongoDB database, which is not currently configured.")
 
 @pytest.mark.asyncio
 class TestCreditCommands:
@@ -116,27 +106,21 @@ class TestCreditCommands:
     async def test_add_credit_success(self, mock_bot, mock_ctx, mock_member, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "addcredit")
-
         await callback(mock_ctx, mock_member, 50)
-
         mock_mongodb_store.add_user_credit.assert_called_once_with(12345, 50)
-        mock_ctx.send.assert_called_once_with("✅ Added 50 credits to TestUser. New balance: 100")
+        mock_ctx.send.assert_called_once_with("✅ Added 50 credits to TestUser. Their new balance is 150.")
 
     async def test_deduct_credit_invalid_amount(self, mock_bot, mock_ctx, mock_member, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "deductcredit")
-
         await callback(mock_ctx, mock_member, 0)
-
         mock_mongodb_store.deduct_user_credit.assert_not_called()
-        mock_ctx.send.assert_called_once_with("❌ Amount must be positive.")
+        mock_ctx.send.assert_called_once_with("❌ The amount of credits to deduct must be a positive number.")
 
     async def test_set_credit_success(self, mock_bot, mock_ctx, mock_member, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "setcredit")
-
         await callback(mock_ctx, mock_member, 500)
-
         mock_mongodb_store.set_user_credit.assert_called_once_with(12345, 500)
         mock_ctx.send.assert_called_once_with("✅ Set TestUser's credit balance to 500.")
 
@@ -144,11 +128,9 @@ class TestCreditCommands:
         mock_mongodb_store.set_user_credit.return_value = False
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "setcredit")
-
         await callback(mock_ctx, mock_member, 500)
-
         mock_mongodb_store.set_user_credit.assert_called_once_with(12345, 500)
-        mock_ctx.send.assert_called_once_with("❌ Failed to set credits.")
+        mock_ctx.send.assert_called_once_with("❌ Failed to set the credit balance for TestUser.")
 
 
 @pytest.mark.asyncio
@@ -157,17 +139,13 @@ class TestSetLevelCommand:
     async def test_set_level_success(self, mock_bot, mock_ctx, mock_member, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "setlevel")
-
         await callback(mock_ctx, mock_member, 2)
-
         mock_mongodb_store.set_user_level.assert_called_once_with(12345, 2)
         mock_ctx.send.assert_called_once_with("✅ Set TestUser's access level to Ultimate (Level 2).")
 
     async def test_set_level_invalid_level(self, mock_bot, mock_ctx, mock_member, mock_mongodb_store):
         setup_system_commands(mock_bot, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "setlevel")
-
         await callback(mock_ctx, mock_member, 99)
-
         mock_mongodb_store.set_user_level.assert_not_called()
-        mock_ctx.send.assert_called_once_with("❌ Level must be 0 (Basic), 1 (Advanced), or 2 (Ultimate).")
+        mock_ctx.send.assert_called_once_with("❌ Access level must be 0 (Basic), 1 (Advanced), or 2 (Ultimate).")
