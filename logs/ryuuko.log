@@ -1173,3 +1173,6 @@ NoneType: None
 2025-10-05 23:34:27,917 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 3
 2025-10-05 23:34:27,921 INFO [34mStorage.Database[0m: Successfully added message for user 1320303839701897230. Total messages: 4
 2025-10-05 23:34:37,318 INFO [34mStorage.Database[0m: Cleared memory for user 1320303839701897230
+2025-10-05 23:49:49,288 INFO [34mRequest Queue[0m: Request queue worker cancelled
+2025-10-05 23:49:49,294 INFO [34mBot.Main[0m: [STOP] Bot shutdown initiated.
+2025-10-05 23:49:49,294 INFO [34mBot.Main[0m: [EXIT] Bot process exiting.
