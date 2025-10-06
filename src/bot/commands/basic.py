@@ -62,13 +62,13 @@ def setup_basic_commands(bot: commands.Bot):
         embed.add_field(
             name="👤 User Commands",
             value=(
-                "`ping` - Check bot's latency.\n"
-                "`model <model_name>` - Set your preferred AI model.\n"
-                "`sysprompt <prompt>` - Set your custom system prompt.\n"
-                "`profile [user]` - Show your (or another user's) configuration.\n"
-                "`showprompt [user]` - View your (or another user's) system prompt.\n"
-                "`models` - List all available AI models.\n"
-                "`clearmemory` - Clear your conversation history."
+                "`.ping` - Check bot's latency.\n"
+                "`.model <model_name>` - Set your preferred AI model.\n"
+                "`.sysprompt <prompt>` - Set your custom system prompt.\n"
+                "`.profile [user]` - Show your (or another user's) configuration.\n"
+                "`.showprompt [user]` - View your (or another user's) system prompt.\n"
+                "`.models` - List all available AI models.\n"
+                "`.clearmemory` - Clear your conversation history."
             ),
             inline=False
         )

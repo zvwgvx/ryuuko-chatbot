@@ -10,7 +10,7 @@ authors = [
 ]
 description = "A Discord bot."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -26,9 +26,9 @@ dependencies = [
     "urllib3>=1.21.0",
     "tiktoken>=0.4.0",
     "colorama>=0.4.6",
-    "google-generativeai>=0.4.0",
+    "google-genai>=0.4.0",
     "fastapi>=0.118.0",
-    "uvicorn>=0.37.0"
+    "uvicorn>=0.37.0",
 ]
 
 [project.optional-dependencies]
@@ -39,4 +39,4 @@ test = [
 ]
 
 [project.scripts]
-start = "src:main"
+start = "src.__main__:main"

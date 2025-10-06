@@ -1,22 +1,42 @@
-# Use an official Python runtime as a parent image
-FROM python:3.11-slim
+# =================================================================
+# STAGE 1: Build Stage
+# =================================================================
+# This stage installs dependencies into a virtual environment.
+# It leverages Docker caching, so dependencies are only re-installed
+# if pyproject.toml changes.
+FROM python:3.11-slim-bookworm AS builder
 
-# Set the working directory in the container
-WORKDIR /app
-
-# Set environment variables to ensure logs are sent straight to stdout
-# and that Python doesn't generate .pyc files.
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PIP_NO_CACHE_DIR=off
 
-# Copy the requirements file first to leverage Docker's layer caching.
-# The pip install step will only be re-run if requirements.txt changes.
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Create a virtual environment
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
 
-# Copy the rest of the application code into the container.
-# The .dockerignore file will prevent unnecessary files from being copied.
+# Install dependencies
+WORKDIR /app
+COPY pyproject.toml .
+RUN pip install --upgrade pip
+# We copy the src directory here because `pip install .` needs it to resolve the project structure
+COPY src ./src
+RUN pip install .
+
+# =================================================================
+# STAGE 2: Final Stage
+# =================================================================
+# This stage creates the final, lean image for running the application.
+FROM python:3.11-slim-bookworm
+
+WORKDIR /app
+
+# Copy the virtual environment with all dependencies from the builder stage
+COPY --from=builder /opt/venv /opt/venv
+
+# Copy the application source code
 COPY . .
 
-# Command to run the application as a module
-CMD ["python3", "-m", "src"]
+# Activate the virtual environment and run the application
+ENV PATH="/opt/venv/bin:$PATH"
+CMD ["python", "-m", "src"]
