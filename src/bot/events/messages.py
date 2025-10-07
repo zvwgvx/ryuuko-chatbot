@@ -8,7 +8,7 @@ from discord.ext import commands
 
 logger = logging.getLogger("Bot.Events.Messages")
 
-# --- Constants (Không thay đổi) ---
+# --- Constants ---
 FILE_MAX_BYTES = 200 * 1024
 IMAGE_MAX_BYTES = 10 * 1024 * 1024
 MAX_CHARS_PER_FILE = 10_000
@@ -18,7 +18,7 @@ ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 ALLOWED_IMAGE_MIMES = {"image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp", "image/bmp"}
 
 
-# --- Attachment Processing Functions (Không thay đổi) ---
+# --- Attachment Processing Functions ---
 async def _read_image_attachment(attachment: discord.Attachment) -> Dict:
     entry = {"filename": attachment.filename, "type": "image", "data": None, "mime_type": None, "skipped": False,
              "reason": None}
@@ -95,7 +95,7 @@ async def _read_attachments_enhanced(attachments: List[discord.Attachment]) -> D
     return result
 
 
-# --- Message Formatting Functions (Không thay đổi) ---
+# --- Message Formatting Functions ---
 def convert_latex_to_discord(text: str) -> str: return text
 
 
@@ -112,7 +112,7 @@ def get_vietnam_timestamp() -> str:
     return datetime.now(timezone(timedelta(hours=7))).strftime("[%Y-%m-%d %H:%M:%S GMT+7] ")
 
 
-# --- Main Event Setup Function (Đã Sửa Lỗi) ---
+# --- Main Event Setup Function ---
 def setup_message_events(bot: commands.Bot, dependencies: dict):
     user_config_manager = dependencies['user_config_manager']
     request_queue = dependencies['request_queue']
@@ -133,7 +133,7 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
             user_model = user_config_manager.get_user_model(user_id)
             user_system_message = user_config_manager.get_user_system_message(user_id)
 
-            # --- CORE FIX for Lỗi 2: Assume mongodb_store always exists, remove USE_MONGODB check ---
+            # --- CORE FIX: Assume mongodb_store always exists, remove USE_MONGODB check ---
             model_info = mongodb_store.get_model_info(user_model)
             if model_info:
                 user_config = user_config_manager.get_user_config(user_id)
@@ -163,7 +163,6 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
             payload_messages.extend(memory_store.get_user_messages(user_id))
             final_text = f"{get_vietnam_timestamp()}{combined_text}"
 
-            # TODO: Xử lý multimodal (ghép ảnh vào payload)
             payload_messages.append({"role": "user", "content": final_text})
 
             ok, resp = await call_api.call_unified_api(messages=payload_messages, model=user_model)
@@ -173,7 +172,7 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
                 memory_store.add_message(user_id, {"role": "user", "content": combined_text})
                 memory_store.add_message(user_id, {"role": "model", "content": resp})
 
-                # --- CORE FIX for Lỗi 2: Simplified credit deduction ---
+                # --- CORE FIX : Simplified credit deduction ---
                 if model_info and model_info.get("credit_cost", 0) > 0:
                     mongodb_store.deduct_user_credit(user_id, model_info["credit_cost"])
                 # -----------------------------------------------------

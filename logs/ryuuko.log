@@ -42,3 +42,41 @@ Traceback (most recent call last):
   File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/src/config/loader.py", line 132, in init_storage
     raise RuntimeError(f"MongoDB initialization FAILED: {e}") from e
 RuntimeError: MongoDB initialization FAILED: No servers found yet, Timeout: 5.0s, Topology Description: <TopologyDescription id: 68e48a028565910c71eacae7, topology_type: Unknown, servers: [<ServerDescription ('192.168.2.254', 27017) server_type: Unknown, rtt: None>]>
+2025-10-07 12:31:32,817 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-07 12:31:32,817 INFO root: Log rotation: daily, keeping 30 days
+2025-10-07 12:31:32,817 INFO root: Compressed archives will be created in: logs
+2025-10-07 12:31:32,817 INFO root: Starting application...
+2025-10-07 12:31:32,817 INFO root: Initializing storage...
+2025-10-07 12:31:32,818 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-07 12:31:32,845 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-07 12:31:32,845 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-07 12:31:32,846 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-07 12:31:32,847 INFO root: Storage initialized successfully.
+2025-10-07 12:31:32,847 INFO root: ==================================================
+2025-10-07 12:31:32,847 INFO root: Ryuuko Chatbot Initializing...
+2025-10-07 12:31:32,847 INFO root: Storage Type: MongoDB
+2025-10-07 12:31:32,847 INFO root: Database Name: polydevsdb
+2025-10-07 12:31:32,847 INFO root: AI Gateway Mode: Integrated (Direct Call)
+2025-10-07 12:31:32,847 INFO root: ==================================================
+2025-10-07 12:31:32,847 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-07 12:31:32,847 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-07 12:31:32,847 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-07 12:31:32,847 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-07 12:31:32,848 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-07 12:31:32,848 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-07 12:31:32,848 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-07 12:31:32,848 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-07 12:31:32,848 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-07 12:31:32,848 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-07 12:31:32,848 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-07 12:31:32,848 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-07 12:31:32,848 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-07 12:31:32,848 INFO root: Bot instance created. Starting bot...
+2025-10-07 12:31:32,848 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-07 12:31:32,848 INFO HealthCheck: Starting health checks...
+2025-10-07 12:31:33,290 INFO Bot.Main: [OK] All health checks passed!
+2025-10-07 12:31:33,290 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-07 12:31:40,660 INFO Bot.Main: [OK] Bot is ready: Ryuuko#4024 (id=1405869084528087050)
+2025-10-07 12:31:40,661 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-07 12:42:53,437 INFO Bot.Main: [STOP] Bot shutdown initiated.
+2025-10-07 12:42:53,439 INFO Bot.Main: [EXIT] Bot process exiting.
