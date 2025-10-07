@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Service 1: Backend API
+  api:
+    build:
+      context: ./packages/api
+      dockerfile: Dockerfile
+    ports:
+      - "${API_PORT}:${API_PORT}" # Lấy port từ file .env, ví dụ: 8000:8000
+    env_file:
+      - .env
+    volumes:
+      - ./packages/api/src:/app/src # Đồng bộ code để dev
+    command: uvicorn src.main:app --host 0.0.0.0 --port ${API_PORT} --reload
+
+  # Service 2: Frontend Dashboard
+  web:
+    build:
+      context: ./packages/web
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80" # Map port 80 của container ra port 5173 của máy bạn
+    depends_on:
+      - api
+
+  # Service 3: Discord Bot
+  bot:
+    build:
+      context: ./packages/bot
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    depends_on:
+      - api
+    volumes:
+      - ./packages/bot/src:/app/src # Đồng bộ code để dev
