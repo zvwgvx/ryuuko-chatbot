@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+pymongo
+passlib==1.7.4
+bcrypt==4.0.1
+python-jose[cryptography]
+pydantic[email]
+python-multipart
+
+[test]
+pytest
+pytest-asyncio
+httpx
+mongomock

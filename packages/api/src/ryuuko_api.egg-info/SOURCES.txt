@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+src/ryuuko_api.egg-info/PKG-INFO
+src/ryuuko_api.egg-info/SOURCES.txt
+src/ryuuko_api.egg-info/dependency_links.txt
+src/ryuuko_api.egg-info/requires.txt
+src/ryuuko_api.egg-info/top_level.txt
+tests/test_auth.py

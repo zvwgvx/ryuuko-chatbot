@@ -1,0 +1,26 @@
+[project]
+name = "ryuuko-api"
+version = "0.1.0"
+description = "Backend API for the Ryuuko project."
+authors = [{ name = "Your Name", email = "you@example.com" }]
+dependencies = [
+    "fastapi",
+    "uvicorn[standard]",
+    "pymongo",
+    "passlib==1.7.4",
+    "bcrypt==4.0.1",
+    "python-jose[cryptography]",
+    "pydantic[email]",
+    "python-multipart",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "pytest-asyncio",
+    "httpx", # For making async requests to the API in tests
+    "mongomock",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
