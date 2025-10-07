@@ -13,7 +13,7 @@ from pymongo import MongoClient
 from pymongo.database import Database
 
 # --- Configuration ---
-MONGO_URI = os.getenv("MONGODB_CONNECTION_STRING", "mongodb://localhost:27017/")
+MONGO_URI = os.getenv("MONGODB_CONNECTION_STRING", "")
 MONGO_DB_NAME = "ryuuko_db"
 SECRET_KEY = os.getenv("JWT_SECRET_KEY", "a_very_secret_key")
 ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
