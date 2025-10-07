@@ -1,27 +1,27 @@
-# Ryuuko — Discord LLM Bot
+# Ryuuko — Monorepo
 
-**Ryuuko** is a modular and extensible Discord bot powered by Large Language Models (LLMs). It's designed to be a versatile chatbot that can be customized and extended with new commands and functionalities.
+This repository contains the source code for the Ryuuko project, which includes a Discord Bot, a backend API, and a web dashboard.
 
-## Features
+## Overview
 
-*   **Modular Architecture**: Easily extend the bot by adding new commands, events, or services.
-*   **LLM Integration**: Connects with LLM providers for intelligent conversation.
-*   **Conversation Memory**: Remembers previous messages in a conversation for better context.
-*   **Configuration Management**: Flexible configuration system using environment variables and a `config.json` file.
-*   **Role-Based Access Control**: Restrict commands to authorized users.
-*   **Asynchronous Processing**: Uses a request queue to handle LLM API calls without blocking the bot.
+This project is structured as a monorepo, with each major component living in its own package.
+
+*   `packages/bot`: The Discord bot, powered by Large Language Models.
+*   `packages/api`: The backend API (FastAPI) that handles user authentication, data storage, and business logic.
+*   `packages/web`: The frontend web dashboard for user interaction and configuration.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will give you an overview of the project setup. For detailed instructions on a specific service, please refer to the `README.md` within that package's directory.
 
 ### Prerequisites
 
 *   Python 3.10+
+*   Node.js (for the web dashboard)
+*   Docker and Docker Compose
 *   MongoDB server
-*   A Discord Bot Token
 
-### Installation
+### Installation & Setup
 
 1.  **Clone the repository:**
     ```bash
@@ -29,55 +29,26 @@ These instructions will get you a copy of the project up and running on your loc
     cd ryuuko-chatbot
     ```
 
-2.  **Install dependencies:**
-    ```bash
-    # Install main dependencies
-    pip install .
+2.  **Configure environment variables:**
+    *   Copy the `.env.example` file to a new `.env` file in the root directory.
+        ```bash
+        cp .env.example .env
+        ```
+    *   Fill in the required values in the `.env` file, such as your Discord token, database connection string, and JWT secret.
 
-    # To install testing dependencies as well
-    pip install .[test]
-    ```
-
-3.  **Configure the bot:**
-    *   Create a `.env` file in the root directory and add your secrets. For a full list of required API keys, see the [Setup Guide](docs/SETUP.md).
-        ```env
-        # Discord and Database
-        DISCORD_TOKEN="your_discord_bot_token"
-        MONGODB_CONNECTION_STRING="your_mongodb_connection_string"
-
-        # LLM API Keys (only add the ones you use)
-        AISTUDIO_API_KEY="your_aistudio_api_key"
-        POLYDEVS_API_KEY="your_polydevs_api_key"
-        PROXYVN_API_KEY="your_proxyvn_api_key"
-
-    *   Modify `config.json` for additional settings if needed.
-
-## Usage
-
-To run the bot, use one of the following commands:
-
-```bash
-# Using the python module directly
-python -m src
-
-# Using the installed script
-start
-```
-
-Once the bot is running, you can interact with it on Discord using the `.` prefix. For a full list of commands, see the [Commands Reference](docs/COMMANDS.md).
+3.  **Service-specific setup:**
+    *   For the **Discord Bot**, navigate to `packages/bot` and follow the instructions in its `README.md`.
+    *   For the **API**, navigate to `packages/api` and follow the instructions in its `README.md`.
+    *   For the **Web Dashboard**, navigate to `packages/web` and follow the instructions in its `README.md`.
 
 ## Documentation
 
-For more detailed information, please refer to the following documents:
+For more detailed information about the project's architecture, contribution guidelines, and more, please refer to the `/docs` directory.
 
 *   [**Architecture**](docs/ARCHITECTURE.md): An overview of the project's technical design.
-*   [**Setup Guide**](docs/SETUP.md): Detailed setup and configuration instructions.
-*   [**Command Reference**](docs/COMMANDS.md): A complete list of all available bot commands.
-*   [**Deployment Guide**](docs/DEPLOYMENT.md): Instructions for deploying the bot to a production environment.
-
-## Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+*   [**Contributing**](CONTRIBUTING.md): Guidelines for contributing to the project.
+*   [**License**](LICENSE): The project's license.
+*   [**Security**](SECURITY.md): Information about the project's security policies.
 
 ## License
 
