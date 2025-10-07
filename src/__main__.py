@@ -7,7 +7,6 @@ import sys
 import logging
 from pathlib import Path
 
-# Add project root to Python path if not already present
 project_root = str(Path(__file__).resolve().parent.parent)
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
