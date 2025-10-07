@@ -49,10 +49,16 @@ class MemoryStore:
             logger.exception(f"Error adding message to MongoDB for user {user_id}: {e}")
             return False
 
-    def clear_user(self, user_id: int) -> bool:
-        """Clear user's conversation history in MongoDB."""
+    def clear_user_messages(self, user_id: int) -> bool:
+        """
+        Clears the conversation history for a specific user in MongoDB.
+        Returns True on success, False on failure.
+        """
         try:
-            return self.mongo_store.clear_user_memory(user_id)
+            # Call the correct method on the MongoDBStore instance.
+            # Assuming the method is named 'clear_user_memory' and returns a tuple (success, message).
+            success = self.mongo_store.clear_user_memory(user_id)
+            return success
         except Exception as e:
             logger.exception(f"Error clearing memory from MongoDB for user {user_id}: {e}")
             return False

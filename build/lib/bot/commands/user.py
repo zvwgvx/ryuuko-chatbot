@@ -106,7 +106,7 @@ def setup_user_commands(bot: commands.Bot, user_config_manager, call_api, memory
             await ctx.send(f"**Supported AI Models (from config file):**\n{models_list}")
             return
 
-        all_models = bot.mongodb_store.list_all_models_detailed()
+        all_models = bot.mongodb_store.list_all_models()
         if not all_models:
             await ctx.send("There are no models configured in the database.")
             return

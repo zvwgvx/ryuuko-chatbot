@@ -1,139 +1,19 @@
 # src/utils/logger.py
 """
-Centralized logging configuration for Ryuuko Chatbot with colored output.
+Centralized logging configuration for Ryuuko Chatbot.
 """
 
 import logging
 import sys
 import os
-import gzip
-import shutil
 import tarfile
 from pathlib import Path
 from datetime import datetime
 from logging.handlers import TimedRotatingFileHandler
 from typing import Optional
 
-# Import colorama for cross-platform color support
-try:
-    from colorama import init, Fore, Style, Back
-
-    init(autoreset=True)  # Auto-reset colors after each print
-    COLORS_AVAILABLE = True
-except ImportError:
-    COLORS_AVAILABLE = False
-
-
-    # Fallback if colorama not installed
-    class Fore:
-        BLACK = RED = GREEN = YELLOW = BLUE = MAGENTA = CYAN = WHITE = ""
-        RESET = ""
-
-
-    class Style:
-        DIM = NORMAL = BRIGHT = RESET_ALL = ""
-
-
-    class Back:
-        BLACK = RED = GREEN = YELLOW = BLUE = MAGENTA = CYAN = WHITE = ""
-        RESET = ""
-
 # Global flag to track if logging has been configured
 _logging_configured = False
-
-
-class ColoredFormatter(logging.Formatter):
-    """
-    Custom formatter that adds colors to log output in console.
-    File output remains without colors.
-    """
-
-    # Color scheme for different log levels
-    COLORS = {
-        'DEBUG': Fore.CYAN + Style.DIM,
-        'INFO': Fore.GREEN,
-        'WARNING': Fore.YELLOW,
-        'ERROR': Fore.RED + Style.BRIGHT,
-        'CRITICAL': Fore.WHITE + Back.RED + Style.BRIGHT,
-    }
-
-    # Prefixes for different log levels
-    PREFIXES = {
-        'DEBUG': '[DEBUG]',
-        'INFO': '[INFO]',
-        'WARNING': '[WARN]',
-        'ERROR': '[ERROR]',
-        'CRITICAL': '[CRITICAL]',
-    }
-
-    # Marker colors for message content
-    MARKER_COLORS = {
-        '[OK]': Fore.GREEN + Style.BRIGHT,
-        '[ERROR]': Fore.RED + Style.BRIGHT,
-        '[WARN]': Fore.YELLOW,
-        '[DENIED]': Fore.RED + Style.BRIGHT,
-        '[INIT]': Fore.CYAN,
-        '[START]': Fore.CYAN + Style.BRIGHT,
-        '[STOP]': Fore.RED,
-        '[CRASH]': Fore.RED + Style.BRIGHT,
-        '[EXIT]': Fore.YELLOW,
-        '[HEALTH]': Fore.CYAN,
-        '[SUCCESS]': Fore.GREEN + Style.BRIGHT,
-        '[LIST]': Fore.WHITE,
-        '[TIP]': Fore.YELLOW,
-        '[STATS]': Fore.BLUE,
-        '[SYNC]': Fore.BLUE,
-        '[SKIP]': Fore.WHITE + Style.DIM,
-        '[DONE]': Fore.GREEN,
-        '[FAIL]': Fore.RED,
-        '[SYSTEM]': Fore.CYAN + Style.BRIGHT,
-    }
-
-    def __init__(self, fmt=None, datefmt=None, use_colors=True):
-        super().__init__(fmt, datefmt)
-        self.use_colors = use_colors and COLORS_AVAILABLE
-
-    def colorize_markers(self, text):
-        """Apply colors to [MARKER] patterns in text"""
-        if not self.use_colors:
-            return text
-
-        for marker, color in self.MARKER_COLORS.items():
-            if marker in text:
-                text = text.replace(marker, f"{color}{marker}{Style.RESET_ALL}")
-
-        return text
-
-    def format(self, record):
-        # Save original levelname
-        orig_levelname = record.levelname
-
-        # Add prefix to levelname
-        prefix = self.PREFIXES.get(record.levelname, f'[{record.levelname}]')
-
-        if self.use_colors:
-            # Apply color to the prefix
-            color = self.COLORS.get(record.levelname, '')
-            record.levelname = f"{color}{prefix}{Style.RESET_ALL}"
-
-            # Color the logger name
-            record.name = f"{Fore.BLUE}{record.name}{Style.RESET_ALL}"
-
-            # Don't auto-color messages, let markers handle it
-            # This allows more precise control
-        else:
-            record.levelname = prefix
-
-        # Format the message
-        formatted = super().format(record)
-
-        # Colorize markers in the formatted message
-        formatted = self.colorize_markers(formatted)
-
-        # Restore original levelname
-        record.levelname = orig_levelname
-
-        return formatted
 
 
 class CompressingTimedRotatingFileHandler(TimedRotatingFileHandler):
@@ -224,11 +104,10 @@ def setup_logger(
         log_dir: Optional[str] = None,
         log_filename: Optional[str] = None,
         log_format: Optional[str] = None,
-        backup_count: int = 30,
-        use_colors: bool = True
+        backup_count: int = 30
 ) -> logging.Logger:
     """
-    Configure and return the root logger with colored console output.
+    Configure and return the root logger.
     """
     global _logging_configured
 
@@ -253,7 +132,7 @@ def setup_logger(
 
     # Console handler with colors
     console_handler = logging.StreamHandler(sys.stdout)
-    console_formatter = ColoredFormatter(console_format, datefmt='%H:%M:%S', use_colors=use_colors)
+    console_formatter = logging.Formatter(console_format, datefmt='%H:%M:%S')
     console_handler.setFormatter(console_formatter)
     root_logger.addHandler(console_handler)
 
@@ -293,14 +172,9 @@ def setup_logger(
     _logging_configured = True
 
     # Print startup banner
-    if use_colors and COLORS_AVAILABLE:
-        print(f"\n{Fore.CYAN}{'=' * 60}{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}[SYSTEM] Ryuuko Chatbot - Logging initialized{Style.RESET_ALL}")
-        print(f"{Fore.CYAN}{'=' * 60}{Style.RESET_ALL}\n")
-    else:
-        print("\n" + "=" * 60)
-        print("[SYSTEM] Ryuuko Chatbot - Logging initialized")
-        print("=" * 60 + "\n")
+    print("\n" + "=" * 60)
+    print("[SYSTEM] Ryuuko Chatbot - Logging initialized")
+    print("=" * 60 + "\n")
 
     return root_logger
 

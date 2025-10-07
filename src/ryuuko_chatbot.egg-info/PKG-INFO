@@ -18,7 +18,7 @@ Requires-Dist: aiohttp>=3.9.0
 Requires-Dist: urllib3>=1.21.0
 Requires-Dist: tiktoken>=0.4.0
 Requires-Dist: colorama>=0.4.6
-Requires-Dist: google-generativeai>=0.4.0
+Requires-Dist: google-genai>=0.4.0
 Requires-Dist: fastapi>=0.118.0
 Requires-Dist: uvicorn>=0.37.0
 Provides-Extra: test
