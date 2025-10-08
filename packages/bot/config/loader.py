@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 logger = logging.getLogger("Config.Loader")
 
 # --- Path Constants & Initial Setup ---
-BASE_DIR = Path(__file__).resolve().parent.parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 CONFIG_DIR = BASE_DIR / "config"
 ENV_FILE_PATH = BASE_DIR / ".env"
 
@@ -118,7 +118,7 @@ def init_storage():
     try:
         # Import only when needed to avoid circular dependency issues.
         import pymongo
-        from src.storage.database import init_mongodb_store
+        from bot.storage.database import init_mongodb_store
 
         # Ping the server to verify the connection.
         with pymongo.MongoClient(MONGODB_CONNECTION_STRING, serverSelectionTimeoutMS=5000) as client:

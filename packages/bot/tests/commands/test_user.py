@@ -8,7 +8,7 @@ from discord.ext import commands
 from unittest.mock import Mock, AsyncMock, MagicMock, ANY
 
 # The setup function to be tested is in `user.py`
-from src.bot.commands.user import setup_user_commands
+from bot.bot.commands.user import setup_user_commands
 
 # --- Constants for Fixtures ---
 OWNER_ID = 99999
@@ -65,7 +65,7 @@ def mock_memory_store():
 def mock_mongodb_store():
     """Fixture for a mock MongoDB store."""
     store = Mock()
-    store.list_all_models_detailed.return_value = [
+    store.list_all_models.return_value = [
         {"model_name": "gpt-4", "credit_cost": 20, "access_level": 2},
         {"model_name": "gpt-3.5", "credit_cost": 5, "access_level": 1},
     ]
@@ -166,7 +166,7 @@ class TestModelsCommand:
 
         await callback(mock_ctx_authorized)
 
-        mock_mongodb_store.list_all_models_detailed.assert_called_once()
+        mock_mongodb_store.list_all_models.assert_called_once()
         mock_ctx_authorized.send.assert_called_once_with(embed=ANY)
         embed = mock_ctx_authorized.send.call_args.kwargs['embed']
         assert "Ultimate (Lvl 2)" in embed.fields[0].name

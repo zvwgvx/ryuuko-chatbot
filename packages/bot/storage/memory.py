@@ -2,8 +2,8 @@
 import tiktoken
 import logging
 from typing import List, Dict
-from src.config import loader
-from src.storage.database import MongoDBStore  # Import để type hinting
+from bot.config import loader
+from bot.storage.database import MongoDBStore
 
 logger = logging.getLogger("Storage.Memory")
 

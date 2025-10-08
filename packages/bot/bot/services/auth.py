@@ -6,7 +6,7 @@ import logging
 from typing import Set
 
 # Import the database store type hint for clarity
-from src.storage.database import MongoDBStore
+from bot.storage.database import MongoDBStore
 
 logger = logging.getLogger("Bot.Services.Auth")
 

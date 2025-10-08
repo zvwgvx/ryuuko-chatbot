@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands
 from unittest.mock import Mock, AsyncMock, MagicMock, patch, ANY
 
-from src.bot.events.messages import setup_message_events
+from bot.bot.events.messages import setup_message_events
 
 # --- Fixtures ---
 
@@ -120,8 +120,8 @@ class TestProcessAIRequest:
         request.final_user_text = "This is a test prompt."
         return request
 
-    @patch('src.bot.events.messages.send_long_message_with_reference', new_callable=AsyncMock)
-    @patch('src.bot.events.messages._read_attachments_enhanced', new_callable=AsyncMock)
+    @patch('bot.bot.events.messages.send_long_message_with_reference', new_callable=AsyncMock)
+    @patch('bot.bot.events.messages._read_attachments_enhanced', new_callable=AsyncMock)
     async def test_successful_flow(self, mock_read_attachments, mock_send_long, mock_bot, mock_dependencies, mock_request):
         mock_read_attachments.return_value = {"text_summary": "", "has_images": False}
         ucm = mock_dependencies['user_config_manager']
@@ -152,7 +152,7 @@ class TestProcessAIRequest:
         assert memory.add_message.call_count == 2
         mongo.deduct_user_credit.assert_called_once_with(AUTHORIZED_USER_ID, 10)
 
-    @patch('src.bot.events.messages._read_attachments_enhanced', new_callable=AsyncMock)
+    @patch('bot.bot.events.messages._read_attachments_enhanced', new_callable=AsyncMock)
     async def test_insufficient_credits(self, mock_read_attachments, mock_bot, mock_dependencies, mock_request):
         mock_read_attachments.return_value = {"text_summary": "", "has_images": False}
         ucm = mock_dependencies['user_config_manager']

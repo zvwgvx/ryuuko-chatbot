@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+packages/bot/__init__.py
+packages/bot/__main__.py
+packages/ryuuko_bot.egg-info/PKG-INFO
+packages/ryuuko_bot.egg-info/SOURCES.txt
+packages/ryuuko_bot.egg-info/dependency_links.txt
+packages/ryuuko_bot.egg-info/entry_points.txt
+packages/ryuuko_bot.egg-info/requires.txt
+packages/ryuuko_bot.egg-info/top_level.txt

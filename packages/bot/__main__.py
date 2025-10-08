@@ -12,9 +12,9 @@ project_root = str(Path(__file__).resolve().parent.parent)
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
-from src.bot.main import Bot
-from src.config import loader  # Import the unified loader
-from src.utils.logger import setup_logger, configure_discord_logging
+from bot.bot.main import Bot
+from bot.config import loader  # Import the unified loader
+from bot.utils.logger import setup_logger, configure_discord_logging
 
 
 def main():

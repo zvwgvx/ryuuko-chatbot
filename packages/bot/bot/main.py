@@ -9,15 +9,15 @@ import asyncio
 import discord
 from discord.ext import commands
 
-from src.config import loader as config_loader
-from src.config import get_user_config_manager
-from src.bot import api as call_api
-from src.bot.commands import register_all_commands
-from src.bot.events import register_all_events
-from src.storage import MemoryStore, get_mongodb_store
-from src.bot.services import auth as auth_service
-from src.utils.health import perform_startup_checks
-from src.utils.queue import get_request_queue
+from bot.config import loader as config_loader
+from bot.config import get_user_config_manager
+from bot.bot import api as call_api
+from bot.bot.commands import register_all_commands
+from bot.bot.events import register_all_events
+from bot.storage import MemoryStore, get_mongodb_store
+from bot.bot.services import auth as auth_service
+from bot.utils.health import perform_startup_checks
+from bot.utils.queue import get_request_queue
 
 logger = logging.getLogger("Bot.Main")
 

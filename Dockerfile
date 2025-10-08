@@ -19,8 +19,8 @@ ENV PATH="/opt/venv/bin:$PATH"
 WORKDIR /app
 COPY pyproject.toml .
 RUN pip install --upgrade pip
-# We copy the src directory here because `pip install .` needs it to resolve the project structure
-COPY src ./src
+# We copy the packages directory here because `pip install .` needs it to resolve the project structure
+COPY packages ./packages
 RUN pip install .
 
 # =================================================================
@@ -39,4 +39,4 @@ COPY . .
 
 # Activate the virtual environment and run the application
 ENV PATH="/opt/venv/bin:$PATH"
-CMD ["python", "-m", "src"]
+CMD ["start"]
