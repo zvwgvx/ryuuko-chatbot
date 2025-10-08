@@ -1,9 +1,10 @@
-# src/config/loader.py
+# packages/bot/src/bot/config/loader.py
 """
 Handles loading and validation of all application configurations.
 
 This module is responsible for:
-- Loading environment variables from a .env file.
+- Loading environment variables from a root .env file (for shared settings)
+  and a package-specific .env file (for secrets).
 - Loading JSON configuration files for different parts of the application.
 - Validating and providing access to configuration values.
 """
@@ -18,20 +19,33 @@ from dotenv import load_dotenv
 logger = logging.getLogger("Config.Loader")
 
 # --- Path Constants & Initial Setup ---
-BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-CONFIG_DIR = BASE_DIR / "config"
-ENV_FILE_PATH = BASE_DIR / ".env"
+# This file is located at: packages/bot/src/bot/config/loader.py
+# The project root is 5 levels up from this file's directory.
+PACKAGE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+BASE_DIR = PACKAGE_DIR.parent.parent
+CONFIG_DIR = BASE_DIR / "config" # JSON configs are in the root config/ directory
 
-# Load .env file from the project root if it exists.
-if ENV_FILE_PATH.exists():
-    load_dotenv(ENV_FILE_PATH)
-    logger.info(".env file loaded successfully from the project root.")
+# --- Environment Variable Loading ---
+# 1. Load the shared .env file from the project root.
+ROOT_ENV_FILE_PATH = BASE_DIR / ".env"
+if ROOT_ENV_FILE_PATH.exists():
+    load_dotenv(dotenv_path=ROOT_ENV_FILE_PATH, override=True)
+    logger.info("Shared .env file loaded successfully from the project root.")
 else:
-    logger.warning(".env file not found at %s. Assuming environment variables are set externally.", ENV_FILE_PATH)
+    logger.warning("Root .env file not found at %s. Assuming environment variables are set externally.", ROOT_ENV_FILE_PATH)
+
+# 2. Load the package-specific .env file (overwrites any shared values).
+PACKAGE_ENV_FILE_PATH = PACKAGE_DIR / ".env"
+if PACKAGE_ENV_FILE_PATH.exists():
+    load_dotenv(dotenv_path=PACKAGE_ENV_FILE_PATH, override=True)
+    logger.info("Package-specific .env file loaded successfully from %s.", PACKAGE_ENV_FILE_PATH)
+else:
+    logger.warning("Package-specific .env file not found at %s.", PACKAGE_ENV_FILE_PATH)
+
 
 # --- Helper Functions ---
 def _load_json_config(file_name: str) -> Dict[str, Any]:
-    """Loads a JSON configuration file from the config directory."""
+    """Loads a JSON configuration file from the root config directory."""
     config_path = CONFIG_DIR / file_name
     if not config_path.exists():
         raise FileNotFoundError(f"Configuration file not found: {config_path}")

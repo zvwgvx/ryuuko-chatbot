@@ -8,7 +8,7 @@ from discord.ext import commands
 from unittest.mock import Mock, AsyncMock, MagicMock
 
 # Import the setup function to be tested
-from bot.bot.commands.system import setup_system_commands
+from bot.commands.system import setup_system_commands
 
 # --- Fixtures ---
 

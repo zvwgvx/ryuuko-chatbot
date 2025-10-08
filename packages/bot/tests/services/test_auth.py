@@ -7,7 +7,7 @@ import pytest
 from unittest.mock import Mock, patch
 
 # Import the service to be tested
-from bot.bot.services import auth
+from bot.services import auth
 
 @pytest.fixture
 def mock_mongodb_store():

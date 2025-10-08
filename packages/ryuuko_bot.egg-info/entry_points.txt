@@ -1,2 +1,0 @@
-[console_scripts]
-start = bot.__main__:main
