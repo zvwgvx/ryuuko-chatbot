@@ -4,10 +4,10 @@ import logging
 from typing import List, Dict, Any, Tuple, Optional
 
 # --- CORE CHANGE: Import llm_services logic directly instead of httpx ---
-from src.llm_services.main import handle_proxy_request
+from bot.llm_services.main import handle_proxy_request
 # -------------------------------------------------------------------
 
-from src.utils.ratelimit import get_rate_limiter
+from bot.utils.ratelimit import get_rate_limiter
 
 logger = logging.getLogger("Bot.API.Client")
 

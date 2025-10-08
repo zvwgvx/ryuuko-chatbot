@@ -1,3 +1,32 @@
+Metadata-Version: 2.4
+Name: ryuuko-bot
+Version: 1.3.1
+Summary: A Discord bot.
+Author-email: Zang Vũ <zvwgvx@polydevs.uk>
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: python-dotenv>=0.21.0
+Requires-Dist: discord.py>=2.3.2
+Requires-Dist: requests>=2.28.0
+Requires-Dist: pymongo>=4.0.0
+Requires-Dist: Pillow>=10.0.0
+Requires-Dist: aiohttp>=3.9.0
+Requires-Dist: urllib3>=1.21.0
+Requires-Dist: tiktoken>=0.4.0
+Requires-Dist: colorama>=0.4.6
+Requires-Dist: google-genai>=0.4.0
+Requires-Dist: fastapi>=0.118.0
+Requires-Dist: uvicorn>=0.37.0
+Provides-Extra: test
+Requires-Dist: pytest>=7.0.0; extra == "test"
+Requires-Dist: pytest-asyncio>=0.21.0; extra == "test"
+Requires-Dist: pytest-mock>=3.10.0; extra == "test"
+Dynamic: license-file
+
 # Ryuuko — Discord LLM Bot
 
 **Ryuuko** is a modular and extensible Discord bot powered by Large Language Models (LLMs). It's designed to be a versatile chatbot that can be customized and extended with new commands and functionalities. The project is structured as a monorepo to support future expansion with other services like a web interface or an API.

@@ -4,8 +4,8 @@ from typing import Dict, Any, Tuple
 from fastapi.responses import JSONResponse
 import json
 
-from src.config import loader
-from src.llm_services.providers import get_provider_forward
+from bot.config import loader
+from bot.llm_services.providers import get_provider_forward
 
 logger = logging.getLogger("Gateway.Logic")
 

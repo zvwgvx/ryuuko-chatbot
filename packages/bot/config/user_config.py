@@ -40,7 +40,7 @@ class UserConfigManager:
         """
         try:
             # Dynamically import to ensure MongoDB is confirmed to be in use.
-            from src.storage.database import get_mongodb_store
+            from bot.storage.database import get_mongodb_store
             self.mongo_store = get_mongodb_store()
             logger.info("UserConfigManager initialized successfully with MongoDB.")
         except Exception as e:

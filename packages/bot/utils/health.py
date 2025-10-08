@@ -56,7 +56,7 @@ class ServiceHealthChecker:
             if not connection_string:
                 return False, "MongoDB: [ERROR] MONGODB_CONNECTION_STRING is not set"
 
-            from src.storage.database import get_mongodb_store
+            from bot.storage.database import get_mongodb_store
             store = get_mongodb_store()
 
             # Run blocking IO in a separate thread to avoid blocking the event loop
