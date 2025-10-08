@@ -1,8 +1,7 @@
-import os
 import uuid
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
-from typing import Optional, Generator
+from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Depends, status, Request
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -13,18 +12,20 @@ from pymongo import MongoClient
 from pymongo.database import Database
 
 # --- Configuration ---
-MONGO_URI = os.getenv("MONGODB_CONNECTION_STRING", "")
-MONGO_DB_NAME = "ryuuko_db"
-SECRET_KEY = os.getenv("JWT_SECRET_KEY", "a_very_secret_key")
-ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+from src.config.loader import (
+    MONGODB_CONNECTION_STRING,
+    MONGODB_DATABASE_NAME,
+    SECRET_KEY,
+    ALGORITHM,
+    ACCESS_TOKEN_EXPIRE_MINUTES,
+)
 
 # --- Lifespan Manager for DB Connection ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # On startup, connect to the database
-    app.state.mongo_client = MongoClient(MONGO_URI)
-    app.state.db = app.state.mongo_client[MONGO_DB_NAME]
+    app.state.mongo_client = MongoClient(MONGODB_CONNECTION_STRING)
+    app.state.db = app.state.mongo_client[MONGODB_DATABASE_NAME]
     print("Database connection established.")
     yield
     # On shutdown, close the connection

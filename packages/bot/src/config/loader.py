@@ -18,11 +18,11 @@ from dotenv import load_dotenv
 logger = logging.getLogger("Config.Loader")
 
 # --- Path Constants & Initial Setup ---
-# The project root is 5 levels up from this file's location
-# (packages/bot/src/config/loader.py -> ... -> project_root)
-PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent.parent.parent
-CONFIG_DIR = PROJECT_ROOT / "config"
-ENV_FILE_PATH = PROJECT_ROOT / ".env"
+# The package root is 3 levels up from this file's location
+# (packages/bot/src/config/loader.py -> ... -> packages/bot)
+PACKAGE_ROOT = Path(__file__).resolve().parent.parent.parent
+CONFIG_DIR = PACKAGE_ROOT / "config"
+ENV_FILE_PATH = PACKAGE_ROOT / ".env"
 
 # Load .env file from the project root if it exists.
 if ENV_FILE_PATH.exists():
@@ -68,6 +68,7 @@ _bot_config_data = _load_json_config("chatbot.json")
 # Core bot settings from environment variables
 DISCORD_TOKEN = _get_env_var("DISCORD_TOKEN")
 MONGODB_CONNECTION_STRING = _get_env_var("MONGODB_CONNECTION_STRING")
+RYUUKO_API_URL = _get_env_var("RYUUKO_API_URL", required=False, default="http://api:8000")
 
 # Settings from chatbot.json with defaults
 MONGODB_DATABASE_NAME = _bot_config_data.get("MONGODB_DATABASE_NAME", "ryuukodb")
