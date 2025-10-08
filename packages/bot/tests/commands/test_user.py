@@ -40,7 +40,7 @@ def mock_bot():
 def mock_user_config_manager():
     """Fixture for a mock user config manager."""
     manager = Mock()
-    manager.set_user_model.return_value = (True, "Model updated successfully.")
+    manager.set_user_model.return_value = True  # Command now expects a direct boolean
     manager.set_user_system_prompt.return_value = (True, "System prompt updated successfully.")
     manager.get_user_config.return_value = {"model": "test-gpt", "credit": 100, "access_level": 1}
     manager.get_user_system_prompt.return_value = "You are a helpful assistant."
@@ -63,13 +63,14 @@ def mock_memory_store():
 
 @pytest.fixture
 def mock_mongodb_store():
-    """Fixture for a mock MongoDB store."""
+    """Fixture for a mock MongoDB store, now with user auth methods."""
     store = Mock()
-    # This is the method the command actually calls.
     store.list_all_models.return_value = [
         {"model_name": "gpt-4", "credit_cost": 20, "access_level": 2},
         {"model_name": "gpt-3.5", "credit_cost": 5, "access_level": 1},
     ]
+    store.get_ryuuko_user_id_from_discord_id.return_value = "test_ryuuko_id"
+    store.get_user_config.return_value = {"access_level": 1}  # Default to authorized
     return store
 
 @pytest.fixture
@@ -120,20 +121,21 @@ def get_command_callback(bot, name):
 @pytest.mark.asyncio
 class TestSetModelCommand:
     """Tests for the 'model' command."""
-    async def test_set_model_success(self, mock_bot, mock_ctx_authorized, mock_user_config_manager, mock_call_api):
+    async def test_set_model_success(self, mock_bot, mock_ctx_authorized, mock_user_config_manager, mock_call_api, mock_mongodb_store):
         mock_ctx_authorized.bot = mock_bot
-        setup_user_commands(mock_bot, mock_user_config_manager, mock_call_api, None, None)
+        setup_user_commands(mock_bot, mock_user_config_manager, mock_call_api, None, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "model")
 
         await callback(mock_ctx_authorized, model="gpt-4")
 
-        mock_user_config_manager.set_user_model.assert_called_once_with(AUTHORIZED_USER_ID, "gpt-4")
-        mock_ctx_authorized.send.assert_called_once_with("✅ Model updated successfully.")
+        mock_mongodb_store.get_ryuuko_user_id_from_discord_id.assert_called_with(AUTHORIZED_USER_ID)
+        mock_user_config_manager.set_user_model.assert_called_once_with("test_ryuuko_id", "gpt-4")
+        mock_ctx_authorized.send.assert_called_once_with("✅ Your model has been set to `gpt-4`.")
 
-    async def test_set_model_unauthorized(self, mock_bot, mock_ctx_authorized, mock_user_config_manager, mock_call_api):
+    async def test_set_model_unauthorized(self, mock_bot, mock_ctx_authorized, mock_user_config_manager, mock_call_api, mock_mongodb_store):
         mock_ctx_authorized.bot = mock_bot
-        mock_bot.authorized_users = set() # Make user unauthorized
-        setup_user_commands(mock_bot, mock_user_config_manager, mock_call_api, None, None)
+        mock_mongodb_store.get_user_config.return_value = {"access_level": 0} # Unauthorized
+        setup_user_commands(mock_bot, mock_user_config_manager, mock_call_api, None, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "model")
 
         await callback(mock_ctx_authorized, model="gpt-4")
@@ -192,29 +194,31 @@ class TestModelsCommand:
 @pytest.mark.asyncio
 class TestClearMemoryCommand:
     """Tests for the 'clearmemory' command."""
-    async def test_clear_own_memory_success(self, mock_bot, mock_ctx_authorized, mock_memory_store):
+    async def test_clear_own_memory_success(self, mock_bot, mock_ctx_authorized, mock_memory_store, mock_mongodb_store):
         mock_ctx_authorized.bot = mock_bot
-        setup_user_commands(mock_bot, None, None, mock_memory_store, None)
+        setup_user_commands(mock_bot, None, None, mock_memory_store, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "clearmemory")
 
         await callback(mock_ctx_authorized, member=None)
 
-        mock_memory_store.clear_user_messages.assert_called_once_with(AUTHORIZED_USER_ID)
+        mock_mongodb_store.get_ryuuko_user_id_from_discord_id.assert_called_with(AUTHORIZED_USER_ID)
+        mock_memory_store.clear_user_messages.assert_called_once_with("test_ryuuko_id")
         mock_ctx_authorized.send.assert_called_once_with("✅ Cleared conversation memory for TestUser.")
 
-    async def test_owner_clears_other_memory(self, mock_bot, mock_ctx_owner, mock_authorized_member, mock_memory_store):
+    async def test_owner_clears_other_memory(self, mock_bot, mock_ctx_owner, mock_authorized_member, mock_memory_store, mock_mongodb_store):
         mock_ctx_owner.bot = mock_bot
-        setup_user_commands(mock_bot, None, None, mock_memory_store, None)
+        setup_user_commands(mock_bot, None, None, mock_memory_store, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "clearmemory")
 
         await callback(mock_ctx_owner, member=mock_authorized_member)
 
-        mock_memory_store.clear_user_messages.assert_called_once_with(mock_authorized_member.id)
+        mock_mongodb_store.get_ryuuko_user_id_from_discord_id.assert_called_with(mock_authorized_member.id)
+        mock_memory_store.clear_user_messages.assert_called_once_with("test_ryuuko_id")
         mock_ctx_owner.send.assert_called_once_with(f"✅ Cleared conversation memory for {mock_authorized_member.display_name}.")
 
-    async def test_user_clears_other_memory_denied(self, mock_bot, mock_ctx_authorized, mock_owner, mock_memory_store):
+    async def test_user_clears_other_memory_denied(self, mock_bot, mock_ctx_authorized, mock_owner, mock_memory_store, mock_mongodb_store):
         mock_ctx_authorized.bot = mock_bot
-        setup_user_commands(mock_bot, None, None, mock_memory_store, None)
+        setup_user_commands(mock_bot, None, None, mock_memory_store, mock_mongodb_store)
         callback = get_command_callback(mock_bot, "clearmemory")
 
         await callback(mock_ctx_authorized, member=mock_owner)

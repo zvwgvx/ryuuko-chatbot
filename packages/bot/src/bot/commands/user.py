@@ -9,8 +9,10 @@ from discord.ext import commands
 import httpx
 
 from src.config.loader import RYUUKO_API_URL
+from src.bot.gateway import llm as gateway_llm
 
 logger = logging.getLogger("Bot.Commands.User")
+
 
 async def _is_authorized_user(ctx: commands.Context) -> bool:
     """
@@ -19,7 +21,13 @@ async def _is_authorized_user(ctx: commands.Context) -> bool:
     """
     if await ctx.bot.is_owner(ctx.author):
         return True
-    return ctx.author.id in ctx.bot.authorized_users
+
+    ryuuko_user_id = ctx.bot.mongodb_store.get_ryuuko_user_id_from_discord_id(ctx.author.id)
+    if not ryuuko_user_id:
+        return False # Not a linked user
+
+    user_config = ctx.bot.mongodb_store.get_user_config(ryuuko_user_id)
+    return user_config.get("access_level", 0) > 0
 
 
 def setup_user_commands(bot: commands.Bot, user_config_manager, call_api, memory_store, mongodb_store):
@@ -38,14 +46,23 @@ def setup_user_commands(bot: commands.Bot, user_config_manager, call_api, memory
             await ctx.send("❌ You are not authorized to use this command.")
             return
 
+        ryuuko_user_id = bot.mongodb_store.get_ryuuko_user_id_from_discord_id(ctx.author.id)
+        if not ryuuko_user_id:
+            await ctx.send("❌ Your Discord account is not linked. Please use the `.link` command first.")
+            return
+
         model_name = model.strip()
-        is_available, error_message = ctx.bot.call_api.is_model_available(model_name)
+        is_available, error_message = gateway_llm.is_model_available(model_name, bot.mongodb_store)
         if not is_available:
             await ctx.send(f"❌ {error_message}")
             return
 
-        success, message = ctx.bot.user_config_manager.set_user_model(ctx.author.id, model_name)
-        await ctx.send(f"✅ {message}" if success else f"❌ {message}")
+        # Use the direct method from user_config_manager which now should handle ryuuko_user_id
+        success = user_config_manager.set_user_model(ryuuko_user_id, model_name)
+        if success:
+            await ctx.send(f"✅ Your model has been set to `{model_name}`.")
+        else:
+            await ctx.send("❌ An error occurred while setting your model.")
 
     @bot.command(name="sysprompt")
     async def set_sys_prompt_command(ctx: commands.Context, *, prompt: str):
@@ -146,13 +163,17 @@ def setup_user_commands(bot: commands.Bot, user_config_manager, call_api, memory
             await ctx.send("❌ You can only clear your own conversation memory.")
             return
 
-        # An authorized user can clear their own memory.
-        # An owner can clear anyone's memory, so they pass this check too.
-        if not await _is_authorized_user(ctx) and not is_owner:
+        # This check is for the command *author*
+        if not is_owner and not await _is_authorized_user(ctx):
             await ctx.send("❌ You are not authorized to use this command.")
             return
 
-        ctx.bot.memory_store.clear_user_messages(target_user.id)
+        ryuuko_user_id = bot.mongodb_store.get_ryuuko_user_id_from_discord_id(target_user.id)
+        if not ryuuko_user_id:
+            await ctx.send(f"⚠️ {target_user.display_name} does not have a linked Ryuuko account.")
+            return
+
+        bot.memory_store.clear_user_messages(ryuuko_user_id)
         await ctx.send(f"✅ Cleared conversation memory for {target_user.display_name}.")
 
     @bot.command(name="link")

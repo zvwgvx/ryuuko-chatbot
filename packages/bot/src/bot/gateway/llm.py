@@ -61,10 +61,19 @@ def build_api_request(
     }
     return payload
 
-def is_model_available(model: str) -> Tuple[bool, str]:
-    """Check if a model is available for use. This can be improved to check config."""
-    # This logic can now be smarter by checking loader.PROVIDER_ALLOWED_MODELS
-    return True, ""
+from src.storage.database import MongoDBStore
+
+
+def is_model_available(model: str, db_store: MongoDBStore) -> Tuple[bool, str]:
+    """Check if a model is available in the database."""
+    if db_store.model_exists(model):
+        return True, ""
+
+    supported_models = db_store.get_supported_models()
+    if not supported_models:
+        return False, "There are no models configured in the system."
+
+    return False, f"Model `{model}` is not available. Please choose from: `{'`, `'.join(supported_models)}`"
 
 # --- REWRITTEN CORE FUNCTION ---
 async def call_unified_api(

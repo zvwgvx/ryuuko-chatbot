@@ -63,10 +63,20 @@ class MongoDBStore:
             raise
 
     def _create_indexes(self):
-        """Create necessary indexes"""
+        """Create necessary indexes, ensuring they are sparse to avoid issues with null values."""
         try:
-            self.db[self.COLLECTIONS['user_config']].create_index("ryuuko_user_id", unique=True)
-            self.db[self.COLLECTIONS['memory']].create_index("ryuuko_user_id", unique=True)
+            # For user_config, only index documents where ryuuko_user_id is not null
+            self.db[self.COLLECTIONS['user_config']].create_index(
+                "ryuuko_user_id",
+                unique=True,
+                sparse=True
+            )
+            # Do the same for user_memory to prevent similar errors
+            self.db[self.COLLECTIONS['memory']].create_index(
+                "ryuuko_user_id",
+                unique=True,
+                sparse=True
+            )
             self.db[self.COLLECTIONS['memory']].create_index([("ryuuko_user_id", 1), ("updated_at", -1)])
             self.db[self.COLLECTIONS['authorized']].create_index("user_id", unique=True)
             self.db[self.COLLECTIONS['models']].create_index("model_name", unique=True)
@@ -270,6 +280,45 @@ class MongoDBStore:
     # USER LEVEL AND CREDIT METHODS
     # =====================================
 
+    def add_user_credit(self, ryuuko_user_id: str, amount: int) -> tuple[bool, int]:
+        """Adds a specified amount of credit to a user's account."""
+        try:
+            result = self.db[self.COLLECTIONS['user_config']].find_one_and_update(
+                {"ryuuko_user_id": ryuuko_user_id},
+                {
+                    "$inc": {"credit": amount},
+                    "$set": {"updated_at": datetime.utcnow()},
+                    "$setOnInsert": {"ryuuko_user_id": ryuuko_user_id, "created_at": datetime.utcnow()}
+                },
+                upsert=True,
+                return_document=True
+            )
+            if result:
+                return True, result.get("credit", 0)
+            return False, 0
+        except Exception as e:
+            logger.exception(f"Error adding credit for user {ryuuko_user_id}: {e}")
+            return False, 0
+
+    def set_user_credit(self, ryuuko_user_id: str, amount: int) -> tuple[bool, int]:
+        """Sets a user's credit to a specific amount."""
+        try:
+            result = self.db[self.COLLECTIONS['user_config']].find_one_and_update(
+                {"ryuuko_user_id": ryuuko_user_id},
+                {
+                    "$set": {"credit": amount, "updated_at": datetime.utcnow()},
+                    "$setOnInsert": {"ryuuko_user_id": ryuuko_user_id, "created_at": datetime.utcnow()}
+                },
+                upsert=True,
+                return_document=True
+            )
+            if result:
+                return True, result.get("credit", 0)
+            return False, 0
+        except Exception as e:
+            logger.exception(f"Error setting credit for user {ryuuko_user_id}: {e}")
+            return False, 0
+
     def deduct_user_credit(self, ryuuko_user_id: str, amount: int) -> tuple[bool, int]:
         try:
             user_config = self.get_user_config(ryuuko_user_id)
@@ -287,6 +336,22 @@ class MongoDBStore:
         except Exception as e:
             logger.exception(f"Error deducting credit for user {ryuuko_user_id}: {e}")
             return False, 0
+
+    def set_user_access_level(self, ryuuko_user_id: str, level: int) -> bool:
+        """Sets a user's access level."""
+        try:
+            self.db[self.COLLECTIONS['user_config']].update_one(
+                {"ryuuko_user_id": ryuuko_user_id},
+                {
+                    "$set": {"access_level": level, "updated_at": datetime.utcnow()},
+                    "$setOnInsert": {"ryuuko_user_id": ryuuko_user_id, "created_at": datetime.utcnow()}
+                },
+                upsert=True
+            )
+            return True
+        except Exception as e:
+            logger.exception(f"Error setting access level for user {ryuuko_user_id}: {e}")
+            return False
 
     def close(self):
         if self.client:
