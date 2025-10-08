@@ -8,6 +8,8 @@ import discord
 from discord.ext import commands
 import httpx
 
+from src.config.loader import RYUUKO_API_URL
+
 logger = logging.getLogger("Bot.Commands.User")
 
 async def _is_authorized_user(ctx: commands.Context) -> bool:
@@ -160,7 +162,7 @@ def setup_user_commands(bot: commands.Bot, user_config_manager, call_api, memory
             await ctx.send("❌ Please provide a link code. Usage: `.link <your_code>`")
             return
 
-        api_url = "http://api:8000/link-platform" # This should be configurable
+        api_url = f"{RYUUKO_API_URL}/link-platform"
         payload = {
             "code": code.strip(),
             "platform": "discord",

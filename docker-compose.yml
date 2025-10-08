@@ -9,7 +9,7 @@ services:
     ports:
       - "${API_PORT}:${API_PORT}" # Lấy port từ file .env, ví dụ: 8000:8000
     env_file:
-      - .env
+      - ./packages/api/.env
     volumes:
       - ./packages/api/src:/app/src # Đồng bộ code để dev
     command: uvicorn src.main:app --host 0.0.0.0 --port ${API_PORT} --reload
@@ -30,7 +30,7 @@ services:
       context: ./packages/bot
       dockerfile: Dockerfile
     env_file:
-      - .env
+      - ./packages/bot/.env
     depends_on:
       - api
     volumes:
