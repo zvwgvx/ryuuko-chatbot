@@ -1,5 +1,6 @@
 README.md
 pyproject.toml
+src/config/loader.py
 src/ryuuko_api.egg-info/PKG-INFO
 src/ryuuko_api.egg-info/SOURCES.txt
 src/ryuuko_api.egg-info/dependency_links.txt

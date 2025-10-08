@@ -4,7 +4,7 @@ import mongomock
 
 # Set dummy env vars required by the app at import time
 import os
-os.environ["JWT_SECRET_KEY"] = "test-secret"
+os.environ["SECRET_KEY"] = "test-secret"
 
 from main import app, get_db
 

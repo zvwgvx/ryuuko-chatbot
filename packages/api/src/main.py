@@ -12,7 +12,7 @@ from pymongo import MongoClient
 from pymongo.database import Database
 
 # --- Configuration ---
-from src.config.loader import (
+from config.loader import (
     MONGODB_CONNECTION_STRING,
     MONGODB_DATABASE_NAME,
     SECRET_KEY,
