@@ -8,7 +8,7 @@ from discord.ext import commands
 from unittest.mock import Mock, AsyncMock, MagicMock, ANY
 
 # The setup function to be tested is in `user.py`
-from bot.bot.commands.user import setup_user_commands
+from bot.commands.user import setup_user_commands
 
 # --- Constants for Fixtures ---
 OWNER_ID = 99999

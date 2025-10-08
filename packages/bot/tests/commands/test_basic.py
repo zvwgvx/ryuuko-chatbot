@@ -9,7 +9,7 @@ from unittest.mock import Mock, AsyncMock, MagicMock, patch, ANY
 from discord.ext import commands
 
 # Import the setup function to be tested
-from bot.bot.commands.basic import setup_basic_commands
+from bot.commands.basic import setup_basic_commands
 
 @pytest.fixture
 def mock_bot():

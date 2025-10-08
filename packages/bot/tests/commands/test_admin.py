@@ -8,7 +8,7 @@ from discord.ext import commands
 from unittest.mock import Mock, AsyncMock, MagicMock, ANY
 
 # Import the setup function to be tested
-from bot.bot.commands.admin import setup_admin_commands
+from bot.commands.admin import setup_admin_commands
 
 @pytest.fixture
 def mock_bot():

@@ -1,10 +1,14 @@
 # =================================================================
 # STAGE 1: Build Stage
 # =================================================================
-# This stage installs dependencies into a virtual environment.
-# It leverages Docker caching, so dependencies are only re-installed
-# if pyproject.toml changes.
+# This stage installs dependencies for a specific package into a virtual environment.
+# It leverages Docker caching, so dependencies are only re-installed if the
+# package's pyproject.toml changes.
 FROM python:3.11-slim-bookworm AS builder
+
+# ARG to specify which package to build.
+# This can be set during the build process, e.g., --build-arg PACKAGE_NAME=bot
+ARG PACKAGE_NAME
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -15,12 +19,12 @@ ENV PIP_NO_CACHE_DIR=off
 RUN python -m venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-# Install dependencies
+# Install dependencies for the target package
 WORKDIR /app
-COPY pyproject.toml .
+COPY packages/${PACKAGE_NAME}/pyproject.toml .
+# Copy the src directory of the package to resolve local package structure
+COPY packages/${PACKAGE_NAME}/src ./src
 RUN pip install --upgrade pip
-# We copy the packages directory here because `pip install .` needs it to resolve the project structure
-COPY packages ./packages
 RUN pip install .
 
 # =================================================================
@@ -29,14 +33,21 @@ RUN pip install .
 # This stage creates the final, lean image for running the application.
 FROM python:3.11-slim-bookworm
 
+# ARG to specify which package to run (must be the same as in the builder stage)
+ARG PACKAGE_NAME
+
 WORKDIR /app
 
 # Copy the virtual environment with all dependencies from the builder stage
 COPY --from=builder /opt/venv /opt/venv
 
-# Copy the application source code
-COPY . .
+# Copy the application source code for the specific package
+COPY packages/${PACKAGE_NAME}/src ./src
+# Copy the package-specific config directory
+COPY packages/${PACKAGE_NAME}/config ./config
 
-# Activate the virtual environment and run the application
+# Activate the virtual environment and set the entrypoint
 ENV PATH="/opt/venv/bin:$PATH"
+
+# The CMD will execute the 'start' script defined in the package's pyproject.toml
 CMD ["start"]

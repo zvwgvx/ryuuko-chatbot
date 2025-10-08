@@ -17,3 +17,8 @@ venv/
 # Other
 *.log
 *.swp
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
