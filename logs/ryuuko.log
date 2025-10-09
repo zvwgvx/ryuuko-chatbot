@@ -333,3 +333,237 @@ RuntimeError: MongoDB store not initialized. Call init_mongodb_store() first.
 2025-10-09 13:37:27,331 INFO discord.gateway: Shard ID None has connected to Gateway (Session ID: 4a3396d8a99bbb67104f470683ecfb6e).
 2025-10-09 13:37:29,375 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
 2025-10-09 13:37:29,375 INFO Bot.Main: Registered prefix commands: []
+2025-10-09 20:26:33,732 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:26:33,733 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:26:33,733 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:26:33,733 INFO __main__: Starting application...
+2025-10-09 20:26:33,733 INFO __main__: Initializing storage...
+2025-10-09 20:26:33,733 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:26:33,758 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:26:33,758 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:26:33,784 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:26:33,785 INFO __main__: Storage initialized successfully.
+2025-10-09 20:26:33,785 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:26:33,785 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:26:33,785 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:26:33,785 ERROR Config.UserConfig: Failed to acquire MongoDB store for UserConfigManager: No module named 'storage'
+2025-10-09 20:26:33,785 CRITICAL __main__: A fatal error occurred: MongoDB is required for UserConfigManager but is not available: No module named 'storage'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/config/user_config.py", line 34, in __init__
+    from storage.database import get_mongodb_store
+ModuleNotFoundError: No module named 'storage'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/__main__.py", line 29, in main
+    bot.setup_modules()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/main.py", line 57, in setup_modules
+    user_config_manager = get_user_config_manager()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/config/user_config.py", line 150, in get_user_config_manager
+    _user_config_manager = UserConfigManager()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/config/user_config.py", line 39, in __init__
+    raise RuntimeError(f"MongoDB is required for UserConfigManager but is not available: {e}")
+RuntimeError: MongoDB is required for UserConfigManager but is not available: No module named 'storage'
+2025-10-09 20:27:25,033 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:27:25,034 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:27:25,035 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:27:25,035 INFO __main__: Starting application...
+2025-10-09 20:27:25,035 INFO __main__: Initializing storage...
+2025-10-09 20:27:25,035 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:27:25,076 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:27:25,076 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:27:25,078 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:27:25,078 INFO __main__: Storage initialized successfully.
+2025-10-09 20:27:25,078 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:27:25,079 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:27:25,079 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:27:25,079 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-09 20:27:25,081 INFO Bot.Services.Auth: [OK] Loaded 0 authorized users from MongoDB.
+2025-10-09 20:27:25,082 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-09 20:27:25,082 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-09 20:27:25,083 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-09 20:27:25,083 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-09 20:27:25,083 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-09 20:27:25,083 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-09 20:27:25,083 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-09 20:27:25,083 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-09 20:27:25,084 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-09 20:27:25,084 INFO HealthCheck: Starting health checks...
+2025-10-09 20:27:25,485 ERROR HealthCheck: Health checks failed on: mongodb
+2025-10-09 20:27:25,485 CRITICAL Bot.Main: [CRASH] Health checks failed. Bot startup aborted.
+2025-10-09 20:27:25,485 INFO Bot.Main: [STOP] Bot shutdown initiated.
+2025-10-09 20:27:25,485 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-09 20:28:47,761 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:28:47,761 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:28:47,761 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:28:47,761 INFO __main__: Starting application...
+2025-10-09 20:28:47,761 INFO __main__: Initializing storage...
+2025-10-09 20:28:47,761 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:28:47,774 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:28:47,774 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:28:47,775 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:28:47,775 INFO __main__: Storage initialized successfully.
+2025-10-09 20:28:47,776 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:28:47,776 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:28:47,776 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:28:47,776 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-09 20:28:47,776 INFO Bot.Services.Auth: [OK] Loaded 0 authorized users from MongoDB.
+2025-10-09 20:28:47,776 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-09 20:28:47,776 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-09 20:28:47,777 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-09 20:28:47,777 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-09 20:28:47,777 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-09 20:28:47,777 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-09 20:28:47,777 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-09 20:28:47,777 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-09 20:28:47,777 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-09 20:28:47,777 INFO HealthCheck: Starting health checks...
+2025-10-09 20:28:48,226 ERROR HealthCheck: Health checks failed on: mongodb
+2025-10-09 20:28:48,226 CRITICAL Bot.Main: [CRASH] Health checks failed. Bot startup aborted.
+2025-10-09 20:28:48,226 INFO Bot.Main: [STOP] Bot shutdown initiated.
+2025-10-09 20:28:48,226 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-09 20:31:16,626 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:31:16,626 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:31:16,626 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:31:16,626 INFO __main__: Starting application...
+2025-10-09 20:31:16,626 INFO __main__: Initializing storage...
+2025-10-09 20:31:16,627 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:31:16,636 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:31:16,636 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:31:16,637 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:31:16,637 INFO __main__: Storage initialized successfully.
+2025-10-09 20:31:16,637 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:31:16,638 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:31:16,638 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:31:16,638 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-09 20:31:16,638 INFO Bot.Services.Auth: [OK] Loaded 0 authorized users from MongoDB.
+2025-10-09 20:31:16,638 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-09 20:31:16,638 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-09 20:31:16,638 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-09 20:31:16,638 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-09 20:31:16,639 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-09 20:31:16,639 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-09 20:31:16,639 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-09 20:31:16,639 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-09 20:31:16,639 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-09 20:31:16,639 INFO HealthCheck: Starting health checks...
+2025-10-09 20:31:17,152 INFO Bot.Main: [OK] All health checks passed!
+2025-10-09 20:31:17,152 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-09 20:31:20,768 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-09 20:31:20,768 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-09 20:31:44,425 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-09 20:31:44,427 INFO __main__: Shutdown signal received.
+2025-10-09 20:31:46,014 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:31:46,014 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:31:46,014 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:31:46,014 INFO __main__: Starting application...
+2025-10-09 20:31:46,014 INFO __main__: Initializing storage...
+2025-10-09 20:31:46,014 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:31:46,028 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:31:46,028 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:31:46,029 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:31:46,029 INFO __main__: Storage initialized successfully.
+2025-10-09 20:31:46,029 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:31:46,029 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:31:46,029 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:31:46,029 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-09 20:31:46,030 INFO Bot.Services.Auth: [OK] Loaded 0 authorized users from MongoDB.
+2025-10-09 20:31:46,030 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-09 20:31:46,030 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-09 20:31:46,030 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-09 20:31:46,030 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-09 20:31:46,030 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-09 20:31:46,030 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-09 20:31:46,030 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-09 20:31:46,030 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-09 20:31:46,031 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-09 20:31:46,031 INFO HealthCheck: Starting health checks...
+2025-10-09 20:31:46,453 INFO Bot.Main: [OK] All health checks passed!
+2025-10-09 20:31:46,453 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-09 20:31:50,352 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-09 20:31:50,352 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-09 20:32:43,690 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-09 20:32:43,691 INFO Request Queue: Request queue worker started
+2025-10-09 20:33:08,706 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-09 20:33:10,642 ERROR Gateway.Logic: Error from 'polydevs' (Status 500): {"ok":false,"error":"configuration_error","detail":"Instructions not loaded. CRITICAL: instructions.json not found! Tried paths:\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/providers/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/scripts/instructions.json"}
+2025-10-09 20:33:10,642 ERROR Bot.API.Client: Gateway logic returned an error: API Error from polydevs: {"ok":false,"error":"configuration_error","detail":"Instructions not loaded. CRITICAL: instructions.json not found! Tried paths:\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/providers/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/scripts/instructions.json"}
+2025-10-09 20:45:17,783 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:45:17,784 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:45:17,784 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:45:17,784 INFO __main__: Starting application...
+2025-10-09 20:45:17,784 INFO __main__: Initializing storage...
+2025-10-09 20:45:17,784 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:45:17,808 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:45:17,808 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:45:17,839 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:45:17,839 INFO __main__: Storage initialized successfully.
+2025-10-09 20:45:17,840 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:45:17,840 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:45:17,840 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:45:17,840 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-09 20:45:17,841 INFO Bot.Services.Auth: [OK] Loaded 0 authorized users from MongoDB.
+2025-10-09 20:45:17,841 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-09 20:45:17,841 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-09 20:45:17,841 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-09 20:45:17,841 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-09 20:45:17,842 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-09 20:45:17,842 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-09 20:45:17,842 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-09 20:45:17,842 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-09 20:45:17,842 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-09 20:45:17,842 INFO HealthCheck: Starting health checks...
+2025-10-09 20:45:18,396 INFO Bot.Main: [OK] All health checks passed!
+2025-10-09 20:45:18,396 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-09 20:45:22,230 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-09 20:45:22,230 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-09 20:45:25,439 INFO Request Queue: Adding request to queue for user 1320303839701897230: ee
+2025-10-09 20:45:25,439 INFO Request Queue: Request queue worker started
+2025-10-09 20:45:25,692 ERROR Gateway.Logic: Error from 'polydevs' (Status 500): {"ok":false,"error":"configuration_error","detail":"Instructions not loaded. CRITICAL: instructions.json not found! Tried paths:\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/providers/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/scripts/instructions.json"}
+2025-10-09 20:45:25,692 ERROR Bot.API.Client: Gateway logic returned an error: API Error from polydevs: {"ok":false,"error":"configuration_error","detail":"Instructions not loaded. CRITICAL: instructions.json not found! Tried paths:\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/providers/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/packages/bot/src/llm_services/instructions.json\n/Users/zvwgvx/PycharmProjects/ryuuko-chatbot/scripts/instructions.json"}
+2025-10-09 20:53:02,078 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-09 20:53:02,080 INFO Request Queue: Request queue worker cancelled
+2025-10-09 20:53:02,081 INFO __main__: Shutdown signal received.
+2025-10-09 20:53:04,401 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-09 20:53:04,401 INFO root: Log rotation: daily, keeping 30 days
+2025-10-09 20:53:04,401 INFO root: Compressed archives will be created in: logs
+2025-10-09 20:53:04,401 INFO __main__: Starting application...
+2025-10-09 20:53:04,401 INFO __main__: Initializing storage...
+2025-10-09 20:53:04,401 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-09 20:53:04,418 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-09 20:53:04,418 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-09 20:53:04,420 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-09 20:53:04,420 INFO __main__: Storage initialized successfully.
+2025-10-09 20:53:04,421 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-09 20:53:04,421 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-09 20:53:04,421 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-09 20:53:04,421 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-09 20:53:04,422 INFO Bot.Services.Auth: [OK] Loaded 0 authorized users from MongoDB.
+2025-10-09 20:53:04,422 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-09 20:53:04,422 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-09 20:53:04,423 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-09 20:53:04,423 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-09 20:53:04,424 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-09 20:53:04,424 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-09 20:53:04,424 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-09 20:53:04,424 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-09 20:53:04,424 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-09 20:53:04,424 INFO HealthCheck: Starting health checks...
+2025-10-09 20:53:04,857 INFO Bot.Main: [OK] All health checks passed!
+2025-10-09 20:53:04,857 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-09 20:53:08,486 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-09 20:53:08,487 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-09 20:53:16,293 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-09 20:53:16,294 INFO Request Queue: Request queue worker started
+2025-10-09 20:53:16,877 INFO google_genai.models: AFC is enabled with max remote calls: 10.
+2025-10-09 20:53:18,916 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
+2025-10-09 20:53:19,670 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-09 20:53:19,676 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-09 20:57:09,261 INFO Bot.Services.Auth: Successfully added user 1044966320208359525 to authorized list in MongoDB.
+2025-10-09 20:57:09,262 INFO Bot.Main: In-memory auth set updated: added 1044966320208359525
+2025-10-09 20:57:25,452 INFO Bot.Services.Auth: Successfully added user 1320303839701897230 to authorized list in MongoDB.
+2025-10-09 20:57:25,452 INFO Bot.Main: In-memory auth set updated: added 1320303839701897230
+2025-10-09 20:58:04,358 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-09 20:58:04,359 INFO Request Queue: Request queue worker cancelled
+2025-10-09 20:58:04,360 INFO __main__: Shutdown signal received.

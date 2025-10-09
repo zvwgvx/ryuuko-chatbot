@@ -22,3 +22,5 @@ venv/
 dist/
 build/
 *.egg-info/
+
+config/*
