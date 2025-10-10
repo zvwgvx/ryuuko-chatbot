@@ -9,15 +9,30 @@ from dotenv import load_dotenv
 
 logger = logging.getLogger("Config.Loader")
 
-PROJECT_ROOT = Path(__file__).resolve().parents[4]
-CONFIG_DIR = PROJECT_ROOT / "config"
-ROOT_ENV_FILE_PATH = PROJECT_ROOT / ".env"
+# Assume the script is run from the project root (e.g., /Users/zvwgvx/PycharmProjects/ryuuko)
+PROJECT_ROOT = Path.cwd()
+BOT_PACKAGE_DIR = PROJECT_ROOT / "packages" / "bot"
+CONFIG_DIR = BOT_PACKAGE_DIR / "config"
+ENV_FILE_PATH = BOT_PACKAGE_DIR / ".env"
 
-if ROOT_ENV_FILE_PATH.exists():
-    load_dotenv(dotenv_path=ROOT_ENV_FILE_PATH, override=True)
-    logger.info("Shared .env file loaded successfully from the project root.")
+if ENV_FILE_PATH.exists():
+    load_dotenv(dotenv_path=ENV_FILE_PATH, override=True)
+    logger.info("Shared .env file loaded successfully from: %s", ENV_FILE_PATH)
 else:
-    logger.warning("Root .env file not found at %s. Assuming environment variables are set externally.", ROOT_ENV_FILE_PATH)
+    # Fallback for when CWD is not the project root
+    bot_src_root = Path(__file__).resolve().parents[1]
+    alt_env_path = bot_src_root.parent / ".env"
+    if alt_env_path.exists():
+        load_dotenv(dotenv_path=alt_env_path, override=True)
+        logger.info("Shared .env file loaded successfully from fallback path: %s", alt_env_path)
+        CONFIG_DIR = bot_src_root.parent / "config"
+    else:
+        logger.warning(
+            "Bot package .env file not found at %s or %s. Assuming environment variables are set externally.",
+            ENV_FILE_PATH,
+            alt_env_path
+        )
+
 
 def _load_json_config(file_name: str) -> Dict[str, Any]:
     config_path = CONFIG_DIR / file_name
@@ -30,11 +45,13 @@ def _load_json_config(file_name: str) -> Dict[str, Any]:
     except Exception as exc:
         raise RuntimeError(f"Error reading configuration file {config_path}: {exc}")
 
+
 def _get_env_var(key: str, required: bool = True, default: Any = None) -> str:
     value = os.getenv(key)
     if value is None and required:
         raise ValueError(f"CRITICAL: Required environment variable '{key}' is not set.")
     return value or default
+
 
 def _int_or_default(val: Any, default: int, name: str) -> int:
     try:
@@ -42,6 +59,7 @@ def _int_or_default(val: Any, default: int, name: str) -> int:
     except (ValueError, TypeError, AttributeError):
         logger.warning("Configuration value '%s' is invalid. Using default value: %d", name, default)
         return default
+
 
 logger.info("Loading configurations from config.json...")
 _config_data = _load_json_config("config.json")
@@ -73,11 +91,13 @@ for provider_name, env_var_name in _provider_env_names.items():
 logger.info("Loaded %d upstream provider API keys.", len(UPSTREAM_API_KEYS))
 logger.info("Gateway configuration loaded.")
 
+
 def init_storage():
     logger.info("Initializing MongoDB connection to database: %s", MONGODB_DATABASE_NAME)
     try:
         import pymongo
         from bot.storage.database import init_mongodb_store
+
         with pymongo.MongoClient(MONGODB_CONNECTION_STRING, serverSelectionTimeoutMS=5000) as client:
             client.admin.command('ping')
         init_mongodb_store(MONGODB_CONNECTION_STRING, MONGODB_DATABASE_NAME)

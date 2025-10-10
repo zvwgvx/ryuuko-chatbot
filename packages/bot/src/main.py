@@ -5,11 +5,9 @@ Discord Bot implementation for Ryuuko Chatbot.
 """
 import logging
 import sys
-import asyncio
 import discord
 from discord.ext import commands
 
-# [SỬA LỖI] Sử dụng import tuyệt đối từ `bot`
 from bot.config import loader as config_loader
 from bot.config import get_user_config_manager
 import bot.api as call_api
@@ -21,7 +19,6 @@ from bot.utils.health import perform_startup_checks
 from bot.utils.queue import get_request_queue
 
 logger = logging.getLogger("Bot.Main")
-
 
 class Bot(commands.Bot):
     def __init__(self):

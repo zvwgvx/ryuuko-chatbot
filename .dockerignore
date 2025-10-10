@@ -18,7 +18,7 @@ logs/
 *.log
 
 # Environment files (NEVER commit these to Docker image)
-.env
+packages/bot/.env
 *.env
 
 # Docker files
