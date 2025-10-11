@@ -1,14 +1,14 @@
 # src/bot/events/messages.py
 import re, json, logging, asyncio, base64, mimetypes
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Any
 from datetime import datetime, timezone, timedelta
 import discord
 from discord.ext import commands
 
 logger = logging.getLogger("Bot.Events.Messages")
 
-# --- Constants (Không thay đổi) ---
+# --- Constants ---
 FILE_MAX_BYTES = 200 * 1024
 IMAGE_MAX_BYTES = 10 * 1024 * 1024
 MAX_CHARS_PER_FILE = 10_000
@@ -18,7 +18,7 @@ ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 ALLOWED_IMAGE_MIMES = {"image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp", "image/bmp"}
 
 
-# --- Attachment Processing Functions (Không thay đổi) ---
+# --- Attachment Processing Functions ---
 async def _read_image_attachment(attachment: discord.Attachment) -> Dict:
     entry = {"filename": attachment.filename, "type": "image", "data": None, "mime_type": None, "skipped": False,
              "reason": None}
@@ -33,10 +33,8 @@ async def _read_image_attachment(attachment: discord.Attachment) -> Dict:
             entry["skipped"], entry["reason"] = True, f"unsupported image type ({content_type}, {ext})"
             return entry
         image_data = await attachment.read()
-        base64_data = base64.b64encode(image_data).decode('utf-8')
-        mime_type = content_type or mimetypes.guess_type(attachment.filename)[0] or "image/jpeg"
-        entry["data"], entry["mime_type"] = base64_data, mime_type
-        logger.info(f"[DONE] Processed image: {attachment.filename}")
+        entry["data"] = base64.b64encode(image_data).decode('utf-8')
+        entry["mime_type"] = content_type or mimetypes.guess_type(attachment.filename)[0] or "image/jpeg"
     except Exception as e:
         logger.exception(f"[ERROR] Reading image attachment {attachment.filename}")
         entry["skipped"], entry["reason"] = True, f"read error: {e}"
@@ -56,12 +54,8 @@ async def _read_text_attachment(attachment: discord.Attachment) -> Dict:
             entry["skipped"], entry["reason"] = True, f"file too large ({size} bytes)"
             return entry
         b = await attachment.read()
-        try:
-            text = b.decode("utf-8")
-        except:
-            text = b.decode("latin-1", errors="replace")
-        if len(text) > MAX_CHARS_PER_FILE: text = text[:MAX_CHARS_PER_FILE] + "\n\n...[truncated]..."
-        entry["text"] = text
+        entry["text"] = b.decode("utf-8", errors="replace")
+        if len(entry["text"]) > MAX_CHARS_PER_FILE: entry["text"] = entry["text"][:MAX_CHARS_PER_FILE] + "\n\n...[truncated]..."
     except Exception as e:
         logger.exception("[ERROR] Reading attachment %s", attachment.filename)
         entry["skipped"], entry["reason"] = True, f"read error: {e}"
@@ -70,49 +64,51 @@ async def _read_text_attachment(attachment: discord.Attachment) -> Dict:
 
 async def _read_attachments_enhanced(attachments: List[discord.Attachment]) -> Dict:
     result = {"text_files": [], "images": [], "text_summary": "", "has_images": False}
+    
+    image_attachments = []
+    text_attachments = []
+
+    # SỬA LỖI: Phân loại tệp đính kèm một cách an toàn
     for att in attachments:
         ext = (Path(att.filename).suffix or "").lower()
-        if (att.content_type in ALLOWED_IMAGE_MIMES or ext in ALLOWED_IMAGE_EXTENSIONS):
-            image_entry = await _read_image_attachment(att)
-            result["images"].append(image_entry)
-            if not image_entry["skipped"]: result["has_images"] = True
+        if att.content_type in ALLOWED_IMAGE_MIMES or ext in ALLOWED_IMAGE_EXTENSIONS:
+            image_attachments.append(att)
         else:
-            result["text_files"].append(await _read_text_attachment(att))
+            text_attachments.append(att)
+
+    image_tasks = [_read_image_attachment(att) for att in image_attachments]
+    text_tasks = [_read_text_attachment(att) for att in text_attachments]
+    
+    if image_tasks:
+        result["images"] = await asyncio.gather(*image_tasks)
+    if text_tasks:
+        result["text_files"] = await asyncio.gather(*text_tasks)
+
+    for img in result["images"]:
+        if not img.get("skipped"): result["has_images"] = True
 
     attach_summary, files_combined = [], ""
     for fi in result["text_files"]:
-        if fi.get("skipped"):
-            attach_summary.append(f"- {fi['filename']}: SKIPPED ({fi.get('reason')})")
+        if fi.get("skipped"): attach_summary.append(f"- {fi['filename']}: SKIPPED ({fi.get('reason')})")
         else:
             attach_summary.append(f"- {fi['filename']}: included ({len(fi['text'])} chars)")
             files_combined += f"Filename: {fi['filename']}\n---\n{fi['text']}\n\n"
     for img in result["images"]:
-        if img.get("skipped"):
-            attach_summary.append(f"- {img['filename']}: SKIPPED ({img.get('reason')})")
-        else:
-            attach_summary.append(f"- {img['filename']}: image included ({img.get('mime_type')})")
+        if img.get("skipped"): attach_summary.append(f"- {img['filename']}: SKIPPED ({img.get('reason')})")
+        else: attach_summary.append(f"- {img['filename']}: image included ({img.get('mime_type')})")
     if attach_summary: result["text_summary"] = "\n".join(attach_summary) + "\n\n" + files_combined
     return result
 
 
-# --- Message Formatting Functions (Không thay đổi) ---
-def convert_latex_to_discord(text: str) -> str: return text
-
-
-def split_message_smart(text: str, max_length: int = 2000) -> list[str]: return [text]  # Giả định hàm phức tạp hơn
-
+# --- Message Formatting Functions ---
+def split_message_smart(text: str, max_length: int = 1900) -> list[str]:
+    return [text[i:i+max_length] for i in range(0, len(text), max_length)]
 
 async def send_long_message_with_reference(channel, content: str, reference_message: discord.Message):
     for i, chunk in enumerate(split_message_smart(content)):
-        await channel.send(chunk, reference=reference_message if i == 0 else None,
-                           allowed_mentions=discord.AllowedMentions.none())
+        await channel.send(chunk, reference=reference_message if i == 0 else None, allowed_mentions=discord.AllowedMentions.none())
 
-
-def get_vietnam_timestamp() -> str:
-    return datetime.now(timezone(timedelta(hours=7))).strftime("[%Y-%m-%d %H:%M:%S GMT+7] ")
-
-
-# --- Main Event Setup Function (Đã Sửa Lỗi) ---
+# --- Main Event Setup Function ---
 def setup_message_events(bot: commands.Bot, dependencies: dict):
     user_config_manager = dependencies['user_config_manager']
     request_queue = dependencies['request_queue']
@@ -133,25 +129,18 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
             user_model = user_config_manager.get_user_model(user_id)
             user_system_message = user_config_manager.get_user_system_message(user_id)
 
-            # --- CORE FIX for Lỗi 2: Assume mongodb_store always exists, remove USE_MONGODB check ---
             model_info = mongodb_store.get_model_info(user_model)
             if model_info:
                 user_config = user_config_manager.get_user_config(user_id)
                 user_level = user_config.get("access_level", 0)
                 required_level = model_info.get("access_level", 0)
                 if user_level < required_level:
-                    await message.channel.send(
-                        f"⛔ Model này yêu cầu cấp độ truy cập {required_level}. Cấp độ của bạn: {user_level}",
-                        reference=message)
+                    await message.channel.send(f"⛔ Model này yêu cầu cấp độ truy cập {required_level}. Cấp độ của bạn: {user_level}", reference=message)
                     return
-
                 cost = model_info.get("credit_cost", 0)
                 if cost > 0 and user_config.get("credit", 0) < cost:
-                    await message.channel.send(
-                        f"⛔ Không đủ credit. Model này tốn {cost} credit. Số dư của bạn: {user_config.get('credit', 0)}",
-                        reference=message)
+                    await message.channel.send(f"⛔ Không đủ credit. Model này tốn {cost} credit. Số dư của bạn: {user_config.get('credit', 0)}", reference=message)
                     return
-            # -------------------------------------------------------------------------------------
 
             attachments = list(message.attachments or [])
             attachment_data = await _read_attachments_enhanced(attachments)
@@ -159,24 +148,35 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
 
             if not combined_text and not attachment_data["has_images"]: return
 
-            payload_messages = [user_system_message]
+            payload_messages = []
+            if user_system_message and user_system_message.get('content'):
+                payload_messages.append(user_system_message)
+            
             payload_messages.extend(memory_store.get_user_messages(user_id))
-            final_text = f"{get_vietnam_timestamp()}{combined_text}"
 
-            # TODO: Xử lý multimodal (ghép ảnh vào payload)
-            payload_messages.append({"role": "user", "content": final_text})
+            user_content: List[Dict[str, Any]] = []
+            if combined_text:
+                user_content.append({"type": "text", "text": combined_text})
+            
+            for img in attachment_data.get("images", []):
+                if not img.get("skipped") and img.get("data") and img.get("mime_type"):
+                    user_content.append({
+                        "type": "image_url",
+                        "image_url": {"url": f"data:{img['mime_type']};base64,{img['data']}"}
+                    })
+
+            final_content = user_content[0]["text"] if len(user_content) == 1 and user_content[0]["type"] == "text" else user_content
+            payload_messages.append({"role": "user", "content": final_content})
 
             ok, resp = await call_api.call_unified_api(messages=payload_messages, model=user_model)
 
             if ok and resp:
                 await send_long_message_with_reference(message.channel, resp, message)
                 memory_store.add_message(user_id, {"role": "user", "content": combined_text})
-                memory_store.add_message(user_id, {"role": "model", "content": resp})
+                memory_store.add_message(user_id, {"role": "assistant", "content": resp})
 
-                # --- CORE FIX for Lỗi 2: Simplified credit deduction ---
                 if model_info and model_info.get("credit_cost", 0) > 0:
                     mongodb_store.deduct_user_credit(user_id, model_info["credit_cost"])
-                # -----------------------------------------------------
             elif not ok:
                 await message.channel.send(f"⚠️ Lỗi: {str(resp)[:500]}", reference=message)
 

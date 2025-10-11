@@ -154,3 +154,397 @@
 2025-10-11 15:09:01,038 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
 2025-10-11 15:09:01,045 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
 2025-10-11 15:10:06,747 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 15:30:02,106 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:30:02,108 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:30:02,109 INFO __main__: Shutdown signal received.
+2025-10-11 15:30:03,390 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:30:03,391 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:30:03,391 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:30:03,391 INFO __main__: Starting application...
+2025-10-11 15:30:03,391 INFO __main__: Initializing storage...
+2025-10-11 15:30:03,391 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:30:03,465 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:30:03,465 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:30:03,490 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:30:03,490 INFO __main__: Storage initialized successfully.
+2025-10-11 15:30:03,491 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:30:03,491 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:30:03,491 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:30:03,491 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:30:03,492 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:30:03,492 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:30:03,492 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:30:03,492 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:30:03,492 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:30:03,493 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:30:03,493 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:30:03,493 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:30:03,493 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:30:03,493 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:30:03,493 INFO HealthCheck: Starting health checks...
+2025-10-11 15:30:03,898 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:30:03,898 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:30:07,464 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:30:07,464 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:30:12,044 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 15:30:12,044 INFO Request Queue: Request queue worker started
+2025-10-11 15:30:14,879 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:30:15,502 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 15:30:15,507 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 15:30:19,456 INFO Request Queue: Adding request to queue for user 1320303839701897230: mấy h r
+2025-10-11 15:30:20,792 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:30:21,293 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 15:30:21,298 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 15:30:30,115 INFO Request Queue: Adding request to queue for user 1320303839701897230: ngày mai là ngày bao nhiêu
+2025-10-11 15:30:30,850 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:30:31,493 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 15:30:31,498 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 15:30:40,050 INFO Request Queue: Adding request to queue for user 1320303839701897230: IOI 2027 tổ chức ở đâu
+2025-10-11 15:30:43,833 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:30:44,453 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 15:30:44,459 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 15:30:52,041 INFO Request Queue: Adding request to queue for user 1320303839701897230: tra giúp anh đi
+2025-10-11 15:30:55,749 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:30:56,397 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-11 15:30:56,402 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-11 15:33:27,263 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:33:27,265 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:33:27,266 INFO __main__: Shutdown signal received.
+2025-10-11 15:34:17,056 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:34:17,057 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:34:17,057 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:34:17,057 INFO __main__: Starting application...
+2025-10-11 15:34:17,057 INFO __main__: Initializing storage...
+2025-10-11 15:34:17,057 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:34:17,066 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:34:17,066 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:34:17,069 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:34:17,069 INFO __main__: Storage initialized successfully.
+2025-10-11 15:34:17,069 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:34:17,069 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:34:17,069 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:34:17,069 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:34:17,070 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:34:17,070 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:34:17,070 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:34:17,070 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:34:17,070 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:34:17,070 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:34:17,070 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:34:17,070 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:34:17,070 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:34:17,071 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:34:17,071 INFO HealthCheck: Starting health checks...
+2025-10-11 15:34:17,536 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:34:17,536 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:34:21,040 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:34:21,040 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:34:31,026 INFO Request Queue: Adding request to queue for user 1320303839701897230: tra được chưa IOI 2027 tổ chức ở đâu vậy
+2025-10-11 15:34:31,026 INFO Request Queue: Request queue worker started
+2025-10-11 15:34:31,966 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 400 Bad Request"
+2025-10-11 15:34:31,967 ERROR Bot.API.Client: No content found in successful API response: {'ok': False, 'error': 'upstream_error', 'detail': "Upstream API error: Error code: 400 - [{'error': {'code': 400, 'message': 'Invalid tool type: google_search', 'status': 'INVALID_ARGUMENT'}}]"}
+2025-10-11 15:38:20,043 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:38:20,044 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:38:20,045 INFO __main__: Shutdown signal received.
+2025-10-11 15:38:21,386 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:38:21,387 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:38:21,387 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:38:21,387 INFO __main__: Starting application...
+2025-10-11 15:38:21,387 INFO __main__: Initializing storage...
+2025-10-11 15:38:21,387 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:38:21,408 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:38:21,408 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:38:21,409 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:38:21,409 INFO __main__: Storage initialized successfully.
+2025-10-11 15:38:21,409 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:38:21,409 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:38:21,409 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:38:21,409 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:38:21,410 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:38:21,410 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:38:21,410 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:38:21,410 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:38:21,410 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:38:21,410 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:38:21,410 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:38:21,410 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:38:21,410 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:38:21,410 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:38:21,410 INFO HealthCheck: Starting health checks...
+2025-10-11 15:38:21,882 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:38:21,883 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:38:25,460 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:38:25,460 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:38:27,655 INFO Request Queue: Adding request to queue for user 1320303839701897230: tra được chưa
+2025-10-11 15:38:27,655 INFO Request Queue: Request queue worker started
+2025-10-11 15:38:28,843 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:38:28,870 ERROR Bot.API.Client: No content found in successful API response: {'text': ''}
+2025-10-11 15:38:50,002 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 15:38:51,219 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:38:51,245 ERROR Bot.API.Client: No content found in successful API response: {'text': ''}
+2025-10-11 15:45:23,581 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:45:23,583 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:45:23,584 INFO __main__: Shutdown signal received.
+2025-10-11 15:45:24,745 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:45:24,745 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:45:24,745 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:45:24,745 INFO __main__: Starting application...
+2025-10-11 15:45:24,745 INFO __main__: Initializing storage...
+2025-10-11 15:45:24,745 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:45:24,755 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:45:24,755 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:45:24,755 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:45:24,755 INFO __main__: Storage initialized successfully.
+2025-10-11 15:45:24,756 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:45:24,756 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:45:24,756 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:45:24,756 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:45:24,756 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:45:24,756 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:45:24,756 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:45:24,756 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:45:24,757 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:45:24,757 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:45:24,757 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:45:24,757 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:45:24,757 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:45:24,757 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:45:24,757 INFO HealthCheck: Starting health checks...
+2025-10-11 15:45:25,165 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:45:25,166 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:45:28,855 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:45:28,856 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:45:35,297 INFO Request Queue: Adding request to queue for user 1320303839701897230: sao rồi tìm được chưa
+2025-10-11 15:45:35,297 INFO Request Queue: Request queue worker started
+2025-10-11 15:45:36,781 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:45:36,836 ERROR Bot.API.Client: No content found in successful API response: {'ok': False, 'error': 'upstream_error', 'detail': "Upstream API error: '<=' not supported between instances of 'int' and 'NoneType'"}
+2025-10-11 15:50:33,534 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:50:33,538 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:50:33,541 INFO __main__: Shutdown signal received.
+2025-10-11 15:50:34,921 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:50:34,921 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:50:34,921 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:50:34,921 INFO __main__: Starting application...
+2025-10-11 15:50:34,921 INFO __main__: Initializing storage...
+2025-10-11 15:50:34,921 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:50:34,929 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:50:34,929 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:50:34,930 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:50:34,930 INFO __main__: Storage initialized successfully.
+2025-10-11 15:50:34,930 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:50:34,930 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:50:34,930 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:50:34,930 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:50:34,931 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:50:34,931 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:50:34,931 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:50:34,931 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:50:34,932 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:50:34,932 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:50:34,932 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:50:34,932 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:50:34,932 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:50:34,932 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:50:34,932 INFO HealthCheck: Starting health checks...
+2025-10-11 15:50:35,361 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:50:35,361 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:50:39,001 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:50:39,001 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:50:41,308 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê tra được chưa
+2025-10-11 15:50:41,309 INFO Request Queue: Request queue worker started
+2025-10-11 15:50:42,331 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:50:43,694 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 11
+2025-10-11 15:50:43,703 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 12
+2025-10-11 15:52:45,672 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 15:55:20,240 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:55:20,241 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:55:20,242 INFO __main__: Shutdown signal received.
+2025-10-11 15:55:21,427 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:55:21,427 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:55:21,427 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:55:21,427 INFO __main__: Starting application...
+2025-10-11 15:55:21,428 INFO __main__: Initializing storage...
+2025-10-11 15:55:21,428 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:55:21,435 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:55:21,435 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:55:21,436 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:55:21,436 INFO __main__: Storage initialized successfully.
+2025-10-11 15:55:21,436 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:55:21,436 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:55:21,436 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:55:21,436 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:55:21,437 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:55:21,437 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:55:21,437 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:55:21,437 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:55:21,437 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:55:21,437 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:55:21,437 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:55:21,437 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:55:21,437 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:55:21,437 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:55:21,437 INFO HealthCheck: Starting health checks...
+2025-10-11 15:55:21,832 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:55:21,832 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:55:25,418 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:55:25,418 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:55:30,609 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 15:55:30,609 INFO Request Queue: Request queue worker started
+2025-10-11 15:55:33,509 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:55:33,936 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 15:55:33,941 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 15:55:39,944 INFO Request Queue: Adding request to queue for user 1320303839701897230: em đang làm j thế
+2025-10-11 15:55:43,791 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:55:44,285 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 15:55:44,297 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 15:55:49,092 INFO Request Queue: Adding request to queue for user 1320303839701897230: vậy qua đón a đi học đi
+2025-10-11 15:55:57,119 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:55:57,862 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 15:55:57,867 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 15:56:05,934 INFO Request Queue: Adding request to queue for user 1320303839701897230: ơ kìa, đi mà bé iu của a
+2025-10-11 15:56:11,886 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:56:12,489 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 15:56:12,494 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 15:56:22,147 INFO Request Queue: Adding request to queue for user 1320303839701897230: sao, anh mua sẵn matcha r, qua lấy rồi đi mà
+2025-10-11 15:56:29,429 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:56:30,013 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-11 15:56:30,019 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-11 15:57:05,389 INFO Request Queue: Adding request to queue for user 1320303839701897230: đây em thấy chưa :
+2025-10-11 15:57:06,350 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:57:07,511 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 11
+2025-10-11 15:57:07,517 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 12
+2025-10-11 16:01:16,868 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 16:01:16,870 INFO Request Queue: Request queue worker cancelled
+2025-10-11 16:01:16,876 INFO __main__: Shutdown signal received.
+2025-10-11 16:01:18,229 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 16:01:18,229 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 16:01:18,229 INFO root: Compressed archives will be created in: logs
+2025-10-11 16:01:18,229 INFO __main__: Starting application...
+2025-10-11 16:01:18,229 INFO __main__: Initializing storage...
+2025-10-11 16:01:18,229 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 16:01:18,238 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 16:01:18,239 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 16:01:18,240 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 16:01:18,240 INFO __main__: Storage initialized successfully.
+2025-10-11 16:01:18,240 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 16:01:18,240 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 16:01:18,240 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 16:01:18,240 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 16:01:18,240 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 16:01:18,241 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 16:01:18,241 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 16:01:18,241 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 16:01:18,241 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 16:01:18,241 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 16:01:18,241 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 16:01:18,241 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 16:01:18,241 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 16:01:18,241 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 16:01:18,241 INFO HealthCheck: Starting health checks...
+2025-10-11 16:01:18,654 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 16:01:18,654 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 16:01:22,187 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 16:01:22,187 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 16:03:28,986 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 16:03:43,569 INFO Request Queue: Adding request to queue for user 1320303839701897230: phân tích bức ảnh này giúp anh với
+2025-10-11 16:03:43,570 INFO Request Queue: Request queue worker started
+2025-10-11 16:03:43,578 ERROR Bot.Events.Messages: [ERROR] Lỗi khi xử lý request cho user 1320303839701897230
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 132, in process_ai_request
+    attachment_data = await _read_attachments_enhanced(attachments)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 68, in _read_attachments_enhanced
+    text_tasks = [_read_text_attachment(att) for att in attachments if att not in [t._coro.args[0] for t in image_tasks]] # A bit hacky but works
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 68, in <listcomp>
+    text_tasks = [_read_text_attachment(att) for att in attachments if att not in [t._coro.args[0] for t in image_tasks]] # A bit hacky but works
+                                                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 68, in <listcomp>
+    text_tasks = [_read_text_attachment(att) for att in attachments if att not in [t._coro.args[0] for t in image_tasks]] # A bit hacky but works
+                                                                                   ^^^^^^^
+AttributeError: 'coroutine' object has no attribute '_coro'
+2025-10-11 16:08:38,739 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 16:08:38,742 INFO Request Queue: Request queue worker cancelled
+2025-10-11 16:08:38,743 INFO __main__: Shutdown signal received.
+2025-10-11 16:08:39,936 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 16:08:39,937 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 16:08:39,937 INFO root: Compressed archives will be created in: logs
+2025-10-11 16:08:39,937 INFO __main__: Starting application...
+2025-10-11 16:08:39,937 INFO __main__: Initializing storage...
+2025-10-11 16:08:39,937 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 16:08:39,953 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 16:08:39,953 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 16:08:39,956 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 16:08:39,956 INFO __main__: Storage initialized successfully.
+2025-10-11 16:08:39,957 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 16:08:39,957 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 16:08:39,957 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 16:08:39,957 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 16:08:39,958 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 16:08:39,958 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 16:08:39,958 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 16:08:39,959 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 16:08:39,959 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 16:08:39,959 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 16:08:39,959 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 16:08:39,959 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 16:08:39,959 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 16:08:39,959 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 16:08:39,959 INFO HealthCheck: Starting health checks...
+2025-10-11 16:08:40,343 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 16:08:40,343 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 16:08:43,898 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 16:08:43,899 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 16:08:51,023 INFO Request Queue: Adding request to queue for user 1320303839701897230: phân tích ảnh trên
+2025-10-11 16:08:51,024 INFO Request Queue: Request queue worker started
+2025-10-11 16:08:51,725 ERROR Gateway.Logic: Error from 'polydevs' (Status 400): {"ok":false,"error":"empty_prompt","detail":"Không có nội dung để gửi."}
+2025-10-11 16:08:51,725 ERROR Bot.API.Client: Gateway logic returned an error: API Error from polydevs: {"ok":false,"error":"empty_prompt","detail":"Không có nội dung để gửi."}
+2025-10-11 16:10:22,806 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 16:10:22,813 INFO Request Queue: Request queue worker cancelled
+2025-10-11 16:10:22,815 INFO __main__: Shutdown signal received.
+2025-10-11 16:10:23,820 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 16:10:23,821 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 16:10:23,821 INFO root: Compressed archives will be created in: logs
+2025-10-11 16:10:23,821 INFO __main__: Starting application...
+2025-10-11 16:10:23,821 INFO __main__: Initializing storage...
+2025-10-11 16:10:23,821 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 16:10:23,830 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 16:10:23,830 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 16:10:23,831 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 16:10:23,831 INFO __main__: Storage initialized successfully.
+2025-10-11 16:10:23,831 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 16:10:23,832 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 16:10:23,832 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 16:10:23,832 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 16:10:23,832 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 16:10:23,832 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 16:10:23,832 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 16:10:23,833 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 16:10:23,833 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 16:10:23,833 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 16:10:23,833 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 16:10:23,833 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 16:10:23,833 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 16:10:23,833 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 16:10:23,833 INFO HealthCheck: Starting health checks...
+2025-10-11 16:10:24,225 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 16:10:24,225 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 16:10:27,839 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 16:10:27,839 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 16:10:41,529 INFO Request Queue: Adding request to queue for user 1320303839701897230: phân tích ảnh trên
+2025-10-11 16:10:41,529 INFO Request Queue: Request queue worker started
+2025-10-11 16:10:51,806 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 16:10:52,320 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 16:10:52,326 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 16:10:58,527 INFO Request Queue: Adding request to queue for user 1320303839701897230: nội dung của nó là gì
+2025-10-11 16:11:02,519 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 16:11:03,075 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 16:11:03,081 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 16:11:10,754 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 16:11:26,217 INFO Request Queue: Adding request to queue for user 1320303839701897230: cho anh biết chi tiết nội dung bức ảnh này
+2025-10-11 16:11:41,271 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 16:11:41,778 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 16:11:41,783 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 16:14:31,277 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 16:14:31,279 INFO Request Queue: Request queue worker cancelled
+2025-10-11 16:14:31,280 INFO __main__: Shutdown signal received.

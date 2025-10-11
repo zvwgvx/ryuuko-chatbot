@@ -24,7 +24,6 @@ def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
         memory_store: The instance of the conversation memory store.
         auth_helpers (dict): A dictionary of helper functions for authorization management.
     """
-    # Attach stores and helpers to the bot object for easy access within commands.
     bot.memory_store = memory_store
     bot.auth_helpers = auth_helpers
 
@@ -67,10 +66,8 @@ def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
             await ctx.send("The authorized users list is currently empty.")
             return
 
-        # Format the list of user IDs for the response.
         user_list_str = "\n".join(str(uid) for uid in sorted(authorized_users))
 
-        # If the list is too long for a standard Discord message, send it as a file.
         if len(user_list_str) > 1900:
             with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as temp_f:
                 temp_f.write("Authorized User IDs:\n" + user_list_str)
@@ -79,7 +76,6 @@ def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
             try:
                 await ctx.send("The list of authorized users is too long to display, sending it as a file.", file=discord.File(temp_path, filename="authorized_users.txt"))
             finally:
-                # Clean up the temporary file after sending.
                 Path(temp_path).unlink(missing_ok=True)
         else:
             await ctx.send(f"**Authorized User IDs:**\n```\n{user_list_str}\n```")
@@ -102,13 +98,22 @@ def setup_admin_commands(bot: commands.Bot, memory_store, auth_helpers: dict):
             await ctx.send(f"No conversation memory found for {target_user.display_name}.")
             return
 
-        # Format the last 10 messages for a concise overview.
+        # THAY ĐỔI: Ánh xạ role sang tên thân mật
+        role_map = {
+            "user": "You",
+            "assistant": "Ryuuko"
+        }
+
         lines = [f"**Conversation Memory for {target_user.display_name}:**"]
         for i, msg in enumerate(messages[-10:], start=1):
             content = msg.get("content", "[Message content not available]")
-            # Truncate long messages for readability.
             preview = (content[:120] + "…") if len(content) > 120 else content
-            lines.append(f"`{i:02d}.` **{msg.get('role', 'N/A').capitalize()}**: {preview}")
+            
+            # Sử dụng role_map để lấy tên hiển thị
+            role_name = msg.get('role', 'N/A')
+            display_name = role_map.get(role_name, role_name.capitalize())
+            
+            lines.append(f"`{i:02d}.` **{display_name}**: {preview}")
 
         await ctx.send("\n".join(lines))
 

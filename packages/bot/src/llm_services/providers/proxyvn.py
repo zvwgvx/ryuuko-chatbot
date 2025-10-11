@@ -2,50 +2,50 @@
 import asyncio
 import json
 import os
+from datetime import datetime, timezone, timedelta
 from typing import Any, Dict, List, Optional
 
 from fastapi import Request
 from fastapi.responses import JSONResponse, StreamingResponse
 
-# Sử dụng AsyncOpenAI client cho môi trường asyncio
 try:
     from openai import AsyncOpenAI
 except ImportError:
     AsyncOpenAI = None
     _IMPORT_ERROR = "openai library not found. Please install it with 'pip install openai'"
 
-# Endpoint của dịch vụ proxy
 PROXY_BASE_URL = "https://proxyvn.top/v1"
-DEFAULT_MODEL = "gpt-3.5-turbo"  # Một model mặc định hợp lý cho proxy
+DEFAULT_MODEL = "gpt-3.5-turbo"
+
+# --- Helpers ---
+def get_vietnam_timestamp() -> str:
+    return datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S GMT+7")
 
 def _build_openai_messages(data: Dict) -> List[Dict[str, Any]]:
-    """
-    Xây dựng danh sách 'messages' theo định dạng của OpenAI từ dữ liệu yêu cầu.
-    """
     messages = []
 
-    system_instructions = data.get("system_instruction", [])
-    if isinstance(system_instructions, list) and system_instructions:
-        full_system_prompt = "\n".join(filter(None, [str(s).strip() for s in system_instructions]))
-        if full_system_prompt:
-            messages.append({"role": "system", "content": full_system_prompt})
+    timestamp_str = get_vietnam_timestamp()
+    system_content = f"Current time: {timestamp_str}"
 
-    if "messages" in data and isinstance(data["messages"], list):
-        for msg in data["messages"]:
-            if isinstance(msg, dict) and "role" in msg and "content" in msg:
-                if msg["role"] == "system":
-                    continue
-                messages.append({"role": msg["role"], "content": msg["content"]})
-    elif "prompt" in data and isinstance(data["prompt"], str):
-        messages.append({"role": "user", "content": data["prompt"]})
+    user_system_instructions = data.get("system_instruction", [])
+    if isinstance(user_system_instructions, list) and user_system_instructions:
+        full_user_prompt = "\n".join(filter(None, [str(s).strip() for s in user_system_instructions]))
+        if full_user_prompt:
+            system_content += f"\n\n{full_user_prompt}"
+
+    messages.append({"role": "system", "content": system_content})
+
+    # SỬA LỖI: Xử lý content là string hoặc list
+    for msg in data.get("messages", []) or []:
+        if not isinstance(msg, dict) or "role" not in msg or msg["role"] == "system":
+            continue
+        openai_role = "assistant" if msg["role"] in ("assistant", "model") else "user"
+        messages.append({"role": openai_role, "content": msg["content"]})
 
     return messages
 
 
 async def forward(request: Request, data: Dict, api_key: Optional[str]):
-    """
-    Chuyển tiếp yêu cầu đến một endpoint tương thích OpenAI (ProxyVN) bằng AsyncOpenAI SDK.
-    """
     if AsyncOpenAI is None:
         return JSONResponse(
             {"ok": False, "error": "dependency_not_found", "detail": _IMPORT_ERROR},
@@ -76,16 +76,13 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
     temperature = config.get("temperature")
     top_p = config.get("top_p")
 
-    if not messages:
+    if len(messages) <= 1 or not any(msg['role'] == 'user' for msg in messages):
         return JSONResponse(
             {"ok": False, "error": "empty_prompt", "detail": "Không có nội dung để gửi."},
             status_code=400,
         )
 
     async def streamer():
-        """
-        Async generator để gọi API và yield các chunk dữ liệu.
-        """
         try:
             stream = await client.chat.completions.create(
                 model=model,
