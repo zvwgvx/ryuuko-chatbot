@@ -3,15 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-# [THAY ĐỔI QUAN TRỌNG]
-# Dòng này nói với Python: "Hãy coi toàn bộ thư mục 'src' là một gói (package) duy nhất có tên là 'bot'"
 package-dir = {"bot" = "src"}
-# Chúng ta không cần 'find' nữa vì đã chỉ định rõ ràng
 packages = ["bot"]
 
 [project]
 name = "ryuuko-bot"
-version = "1.3.4" # Tôi cập nhật phiên bản cho bạn
+version = "1.3.5" # Cập nhật phiên bản
 authors = [
   { name="Zang Vũ", email="zvwgvx@polydevs.uk" },
 ]
@@ -34,7 +31,8 @@ dependencies = [
     "tiktoken>=0.4.0",
     "colorama>=0.4.6",
     "google-genai>=0.4.0",
-    "fastapi>=0.118.0" # Đã thêm fastapi
+    "fastapi>=0.118.0",
+    "openai>=1.3.0" # <--- THÊM THƯ VIỆN OPENAI
 ]
 
 [project.optional-dependencies]
@@ -44,7 +42,5 @@ test = [
     "pytest-mock>=3.10.0"
 ]
 
-# [THAY ĐỔI QUAN TRỌNG]
-# Entry point này bây giờ sẽ hoạt động chính xác
 [project.scripts]
 start = "bot.__main__:main"

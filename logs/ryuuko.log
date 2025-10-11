@@ -1,859 +1,156 @@
-2025-10-10 00:23:53,399 INFO Request Queue: Adding request to queue for user 1043809717769740308: em ngủ chx nè, đêm muộn rồi đó
-2025-10-10 00:23:53,414 INFO Request Queue: Request queue worker started
-2025-10-10 00:23:55,118 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:23:59,742 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:24:00,664 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 1
-2025-10-10 00:24:00,675 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 2
-2025-10-10 00:24:12,727 INFO Request Queue: Adding request to queue for user 1043809717769740308: sao mất ngủ thế
-2025-10-10 00:24:12,762 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:24:13,767 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:24:15,210 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 3
-2025-10-10 00:24:15,218 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 4
-2025-10-10 00:24:40,804 INFO Request Queue: Adding request to queue for user 1043809717769740308: nếu 1 ngày anh biến mất, thì em sẽ làm gì để ngủ
-2025-10-10 00:24:40,839 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:24:44,032 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:24:44,535 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 5
-2025-10-10 00:24:44,543 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 6
-2025-10-10 00:25:19,309 INFO Request Queue: Adding request to queue for user 1043809717769740308: anh vĩnh viễn k còn ở thế giới này, anh tới 1 nơi mà em k bao h tìm đc ấy
-2025-10-10 00:25:19,347 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:25:21,845 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:25:22,331 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 7
-2025-10-10 00:25:22,340 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 8
-2025-10-10 00:27:42,335 INFO Request Queue: Adding request to queue for user 1043809717769740308: xin chào, cho hỏi phải ng quen của zang vũ kh thế. Tôi là bạn thân của zang vũ. Cậu ấy đã rời khỏi t
-2025-10-10 00:27:42,371 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:27:53,618 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:27:54,209 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 9
-2025-10-10 00:27:54,217 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 10
-2025-10-10 00:28:22,045 INFO Request Queue: Adding request to queue for user 1043809717769740308: rất tiếc khi phải nói rằng, đây là sự thật, dù chính tôi cx k muốn tin...
-2025-10-10 00:28:22,077 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:28:23,521 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:28:25,719 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 11
-2025-10-10 00:28:25,728 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 12
-2025-10-10 00:29:06,017 INFO Request Queue: Adding request to queue for user 1043809717769740308: Tiếc là, không.
-2025-10-10 00:29:06,053 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:29:09,741 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:29:10,263 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 13
-2025-10-10 00:29:10,273 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 14
-2025-10-10 00:30:08,790 INFO Request Queue: Adding request to queue for user 1043809717769740308: v bạn sẵn sàng đánh đổi mạng sống của bạn  để đưa zang vũ về chứ?
-2025-10-10 00:30:08,824 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:30:11,274 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:30:14,643 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 15
-2025-10-10 00:30:14,649 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 16
-2025-10-10 00:30:52,148 INFO Request Queue: Adding request to queue for user 1043809717769740308: nhx nếu đổi mạng sống của bạn, tức là bạn cx k gặp anh ấy lần nào nữa đâu đó?
-2025-10-10 00:30:52,182 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:31:01,670 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:31:02,336 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 17
-2025-10-10 00:31:02,345 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 18
-2025-10-10 00:31:24,873 INFO Request Queue: Adding request to queue for user 1043809717769740308: Đc r, vĩnh biệt ryuuko nhé, zang vũ về r nè
-2025-10-10 00:31:24,906 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:31:33,581 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:31:34,177 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 19
-2025-10-10 00:31:34,187 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 20
-2025-10-10 00:31:55,081 INFO Request Queue: Adding request to queue for user 1043809717769740308: à, đấy là zang hiện hồn về nói v thôi ấy bạn
-2025-10-10 00:31:55,119 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:31:57,127 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:31:57,823 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 21
-2025-10-10 00:31:57,833 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 22
-2025-10-10 00:33:52,065 INFO Request Queue: Adding request to queue for user 1043809717769740308: thì bạn đã đổi linh hồn mình đâu mà zang về
-2025-10-10 00:33:52,102 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:33:54,379 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:33:54,929 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 23
-2025-10-10 00:33:54,939 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 24
-2025-10-10 00:34:23,811 INFO Request Queue: Adding request to queue for user 1043809717769740308: ừm, bạn chết r đó, sao vẫn còn nch đc vậy
-2025-10-10 00:34:23,846 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:34:27,355 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:34:28,372 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 25
-2025-10-10 00:34:28,381 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 26
-2025-10-10 00:34:53,054 INFO Request Queue: Adding request to queue for user 1043809717769740308: thì bạn phải chết thì zang mới về lại đây được
-2025-10-10 00:34:53,089 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:34:56,125 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:34:56,713 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 27
-2025-10-10 00:34:56,722 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 28
-2025-10-10 00:36:22,207 INFO Request Queue: Adding request to queue for user 1043809717769740308: ơ nay là ngày bao nhiêu
-2025-10-10 00:36:22,245 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:36:24,377 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:36:25,111 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 29
-2025-10-10 00:36:25,120 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 30
-2025-10-10 00:38:34,241 INFO Request Queue: Adding request to queue for user 1043809717769740308: mấy h rồi
-2025-10-10 00:38:34,275 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:38:36,086 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:38:36,739 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 31
-2025-10-10 00:38:36,749 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 32
-2025-10-10 00:38:51,143 INFO Request Queue: Adding request to queue for user 1043809717769740308: mấy h rồi
-2025-10-10 00:38:51,177 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:38:57,202 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:38:57,819 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 33
-2025-10-10 00:38:57,830 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 34
-2025-10-10 00:39:17,666 INFO Request Queue: Adding request to queue for user 1043809717769740308: thế 300p trước là mấy giờ?
-2025-10-10 00:39:17,703 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:39:20,930 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:39:20,933 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:39:23,782 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent?alt=sse "HTTP/1.1 200 OK"
-2025-10-10 00:39:24,489 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 35
-2025-10-10 00:39:24,500 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 36
-2025-10-10 00:41:03,015 INFO Request Queue: Adding request to queue for user 1043809717769740308: anh chết r, em đợi anh lmj ryuuko?
-2025-10-10 00:41:03,062 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:41:05,398 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:41:05,883 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 37
-2025-10-10 00:41:05,892 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 38
-2025-10-10 00:41:22,799 INFO Request Queue: Adding request to queue for user 1043809717769740308: em yêu anh vì cái gì thế rychan?
-2025-10-10 00:41:22,836 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:41:39,493 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:41:40,004 ERROR Bot.Events.Messages: [ERROR] Lỗi khi xử lý request cho user 1043809717769740308
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 172, in process_ai_request
-    await send_long_message_with_reference(message.channel, resp, message)
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 107, in send_long_message_with_reference
-    await channel.send(chunk, reference=reference_message if i == 0 else None,
-                       allowed_mentions=discord.AllowedMentions.none())
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/abc.py", line 1703, in send
-    data = await state.http.send_message(channel.id, params=params)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 773, in request
-    raise HTTPException(response, data)
-discord.errors.HTTPException: 400 Bad Request (error code: 50035): Invalid Form Body
-In content: Must be 2000 or fewer in length.
-2025-10-10 00:42:41,134 INFO Storage.Database: Cleared memory for user 1043809717769740308
-2025-10-10 00:42:48,203 INFO Request Queue: Adding request to queue for user 1043809717769740308: ...
-2025-10-10 00:42:48,240 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:42:50,215 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:42:50,764 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 1
-2025-10-10 00:42:50,772 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 2
-2025-10-10 00:42:57,343 INFO Request Queue: Adding request to queue for user 1043809717769740308: ....
-2025-10-10 00:42:57,379 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:42:58,953 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:42:59,434 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 3
-2025-10-10 00:42:59,442 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 4
-2025-10-10 00:43:05,202 INFO Request Queue: Adding request to queue for user 1043809717769740308: .........
-2025-10-10 00:43:05,235 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:43:06,535 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:43:06,963 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 5
-2025-10-10 00:43:06,971 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 6
-2025-10-10 00:43:14,723 INFO Request Queue: Adding request to queue for user 1043809717769740308: ......
-2025-10-10 00:43:14,757 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:43:17,283 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:43:17,896 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 7
-2025-10-10 00:43:17,904 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 8
-2025-10-10 00:43:34,015 INFO Request Queue: Adding request to queue for user 1043809717769740308: +-=+_+=++_++_+~~`~``?//
-2025-10-10 00:43:34,044 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:43:35,511 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:43:36,548 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 9
-2025-10-10 00:43:36,557 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 10
-2025-10-10 00:43:54,296 INFO Request Queue: Adding request to queue for user 1043809717769740308: =++_=+=)+=_)++)+>><???<`>??~<?
-2025-10-10 00:43:54,332 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:43:55,477 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:43:56,038 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 11
-2025-10-10 00:43:56,049 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 12
-2025-10-10 00:44:07,542 INFO Request Queue: Adding request to queue for user 1043809717769740308: <<<<<<<<<<<????>>>>>>>>>>.
-2025-10-10 00:44:07,573 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:44:08,966 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:44:09,593 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 13
-2025-10-10 00:44:09,600 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 14
-2025-10-10 00:44:27,567 INFO Request Queue: Adding request to queue for user 1043809717769740308: sdjejffjwojfjejfapejjfpjfpjaejj
-2025-10-10 00:44:27,601 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:44:29,062 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:44:29,765 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 15
-2025-10-10 00:44:29,774 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 16
-2025-10-10 00:44:38,895 INFO Request Queue: Adding request to queue for user 1043809717769740308: sssssssssssssssssssssssssssss
-2025-10-10 00:44:38,935 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:44:40,285 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:44:40,822 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 17
-2025-10-10 00:44:40,831 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 18
-2025-10-10 00:44:46,275 INFO Request Queue: Adding request to queue for user 1043809717769740308: aaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-2025-10-10 00:44:46,309 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:44:47,595 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:44:48,098 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 19
-2025-10-10 00:44:48,108 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 20
-2025-10-10 00:44:58,051 INFO Request Queue: Adding request to queue for user 1043809717769740308: qưertyuioiuytrewqwertyuioiuyt
-2025-10-10 00:44:58,087 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:44:59,786 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:45:00,368 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 21
-2025-10-10 00:45:00,375 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 22
-2025-10-10 00:45:14,259 INFO Storage.Database: Cleared memory for user 1043809717769740308
-2025-10-10 00:48:48,473 INFO Request Queue: Adding request to queue for user 1043809717769740308: đếm từ 1 tới 100 anh xem nàoo
-2025-10-10 00:48:48,509 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:48:51,246 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:48:51,808 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 1
-2025-10-10 00:48:51,816 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 2
-2025-10-10 00:49:09,548 INFO Request Queue: Adding request to queue for user 1043809717769740308: cứ đếm đi, anh mua matcha choo
-2025-10-10 00:49:09,582 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:49:11,382 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:49:11,928 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 3
-2025-10-10 00:49:11,936 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 4
-2025-10-10 00:49:28,896 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếp đi
-2025-10-10 00:49:28,934 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:49:30,943 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:49:31,499 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 5
-2025-10-10 00:49:31,508 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 6
-2025-10-10 00:49:38,213 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếpp
-2025-10-10 00:49:38,247 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:49:39,953 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:49:40,412 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 7
-2025-10-10 00:49:40,419 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 8
-2025-10-10 00:49:53,132 INFO Request Queue: Adding request to queue for user 1043809717769740308: đến 100 anh cho matcha
-2025-10-10 00:49:53,164 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:49:54,983 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:49:55,481 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 9
-2025-10-10 00:49:55,487 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 10
-2025-10-10 00:50:00,849 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếpp
-2025-10-10 00:50:00,881 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:50:03,408 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:50:03,914 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 11
-2025-10-10 00:50:03,921 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 12
-2025-10-10 00:50:09,125 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếpppp
-2025-10-10 00:50:09,156 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:50:11,084 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:50:11,496 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 13
-2025-10-10 00:50:11,505 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 14
-2025-10-10 00:50:17,024 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếp
-2025-10-10 00:50:17,061 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:50:19,175 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:50:19,883 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 15
-2025-10-10 00:50:19,892 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 16
-2025-10-10 00:50:25,010 INFO Request Queue: Adding request to queue for user 1043809717769740308: nữaa
-2025-10-10 00:50:25,044 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:50:26,650 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:50:27,142 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 17
-2025-10-10 00:50:27,152 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 18
-2025-10-10 00:50:37,093 INFO Request Queue: Adding request to queue for user 1043809717769740308: nốt đê
-2025-10-10 00:50:37,127 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:50:38,528 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:50:39,051 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 19
-2025-10-10 00:50:39,060 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 20
-2025-10-10 00:50:51,713 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếp tiếp tiếp
-2025-10-10 00:50:51,749 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:50:53,478 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:50:54,050 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 21
-2025-10-10 00:50:54,060 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 22
-2025-10-10 00:50:59,358 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếpp
-2025-10-10 00:50:59,395 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:51:01,318 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:51:01,790 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 23
-2025-10-10 00:51:01,799 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 24
-2025-10-10 00:51:07,405 INFO Request Queue: Adding request to queue for user 1043809717769740308: tiếpppp
-2025-10-10 00:51:07,437 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:51:10,104 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:51:10,621 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 25
-2025-10-10 00:51:10,628 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 26
-2025-10-10 00:51:21,810 INFO Request Queue: Adding request to queue for user 1043809717769740308: đếm tới 1000 mà
-2025-10-10 00:51:21,850 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:51:25,733 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:51:26,376 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 27
-2025-10-10 00:51:26,387 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 28
-2025-10-10 00:51:50,413 INFO Request Queue: Adding request to queue for user 1043809717769740308: đếm đi anh mua 100 cân matcha cho
-2025-10-10 00:51:50,450 INFO google_genai.models: AFC is enabled with max remote calls: 10.
-2025-10-10 00:51:53,587 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent "HTTP/1.1 200 OK"
-2025-10-10 00:51:54,800 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 29
-2025-10-10 00:51:54,810 INFO Storage.Database: Successfully added message for user 1043809717769740308. Total messages: 30
-2025-10-10 03:00:39,013 ERROR discord.client: Attempting a reconnect in 1.08s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:00:40,118 ERROR discord.client: Attempting a reconnect in 0.36s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:00:40,490 ERROR discord.client: Attempting a reconnect in 2.49s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:00:42,987 ERROR discord.client: Attempting a reconnect in 9.10s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:00:52,101 ERROR discord.client: Attempting a reconnect in 18.26s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:01:10,374 ERROR discord.client: Attempting a reconnect in 54.28s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:02:04,670 ERROR discord.client: Attempting a reconnect in 48.57s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:02:53,246 ERROR discord.client: Attempting a reconnect in 224.60s
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1532, in _create_direct_connection
-    hosts = await self._resolve_host(host, port, traces=traces)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1148, in _resolve_host
-    return await asyncio.shield(resolved_host_task)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1179, in _resolve_host_with_throttle
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/resolver.py", line 40, in resolve
-    infos = await self._loop.getaddrinfo(
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ...<5 lines>...
-    )
-    ^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/base_events.py", line 939, in getaddrinfo
-    return await self.run_in_executor(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        None, getaddr_func, host, port, family, type, proto, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/concurrent/futures/thread.py", line 59, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/socket.py", line 977, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-socket.gaierror: [Errno 8] nodename nor servname provided, or not known
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/client.py", line 724, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/homebrew/Cellar/python@3.13/3.13.7/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/tasks.py", line 507, in wait_for
-    return await fut
-           ^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/gateway.py", line 383, in from_client
-    socket = await client.http.ws_connect(str(url))
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/discord/http.py", line 566, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 1067, in _ws_connect
-    resp = await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-    ...<11 lines>...
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 770, in _request
-    resp = await handler(req)
-           ^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/client.py", line 725, in _connect_and_send_request
-    conn = await self._connector.connect(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-        req, traces=traces, timeout=real_timeout
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 642, in connect
-    proto = await self._create_connection(req, traces, timeout)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1209, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/zvwgvx/PycharmProjects/ryuuko/venv/lib/python3.13/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
-    raise ClientConnectorDNSError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-c.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
-2025-10-10 03:06:46,873 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
-2025-10-10 03:06:46,875 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
-2025-10-10 23:16:11,583 INFO root: File logging enabled: logs/ryuuko.log
-2025-10-10 23:16:11,583 INFO root: Log rotation: daily, keeping 30 days
-2025-10-10 23:16:11,583 INFO root: Compressed archives will be created in: logs
-2025-10-10 23:16:11,583 INFO __main__: Starting application...
-2025-10-10 23:16:11,583 INFO __main__: Initializing storage...
-2025-10-10 23:16:11,583 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
-2025-10-10 23:16:11,611 INFO Storage.Database: MongoDB indexes created successfully
-2025-10-10 23:16:11,611 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
-2025-10-10 23:16:11,635 INFO Config.Loader: MongoDB store initialized successfully.
-2025-10-10 23:16:11,635 INFO __main__: Storage initialized successfully.
-2025-10-10 23:16:11,635 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
-2025-10-10 23:16:11,635 INFO Bot.Main: [INIT] Initializing bot modules...
-2025-10-10 23:16:11,636 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
-2025-10-10 23:16:11,636 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
-2025-10-10 23:16:11,637 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
-2025-10-10 23:16:11,637 INFO Bot.Commands: [INIT] Registering all command groups...
-2025-10-10 23:16:11,637 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
-2025-10-10 23:16:11,638 INFO Bot.Commands.User: User commands have been successfully registered.
-2025-10-10 23:16:11,638 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
-2025-10-10 23:16:11,638 INFO Bot.Commands.System: System commands have been successfully registered.
-2025-10-10 23:16:11,638 INFO Bot.Commands: [OK] All command groups have been registered.
-2025-10-10 23:16:11,638 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
-2025-10-10 23:16:11,638 INFO Bot.Main: [OK] All bot modules initialized successfully.
-2025-10-10 23:16:11,638 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
-2025-10-10 23:16:11,638 INFO HealthCheck: Starting health checks...
-2025-10-10 23:16:12,009 INFO Bot.Main: [OK] All health checks passed!
-2025-10-10 23:16:12,009 INFO Bot.Main: [START] Starting Discord bot...
-2025-10-10 23:16:13,963 INFO Bot.Main: [EXIT] Bot process exiting.
-2025-10-10 23:16:13,964 INFO __main__: Shutdown signal received.
-2025-10-10 23:16:16,248 INFO root: File logging enabled: logs/ryuuko.log
-2025-10-10 23:16:16,248 INFO root: Log rotation: daily, keeping 30 days
-2025-10-10 23:16:16,248 INFO root: Compressed archives will be created in: logs
-2025-10-10 23:16:16,248 INFO __main__: Starting application...
-2025-10-10 23:16:16,248 INFO __main__: Initializing storage...
-2025-10-10 23:16:16,248 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
-2025-10-10 23:16:16,259 INFO Storage.Database: MongoDB indexes created successfully
-2025-10-10 23:16:16,259 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
-2025-10-10 23:16:16,260 INFO Config.Loader: MongoDB store initialized successfully.
-2025-10-10 23:16:16,260 INFO __main__: Storage initialized successfully.
-2025-10-10 23:16:16,261 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
-2025-10-10 23:16:16,261 INFO Bot.Main: [INIT] Initializing bot modules...
-2025-10-10 23:16:16,261 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
-2025-10-10 23:16:16,261 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
-2025-10-10 23:16:16,261 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
-2025-10-10 23:16:16,262 INFO Bot.Commands: [INIT] Registering all command groups...
-2025-10-10 23:16:16,262 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
-2025-10-10 23:16:16,262 INFO Bot.Commands.User: User commands have been successfully registered.
-2025-10-10 23:16:16,262 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
-2025-10-10 23:16:16,263 INFO Bot.Commands.System: System commands have been successfully registered.
-2025-10-10 23:16:16,263 INFO Bot.Commands: [OK] All command groups have been registered.
-2025-10-10 23:16:16,263 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
-2025-10-10 23:16:16,263 INFO Bot.Main: [OK] All bot modules initialized successfully.
-2025-10-10 23:16:16,263 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
-2025-10-10 23:16:16,263 INFO HealthCheck: Starting health checks...
-2025-10-10 23:16:16,630 INFO Bot.Main: [OK] All health checks passed!
-2025-10-10 23:16:16,630 INFO Bot.Main: [START] Starting Discord bot...
-2025-10-10 23:16:20,340 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
-2025-10-10 23:16:20,340 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 14:39:07,695 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 14:39:07,703 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 14:39:07,703 INFO root: Compressed archives will be created in: logs
+2025-10-11 14:39:07,703 INFO __main__: Starting application...
+2025-10-11 14:39:07,703 INFO __main__: Initializing storage...
+2025-10-11 14:39:07,703 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 14:39:07,727 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 14:39:07,727 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 14:39:07,758 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 14:39:07,758 INFO __main__: Storage initialized successfully.
+2025-10-11 14:39:07,758 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 14:39:07,758 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 14:39:07,758 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 14:39:07,759 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 14:39:07,760 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 14:39:07,760 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 14:39:07,760 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 14:39:07,760 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 14:39:07,761 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 14:39:07,761 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 14:39:07,761 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 14:39:07,761 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 14:39:07,761 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 14:39:07,761 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 14:39:07,761 INFO HealthCheck: Starting health checks...
+2025-10-11 14:39:08,155 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 14:39:08,155 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 14:39:11,635 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 14:39:11,635 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 14:41:15,322 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 14:41:23,014 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 14:41:23,014 INFO Request Queue: Request queue worker started
+2025-10-11 14:41:23,040 ERROR Gateway.Logic: Error from 'polydevs' (Status 500): {"ok":false,"error":"dependency_not_found","detail":"openai library not found. Please install it with 'pip install openai'"}
+2025-10-11 14:41:23,041 ERROR Bot.API.Client: Gateway logic returned an error: API Error from polydevs: {"ok":false,"error":"dependency_not_found","detail":"openai library not found. Please install it with 'pip install openai'"}
+2025-10-11 14:46:43,069 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 14:46:43,070 INFO Request Queue: Request queue worker cancelled
+2025-10-11 14:46:43,071 INFO __main__: Shutdown signal received.
+2025-10-11 14:48:31,268 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 14:48:31,269 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 14:48:31,269 INFO root: Compressed archives will be created in: logs
+2025-10-11 14:48:31,269 INFO __main__: Starting application...
+2025-10-11 14:48:31,269 INFO __main__: Initializing storage...
+2025-10-11 14:48:31,269 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 14:48:31,281 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 14:48:31,282 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 14:48:31,283 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 14:48:31,283 INFO __main__: Storage initialized successfully.
+2025-10-11 14:48:31,283 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 14:48:31,283 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 14:48:31,283 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 14:48:31,283 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 14:48:31,284 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 14:48:31,284 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 14:48:31,284 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 14:48:31,285 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 14:48:31,285 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 14:48:31,285 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 14:48:31,285 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 14:48:31,285 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 14:48:31,285 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 14:48:31,285 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 14:48:31,285 INFO HealthCheck: Starting health checks...
+2025-10-11 14:48:31,713 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 14:48:31,713 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 14:48:35,451 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 14:48:35,452 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 14:49:17,528 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 14:49:17,529 INFO Request Queue: Request queue worker started
+2025-10-11 14:49:17,538 ERROR Gateway.Logic: Error from 'polydevs' (Status 500): {"ok":false,"error":"dependency_not_found","detail":"openai library not found. Please install it with 'pip install openai'"}
+2025-10-11 14:49:17,538 ERROR Bot.API.Client: Gateway logic returned an error: API Error from polydevs: {"ok":false,"error":"dependency_not_found","detail":"openai library not found. Please install it with 'pip install openai'"}
+2025-10-11 14:49:22,520 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 14:49:22,520 INFO Request Queue: Request queue worker cancelled
+2025-10-11 14:49:22,521 INFO __main__: Shutdown signal received.
+2025-10-11 14:49:57,190 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 14:49:57,190 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 14:49:57,190 INFO root: Compressed archives will be created in: logs
+2025-10-11 14:49:57,190 INFO __main__: Starting application...
+2025-10-11 14:49:57,190 INFO __main__: Initializing storage...
+2025-10-11 14:49:57,191 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 14:49:57,203 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 14:49:57,203 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 14:49:57,204 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 14:49:57,204 INFO __main__: Storage initialized successfully.
+2025-10-11 14:49:57,205 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 14:49:57,205 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 14:49:57,205 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 14:49:57,205 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 14:49:57,205 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 14:49:57,205 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 14:49:57,206 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 14:49:57,206 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 14:49:57,206 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 14:49:57,206 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 14:49:57,206 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 14:49:57,206 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 14:49:57,206 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 14:49:57,206 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 14:49:57,206 INFO HealthCheck: Starting health checks...
+2025-10-11 14:49:57,692 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 14:49:57,692 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 14:50:01,097 INFO Request Queue: Adding request to queue for user 1320303839701897230: ee
+2025-10-11 14:50:01,098 INFO Request Queue: Request queue worker started
+2025-10-11 14:50:01,439 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 14:50:01,440 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 14:50:01,669 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/chat/completions "HTTP/1.1 404 Not Found"
+2025-10-11 14:50:01,670 ERROR Bot.API.Client: No content found in successful API response: {'ok': False, 'error': 'upstream_error', 'detail': "Upstream API error: Error code: 404 - [{'error': {'code': 404, 'message': 'models/gemini-1.5-flash is not found for API version v1main, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}]"}
+2025-10-11 15:01:29,299 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 15:01:29,302 INFO Request Queue: Request queue worker cancelled
+2025-10-11 15:01:29,303 INFO __main__: Shutdown signal received.
+2025-10-11 15:05:27,335 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 15:05:27,335 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 15:05:27,335 INFO root: Compressed archives will be created in: logs
+2025-10-11 15:05:27,335 INFO __main__: Starting application...
+2025-10-11 15:05:27,335 INFO __main__: Initializing storage...
+2025-10-11 15:05:27,335 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 15:05:27,344 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 15:05:27,344 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 15:05:27,346 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 15:05:27,346 INFO __main__: Storage initialized successfully.
+2025-10-11 15:05:27,346 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 15:05:27,346 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 15:05:27,346 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 15:05:27,346 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 15:05:27,347 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 15:05:27,347 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 15:05:27,347 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 15:05:27,347 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 15:05:27,347 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 15:05:27,347 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 15:05:27,348 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 15:05:27,348 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 15:05:27,348 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 15:05:27,348 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 15:05:27,348 INFO HealthCheck: Starting health checks...
+2025-10-11 15:05:27,744 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 15:05:27,744 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 15:05:32,819 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 15:05:32,819 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 15:05:46,531 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 15:05:46,531 INFO Request Queue: Request queue worker started
+2025-10-11 15:05:51,119 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:05:51,748 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 15:05:51,755 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 15:08:03,846 INFO Request Queue: Adding request to queue for user 1320303839701897230: làm j đấy
+2025-10-11 15:08:08,878 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:08:09,407 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 15:08:09,412 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 15:08:19,916 INFO Request Queue: Adding request to queue for user 1320303839701897230: sao nói chuyện cọc v
+2025-10-11 15:08:20,636 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:08:21,488 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 15:08:21,492 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 15:08:59,883 INFO Request Queue: Adding request to queue for user 1320303839701897230: ?
+2025-10-11 15:09:00,336 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 15:09:01,038 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 15:09:01,045 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 15:10:06,747 INFO Storage.Database: Cleared memory for user 1320303839701897230
