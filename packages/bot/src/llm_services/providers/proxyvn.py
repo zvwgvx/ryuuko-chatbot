@@ -21,6 +21,7 @@ DEFAULT_MODEL = "gpt-3.5-turbo"
 def get_vietnam_timestamp() -> str:
     return datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S GMT+7")
 
+# ĐƠN GIẢN HÓA: Hàm này chỉ cần chuyển tiếp payload đã được chuẩn hóa
 def _build_openai_messages(data: Dict) -> List[Dict[str, Any]]:
     messages = []
 
@@ -35,11 +36,11 @@ def _build_openai_messages(data: Dict) -> List[Dict[str, Any]]:
 
     messages.append({"role": "system", "content": system_content})
 
-    # SỬA LỖI: Xử lý content là string hoặc list
     for msg in data.get("messages", []) or []:
         if not isinstance(msg, dict) or "role" not in msg or msg["role"] == "system":
             continue
         openai_role = "assistant" if msg["role"] in ("assistant", "model") else "user"
+        # Chỉ cần chuyển tiếp content, vì nó đã được định dạng đúng ở events/messages.py
         messages.append({"role": openai_role, "content": msg["content"]})
 
     return messages
@@ -76,7 +77,7 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
     temperature = config.get("temperature")
     top_p = config.get("top_p")
 
-    if len(messages) <= 1 or not any(msg['role'] == 'user' for msg in messages):
+    if not any(msg['role'] == 'user' for msg in messages):
         return JSONResponse(
             {"ok": False, "error": "empty_prompt", "detail": "Không có nội dung để gửi."},
             status_code=400,

@@ -1,104 +1,90 @@
 # src/bot/events/messages.py
-import re, json, logging, asyncio, base64, mimetypes
+import re, json, logging, asyncio, base64, mimetypes, io
 from pathlib import Path
 from typing import List, Dict, Any
 from datetime import datetime, timezone, timedelta
 import discord
 from discord.ext import commands
+from PIL import Image
 
 logger = logging.getLogger("Bot.Events.Messages")
 
 # --- Constants ---
-FILE_MAX_BYTES = 200 * 1024
-IMAGE_MAX_BYTES = 10 * 1024 * 1024
-MAX_CHARS_PER_FILE = 10_000
-ALLOWED_TEXT_EXTENSIONS = {".txt", ".md", ".py", ".js", ".java", ".c", ".cpp", ".h", ".json", ".yaml", ".yml", ".csv",
-                           ".rs", ".go", ".rb", ".sh", ".html", ".css", ".ts", ".ini", ".toml"}
-ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
+IMAGE_MAX_BYTES = 30 * 1024 * 1024 # Tăng giới hạn file ảnh
+IMAGE_MAX_DIMENSION = 2048 # TĂNG GIỚI HẠN ĐỘ PHÂN GIẢI LÊN 2048PX
 ALLOWED_IMAGE_MIMES = {"image/jpeg", "image/jpg", "image/png", "image/gif", "image/webp", "image/bmp"}
-
+ALLOWED_IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".webp", ".bmp"}
 
 # --- Attachment Processing Functions ---
 async def _read_image_attachment(attachment: discord.Attachment) -> Dict:
-    entry = {"filename": attachment.filename, "type": "image", "data": None, "mime_type": None, "skipped": False,
-             "reason": None}
+    entry = {"filename": attachment.filename, "type": "image", "data": None, "mime_type": None, "skipped": False, "reason": None}
     try:
-        size = getattr(attachment, "size", 0) or 0
-        if size > IMAGE_MAX_BYTES:
-            entry["skipped"], entry["reason"] = True, f"image too large ({size} bytes)"
+        if attachment.size > IMAGE_MAX_BYTES:
+            entry["skipped"], entry["reason"] = True, f"image too large ({attachment.size} bytes)"
             return entry
-        content_type = getattr(attachment, "content_type", "") or ""
-        ext = (Path(attachment.filename).suffix or "").lower()
-        if not (content_type in ALLOWED_IMAGE_MIMES or ext in ALLOWED_IMAGE_EXTENSIONS):
-            entry["skipped"], entry["reason"] = True, f"unsupported image type ({content_type}, {ext})"
+        if not (attachment.content_type in ALLOWED_IMAGE_MIMES or (Path(attachment.filename).suffix or "").lower() in ALLOWED_IMAGE_EXTENSIONS):
+            entry["skipped"], entry["reason"] = True, f"unsupported image type ({attachment.content_type})"
             return entry
+
         image_data = await attachment.read()
-        entry["data"] = base64.b64encode(image_data).decode('utf-8')
-        entry["mime_type"] = content_type or mimetypes.guess_type(attachment.filename)[0] or "image/jpeg"
+
+        with Image.open(io.BytesIO(image_data)) as img:
+            if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
+                background = Image.new('RGB', img.size, (255, 255, 255))
+                background.paste(img, (0, 0), img.convert('RGBA'))
+                img = background
+
+            if max(img.width, img.height) > IMAGE_MAX_DIMENSION:
+                img.thumbnail((IMAGE_MAX_DIMENSION, IMAGE_MAX_DIMENSION), Image.Resampling.LANCZOS)
+                logger.info(f"Resized image {attachment.filename} to fit within {IMAGE_MAX_DIMENSION}px")
+
+            output_buffer = io.BytesIO()
+            img.save(output_buffer, format='JPEG', quality=95)
+            final_image_data = output_buffer.getvalue()
+            entry["mime_type"] = "image/jpeg"
+
+        entry["data"] = base64.b64encode(final_image_data).decode('utf-8')
+
     except Exception as e:
-        logger.exception(f"[ERROR] Reading image attachment {attachment.filename}")
-        entry["skipped"], entry["reason"] = True, f"read error: {e}"
+        logger.exception(f"[ERROR] Reading/Resizing image attachment {attachment.filename}")
+        entry["skipped"], entry["reason"] = True, f"read/resize error: {e}"
     return entry
 
+# --- Helper for Multimodal Payload ---
+def _build_multimodal_content(prompt_text: str, images: List[Dict]) -> List[Dict]:
+    content_parts = []
+    image_queue = [img for img in images if not img.get("skipped")]
+    text_segments = re.split(r'\s*\[ảnh\]\s*|\[ảnh\]', prompt_text)
 
-async def _read_text_attachment(attachment: discord.Attachment) -> Dict:
-    entry = {"filename": attachment.filename, "type": "text", "text": "", "skipped": False, "reason": None}
-    try:
-        size = int(getattr(attachment, "size", 0) or 0)
-        ext = (Path(attachment.filename).suffix or "").lower()
-        content_type = getattr(attachment, "content_type", "") or ""
-        if not (content_type.startswith("text") or ext in ALLOWED_TEXT_EXTENSIONS):
-            entry["skipped"], entry["reason"] = True, f"unsupported file type ({content_type!r}, {ext!r})"
-            return entry
-        if size and size > FILE_MAX_BYTES:
-            entry["skipped"], entry["reason"] = True, f"file too large ({size} bytes)"
-            return entry
-        b = await attachment.read()
-        entry["text"] = b.decode("utf-8", errors="replace")
-        if len(entry["text"]) > MAX_CHARS_PER_FILE: entry["text"] = entry["text"][:MAX_CHARS_PER_FILE] + "\n\n...[truncated]..."
-    except Exception as e:
-        logger.exception("[ERROR] Reading attachment %s", attachment.filename)
-        entry["skipped"], entry["reason"] = True, f"read error: {e}"
-    return entry
+    for i, segment in enumerate(text_segments):
+        if segment:
+            content_parts.append({"type": "text", "text": segment})
+        if i < len(text_segments) - 1:
+            if image_queue:
+                img = image_queue.pop(0)
+                content_parts.append({
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:{img['mime_type']};base64,{img['data']}",
+                        "detail": "auto"
+                    }
+                })
+            else:
+                content_parts.append({"type": "text", "text": "\n(Missing image for placeholder)\n"})
 
+    while image_queue:
+        img = image_queue.pop(0)
+        content_parts.append({
+            "type": "image_url",
+            "image_url": {
+                "url": f"data:{img['mime_type']};base64,{img['data']}",
+                "detail": "auto"
+            }
+        })
 
-async def _read_attachments_enhanced(attachments: List[discord.Attachment]) -> Dict:
-    result = {"text_files": [], "images": [], "text_summary": "", "has_images": False}
-    
-    image_attachments = []
-    text_attachments = []
-
-    # SỬA LỖI: Phân loại tệp đính kèm một cách an toàn
-    for att in attachments:
-        ext = (Path(att.filename).suffix or "").lower()
-        if att.content_type in ALLOWED_IMAGE_MIMES or ext in ALLOWED_IMAGE_EXTENSIONS:
-            image_attachments.append(att)
-        else:
-            text_attachments.append(att)
-
-    image_tasks = [_read_image_attachment(att) for att in image_attachments]
-    text_tasks = [_read_text_attachment(att) for att in text_attachments]
-    
-    if image_tasks:
-        result["images"] = await asyncio.gather(*image_tasks)
-    if text_tasks:
-        result["text_files"] = await asyncio.gather(*text_tasks)
-
-    for img in result["images"]:
-        if not img.get("skipped"): result["has_images"] = True
-
-    attach_summary, files_combined = [], ""
-    for fi in result["text_files"]:
-        if fi.get("skipped"): attach_summary.append(f"- {fi['filename']}: SKIPPED ({fi.get('reason')})")
-        else:
-            attach_summary.append(f"- {fi['filename']}: included ({len(fi['text'])} chars)")
-            files_combined += f"Filename: {fi['filename']}\n---\n{fi['text']}\n\n"
-    for img in result["images"]:
-        if img.get("skipped"): attach_summary.append(f"- {img['filename']}: SKIPPED ({img.get('reason')})")
-        else: attach_summary.append(f"- {img['filename']}: image included ({img.get('mime_type')})")
-    if attach_summary: result["text_summary"] = "\n".join(attach_summary) + "\n\n" + files_combined
-    return result
-
+    if not any(part.get("text") or part.get("type") == "image_url" for part in content_parts):
+        return []
+    return content_parts
 
 # --- Message Formatting Functions ---
 def split_message_smart(text: str, max_length: int = 1900) -> list[str]:
@@ -129,54 +115,39 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
             user_model = user_config_manager.get_user_model(user_id)
             user_system_message = user_config_manager.get_user_system_message(user_id)
 
-            model_info = mongodb_store.get_model_info(user_model)
-            if model_info:
-                user_config = user_config_manager.get_user_config(user_id)
-                user_level = user_config.get("access_level", 0)
-                required_level = model_info.get("access_level", 0)
-                if user_level < required_level:
-                    await message.channel.send(f"⛔ Model này yêu cầu cấp độ truy cập {required_level}. Cấp độ của bạn: {user_level}", reference=message)
-                    return
-                cost = model_info.get("credit_cost", 0)
-                if cost > 0 and user_config.get("credit", 0) < cost:
-                    await message.channel.send(f"⛔ Không đủ credit. Model này tốn {cost} credit. Số dư của bạn: {user_config.get('credit', 0)}", reference=message)
-                    return
+            image_attachments = [att for att in (message.attachments or []) if att.content_type in ALLOWED_IMAGE_MIMES or (Path(att.filename).suffix or "").lower() in ALLOWED_IMAGE_EXTENSIONS]
+            processed_images = await asyncio.gather(*[_read_image_attachment(att) for att in image_attachments])
 
-            attachments = list(message.attachments or [])
-            attachment_data = await _read_attachments_enhanced(attachments)
-            combined_text = (attachment_data.get("text_summary", "") + request.final_user_text).strip()
+            prompt_text = request.final_user_text.strip()
+            user_message_content = _build_multimodal_content(prompt_text, processed_images)
 
-            if not combined_text and not attachment_data["has_images"]: return
+            if not user_message_content: return
 
             payload_messages = []
             if user_system_message and user_system_message.get('content'):
                 payload_messages.append(user_system_message)
             
             payload_messages.extend(memory_store.get_user_messages(user_id))
-
-            user_content: List[Dict[str, Any]] = []
-            if combined_text:
-                user_content.append({"type": "text", "text": combined_text})
             
-            for img in attachment_data.get("images", []):
-                if not img.get("skipped") and img.get("data") and img.get("mime_type"):
-                    user_content.append({
-                        "type": "image_url",
-                        "image_url": {"url": f"data:{img['mime_type']};base64,{img['data']}"}
-                    })
-
-            final_content = user_content[0]["text"] if len(user_content) == 1 and user_content[0]["type"] == "text" else user_content
-            payload_messages.append({"role": "user", "content": final_content})
+            user_message_payload = {"role": "user", "content": user_message_content}
+            payload_messages.append(user_message_payload)
 
             ok, resp = await call_api.call_unified_api(messages=payload_messages, model=user_model)
 
             if ok and resp:
+                try:
+                    prompt_tokens = mongodb_store._count_tokens_for_message(user_message_payload)
+                    completion_tokens = mongodb_store._count_tokens_for_message({"role": "assistant", "content": resp})
+                    total_tokens = prompt_tokens + completion_tokens
+                    logger.info(f"Token usage: Prompt={prompt_tokens}, Completion={completion_tokens}, Total={total_tokens}")
+                except Exception as e:
+                    logger.warning(f"Could not calculate token usage: {e}")
+
                 await send_long_message_with_reference(message.channel, resp, message)
-                memory_store.add_message(user_id, {"role": "user", "content": combined_text})
+                
+                memory_store.add_message(user_id, user_message_payload)
                 memory_store.add_message(user_id, {"role": "assistant", "content": resp})
 
-                if model_info and model_info.get("credit_cost", 0) > 0:
-                    mongodb_store.deduct_user_credit(user_id, model_info["credit_cost"])
             elif not ok:
                 await message.channel.send(f"⚠️ Lỗi: {str(resp)[:500]}", reference=message)
 

@@ -60,6 +60,7 @@ def get_instruction_by_model(model: str) -> Optional[str]:
     text = instruction_data.get("system_instruction", "") if isinstance(instruction_data, dict) else str(instruction_data)
     return "\n".join(text) if isinstance(text, list) else str(text)
 
+# ĐƠN GIẢN HÓA: Hàm này chỉ cần chuyển tiếp payload đã được chuẩn hóa
 def _build_openai_messages(data: Dict, system_prompt: str) -> List[Dict[str, Any]]:
     messages = []
     timestamp_str = get_vietnam_timestamp()
@@ -70,8 +71,8 @@ def _build_openai_messages(data: Dict, system_prompt: str) -> List[Dict[str, Any
         if not isinstance(msg, dict) or "role" not in msg or msg["role"] == "system":
             continue
         
-        # SỬA LỖI: Xử lý content là string hoặc list
         openai_role = "assistant" if msg["role"] in ("assistant", "model") else "user"
+        # Chỉ cần chuyển tiếp content, vì nó đã được định dạng đúng ở events/messages.py
         messages.append({"role": openai_role, "content": msg["content"]})
 
     return messages
@@ -105,8 +106,7 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
         return JSONResponse({"ok": False, "error": "instruction_error", "detail": f"Không tìm thấy instruction cho model {original_model}"}, status_code=500)
 
     messages = _build_openai_messages(data, system_prompt)
-    # Kiểm tra lại sau khi xây dựng, đảm bảo có tin nhắn của user
-    if len(messages) <= 1 or not any(m["role"] == "user" for m in messages):
+    if not any(m["role"] == "user" for m in messages):
         return JSONResponse({"ok": False, "error": "empty_prompt", "detail": "Không có nội dung để gửi."}, status_code=400)
 
     config = data.get("config", {})

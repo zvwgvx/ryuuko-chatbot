@@ -548,3 +548,818 @@ AttributeError: 'coroutine' object has no attribute '_coro'
 2025-10-11 16:14:31,277 INFO Bot.Main: [EXIT] Bot process exiting.
 2025-10-11 16:14:31,279 INFO Request Queue: Request queue worker cancelled
 2025-10-11 16:14:31,280 INFO __main__: Shutdown signal received.
+2025-10-11 20:46:47,604 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 20:46:47,605 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 20:46:47,605 INFO root: Compressed archives will be created in: logs
+2025-10-11 20:46:47,605 INFO __main__: Starting application...
+2025-10-11 20:46:47,605 INFO __main__: Initializing storage...
+2025-10-11 20:46:47,605 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 20:46:47,626 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 20:46:47,626 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 20:46:47,652 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 20:46:47,652 INFO __main__: Storage initialized successfully.
+2025-10-11 20:46:47,652 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 20:46:47,653 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 20:46:47,653 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 20:46:47,653 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 20:46:47,654 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 20:46:47,654 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 20:46:47,654 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 20:46:47,655 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 20:46:47,655 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 20:46:47,655 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 20:46:47,655 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 20:46:47,655 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 20:46:47,655 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 20:46:47,655 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 20:46:47,655 INFO HealthCheck: Starting health checks...
+2025-10-11 20:46:48,177 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 20:46:48,177 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 20:46:52,033 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 20:46:52,034 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 20:48:57,661 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 20:49:11,661 INFO Request Queue: Adding request to queue for user 1320303839701897230: cho anh biết chi tiết nội dung bức ảnh này
+2025-10-11 20:49:11,662 INFO Request Queue: Request queue worker started
+2025-10-11 20:49:22,363 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 20:49:24,436 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 20:49:24,445 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 20:49:51,164 INFO Request Queue: Adding request to queue for user 1320303839701897230: anh cần biết chi tiết mọi nội dung bên trong
+2025-10-11 20:50:05,713 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 20:50:06,627 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 20:50:06,633 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 21:28:12,759 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 21:28:12,762 INFO Request Queue: Request queue worker cancelled
+2025-10-11 21:28:12,764 INFO __main__: Shutdown signal received.
+2025-10-11 21:28:14,430 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 21:28:14,431 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 21:28:14,431 INFO root: Compressed archives will be created in: logs
+2025-10-11 21:28:14,431 INFO __main__: Starting application...
+2025-10-11 21:28:14,431 INFO __main__: Initializing storage...
+2025-10-11 21:28:14,431 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 21:28:14,447 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 21:28:14,448 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 21:28:14,472 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 21:28:14,472 INFO __main__: Storage initialized successfully.
+2025-10-11 21:28:14,472 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 21:28:14,472 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 21:28:14,472 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 21:28:14,472 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 21:28:14,473 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 21:28:14,474 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 21:28:14,474 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 21:28:14,474 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 21:28:14,474 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 21:28:14,475 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 21:28:14,475 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 21:28:14,475 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 21:28:14,475 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 21:28:14,475 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 21:28:14,475 INFO HealthCheck: Starting health checks...
+2025-10-11 21:28:15,048 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 21:28:15,048 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 21:28:18,735 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 21:28:18,735 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 21:56:03,175 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 21:56:03,708 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 21:56:03,709 INFO Request Queue: Request queue worker started
+2025-10-11 21:56:08,039 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 21:56:08,566 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 21:56:08,581 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 21:56:08,583 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 21:56:08,603 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 22:00:32,177 INFO Request Queue: Adding request to queue for user 1320303839701897230: đang làm gì thế
+2025-10-11 22:00:32,728 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:00:34,291 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:00:34,291 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:00:34,298 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 22:00:34,298 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:00:34,298 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:00:34,305 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 22:04:13,292 INFO Request Queue: Adding request to queue for user 1320303839701897230: em thấy bức ảnh sau không
+2025-10-11 22:04:18,043 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:04:18,696 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:18,697 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:18,697 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:18,706 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 22:04:18,708 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:18,708 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:18,708 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:18,717 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 22:04:30,610 ERROR Bot.Main: An unexpected error occurred in command 'memory': Command raised an exception: HTTPException: 400 Bad Request (error code: 50035): Invalid Form Body
+In content: Must be 4000 or fewer in length.
+NoneType: None
+2025-10-11 22:04:38,375 INFO Request Queue: Adding request to queue for user 1320303839701897230: ảnh đó nội dung về cái gì vậy
+2025-10-11 22:04:40,036 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:04:41,224 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,224 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,227 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,228 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,240 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 22:04:41,242 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,242 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,242 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,242 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:04:41,253 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 22:10:22,290 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 22:13:31,431 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 22:13:31,432 INFO Request Queue: Request queue worker cancelled
+2025-10-11 22:13:31,434 INFO __main__: Shutdown signal received.
+2025-10-11 22:13:33,665 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 22:13:33,665 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 22:13:33,665 INFO root: Compressed archives will be created in: logs
+2025-10-11 22:13:33,665 INFO __main__: Starting application...
+2025-10-11 22:13:33,665 INFO __main__: Initializing storage...
+2025-10-11 22:13:33,666 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 22:13:33,693 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 22:13:33,693 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 22:13:33,715 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 22:13:33,715 INFO __main__: Storage initialized successfully.
+2025-10-11 22:13:33,716 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 22:13:33,716 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 22:13:33,716 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 22:13:33,716 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 22:13:33,718 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 22:13:33,718 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 22:13:33,718 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 22:13:33,718 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 22:13:33,719 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 22:13:33,719 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 22:13:33,719 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 22:13:33,719 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 22:13:33,720 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 22:13:33,720 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 22:13:33,720 INFO HealthCheck: Starting health checks...
+2025-10-11 22:13:34,152 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 22:13:34,152 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 22:13:38,318 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 22:13:38,318 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 22:13:55,552 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê ryu em thấy ảnh này không
+2025-10-11 22:13:55,553 INFO Request Queue: Request queue worker started
+2025-10-11 22:13:56,847 INFO Bot.Events.Messages: Resized image image.png to fit within 1024px
+2025-10-11 22:14:03,523 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:14:04,083 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:14:04,094 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 22:14:04,096 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:14:04,104 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 22:15:31,953 INFO Request Queue: Adding request to queue for user 1320303839701897230: nội dung bức ảnh là gì v ?
+2025-10-11 22:15:37,401 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:15:37,955 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:15:37,956 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:15:37,965 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 22:15:37,966 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:15:37,967 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:15:37,976 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 22:16:00,825 INFO Request Queue: Adding request to queue for user 1320303839701897230: cụ thể là loại cấu trúc giữ liệu gì vậy, em có biết không
+2025-10-11 22:16:09,580 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:16:10,259 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:10,260 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:10,261 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:10,272 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 22:16:10,275 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:10,275 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:10,275 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:10,283 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 22:16:18,815 INFO Request Queue: Adding request to queue for user 1320303839701897230: liệu có phải KGs ?
+2025-10-11 22:16:29,291 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:16:29,843 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,844 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,844 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,844 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,855 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 22:16:29,856 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,856 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,856 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,856 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:29,861 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 22:16:37,604 INFO Request Queue: Adding request to queue for user 1320303839701897230: tên video là gì ?
+2025-10-11 22:16:39,241 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:16:39,937 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,938 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,938 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,938 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,938 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,945 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-11 22:16:39,948 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,948 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,948 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,948 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,948 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:39,955 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-11 22:16:50,637 INFO Request Queue: Adding request to queue for user 1320303839701897230: ô vlxx thế à, anh quên, sorry bé iu nhiều
+2025-10-11 22:16:57,173 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:16:57,777 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,778 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,778 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,778 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,778 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,779 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,789 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 11
+2025-10-11 22:16:57,791 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,791 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,791 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,791 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,791 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,791 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:16:57,797 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 12
+2025-10-11 22:19:00,173 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 22:19:00,174 INFO Request Queue: Request queue worker cancelled
+2025-10-11 22:19:00,175 INFO __main__: Shutdown signal received.
+2025-10-11 22:19:01,719 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 22:19:01,719 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 22:19:01,719 INFO root: Compressed archives will be created in: logs
+2025-10-11 22:19:01,719 INFO __main__: Starting application...
+2025-10-11 22:19:01,719 INFO __main__: Initializing storage...
+2025-10-11 22:19:01,719 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 22:19:01,728 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 22:19:01,729 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 22:19:01,729 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 22:19:01,730 INFO __main__: Storage initialized successfully.
+2025-10-11 22:19:01,730 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 22:19:01,730 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 22:19:01,730 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 22:19:01,730 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 22:19:01,730 INFO Bot.Services.Auth: [OK] Loaded 3 authorized users from MongoDB.
+2025-10-11 22:19:01,730 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 22:19:01,731 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 22:19:01,731 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 22:19:01,731 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 22:19:01,731 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 22:19:01,731 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 22:19:01,731 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 22:19:01,731 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 22:19:01,731 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 22:19:01,731 INFO HealthCheck: Starting health checks...
+2025-10-11 22:19:02,146 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 22:19:02,146 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 22:19:05,719 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 22:19:05,719 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 22:19:06,285 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 22:19:16,959 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê em thấy ảnh sau không
+2025-10-11 22:19:16,959 INFO Request Queue: Request queue worker started
+2025-10-11 22:19:17,742 INFO Bot.Events.Messages: Resized image image.png to fit within 768px
+2025-10-11 22:19:28,093 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:19:28,685 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:19:28,693 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 22:19:28,694 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:19:28,714 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 22:21:05,228 INFO Request Queue: Adding request to queue for user 1320303839701897230: nội dung của nó là gì vậy
+2025-10-11 22:21:11,854 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:21:12,476 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:12,477 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:12,487 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 22:21:12,489 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:12,489 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:12,498 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 22:21:23,252 INFO Request Queue: Adding request to queue for user 1320303839701897230: KGs á
+2025-10-11 22:21:26,141 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:21:26,622 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:26,622 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:26,622 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:26,629 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 22:21:26,630 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:26,630 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:26,631 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:26,636 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 22:21:35,587 INFO Request Queue: Adding request to queue for user 1320303839701897230: anh không, anh đang tìm hiểu nó
+2025-10-11 22:21:44,080 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:21:44,678 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,678 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,678 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,678 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,689 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 22:21:44,692 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,692 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,693 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,693 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:21:44,703 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 22:22:26,258 INFO Request Queue: Adding request to queue for user 1320303839701897230: a đang học nó để phát triển kí ức toàn vẹn, hoàn hảo cho em
+2025-10-11 22:22:36,490 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 22:22:37,135 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,136 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,136 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,136 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,136 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,144 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-11 22:22:37,145 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,145 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,145 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,145 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,145 WARNING Storage.Database: Error calculating tokens for message: expected string or buffer
+2025-10-11 22:22:37,150 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-11 23:06:22,321 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:06:22,324 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:06:22,329 INFO __main__: Shutdown signal received.
+2025-10-11 23:06:24,046 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:06:24,046 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:06:24,046 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:06:24,046 INFO __main__: Starting application...
+2025-10-11 23:06:24,046 INFO __main__: Initializing storage...
+2025-10-11 23:06:24,046 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:06:24,057 WARNING Storage.Database: google-generativeai SDK not found. Token counting will use estimations.
+2025-10-11 23:06:24,063 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 23:06:24,064 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:06:24,098 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:06:24,099 INFO __main__: Storage initialized successfully.
+2025-10-11 23:06:24,099 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:06:24,099 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:06:24,099 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:06:24,099 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:06:24,099 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:06:24,100 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:06:24,100 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:06:24,100 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:06:24,100 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:06:24,100 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:06:24,100 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:06:24,100 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:06:24,100 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:06:24,101 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:06:24,101 INFO HealthCheck: Starting health checks...
+2025-10-11 23:06:24,571 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:06:24,571 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:06:28,382 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:06:28,383 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:06:32,318 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 23:07:09,224 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 23:07:09,225 INFO Request Queue: Request queue worker started
+2025-10-11 23:07:09,226 ERROR Bot.Events.Messages: [ERROR] Lỗi khi xử lý request cho user 1320303839701897230
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 115, in process_ai_request
+    user_model = user_config_manager.get_user_model(user_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/user_config.py", line 85, in get_user_model
+    return self.mongo_store.get_user_model(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_user_model'
+2025-10-11 23:10:11,564 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:10:11,566 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:10:11,569 INFO __main__: Shutdown signal received.
+2025-10-11 23:10:12,831 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:10:12,832 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:10:12,832 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:10:12,832 INFO __main__: Starting application...
+2025-10-11 23:10:12,832 INFO __main__: Initializing storage...
+2025-10-11 23:10:12,832 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:10:12,836 WARNING Storage.Database: google-generativeai SDK not found. Token counting will use estimations.
+2025-10-11 23:10:12,836 CRITICAL Config.Loader: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+2025-10-11 23:10:12,837 CRITICAL __main__: A fatal error occurred: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/loader.py", line 103, in init_storage
+    init_mongodb_store(MONGODB_CONNECTION_STRING, MONGODB_DATABASE_NAME)
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 256, in init_mongodb_store
+    _mongodb_store = MongoDBStore(connection_string, database_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 50, in __init__
+    self._connect()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 59, in _connect
+    self.client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/synchronous/mongo_client.py", line 804, in __init__
+    res = _validate_uri(
+          ^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/uri_parser_shared.py", line 560, in _validate_uri
+    options.update(split_options(opts, validate, warn, normalize))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/uri_parser_shared.py", line 410, in split_options
+    raise InvalidURI("MongoDB URI options are key=value pairs") from None
+pymongo.errors.InvalidURI: MongoDB URI options are key=value pairs
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/__main__.py", line 25, in main
+    loader.init_storage()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/loader.py", line 107, in init_storage
+    raise RuntimeError(f"MongoDB initialization FAILED: {e}") from e
+RuntimeError: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+2025-10-11 23:10:47,303 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:10:47,303 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:10:47,303 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:10:47,303 INFO __main__: Starting application...
+2025-10-11 23:10:47,303 INFO __main__: Initializing storage...
+2025-10-11 23:10:47,303 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:10:47,308 WARNING Storage.Database: google-generativeai SDK not found. Token counting will use estimations.
+2025-10-11 23:10:47,308 CRITICAL Config.Loader: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+2025-10-11 23:10:47,308 CRITICAL __main__: A fatal error occurred: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/loader.py", line 103, in init_storage
+    init_mongodb_store(MONGODB_CONNECTION_STRING, MONGODB_DATABASE_NAME)
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 256, in init_mongodb_store
+    _mongodb_store = MongoDBStore(connection_string, database_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 50, in __init__
+    self._connect()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 59, in _connect
+    self.client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/synchronous/mongo_client.py", line 804, in __init__
+    res = _validate_uri(
+          ^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/uri_parser_shared.py", line 560, in _validate_uri
+    options.update(split_options(opts, validate, warn, normalize))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/uri_parser_shared.py", line 410, in split_options
+    raise InvalidURI("MongoDB URI options are key=value pairs") from None
+pymongo.errors.InvalidURI: MongoDB URI options are key=value pairs
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/__main__.py", line 25, in main
+    loader.init_storage()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/loader.py", line 107, in init_storage
+    raise RuntimeError(f"MongoDB initialization FAILED: {e}") from e
+RuntimeError: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+2025-10-11 23:12:30,855 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:12:30,856 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:12:30,856 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:12:30,856 INFO __main__: Starting application...
+2025-10-11 23:12:30,856 INFO __main__: Initializing storage...
+2025-10-11 23:12:30,856 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:12:30,861 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:12:30,861 CRITICAL Config.Loader: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+2025-10-11 23:12:30,861 CRITICAL __main__: A fatal error occurred: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/loader.py", line 103, in init_storage
+    init_mongodb_store(MONGODB_CONNECTION_STRING, MONGODB_DATABASE_NAME)
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 256, in init_mongodb_store
+    _mongodb_store = MongoDBStore(connection_string, database_name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 50, in __init__
+    self._connect()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 59, in _connect
+    self.client = MongoClient(conn_str, serverSelectionTimeoutMS=5000)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/synchronous/mongo_client.py", line 804, in __init__
+    res = _validate_uri(
+          ^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/uri_parser_shared.py", line 560, in _validate_uri
+    options.update(split_options(opts, validate, warn, normalize))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/pymongo/uri_parser_shared.py", line 410, in split_options
+    raise InvalidURI("MongoDB URI options are key=value pairs") from None
+pymongo.errors.InvalidURI: MongoDB URI options are key=value pairs
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/__main__.py", line 25, in main
+    loader.init_storage()
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/loader.py", line 107, in init_storage
+    raise RuntimeError(f"MongoDB initialization FAILED: {e}") from e
+RuntimeError: MongoDB initialization FAILED: MongoDB URI options are key=value pairs
+2025-10-11 23:13:42,330 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:13:42,331 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:13:42,331 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:13:42,331 INFO __main__: Starting application...
+2025-10-11 23:13:42,331 INFO __main__: Initializing storage...
+2025-10-11 23:13:42,331 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:13:42,336 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:13:42,340 INFO Storage.Database: MongoDB indexes created successfully
+2025-10-11 23:13:42,340 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:13:42,342 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:13:42,342 INFO __main__: Storage initialized successfully.
+2025-10-11 23:13:42,342 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:13:42,342 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:13:42,342 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:13:42,342 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:13:42,342 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:13:42,342 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:13:42,342 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:13:42,343 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:13:42,343 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:13:42,343 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:13:42,343 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:13:42,343 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:13:42,343 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:13:42,343 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:13:42,343 INFO HealthCheck: Starting health checks...
+2025-10-11 23:13:42,789 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:13:42,789 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:13:46,330 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:13:46,330 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:13:48,350 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 23:13:48,350 INFO Request Queue: Request queue worker started
+2025-10-11 23:13:53,814 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:13:54,360 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:13:54,365 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 23:13:54,366 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:13:54,366 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:13:54,367 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 23:14:13,966 INFO Request Queue: Adding request to queue for user 1320303839701897230: thấy ảnh này không em
+2025-10-11 23:14:14,766 INFO Bot.Events.Messages: Resized image 559911993_1407632451370341_2947289656309770197_n.png to fit within 768px
+2025-10-11 23:14:20,578 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:14:21,134 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:21,134 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:21,134 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:21,135 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 0
+2025-10-11 23:14:21,136 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:21,136 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 23:14:27,511 INFO Request Queue: Adding request to queue for user 1320303839701897230: trong ảnh là ai vậy em
+2025-10-11 23:14:32,618 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:14:33,394 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:33,395 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:33,397 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 23:14:33,399 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:33,419 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:33,419 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:33,420 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 23:14:43,382 INFO Request Queue: Adding request to queue for user 1320303839701897230: ưtf đấy là messi mà
+2025-10-11 23:14:47,344 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:14:47,985 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,985 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,985 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,985 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,987 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 23:14:47,987 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,988 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,988 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,988 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,988 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:14:47,988 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 23:15:02,431 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 23:15:15,461 INFO Request Queue: Adding request to queue for user 1320303839701897230: em thấy ảnh này không
+2025-10-11 23:15:16,553 INFO Bot.Events.Messages: Resized image 561576652_801160592522817_5990168697225078858_n.png to fit within 768px
+2025-10-11 23:15:27,699 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:15:28,402 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:15:28,439 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 0
+2025-10-11 23:15:28,441 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:15:28,442 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 23:16:07,158 INFO Request Queue: Adding request to queue for user 1320303839701897230: em thấy gì trong bức ảnh đó
+2025-10-11 23:16:10,642 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:16:11,286 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:16:11,286 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:16:11,299 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 23:16:11,310 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:16:11,311 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:16:11,311 WARNING Storage.Database: Error calculating tokens for message: "Unable to determine the intended type of the `dict`. For `Content`, a 'parts' key is expected. For `Part`, either an 'inline_data' or a 'text' key is expected. For `Blob`, both 'mime_type' and 'data' keys are expected. However, the provided dictionary has the following keys: ['role', 'content']"
+2025-10-11 23:16:11,311 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 23:16:28,241 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:16:28,242 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:16:28,243 INFO __main__: Shutdown signal received.
+2025-10-11 23:18:45,120 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:18:45,121 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:18:45,121 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:18:45,121 INFO __main__: Starting application...
+2025-10-11 23:18:45,121 INFO __main__: Initializing storage...
+2025-10-11 23:18:45,121 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:18:45,127 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:18:45,129 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:18:45,130 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:18:45,130 INFO __main__: Storage initialized successfully.
+2025-10-11 23:18:45,130 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:18:45,130 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:18:45,130 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:18:45,130 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:18:45,130 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:18:45,130 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:18:45,131 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:18:45,131 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:18:45,131 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:18:45,131 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:18:45,131 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:18:45,131 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:18:45,131 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:18:45,131 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:18:45,131 INFO HealthCheck: Starting health checks...
+2025-10-11 23:18:45,564 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:18:45,564 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:18:49,057 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:18:49,057 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:18:57,082 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 23:18:57,083 INFO Request Queue: Request queue worker started
+2025-10-11 23:18:57,085 ERROR Bot.Events.Messages: [ERROR] Lỗi khi xử lý request cho user 1320303839701897230
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/events/messages.py", line 116, in process_ai_request
+    user_system_message = user_config_manager.get_user_system_message(user_id)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/config/user_config.py", line 93, in get_user_system_message
+    return self.mongo_store.get_user_system_message(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 177, in get_user_system_message
+    return {"role": "system", "content": self.get_user_system_prompt(user_id)}
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/storage/database.py", line 174, in get_user_system_prompt
+    return self.get_user_config(user_id)["system_prompt"]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+KeyError: 'system_prompt'
+2025-10-11 23:20:28,129 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:20:28,131 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:20:28,133 INFO __main__: Shutdown signal received.
+2025-10-11 23:20:29,288 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:20:29,288 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:20:29,288 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:20:29,288 INFO __main__: Starting application...
+2025-10-11 23:20:29,288 INFO __main__: Initializing storage...
+2025-10-11 23:20:29,288 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:20:29,292 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:20:29,295 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:20:29,296 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:20:29,296 INFO __main__: Storage initialized successfully.
+2025-10-11 23:20:29,296 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:20:29,297 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:20:29,297 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:20:29,297 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:20:29,297 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:20:29,297 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:20:29,297 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:20:29,297 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:20:29,297 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:20:29,297 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:20:29,297 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:20:29,298 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:20:29,298 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:20:29,298 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:20:29,298 INFO HealthCheck: Starting health checks...
+2025-10-11 23:20:29,754 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:20:29,754 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:20:33,495 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:20:33,496 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:20:41,648 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 23:20:43,727 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 23:20:43,727 INFO Request Queue: Request queue worker started
+2025-10-11 23:20:49,366 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:20:50,109 ERROR Storage.Database: Failed to count tokens with genai, falling back to estimation. Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for countTokens. Call ListModels to see the list of available models and their supported methods.
+2025-10-11 23:20:50,111 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 23:20:50,196 ERROR Storage.Database: Failed to count tokens with genai, falling back to estimation. Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for countTokens. Call ListModels to see the list of available models and their supported methods.
+2025-10-11 23:20:50,284 ERROR Storage.Database: Failed to count tokens with genai, falling back to estimation. Error: 404 models/gemini-1.5-flash is not found for API version v1beta, or is not supported for countTokens. Call ListModels to see the list of available models and their supported methods.
+2025-10-11 23:20:50,286 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 23:22:16,665 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:22:16,670 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:22:16,672 INFO __main__: Shutdown signal received.
+2025-10-11 23:22:19,789 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:22:19,789 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:22:19,789 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:22:19,789 INFO __main__: Starting application...
+2025-10-11 23:22:19,789 INFO __main__: Initializing storage...
+2025-10-11 23:22:19,789 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:22:19,794 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:22:19,797 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:22:19,798 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:22:19,798 INFO __main__: Storage initialized successfully.
+2025-10-11 23:22:19,798 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:22:19,798 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:22:19,798 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:22:19,798 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:22:19,798 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:22:19,799 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:22:19,799 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:22:19,799 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:22:19,799 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:22:19,799 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:22:19,799 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:22:19,800 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:22:19,800 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:22:19,800 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:22:19,800 INFO HealthCheck: Starting health checks...
+2025-10-11 23:22:20,236 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:22:20,236 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:22:23,811 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:22:23,811 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:23:14,280 INFO Storage.Database: Cleared memory for user 1320303839701897230
+2025-10-11 23:23:17,515 INFO Request Queue: Adding request to queue for user 1320303839701897230: ê
+2025-10-11 23:23:17,515 INFO Request Queue: Request queue worker started
+2025-10-11 23:23:20,088 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:23:20,902 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 1
+2025-10-11 23:23:21,121 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 2
+2025-10-11 23:23:57,405 INFO Request Queue: Adding request to queue for user 1320303839701897230: thấy ảnh này không
+2025-10-11 23:24:02,523 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:24:03,632 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 3
+2025-10-11 23:24:04,181 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 4
+2025-10-11 23:24:12,191 INFO Request Queue: Adding request to queue for user 1320303839701897230: ảnh đó về cái j vậy
+2025-10-11 23:24:13,435 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:24:15,201 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 5
+2025-10-11 23:24:16,014 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 6
+2025-10-11 23:24:26,528 INFO Request Queue: Adding request to queue for user 1320303839701897230: phân tích hộ anh chi tiết bức ảnh đi
+2025-10-11 23:24:32,410 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:24:33,992 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 7
+2025-10-11 23:24:34,961 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 8
+2025-10-11 23:24:50,642 INFO Request Queue: Adding request to queue for user 1320303839701897230: vậy khung cảnh xung quanh ở đâu vậy,
+2025-10-11 23:24:52,219 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:24:54,402 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 9
+2025-10-11 23:24:55,631 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 10
+2025-10-11 23:25:02,023 INFO Request Queue: Adding request to queue for user 1320303839701897230: ý anh là chỗ nào ở vn ấy
+2025-10-11 23:25:05,109 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:25:06,932 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 11
+2025-10-11 23:25:08,380 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 12
+2025-10-11 23:26:59,591 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:26:59,593 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:26:59,595 INFO __main__: Shutdown signal received.
+2025-10-11 23:27:02,989 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:27:02,989 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:27:02,990 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:27:02,990 INFO __main__: Starting application...
+2025-10-11 23:27:02,990 INFO __main__: Initializing storage...
+2025-10-11 23:27:02,990 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:27:02,996 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:27:02,999 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:27:03,000 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:27:03,001 INFO __main__: Storage initialized successfully.
+2025-10-11 23:27:03,001 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:27:03,001 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:27:03,001 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:27:03,001 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:27:03,001 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:27:03,001 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:27:03,002 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:27:03,002 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:27:03,002 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:27:03,002 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:27:03,002 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:27:03,002 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:27:03,002 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:27:03,002 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:27:03,002 INFO HealthCheck: Starting health checks...
+2025-10-11 23:27:03,465 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:27:03,465 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:27:07,209 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:27:07,209 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:27:27,171 INFO Request Queue: Adding request to queue for user 1320303839701897230: lại nhờ em 1 chút : bức ảnh trên là ảnh chụp ở nơi đâu vậy
+2025-10-11 23:27:27,171 INFO Request Queue: Request queue worker started
+2025-10-11 23:27:28,140 INFO Bot.Events.Messages: Resized image image.png to fit within 1536px
+2025-10-11 23:27:35,097 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:27:35,136 WARNING Bot.Events.Messages: Could not calculate token usage: 'MemoryStore' object has no attribute '_count_tokens_for_message'
+2025-10-11 23:27:37,675 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 13
+2025-10-11 23:27:39,496 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 14
+2025-10-11 23:28:31,168 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:28:31,169 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:28:31,170 INFO __main__: Shutdown signal received.
+2025-10-11 23:28:35,339 INFO root: File logging enabled: logs/ryuuko.log
+2025-10-11 23:28:35,339 INFO root: Log rotation: daily, keeping 30 days
+2025-10-11 23:28:35,339 INFO root: Compressed archives will be created in: logs
+2025-10-11 23:28:35,340 INFO __main__: Starting application...
+2025-10-11 23:28:35,340 INFO __main__: Initializing storage...
+2025-10-11 23:28:35,340 INFO Config.Loader: Initializing MongoDB connection to database: polydevsdb
+2025-10-11 23:28:35,346 INFO Storage.Database: Initialized genai model for token counting.
+2025-10-11 23:28:35,350 INFO Storage.Database: Successfully connected to MongoDB: polydevsdb
+2025-10-11 23:28:35,351 INFO Config.Loader: MongoDB store initialized successfully.
+2025-10-11 23:28:35,351 INFO __main__: Storage initialized successfully.
+2025-10-11 23:28:35,352 WARNING discord.client: PyNaCl is not installed, voice will NOT be supported
+2025-10-11 23:28:35,352 INFO Bot.Main: [INIT] Initializing bot modules...
+2025-10-11 23:28:35,352 INFO Storage.Memory: MemoryStore initialized with MongoDB backend.
+2025-10-11 23:28:35,352 INFO Config.UserConfig: UserConfigManager initialized successfully with MongoDB.
+2025-10-11 23:28:35,352 ERROR Bot.Services.Auth: [ERROR] Failed to load authorized users from MongoDB: 'MongoDBStore' object has no attribute 'get_authorized_users'
+Traceback (most recent call last):
+  File "/Users/zvwgvx/PycharmProjects/ryuuko/packages/bot/src/services/auth.py", line 25, in load_authorized_users
+    users_set = mongodb_store.get_authorized_users()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'MongoDBStore' object has no attribute 'get_authorized_users'
+2025-10-11 23:28:35,352 INFO Bot.Commands: [INIT] Registering all command groups...
+2025-10-11 23:28:35,352 INFO Bot.Commands.Basic: Basic commands have been successfully registered.
+2025-10-11 23:28:35,353 INFO Bot.Commands.User: User commands have been successfully registered.
+2025-10-11 23:28:35,353 INFO Bot.Commands.Admin: Admin commands have been successfully registered.
+2025-10-11 23:28:35,353 INFO Bot.Commands.System: System commands have been successfully registered.
+2025-10-11 23:28:35,379 INFO Bot.Commands: [OK] All command groups have been registered.
+2025-10-11 23:28:35,379 INFO Bot.Events.Messages: [OK] Message event listeners have been registered
+2025-10-11 23:28:35,380 INFO Bot.Main: [OK] All bot modules initialized successfully.
+2025-10-11 23:28:35,380 INFO Bot.Main: [HEALTH] Running pre-startup health checks...
+2025-10-11 23:28:35,380 INFO HealthCheck: Starting health checks...
+2025-10-11 23:28:35,794 INFO Bot.Main: [OK] All health checks passed!
+2025-10-11 23:28:35,794 INFO Bot.Main: [START] Starting Discord bot...
+2025-10-11 23:28:39,646 INFO Bot.Main: [OK] Bot is ready: Ryuuko Preview#2812 (id=1425479067095797924)
+2025-10-11 23:28:39,646 INFO Bot.Main: Registered prefix commands: ['addcredit', 'addmodel', 'auth', 'auths', 'clearmemory', 'deauth', 'deductcredit', 'editmodel', 'help', 'memory', 'model', 'models', 'ping', 'profile', 'removemodel', 'setcredit', 'setlevel', 'showprompt', 'sysprompt']
+2025-10-11 23:28:47,572 INFO Request Queue: Adding request to queue for user 1320303839701897230: hỏi lần cuối : đây là đâu
+2025-10-11 23:28:47,572 INFO Request Queue: Request queue worker started
+2025-10-11 23:28:49,004 INFO Bot.Events.Messages: Resized image BF04-C490C3AAm-ThuE1BAADn-PhC6B0E1BB9Bc.png to fit within 1536px
+2025-10-11 23:28:54,754 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:28:55,433 INFO Bot.Events.Messages: Token usage: Prompt=266, Completion=12, Total=278
+2025-10-11 23:28:57,987 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 15
+2025-10-11 23:28:59,966 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 16
+2025-10-11 23:30:31,019 INFO Request Queue: Adding request to queue for user 1320303839701897230: ủa càua thuận phước đà nẵng mà
+2025-10-11 23:30:38,043 INFO httpx: HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/openai/chat/completions "HTTP/1.1 200 OK"
+2025-10-11 23:30:38,279 INFO Bot.Events.Messages: Token usage: Prompt=12, Completion=9, Total=21
+2025-10-11 23:30:41,178 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 17
+2025-10-11 23:30:43,586 INFO Storage.Database: Successfully added message for user 1320303839701897230. Total messages: 18
+2025-10-11 23:30:52,504 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-11 23:30:52,504 INFO Request Queue: Request queue worker cancelled
+2025-10-11 23:30:52,505 INFO __main__: Shutdown signal received.

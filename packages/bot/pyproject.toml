@@ -31,8 +31,9 @@ dependencies = [
     "tiktoken>=0.4.0",
     "colorama>=0.4.6",
     "google-genai>=0.4.0",
+    "google-generativea",
     "fastapi>=0.118.0",
-    "openai>=1.3.0" # <--- THÊM THƯ VIỆN OPENAI
+    "openai>=1.3.0"
 ]
 
 [project.optional-dependencies]
