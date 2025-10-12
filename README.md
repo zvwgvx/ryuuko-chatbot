@@ -1,86 +1,128 @@
-# Ryuuko — Discord LLM Bot
+# Ryuuko Bot
 
-**Ryuuko** is a modular and extensible Discord bot powered by Large Language Models (LLMs). It's designed to be a versatile chatbot that can be customized and extended with new commands and functionalities. The project is structured as a monorepo to support future expansion with other services like a web interface or an API.
+A modular, high-performance Discord bot designed as a gateway to various Large Language Models (LLMs). It supports multimodal interactions, conversation memory, and a robust user management system.
 
-## Features
+## Key Features
 
-*   **Modular Architecture**: Easily extend the bot by adding new commands, events, or services.
-*   **LLM Integration**: Connects with LLM providers for intelligent conversation.
-*   **Conversation Memory**: Remembers previous messages in a conversation for better context.
-*   **Configuration Management**: Flexible configuration system using environment variables and a `config.json` file.
-*   **Role-Based Access Control**: Restrict commands to authorized users.
-*   **Asynchronous Processing**: Uses a request queue to handle LLM API calls without blocking the bot.
+- **Modular Provider System**: Easily switch between different LLM backends (e.g., Google's Gemini, custom proxies like ProxyVN) without changing the core logic.
+- **Multimodal Conversations**: Supports understanding and discussing images within a conversation. Users can place images at specific points in their prompt for contextual analysis.
+- **Persistent Memory**: Maintains conversation history for each user, allowing for follow-up questions and contextual continuity.
+- **User & Credit Management**: Features a built-in system for managing authorized users, access levels, and credit balances, all stored in MongoDB.
+- **Optimized for Performance**: Includes features like asynchronous request queuing and image processing to ensure responsiveness.
+- **Secure Configuration**: Manages all sensitive keys and credentials through a `.env` file, keeping them out of the codebase.
+- **Rich Command Set**: Provides a comprehensive suite of commands for both users and bot owners.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+Follow these instructions to get a local copy up and running.
 
 ### Prerequisites
 
-*   Python 3.11+
-*   MongoDB server
-*   A Discord Bot Token
+- Python 3.11 or higher
+- Git
+- A MongoDB database instance (local or cloud-hosted)
 
 ### Installation
 
 1.  **Clone the repository:**
-    ```bash
+    ```sh
     git clone https://github.com/zvwgvx/ryuuko-chatbot.git
-    cd ryuuko-chatbot
+    cd ryuuko
     ```
 
-2.  **Install dependencies:**
-    The project is structured as a monorepo. The bot is the first package.
-    ```bash
-    # Install main dependencies for the bot
-    pip install .
-
-    # To install testing dependencies as well
-    pip install .[test]
+2.  **Set up a virtual environment:**
+    ```sh
+    python3 -m venv .venv
+    source .venv/bin/activate
     ```
 
-3.  **Configure the bot:**
-    *   Create a `.env` file in the root directory and add your secrets. For a full list of required API keys, see the [Setup Guide](docs/SETUP.md).
-        ```env
-        # Discord and Database
-        DISCORD_TOKEN="your_discord_bot_token"
-        MONGODB_CONNECTION_STRING="your_mongodb_connection_string"
+3.  **Install dependencies:**
+    The project uses `pyproject.toml`. Install the bot in editable mode, which will also install all required dependencies.
+    ```sh
+    pip install -e ./packages/bot
+    ```
 
-        # LLM API Keys (only add the ones you use)
-        AISTUDIO_API_KEY="your_aistudio_api_key"
-        POLYDEVS_API_KEY="your_polydevs_api_key"
-        PROXYVN_API_KEY="your_proxyvn_api_key"
-        ```
+4.  **Configure the bot:**
+    - Navigate to the `packages/bot` directory.
+    - Create a file named `.env` by copying the example:
+      ```sh
+      cp .env.example .env
+      ```
+    - Open the `.env` file and fill in your credentials:
+      ```ini
+      # Your Discord Bot Token
+      DISCORD_TOKEN="YOUR_DISCORD_BOT_TOKEN"
 
-    *   Modify `config.json` for additional settings if needed.
+      # Connection string for your MongoDB database
+      MONGODB_CONNECTION_STRING="mongodb://user:pass@host:port/"
 
-## Usage
+      # --- API Keys for LLM Providers ---
+      # At least one is required for the bot to function
+      GEMINI_API_KEY="YOUR_GOOGLE_AI_STUDIO_API_KEY"
+      POLYDEVS_API_KEY="YOUR_POLYDEVS_API_KEY"
+      PROXYVN_API_KEY="YOUR_PROXYVN_API_KEY"
+      ```
 
-To run the bot, use one of the following commands:
+5.  **Set up configuration files:**
+    - In the `packages/bot/config/` directory, review and customize `config.json` and `instructions.json` as needed.
 
-```bash
-# Using the python module directly
-python -m bot
+### Running the Bot
 
-# Using the installed script
-start
+From the project root directory (`ryuuko`), run the bot as a module:
+
+```sh
+python3 -m bot
 ```
 
-Once the bot is running, you can interact with it on Discord using the `.` prefix. For a full list of commands, see the [Commands Reference](docs/COMMANDS.md).
+## Commands
 
-## Documentation
+### User Commands
 
-For more detailed information, please refer to the following documents:
+| Command               | Description                                      |
+| --------------------- | ------------------------------------------------ |
+| `.ping`               | Checks the bot's latency.                        |
+| `.help`               | Displays the list of available commands.         |
+| `.model <model_name>` | Sets your preferred AI model.                    |
+| `.profile [user]`     | Shows your (or another user's) profile.          |
+| `.models`             | Lists all available AI models.                   |
+| `.clearmemory`        | Clears your personal conversation history.       |
 
-*   [**Architecture**](docs/ARCHITECTURE.md): An overview of the project's technical design.
-*   [**Setup Guide**](docs/SETUP.md): Detailed setup and configuration instructions.
-*   [**Command Reference**](docs/COMMANDS.md): A complete list of all available bot commands.
-*   [**Deployment Guide**](docs/DEPLOYMENT.md): Instructions for deploying the bot to a production environment.
+### Admin & Owner Commands
+
+| Command                         | Description                                      |
+| ------------------------------- | ------------------------------------------------ |
+| `.memory [user]`                | Inspects a user's conversation memory.           |
+| `.auth <user>`                  | Authorizes a user to use the bot.                |
+| `.deauth <user>`                | De-authorizes a user.                            |
+| `.auths`                        | Lists all authorized users.                      |
+| `.addmodel <name> <cost> <lvl>` | Adds a new supported model to the database.      |
+| `.removemodel <name>`           | Removes a model.                                 |
+| `.editmodel <name> <cost> <lvl>`| Edits an existing model's properties.            |
+| `.addcredit <user> <amount>`    | Adds credits to a user.                          |
+| `.setcredit <user> <amount>`    | Sets a user's credit balance.                    |
+| `.setlevel <user> <level>`      | Sets a user's access level.                      |
+
+## Project Structure
+
+- `packages/bot/src/`: Main source code for the bot.
+  - `commands/`: Handles command definitions.
+  - `config/`: Manages loading of configurations.
+  - `events/`: Contains event listeners (e.g., `on_message`).
+  - `llm_services/`: Core logic for the LLM gateway and providers.
+  - `storage/`: Manages conversation memory and database interactions.
+- `packages/bot/config/`: Bot-specific configuration files (`config.json`, `instructions.json`).
+- `pyproject.toml`: Project metadata and dependencies.
 
 ## Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+Contributions are welcome! Please feel free to fork the repository, make changes, and submit a pull request.
+
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is distributed under the MIT License. See `LICENSE` for more information.

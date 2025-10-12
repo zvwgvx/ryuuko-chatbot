@@ -1,87 +1,94 @@
 # Deployment Guide
 
-This guide provides instructions on how to deploy the Ryuuko Discord Bot using Docker. Containerization with Docker is the recommended method for running the bot in a production environment because it ensures consistency and simplifies dependency management.
+This document provides instructions and best practices for deploying the Ryuuko Bot to a production environment.
 
-## Prerequisites
+## 1. Server Preparation
 
--   **Docker**: You must have Docker installed and running on your deployment server. You can find installation instructions for your operating system on the [official Docker website](https://docs.docker.com/get-docker/).
+It is highly recommended to run the bot on a dedicated server or VPS (Virtual Private Server) for 24/7 uptime. A lightweight Linux distribution (such as Ubuntu 22.04) is a suitable choice.
 
-## Deployment Steps
+Ensure your server has Python 3.11+ and `git` installed.
 
-### 1. Build the Docker Image
+## 2. Using a Service Manager
 
-From the root directory of the project, run the following command to build the Docker image. The `Dockerfile` included in the repository contains all the necessary instructions to create a production-ready image.
+To ensure the bot runs continuously and restarts automatically after a server reboot or a crash, you should run it as a system service. `systemd` is the standard service manager on most modern Linux systems.
 
-```bash
-docker build -t ryuuko-bot .
-```
+### Example `systemd` Service File
 
-This command will:
--   Use the official Python 3.11 slim image as a base.
--   Install all the required Python dependencies from `requirements.txt`.
--   Copy the application code into the image.
-
-### 2. Prepare the Environment File
-
-Before running the container, you need to provide the necessary environment variables. Create a file named `prod.env` (or any other name you prefer) in a secure location on your server. This file will contain the bot's secrets.
-
-```env
-# prod.env
-
-# Your Discord bot token
-DISCORD_TOKEN="your_production_discord_bot_token"
-
-# Your production MongoDB connection string
-MONGODB_CONNECTION_STRING="mongodb://user:password@production-db-host:port/"
-```
-
-**Note**: Do not commit this file to your version control system.
-
-### 3. Run the Docker Container
-
-Once the image is built and your environment file is ready, you can start the bot using the `docker run` command.
-
-```bash
-docker run -d \
-  --name ryuuko-bot-container \
-  --env-file ./prod.env \
-  -v ./config.json:/app/config.json \
-  -v ./logs:/app/logs \
-  --restart unless-stopped \
-  ryuuko-bot
-```
-
-Let's break down this command:
--   `-d`: Runs the container in detached mode (in the background).
--   `--name ryuuko-bot-container`: Assigns a name to the container for easy management.
--   `--env-file ./prod.env`: Passes the environment variables from your `prod.env` file to the container.
--   `-v ./config.json:/app/config.json`: Mounts your local `config.json` file into the container. This allows you to change the configuration without rebuilding the image.
--   `-v ./logs:/app/logs`: Mounts a local `logs` directory into the container to persist log files.
--   `--restart unless-stopped`: Configures the container to automatically restart if it crashes, unless it has been manually stopped.
--   `ryuuko-bot`: The name of the image to run.
-
-## Managing the Container
-
-Here are some useful Docker commands for managing your running bot:
-
--   **View logs**:
-    ```bash
-    docker logs -f ryuuko-bot-container
+1.  Create a service file:
+    ```sh
+    sudo nano /etc/systemd/system/ryuuko.service
     ```
 
--   **Stop the container**:
-    ```bash
-    docker stop ryuuko-bot-container
+2.  Paste the following configuration into the file. **Remember to replace `/path/to/ryuuko` and `your_user` with your actual project path and username.**
+
+    ```ini
+    [Unit]
+    Description=Ryuuko Discord Bot
+    After=network.target
+
+    [Service]
+    # User and Group that will run the bot
+    User=your_user
+    Group=your_user
+
+    # The root directory of the project
+    WorkingDirectory=/path/to/ryuuko
+
+    # The command to start the bot
+    # This assumes your virtual environment is named .venv inside the project root
+    ExecStart=/path/to/ryuuko/.venv/bin/python3 -m bot
+
+    # Restart policy
+    Restart=always
+    RestartSec=10
+
+    # Standard output and error logging
+    StandardOutput=journal
+    StandardError=journal
+    SyslogIdentifier=ryuuko
+
+    [Install]
+    WantedBy=multi-user.target
     ```
 
--   **Start the container**:
-    ```bash
-    docker start ryuuko-bot-container
+3.  **Enable and Start the Service:**
+    ```sh
+    # Reload systemd to recognize the new service
+    sudo systemctl daemon-reload
+
+    # Enable the service to start on boot
+    sudo systemctl enable ryuuko.service
+
+    # Start the service immediately
+    sudo systemctl start ryuuko.service
     ```
 
--   **Remove the container**:
-    ```bash
-    docker rm ryuuko-bot-container
+4.  **Check the Service Status:**
+    You can check if the bot is running correctly and view its logs using:
+    ```sh
+    sudo systemctl status ryuuko.service
+    journalctl -u ryuuko -f
     ```
 
-By following these steps, you can deploy a stable and maintainable instance of the Ryuuko Discord Bot.
+## 3. Security Best Practices
+
+-   **Principle of Least Privilege**: Do not run the bot as the `root` user. Create a dedicated user account with limited permissions for running the bot process.
+
+-   **Secure the `.env` File**: On your production server, ensure the `.env` file has restrictive permissions so that only the bot's user can read it.
+    ```sh
+    chmod 600 /path/to/ryuuko/packages/bot/.env
+    ```
+
+-   **Firewall**: Configure a firewall (like `ufw` on Ubuntu) to only allow necessary incoming and outgoing traffic. The bot primarily makes outbound HTTPS requests, so strict inbound rules can be applied.
+
+-   **Regular Updates**: Keep the server's operating system and all bot dependencies updated to patch potential security vulnerabilities.
+    ```sh
+    # From your project root
+    source .venv/bin/activate
+    pip install --upgrade -e ./packages/bot
+    sudo systemctl restart ryuuko
+    ```
+
+## 4. Environment Variables
+
+Unlike in development, you should not commit your `.env` file. Instead, you should create it directly on the production server. Ensure all required variables from `.env.example` are present and correctly configured in your production `.env` file.

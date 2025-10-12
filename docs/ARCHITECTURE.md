@@ -1,82 +1,53 @@
-# Architecture
+# Project Architecture
 
-This document provides a detailed overview of the Ryuuko Discord Bot's architecture.
+This document provides a high-level overview of the Ryuuko Bot's architecture, its core components, and the flow of data through the system.
 
-## Overview
+## Core Philosophy
 
-The bot is built with a modular architecture that separates concerns into distinct components, making it easy to maintain and extend. The core components are the `Bot` instance, `Commands`, `Events`, and `Services`. The system is designed to be asynchronous, using a request queue to handle long-running LLM API calls without blocking the main event loop.
+The bot is designed with a modular and decoupled architecture. The goal is to separate concerns, making it easy to maintain, extend, and modify individual parts of the system without affecting others. For example, the LLM provider logic is completely separate from the Discord event handling logic.
+
+## Data Flow: From Discord Message to AI Response
+
+A typical interaction with the bot follows this sequence:
+
+1.  **Message Reception (`events/messages.py`)**: A user sends a message mentioning the bot (`@Ryuuko`). The `on_message` event listener captures this message.
+
+2.  **Request Queuing (`utils/request_queue.py`)**: To prevent rate-limiting and handle concurrent requests gracefully, the incoming message is not processed immediately. Instead, it's added to an asynchronous queue (`RequestQueue`). A background worker processes requests from this queue one by one.
+
+3.  **Request Processing (`events/messages.py`)**: The `process_ai_request` function is called for the request.
+    - It fetches the user's configuration (preferred model, access level) from the `UserConfigManager`.
+    - It processes any attachments (images), resizing and optimizing them for the API.
+    - It retrieves the user's conversation history from the `MemoryStore`.
+    - It constructs a multimodal payload compliant with the OpenAI Chat Completions API standard.
+
+4.  **API Gateway (`llm_services/api_client.py`)**: The constructed payload is sent to the `call_unified_api` method. This acts as a central gateway.
+    - It identifies the correct provider (e.g., `polydevs`, `aistudio`) based on the user's chosen model.
+    - It retrieves the appropriate API key from the environment.
+    - It forwards the request to the designated provider module.
+
+5.  **LLM Provider (`llm_services/providers/*.py`)**: The specific provider module takes over.
+    - It adds provider-specific context (like system instructions for `polydevs` models) and the current timestamp to the system prompt.
+    - It initializes an `AsyncOpenAI` client with the correct `base_url` and API key.
+    - It makes the final streaming API call to the LLM backend.
+
+6.  **Streaming Response**: The provider streams the response back through the gateway to `events/messages.py`.
+
+7.  **Response Delivery & Memory Update**: 
+    - The final response is sent back to the user on Discord.
+    - The user's prompt (including images) and the assistant's response are saved back to the `MemoryStore` to maintain conversation context.
+    - Token usage is calculated and logged.
 
 ## Directory Structure
 
-The project is organized into the following directories:
-
-```
-├── config/           # Configuration files and loaders
-├── docs/             # Project documentation
-├── logs/             # Log files
-├── scripts/          # Utility scripts
-├── src/              # Source code
-│   ├── bot/          # Core bot logic, commands, and events
-│   ├── config/       # Configuration loading and management
-│   ├── llm_services/ # LLM API integration
-│   ├── storage/      # Database and memory storage
-│   ├── utils/        # Helper functions and utilities
-│   ├── __main__.py   # Main application entry point
-├── tests/            # Unit and integration tests
-├── .env              # Environment variables (not version controlled)
-├── config.json       # Main configuration file
-├── requirements.txt  # Python dependencies
-└── main.py           # Script to run the bot module
-```
-
-## Core Components
-
-### 1. Bot (`src/bot/main.py`)
-
-The `Bot` class is the central component of the application. It inherits from `discord.ext.commands.Bot` and is responsible for:
-- Initializing the Discord client and connecting to the gateway.
-- Registering commands and event handlers.
-- Managing dependencies and injecting them into other modules.
-- Handling global command errors.
-
-### 2. Commands (`src/bot/commands/`)
-
-Commands are organized into separate files based on their functionality (e.g., `admin.py`, `user.py`). The `register_all_commands` function dynamically loads all commands and attaches them to the bot instance. This modular approach allows for easy addition of new commands without modifying the core bot file.
-
-### 3. Events (`src/bot/events/`)
-
-Event handlers (e.g., `on_message`) are also organized into separate files. The `register_all_events` function loads and registers these handlers with the bot. This keeps event-related logic separate from the main bot file.
-
-### 4. Services
-
-Services provide specific functionalities that can be shared across different parts of the application.
-
--   **Authentication Service (`src/bot/services/auth.py`)**: Manages user authorization, controlling which users can execute restricted commands.
--   **LLM Services (`src/llm_services/`)**: This component is responsible for interacting with Large Language Models. It abstracts the API calls, allowing the bot to support different LLM providers.
-
-### 5. Storage (`src/storage/`)
-
-The storage layer handles data persistence.
--   **`MongoDBStore`**: Interacts with a MongoDB database to store conversation history, authorized users, and other persistent data.
--   **`MemoryStore`**: An in-memory cache for conversation history to provide faster access and reduce database queries.
-
-## Configuration (`src/config/`)
-
-Configuration is managed through a combination of a `.env` file for secrets and a `config.json` file for non-sensitive settings. The `loader.py` module loads these configurations and makes them available throughout the application.
-
-## Data Flow (On Message Event)
-
-1.  A user sends a message in a Discord channel.
-2.  The `on_message` event handler in `src/bot/events/chat.py` is triggered.
-3.  The handler checks if the message should be processed (e.g., not from a bot, in a valid channel).
-4.  The message is added to a request queue (`src/utils/queue.py`) for processing.
-5.  A background task picks up the request from the queue.
-6.  The `MemoryStore` retrieves the recent conversation history for the user.
-7.  The `llm_services` component sends the conversation history to the LLM API.
-8.  The LLM API returns a response.
-9.  The bot sends the response back to the Discord channel.
-10. The new message and response are saved to the `MemoryStore` and `MongoDBStore`.
-
-## Error Handling
-
-Global command error handling is implemented in `src/bot/main.py`. The `on_command_error` event handler catches common errors like `CommandNotFound`, `CheckFailure`, and `MissingRequiredArgument`, providing user-friendly feedback and logging unexpected exceptions.
+-   `src/`
+    -   `commands/`: Contains the definitions for all user-facing and admin-facing bot commands (e.g., `.model`, `.memory`).
+    -   `config/`: Manages the loading of all configurations. It loads the main `.env` file and provides access to settings from `config.json` and `instructions.json`.
+    -   `events/`: Home to the core event listeners, primarily `on_message`, which is the entry point for all conversations.
+    -   `llm_services/`: The heart of the AI gateway.
+        -   `api_client.py`: The central router that directs requests to the correct provider.
+        -   `providers/`: Individual modules for each LLM backend. Each provider is responsible for adapting the standard payload to its specific API requirements.
+    -   `storage/`: Manages data persistence.
+        -   `database.py`: Handles all interactions with MongoDB, including user profiles, model configurations, and conversation memory.
+        -   `memory.py`: An in-memory cache layer for conversation history to reduce database lookups (though currently, it interfaces directly with `database.py`).
+    -   `utils/`: Contains utility classes and functions, such as the `RequestQueue`.
+-   `config/`: Contains static, non-sensitive configuration files like `config.json` (for bot settings) and `instructions.json` (for provider-specific system prompts).

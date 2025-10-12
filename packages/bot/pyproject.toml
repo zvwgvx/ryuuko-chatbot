@@ -8,11 +8,11 @@ packages = ["bot"]
 
 [project]
 name = "ryuuko-bot"
-version = "1.3.5" # Cập nhật phiên bản
+version = "1.5.0"
 authors = [
   { name="Zang Vũ", email="zvwgvx@polydevs.uk" },
 ]
-description = "A Discord bot."
+description = "A chatbot."
 readme = "README.md"
 requires-python = ">=3.11"
 classifiers = [
