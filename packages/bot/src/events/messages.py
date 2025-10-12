@@ -66,7 +66,7 @@ def _build_multimodal_content(prompt_text: str, images: List[Dict]) -> List[Dict
                     "type": "image_url",
                     "image_url": {
                         "url": f"data:{img['mime_type']};base64,{img['data']}",
-                        "detail": "auto"
+                        "detail": "high"
                     }
                 })
             else:
