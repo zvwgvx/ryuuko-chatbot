@@ -1,4 +1,4 @@
-# Ryuuko Bot v2.0.0
+# Ryuuko Chatbot
 
 A modular, high-performance Discord bot ecosystem built on a service-oriented architecture. It features a powerful **Core API Service** that handles all AI and data logic, and a lightweight **Discord Client** for user interaction.
 
