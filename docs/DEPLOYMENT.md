@@ -18,7 +18,7 @@ This service runs the FastAPI backend API.
 
 1.  **Create the service file:**
     ```sh
-    sudo nano /etc/systemd/system/ryuuko-core.service
+    sudo nano /etc/systemd/system/ryuuko-ryuuko-api.service
     ```
 
 2.  **Paste the following configuration.** Replace `/path/to/ryuuko` and `your_user` with your actual project path and username.
@@ -81,19 +81,19 @@ After creating both files, run the following commands:
 sudo systemctl daemon-reload
 
 # Enable both services to start on boot
-sudo systemctl enable ryuuko-core.service
+sudo systemctl enable ryuuko-ryuuko-api.service
 sudo systemctl enable ryuuko-discord.service
 
 # Start both services immediately
-sudo systemctl start ryuuko-core.service
+sudo systemctl start ryuuko-ryuuko-api.service
 sudo systemctl start ryuuko-discord.service
 ```
 
 To check the status or view logs for a service, use:
 
 ```sh
-sudo systemctl status ryuuko-core
-journalctl -u ryuuko-core -f
+sudo systemctl status ryuuko-ryuuko-api
+journalctl -u ryuuko-ryuuko-api -f
 
 sudo systemctl status ryuuko-discord
 journalctl -u ryuuko-discord -f
@@ -104,7 +104,7 @@ journalctl -u ryuuko-discord -f
 -   **Firewall**: Configure your firewall to only allow traffic on necessary ports. The Core Service runs on port 8000, but you should ideally place it behind a reverse proxy like Nginx or Caddy and only expose ports 80/443.
 -   **Restrictive Permissions**: Ensure your `.env` files are not world-readable. Set permissions to `600`.
     ```sh
-    chmod 600 /path/to/ryuuko/packages/core/.env
+    chmod 600 /path/to/ryuuko/packages/ryuuko-api/.env
     chmod 600 /path/to/ryuuko/packages/discord-bot/.env
     ```
 -   **Dedicated User**: Run the services under a dedicated, non-root user account.

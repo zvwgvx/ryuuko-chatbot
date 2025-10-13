@@ -1,6 +1,6 @@
-# /packages/core/src/main.py
+# /packages/ryuuko-api/src/main.py
 import logging
-import os
+import os  # <--- SỬA LỖI: Thêm lại import đã mất
 from pathlib import Path
 from typing import Dict, Any, List, Optional, Set
 
@@ -9,7 +9,7 @@ from fastapi import FastAPI, Request, HTTPException, Header, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-# --- Load Config ---
+# --- Load Config at the very start ---
 dotenv_path = Path(__file__).resolve().parents[1] / ".env"
 load_dotenv(dotenv_path=dotenv_path)
 
@@ -26,13 +26,13 @@ from .providers import polydevs, aistudio, proxyvn
 
 # --- App Initialization & Dependencies ---
 app = FastAPI(
-    title="Ryuuko Core API",
-    description="Core service for the Ryuuko Chatbot ecosystem.",
-    version="2.0.0" # <-- UPDATE VERSION
+    title="Ryuuko API",
+    description="Core API Service for the Ryuuko Chatbot ecosystem.",
+    version="2.0.1"
 )
 
 if not MONGODB_CONNECTION_STRING:
-    raise RuntimeError("MONGODB_CONNECTION_STRING is not set. Please check your .env file in /packages/core/")
+    raise RuntimeError("MONGODB_CONNECTION_STRING is not set. Please check your .env file in /packages/ryuuko-api/")
 
 db_store = MongoDBStore(MONGODB_CONNECTION_STRING, MONGODB_DATABASE_NAME)
 PROVIDER_MAP = {"polydevs": polydevs.forward, "aistudio": aistudio.forward, "proxyvn": proxyvn.forward}
@@ -80,7 +80,7 @@ class AuthUserRequest(BaseModel):
 # --- API Endpoints ---
 @app.get("/", include_in_schema=False)
 async def root():
-    return {"message": "Ryuuko Core API is running."}
+    return {"message": "Ryuuko API is running."}
 
 @app.post("/api/v1/chat/completions", dependencies=[Depends(verify_api_key)])
 async def chat_completions(request: ChatCompletionRequest, http_request: Request):
@@ -106,7 +106,7 @@ async def chat_completions(request: ChatCompletionRequest, http_request: Request
         async def final_streamer(): yield final_response_text.encode('utf-8')
         return StreamingResponse(final_streamer(), media_type="text/plain; charset=utf-8")
     except Exception as e:
-        logging.getLogger("Core.API").exception(f"Error during provider call: {e}")
+        logging.getLogger("RyuukoAPI.API").exception(f"Error during provider call: {e}")
         raise HTTPException(status_code=500, detail=f"An internal error occurred: {e}")
 
 @app.get("/api/v1/models", response_model=List[ModelInfoResponse], dependencies=[Depends(verify_api_key)])

@@ -1,4 +1,4 @@
-# /packages/core/src/config.py
+# /packages/ryuuko-api/src/config.py
 import os
 
 # This file now acts as a clean accessor for environment variables,

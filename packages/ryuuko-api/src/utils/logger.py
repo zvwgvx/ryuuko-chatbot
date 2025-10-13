@@ -1,4 +1,4 @@
-# /packages/core/src/utils/logger.py
+# /packages/ryuuko-api/src/utils/logger.py
 import logging
 import os
 import gzip
@@ -15,7 +15,7 @@ def gz_rotator(source, dest):
             shutil.copyfileobj(f_in, f_out)
     os.remove(source)
 
-def setup_logger(log_dir="logs/core", log_filename="core.log"):
+def setup_logger(log_dir="logs/ryuuko-api", log_filename="ryuuko-api.log"):
     """Configures the root logger for the Core Service."""
     log_formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     root_logger = logging.getLogger()

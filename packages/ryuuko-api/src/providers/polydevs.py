@@ -1,4 +1,4 @@
-# providers/polydevs.py
+# /packages/ryuuko-api/src/providers/polydevs.py
 import asyncio
 import json
 import os
@@ -13,15 +13,13 @@ try:
     from openai import AsyncOpenAI
 except ImportError:
     AsyncOpenAI = None
-    _IMPORT_ERROR = "openai library not found. Please install it with 'pip install openai'"
 
 DEFAULT_MODEL = "ryuuko-r1-mini"
 
-# --- Helpers ---
 def get_vietnam_timestamp() -> str:
     return datetime.now(timezone(timedelta(hours=7))).strftime("%Y-%m-%d %H:%M:%S GMT+7")
 
-# --- SỬA LỖI: Cập nhật logic tải instructions từ file .txt ---
+# --- Instruction Loading Logic ---
 INSTRUCTIONS = None
 INSTRUCTIONS_LOAD_ERROR = None
 
@@ -29,33 +27,29 @@ def load_instructions() -> Optional[Dict[str, str]]:
     """Loads system instructions from vietnamese.txt and english.txt."""
     global INSTRUCTIONS_LOAD_ERROR
     try:
-        # Đường dẫn đến thư mục instructions mới
+        # Path is relative to the ryuuko-api package root
         instructions_dir = Path(__file__).resolve().parents[2] / "instructions"
         
         vn_file = instructions_dir / "vietnamese.txt"
         en_file = instructions_dir / "english.txt"
 
         if not vn_file.exists() or not en_file.exists():
-            error_msg = f"CRITICAL: Instruction files not found in {instructions_dir.absolute()}"
-            INSTRUCTIONS_LOAD_ERROR = error_msg
+            INSTRUCTIONS_LOAD_ERROR = f"Instruction files not found in {instructions_dir.absolute()}"
             return None
 
         with open(vn_file, 'r', encoding='utf-8') as f:
             vn_instruction = f.read().strip()
-        
         with open(en_file, 'r', encoding='utf-8') as f:
             en_instruction = f.read().strip()
 
         if not vn_instruction or not en_instruction:
-            error_msg = "Vietnamese or English instruction file is empty."
-            INSTRUCTIONS_LOAD_ERROR = error_msg
+            INSTRUCTIONS_LOAD_ERROR = "Instruction file is empty."
             return None
 
         return {"vietnamese": vn_instruction, "english": en_instruction}
 
     except Exception as e:
-        error_msg = f"Unexpected error loading instruction files: {e}"
-        INSTRUCTIONS_LOAD_ERROR = error_msg
+        INSTRUCTIONS_LOAD_ERROR = f"Unexpected error loading instruction files: {e}"
         return None
 
 INSTRUCTIONS = load_instructions()
@@ -70,10 +64,11 @@ def get_instruction_by_model(model: str) -> Optional[str]:
     key = "english" if model and "eng" in model.lower() else "vietnamese"
     return INSTRUCTIONS.get(key)
 
-# --- SỬA LỖI: Tích hợp timestamp một cách tự nhiên ---
 def _build_openai_messages(data: Dict, system_prompt: str) -> List[Dict[str, Any]]:
+    """Builds the message payload, prepending the timestamp to the system prompt."""
     messages = []
     timestamp_str = get_vietnam_timestamp()
+    # Naturally integrate the timestamp into the system prompt
     final_system_prompt = f"The current date and time is {timestamp_str}. {system_prompt}"
     messages.append({"role": "system", "content": final_system_prompt})
 
@@ -84,6 +79,7 @@ def _build_openai_messages(data: Dict, system_prompt: str) -> List[Dict[str, Any
     return messages
 
 async def forward(request: Request, data: Dict, api_key: Optional[str]):
+    """Forwards the request to the Polydevs (Gemini) provider."""
     if AsyncOpenAI is None: return JSONResponse({"ok": False, "error": "dependency_not_found"}, status_code=500)
     if INSTRUCTIONS is None: return JSONResponse({"ok": False, "error": "configuration_error", "detail": INSTRUCTIONS_LOAD_ERROR}, status_code=500)
     

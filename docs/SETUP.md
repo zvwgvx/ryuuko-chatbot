@@ -37,7 +37,7 @@ From the project root (`ryuuko/`), run the following commands:
 
 ```sh
 # Install the Core Service dependencies
-pip install -e ./packages/core
+pip install -e ./packages/ryuuko-api
 
 # Install the Discord Bot client dependencies
 pip install -e ./packages/discord-bot
@@ -53,7 +53,7 @@ This is the most critical step. You must configure two separate `.env` files.
 
 1.  Navigate to the Core Service package:
     ```sh
-    cd packages/core
+    cd packages/ryuuko-api
     ```
 2.  Create the `.env` file from the example:
     ```sh
@@ -68,7 +68,7 @@ This is the most critical step. You must configure two separate `.env` files.
 
 1.  Navigate to the Discord Bot package:
     ```sh
-    cd ../discord-bot  # Assuming you are in packages/core
+    cd ../discord-bot  # Assuming you are in packages/ryuuko-api
     ```
 2.  Create the `.env` file:
     ```sh
@@ -87,7 +87,7 @@ To run the bot, you need to start both services in two separate terminals from t
 
 ```sh
 # Make sure you are in the project root (ryuuko/)
-python3 -m core
+python3 -m ryuuko-api
 ```
 
 **⬅️ In Terminal 2, start the Discord Bot:**

@@ -37,7 +37,7 @@ A modular, high-performance Discord bot ecosystem built on a service-oriented ar
 3.  **Install all dependencies:**
     Install both the Core Service and the Discord Bot client in editable mode.
     ```sh
-    pip install -e ./packages/core
+    pip install -e ./packages/ryuuko-api
     pip install -e ./packages/discord-bot
     ```
 
@@ -60,7 +60,7 @@ You must run both services in separate terminals.
 **➡️ Terminal 1: Start the Core Service**
 ```sh
 # From the project root (ryuuko/)
-python3 -m core
+python3 -m ryuuko-api
 ```
 
 **⬅️ Terminal 2: Start the Discord Bot**
