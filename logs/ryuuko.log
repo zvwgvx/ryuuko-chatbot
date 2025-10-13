@@ -263,3 +263,6 @@ Traceback (most recent call last):
   File "/Users/zvwgvx/PycharmProjects/ryuuko/.venv/lib/python3.11/site-packages/aiohttp/connector.py", line 1538, in _create_direct_connection
     raise ClientConnectorDNSError(req.connection_key, exc) from exc
 aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [nodename nor servname provided, or not known]
+2025-10-12 21:23:14,121 INFO Bot.Main: [EXIT] Bot process exiting.
+2025-10-12 21:23:14,124 INFO Request Queue: Request queue worker cancelled
+2025-10-12 21:23:14,128 INFO __main__: Shutdown signal received.

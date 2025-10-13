@@ -1,94 +1,110 @@
-# Deployment Guide
+# Deployment Guide v2.0.0
 
-This document provides instructions and best practices for deploying the Ryuuko Bot to a production environment.
+This document provides instructions for deploying the Ryuuko Bot v2.0.0 ecosystem to a production environment. This architecture requires running two separate, persistent services: the **Core Service** and the **Discord Bot**.
 
 ## 1. Server Preparation
 
-It is highly recommended to run the bot on a dedicated server or VPS (Virtual Private Server) for 24/7 uptime. A lightweight Linux distribution (such as Ubuntu 22.04) is a suitable choice.
+-   **Environment**: A Linux VPS (e.g., Ubuntu 22.04) is recommended for 24/7 uptime.
+-   **Prerequisites**: Ensure your server has Python 3.11+, `git`, and a firewall (like `ufw`) configured.
+-   **Installation**: Follow the installation steps in `SETUP.md` to clone the repository, create a virtual environment, and install all dependencies for both `core` and `discord-bot`.
 
-Ensure your server has Python 3.11+ and `git` installed.
+## 2. Using `systemd` for Service Management
 
-## 2. Using a Service Manager
+To ensure both services run continuously and restart automatically, we will create a `systemd` service file for each.
 
-To ensure the bot runs continuously and restarts automatically after a server reboot or a crash, you should run it as a system service. `systemd` is the standard service manager on most modern Linux systems.
+### A. Core Service (`ryuuko-core.service`)
 
-### Example `systemd` Service File
+This service runs the FastAPI backend API.
 
-1.  Create a service file:
+1.  **Create the service file:**
     ```sh
-    sudo nano /etc/systemd/system/ryuuko.service
+    sudo nano /etc/systemd/system/ryuuko-core.service
     ```
 
-2.  Paste the following configuration into the file. **Remember to replace `/path/to/ryuuko` and `your_user` with your actual project path and username.**
+2.  **Paste the following configuration.** Replace `/path/to/ryuuko` and `your_user` with your actual project path and username.
 
     ```ini
     [Unit]
-    Description=Ryuuko Discord Bot
+    Description=Ryuuko Core API Service
     After=network.target
 
     [Service]
-    # User and Group that will run the bot
     User=your_user
     Group=your_user
-
-    # The root directory of the project
     WorkingDirectory=/path/to/ryuuko
-
-    # The command to start the bot
-    # This assumes your virtual environment is named .venv inside the project root
-    ExecStart=/path/to/ryuuko/.venv/bin/python3 -m bot
-
-    # Restart policy
+    # Command to run the Core Service module
+    ExecStart=/path/to/ryuuko/.venv/bin/python3 -m core
     Restart=always
     RestartSec=10
-
-    # Standard output and error logging
-    StandardOutput=journal
-    StandardError=journal
-    SyslogIdentifier=ryuuko
 
     [Install]
     WantedBy=multi-user.target
     ```
 
-3.  **Enable and Start the Service:**
+### B. Discord Bot Service (`ryuuko-discord.service`)
+
+This service runs the Discord client, which connects to the Core Service.
+
+1.  **Create the service file:**
     ```sh
-    # Reload systemd to recognize the new service
-    sudo systemctl daemon-reload
-
-    # Enable the service to start on boot
-    sudo systemctl enable ryuuko.service
-
-    # Start the service immediately
-    sudo systemctl start ryuuko.service
+    sudo nano /etc/systemd/system/ryuuko-discord.service
     ```
 
-4.  **Check the Service Status:**
-    You can check if the bot is running correctly and view its logs using:
-    ```sh
-    sudo systemctl status ryuuko.service
-    journalctl -u ryuuko -f
+2.  **Paste the following configuration.** Again, replace the placeholder paths and username.
+
+    ```ini
+    [Unit]
+    Description=Ryuuko Discord Bot Client
+    # Ensure the Core Service is started first
+    After=network.target ryuuko-core.service
+    Requires=ryuuko-core.service
+
+    [Service]
+    User=your_user
+    Group=your_user
+    WorkingDirectory=/path/to/ryuuko
+    # Command to run the Discord Bot module
+    ExecStart=/path/to/ryuuko/.venv/bin/python3 -m discord_bot
+    Restart=always
+    RestartSec=10
+
+    [Install]
+    WantedBy=multi-user.target
     ```
+
+### C. Managing the Services
+
+After creating both files, run the following commands:
+
+```sh
+# Reload systemd to recognize the new services
+sudo systemctl daemon-reload
+
+# Enable both services to start on boot
+sudo systemctl enable ryuuko-core.service
+sudo systemctl enable ryuuko-discord.service
+
+# Start both services immediately
+sudo systemctl start ryuuko-core.service
+sudo systemctl start ryuuko-discord.service
+```
+
+To check the status or view logs for a service, use:
+
+```sh
+sudo systemctl status ryuuko-core
+journalctl -u ryuuko-core -f
+
+sudo systemctl status ryuuko-discord
+journalctl -u ryuuko-discord -f
+```
 
 ## 3. Security Best Practices
 
--   **Principle of Least Privilege**: Do not run the bot as the `root` user. Create a dedicated user account with limited permissions for running the bot process.
-
--   **Secure the `.env` File**: On your production server, ensure the `.env` file has restrictive permissions so that only the bot's user can read it.
+-   **Firewall**: Configure your firewall to only allow traffic on necessary ports. The Core Service runs on port 8000, but you should ideally place it behind a reverse proxy like Nginx or Caddy and only expose ports 80/443.
+-   **Restrictive Permissions**: Ensure your `.env` files are not world-readable. Set permissions to `600`.
     ```sh
-    chmod 600 /path/to/ryuuko/packages/bot/.env
+    chmod 600 /path/to/ryuuko/packages/core/.env
+    chmod 600 /path/to/ryuuko/packages/discord-bot/.env
     ```
-
--   **Firewall**: Configure a firewall (like `ufw` on Ubuntu) to only allow necessary incoming and outgoing traffic. The bot primarily makes outbound HTTPS requests, so strict inbound rules can be applied.
-
--   **Regular Updates**: Keep the server's operating system and all bot dependencies updated to patch potential security vulnerabilities.
-    ```sh
-    # From your project root
-    source .venv/bin/activate
-    pip install --upgrade -e ./packages/bot
-    sudo systemctl restart ryuuko
-    ```
-
-## 4. Environment Variables
-
-Unlike in development, you should not commit your `.env` file. Instead, you should create it directly on the production server. Ensure all required variables from `.env.example` are present and correctly configured in your production `.env` file.
+-   **Dedicated User**: Run the services under a dedicated, non-root user account.

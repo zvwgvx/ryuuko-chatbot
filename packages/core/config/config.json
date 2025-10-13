@@ -1,0 +1,20 @@
+{
+  "bot_settings": {
+    "REQUEST_TIMEOUT": 100,
+    "MAX_MSG_LENGTH": 1900,
+    "MEMORY_MAX_MESSAGES": 25,
+    "MEMORY_MAX_TOKENS": 8000
+  },
+  "gateway_settings": {
+    "ALLOWED_PROVIDERS": [
+      "polydevs",
+      "aistudio",
+      "proxyvn"
+    ],
+    "PROVIDER_DEFAULT_MODEL": {
+      "polydevs": "ryuuko-r1-vnm-mini",
+      "aistudio": "gemini-2.5-flash",
+      "proxyvn": "gpt-3.5-turbo"
+    }
+  }
+}

@@ -1,26 +1,51 @@
-# Python
+# =============================================================================
+# General System Files
+# =============================================================================
+# macOS-specific files
+.DS_Store
+
+# Windows-specific files
+Thumbs.db
+
+# Log files
+*.log
+*.log.*
+
+# Swap files from editors like Vim
+*.swp
+
+# =============================================================================
+# Python Specific
+# =============================================================================
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Byte-compiled / optimized / C extensions
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
-.Python
-env/
-venv/
 
-# Environment
-packages/bot/.env
+# Caches from common Python tools
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# IDEs
-.idea/
-.vscode/
+# =============================================================================
+# Project-Specific
+# =============================================================================
+# Sensitive Environment Files
+# Ignore all .env files, wherever they are located in the project.
+**/.env
 
-# Other
-*.log
-*.swp
-
-# Build artifacts
-dist/
+# Build, Distribution, and Packaging Artifacts
+# These are created when you build packages with `pip` or `setuptools`.
 build/
+dist/
 *.egg-info/
 
-packages/bot/config/instructions.json
+# IDE & Editor Configuration
+.idea/
+.vscode/
