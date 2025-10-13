@@ -25,7 +25,7 @@ A modular, high-performance Discord bot ecosystem built on a service-oriented ar
 1.  **Clone the repository:**
     ```sh
     git clone https://github.com/zvwgvx/ryuuko-chatbot
-    cd ryuuko
+    cd ryuuko-chatbot
     ```
 
 2.  **Set up a virtual environment:**
