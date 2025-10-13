@@ -75,11 +75,15 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
             async for chunk in api_client.stream_chat_completions(api_payload):
                 full_response_text += chunk.decode('utf-8', errors='ignore')
                 if response_message is None:
-                    response_message = await message.channel.send(full_response_text, reference=message)
+                    if full_response_text.strip(): # Don't send empty first message
+                        response_message = await message.channel.send(full_response_text, reference=message)
                 else:
-                    await response_message.edit(content=full_response_text)
+                    # Avoid editing with the same content or empty content
+                    if response_message.content != full_response_text and full_response_text.strip():
+                        await response_message.edit(content=full_response_text)
             
-            if not full_response_text: await message.channel.send("⚠️ The Core API returned an empty response.", reference=message)
+            if not full_response_text:
+                await message.channel.send("⚠️ The Core API returned an empty response.", reference=message)
 
         except Exception as e:
             logger.exception(f"Error processing request for user {message.author.id}")
@@ -87,7 +91,23 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
 
     @bot.listen('on_message')
     async def on_message(message: discord.Message):
-        if message.author.bot or not (isinstance(message.channel, discord.DMChannel) or bot.user in message.mentions): return
+        # Ignore messages from the bot itself
+        if message.author.bot:
+            return
+
+        # --- FIX: Check if the message is a valid command first ---
+        # This prevents commands (like .help) from being processed as a prompt in DMs
+        ctx = await bot.get_context(message)
+        if ctx.valid:
+            return  # If it's a valid command, let the command handler do its job and stop here.
+        # -----------------------------------------------------------
+
+        # Only process messages in DMs or when the bot is mentioned
+        is_dm = isinstance(message.channel, discord.DMChannel)
+        is_mention = bot.user in message.mentions
+        if not (is_dm or is_mention):
+            return
+
         user_text = re.sub(rf"<@!?{bot.user.id}>", "", message.content or "").strip()
         await request_queue.add_request(message, user_text)
 

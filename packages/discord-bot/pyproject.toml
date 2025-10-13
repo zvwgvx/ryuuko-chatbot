@@ -3,12 +3,14 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
+# ĐỊNH NGHĨA: Thư mục `src` sẽ được đóng gói thành package `discord_bot` (dấu gạch dưới)
 package-dir = {"discord_bot" = "src"}
 packages = ["discord_bot"]
 
 [project]
+# Tên này dùng cho `pip`, có thể chứa dấu gạch ngang
 name = "ryuuko-discord-bot"
-version = "2.0.0"
+version = "2.0.4"
 authors = [
   { name="Zang Vũ", email="zvwgvx@polydevs.uk" },
 ]
@@ -24,3 +26,8 @@ dependencies = [
     "httpx>=0.27.0",
     "Pillow>=10.0.0"
 ]
+
+# ĐỊNH NGHĨA: Tạo lệnh chạy `discord-bot` (dấu gạch ngang)
+# trỏ đến package `discord_bot` (dấu gạch dưới)
+[project.scripts]
+discord-bot = "discord_bot.__main__:main"
