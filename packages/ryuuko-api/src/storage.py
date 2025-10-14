@@ -8,7 +8,7 @@ import base64
 from typing import Dict, List, Optional, Any, Set
 from datetime import datetime
 from pymongo import MongoClient
-from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
+from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError, DuplicateKeyError
 
 try:
     import google.generativeai as genai
@@ -38,8 +38,18 @@ class MongoDBStore:
             except Exception as e:
                 logger.error(f"Failed to initialize genai for token counting: {e}")
         
-        self.COLLECTIONS = {'user_config': 'user_configs', 'memory': 'user_memory', 'authorized': 'authorized_users', 'models': 'supported_models'}
+        self.COLLECTIONS = {
+            'user_config': 'user_configs', 
+            'memory': 'user_memory', 
+            'authorized': 'authorized_users', 
+            'models': 'supported_models',
+            # --- New Collections for Dashboard ---
+            'dashboard_users': 'dashboard_users',
+            'linked_accounts': 'linked_accounts',
+            'link_codes': 'temp_link_codes'
+        }
         self._connect()
+        self._initialize_indexes()
         self._initialize_default_models()
 
     def _connect(self):
@@ -55,6 +65,24 @@ class MongoDBStore:
             logger.error(f"Failed to connect to MongoDB: {e}")
             raise
 
+    def _initialize_indexes(self):
+        """Creates necessary indexes, like TTL for link codes."""
+        try:
+            # TTL index for link codes to auto-expire after 5 minutes (300 seconds)
+            self.db[self.COLLECTIONS['link_codes']].create_index("created_at", expireAfterSeconds=300)
+            logger.info("TTL index for link_codes ensured.")
+
+            # Unique indexes for dashboard users
+            self.db[self.COLLECTIONS['dashboard_users']].create_index("username", unique=True)
+            self.db[self.COLLECTIONS['dashboard_users']].create_index("email", unique=True)
+            logger.info("Unique indexes for dashboard_users ensured.")
+
+            # Unique index for linked accounts to prevent duplicates
+            self.db[self.COLLECTIONS['linked_accounts']].create_index([("platform", 1), ("platform_user_id", 1)], unique=True)
+            logger.info("Unique index for linked_accounts ensured.")
+        except Exception as e:
+            logger.exception(f"Error initializing indexes: {e}")
+
     def _initialize_default_models(self):
         """Initializes the database with default models if the collection is empty."""
         try:
@@ -65,6 +93,90 @@ class MongoDBStore:
                 ])
         except Exception as e:
             logger.exception(f"Error initializing default models: {e}")
+
+    # --- Methods for Dashboard User Management ---
+
+    def create_dashboard_user(self, username: str, email: str, hashed_password: str) -> Optional[str]:
+        """Creates a new user for the dashboard. Returns user ID on success."""
+        try:
+            result = self.db[self.COLLECTIONS['dashboard_users']].insert_one({
+                "username": username,
+                "email": email,
+                "hashed_password": hashed_password,
+                "created_at": datetime.utcnow(),
+                "updated_at": datetime.utcnow()
+            })
+            return str(result.inserted_id)
+        except DuplicateKeyError:
+            logger.warning(f"Attempted to create a dashboard user with duplicate username or email: {username}/{email}")
+            return None
+        except Exception as e:
+            logger.error(f"Error creating dashboard user '{username}': {e}")
+            return None
+
+    def get_dashboard_user_by_username(self, username: str) -> Optional[Dict[str, Any]]:
+        """Finds a dashboard user by their username."""
+        return self.db[self.COLLECTIONS['dashboard_users']].find_one({"username": username})
+
+    def get_dashboard_user_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
+        """Finds a dashboard user by their ID."""
+        from bson.objectid import ObjectId
+        try:
+            return self.db[self.COLLECTIONS['dashboard_users']].find_one({"_id": ObjectId(user_id)})
+        except Exception:
+            return None
+
+    # --- Methods for Account Linking ---
+
+    def create_link_code(self, user_id: str) -> str:
+        """Creates a temporary, random code for account linking."""
+        import random
+        import string
+        code = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        self.db[self.COLLECTIONS['link_codes']].insert_one({
+            "code": code,
+            "user_id": user_id,
+            "created_at": datetime.utcnow()
+        })
+        return code
+
+    def validate_link_code(self, code: str) -> Optional[str]:
+        """Validates a link code, deletes it, and returns the user_id if valid."""
+        doc = self.db[self.COLLECTIONS['link_codes']].find_one_and_delete({"code": code.upper()})
+        return str(doc["user_id"]) if doc else None
+
+    def create_linked_account(self, user_id: str, platform: str, platform_user_id: str, platform_display_name: str) -> tuple[bool, str]:
+        """Creates a record linking a dashboard user to a platform account. Returns (success, message)."""
+        try:
+            self.db[self.COLLECTIONS['linked_accounts']].update_one(
+                {"user_id": user_id, "platform": platform},
+                {"$set": {
+                    "platform_user_id": platform_user_id,
+                    "platform_display_name": platform_display_name,
+                    "updated_at": datetime.utcnow()
+                }, "$setOnInsert": {"created_at": datetime.utcnow()}},
+                upsert=True
+            )
+            return True, "Account linked successfully."
+        except DuplicateKeyError:
+            return False, "This platform account is already linked to another user."
+        except Exception as e:
+            logger.error(f"Error creating linked account: {e}")
+            return False, "An internal error occurred."
+
+    def get_linked_accounts_for_user(self, user_id: str) -> List[Dict[str, Any]]:
+        """Retrieves all linked accounts for a given dashboard user."""
+        from bson.objectid import ObjectId
+        try:
+            return list(self.db[self.COLLECTIONS['linked_accounts']].find({"user_id": ObjectId(user_id)}, {"_id": 0, "user_id": 0}))
+        except Exception:
+            return []
+
+    def find_linked_account(self, platform: str, platform_user_id: str) -> Optional[Dict[str, Any]]:
+        """Finds a linked account by platform and platform_user_id."""
+        return self.db[self.COLLECTIONS['linked_accounts']].find_one({"platform": platform, "platform_user_id": platform_user_id})
+
+    # --- Existing Methods ---
 
     def get_user_messages(self, user_id: int) -> List[Dict[str, Any]]:
         """Retrieves the conversation history for a user."""

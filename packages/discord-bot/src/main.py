@@ -17,7 +17,7 @@ class Bot(commands.Bot):
         intents = discord.Intents.default()
         intents.message_content = True
         intents.members = True
-        super().__init__(command_prefix="r", intents=intents, help_command=None)
+        super().__init__(command_prefix=",", intents=intents, help_command=None)
 
     async def setup_hook(self) -> None:
         """This is called automatically by discord.py after the bot is logged in."""

@@ -1,48 +1,49 @@
 # /packages/ryuuko-api/src/main.py
 import logging
-import os  # <--- SỬA LỖI: Thêm lại import đã mất
-from pathlib import Path
 from typing import Dict, Any, List, Optional, Set
 
-from dotenv import load_dotenv
 from fastapi import FastAPI, Request, HTTPException, Header, Depends
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
-# --- Load Config at the very start ---
-dotenv_path = Path(__file__).resolve().parents[1] / ".env"
-load_dotenv(dotenv_path=dotenv_path)
+# Import config first to ensure all environment variables are loaded and validated.
+from . import config
 
-CORE_API_KEY = os.getenv("CORE_API_KEY")
-MONGODB_CONNECTION_STRING = os.getenv("MONGODB_CONNECTION_STRING")
-MONGODB_DATABASE_NAME = "polydevsdb"
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-POLYDEVS_API_KEY = os.getenv("POLYDEVS_API_KEY")
-PROXYVN_API_KEY = os.getenv("PROXYVN_API_KEY")
+# --- NEW: Import the shared db_store instance from the new database module ---
+from .database import db_store
 
-# Import modules after config is loaded
-from .storage import MongoDBStore
+# --- NEW: Import API routers for dashboard functionality ---
+from .api import auth as auth_router
+from .api import users as users_router
+from .api import link as link_router
+
+# Import other local modules
 from .providers import polydevs, aistudio, proxyvn
 
-# --- App Initialization & Dependencies ---
+# --- App Initialization ---
 app = FastAPI(
     title="Ryuuko API",
     description="Core API Service for the Ryuuko Chatbot ecosystem.",
     version="2.0.1"
 )
 
-if not MONGODB_CONNECTION_STRING:
-    raise RuntimeError("MONGODB_CONNECTION_STRING is not set. Please check your .env file in /packages/ryuuko-api/")
+# --- NEW: Include Dashboard API Routers ---
+# These routers handle authentication, user management, and account linking for the new dashboard.
+app.include_router(auth_router.router, prefix="/api/auth", tags=["Dashboard Auth"])
+app.include_router(users_router.router, prefix="/api/users", tags=["Dashboard Users"])
+app.include_router(link_router.router, prefix="/api/link", tags=["Account Linking"])
 
-db_store = MongoDBStore(MONGODB_CONNECTION_STRING, MONGODB_DATABASE_NAME)
+
+# Map provider names to their forwarding functions.
 PROVIDER_MAP = {"polydevs": polydevs.forward, "aistudio": aistudio.forward, "proxyvn": proxyvn.forward}
 
-# --- Authentication ---
+# --- Authentication (for original bot functionality) ---
 async def verify_api_key(x_api_key: str = Header(...)):
-    if x_api_key != CORE_API_KEY:
+    """Dependency to verify the provided API key in the request header."""
+    if x_api_key != config.CORE_API_KEY:
         raise HTTPException(status_code=401, detail="Invalid or missing API Key")
 
-# --- Pydantic Models ---
+# --- Pydantic Models (for original bot functionality) ---
 class ModelInfoResponse(BaseModel):
     model_name: str
     credit_cost: int
@@ -77,33 +78,56 @@ class ModelCreateRequest(BaseModel):
 class AuthUserRequest(BaseModel):
     user_id: int
 
-# --- API Endpoints ---
+# --- API Endpoints (Original and New Root) ---
 @app.get("/", include_in_schema=False)
 async def root():
     return {"message": "Ryuuko API is running."}
+
+# --- Existing API Endpoints for Bot ---
 
 @app.post("/api/v1/chat/completions", dependencies=[Depends(verify_api_key)])
 async def chat_completions(request: ChatCompletionRequest, http_request: Request):
     user_id = request.user_id
     user_config = db_store.get_user_config(user_id)
     model_to_use = request.model or user_config.get("model", "ryuuko-r1-vnm-mini")
+    
     provider_name = "polydevs"
     if model_to_use.startswith("gemini-"): provider_name = "aistudio"
     elif model_to_use.startswith("gpt-"): provider_name = "proxyvn"
+    
     forward_fn = PROVIDER_MAP.get(provider_name)
-    if not forward_fn: raise HTTPException(status_code=400, detail=f"Provider for model '{model_to_use}' not found.")
+    if not forward_fn: 
+        raise HTTPException(status_code=400, detail=f"Provider for model '{model_to_use}' not found.")
+        
     history = db_store.get_user_messages(user_id)
-    provider_payload = {"model": model_to_use, "messages": history + request.messages, "config": {}, "system_instruction": [user_config.get("system_prompt")]}
-    api_key_map = {"polydevs": POLYDEVS_API_KEY, "aistudio": GEMINI_API_KEY, "proxyvn": PROXYVN_API_KEY}
+    provider_payload = {
+        "model": model_to_use, 
+        "messages": history + request.messages, 
+        "config": {}, 
+        "system_instruction": [user_config.get("system_prompt")]
+    }
+    
+    api_key_map = {
+        "polydevs": config.POLYDEVS_API_KEY, 
+        "aistudio": config.GEMINI_API_KEY, 
+        "proxyvn": config.PROXYVN_API_KEY
+    }
     provider_api_key = api_key_map.get(provider_name)
-    if not provider_api_key: raise HTTPException(status_code=500, detail=f"API key for '{provider_name}' is not configured.")
+    
+    if not provider_api_key: 
+        raise HTTPException(status_code=500, detail=f"API key for '{provider_name}' is not configured.")
+        
     try:
         streaming_response = await forward_fn(http_request, provider_payload, provider_api_key)
         response_content_bytes = b"".join([chunk async for chunk in streaming_response.body_iterator])
         final_response_text = response_content_bytes.decode('utf-8').strip()
+        
         db_store.add_message(user_id, request.messages[-1])
         db_store.add_message(user_id, {"role": "assistant", "content": final_response_text})
-        async def final_streamer(): yield final_response_text.encode('utf-8')
+        
+        async def final_streamer(): 
+            yield final_response_text.encode('utf-8')
+            
         return StreamingResponse(final_streamer(), media_type="text/plain; charset=utf-8")
     except Exception as e:
         logging.getLogger("RyuukoAPI.API").exception(f"Error during provider call: {e}")
