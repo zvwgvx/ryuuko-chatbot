@@ -2,27 +2,66 @@
 import time
 import logging
 import discord
+import asyncio
+import re
+from typing import Optional
 from discord.ext import commands
 
+from ..utils.embed import send_embed
+
 logger = logging.getLogger("DiscordBot.Commands.Basic")
+
+async def measure_external_ping(host: str) -> Optional[float]:
+    """Measures the latency to an external host using the system's ping command."""
+    try:
+        process = await asyncio.create_subprocess_shell(
+            f"ping -c 1 {host}",
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        stdout, stderr = await process.communicate()
+
+        if process.returncode == 0:
+            match = re.search(r"time=([\d.]+)\s*ms", stdout.decode())
+            if match:
+                return float(match.group(1))
+    except (FileNotFoundError, Exception) as e:
+        logger.error(f"Ping measurement failed for {host}: {e}")
+    return None
 
 def setup_basic_commands(bot: commands.Bot, dependencies: dict):
     """Registers basic informational commands with the bot."""
 
     @bot.command(name="ping")
     async def ping_command(ctx: commands.Context):
-        """Measures the bot's latency."""
-        start_time = time.perf_counter()
-        message = await ctx.send("Pinging...")
-        end_time = time.perf_counter()
-        api_latency_ms = round((end_time - start_time) * 1000)
-        websocket_latency_ms = round(bot.latency * 1000) if bot.latency is not None else "N/A"
-        response_content = (
-            f"Pong! 🏓\n"
-            f"Response Time: `{api_latency_ms}ms`\n"
-            f"WebSocket Latency: `{websocket_latency_ms}ms`"
+        """Measures the bot's latency to Google, Cloudflare, and Discord."""
+        embed = discord.Embed(title="Pinging... 🏓", description="Measuring latencies...", color=discord.Color.blue())
+        message = await ctx.send(embed=embed)
+
+        # Measure latencies concurrently
+        google_task = asyncio.create_task(measure_external_ping("8.8.8.8"))
+        cloudflare_task = asyncio.create_task(measure_external_ping("1.1.1.1"))
+        
+        websocket_latency_ms = round(bot.latency * 1000) if bot.latency is not None else None
+
+        # Wait for external pings to complete
+        google_latency, cloudflare_latency = await asyncio.gather(google_task, cloudflare_task)
+        
+        # Format results
+        ws_latency_str = f"`{websocket_latency_ms}ms`" if websocket_latency_ms is not None else "N/A"
+        gg_latency_str = f"`{round(google_latency)}ms`" if google_latency is not None else "Failed"
+        cf_latency_str = f"`{round(cloudflare_latency)}ms`" if cloudflare_latency is not None else "Failed"
+
+        final_embed = discord.Embed(
+            title="Pong! 🏓",
+            description=(
+                f"**Google DNS:** {gg_latency_str}\n"
+                f"**Cloudflare DNS:** {cf_latency_str}\n"
+                f"**Discord WebSocket:** {ws_latency_str}"
+            ),
+            color=discord.Color.blue()
         )
-        await message.edit(content=response_content)
+        await message.edit(embed=final_embed)
 
     @bot.command(name="help")
     async def help_command(ctx: commands.Context):
@@ -68,7 +107,6 @@ def setup_basic_commands(bot: commands.Bot, dependencies: dict):
                 ),
                 inline=False
             )
-            # SỬA LỖI: Thêm lệnh deductcredit vào help
             embed.add_field(
                 name="💰 Credit & Access Management (Owner)",
                 value=(

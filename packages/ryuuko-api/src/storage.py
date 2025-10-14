@@ -123,9 +123,13 @@ class MongoDBStore:
         return messages
 
     def clear_user_memory(self, user_id: int) -> bool:
-        """Clears a user's entire conversation history."""
-        result = self.db[self.COLLECTIONS['memory']].delete_one({"user_id": user_id})
-        return result.deleted_count > 0
+        """Clears a user's conversation history by setting the messages array to empty."""
+        self.db[self.COLLECTIONS['memory']].update_one(
+            {"user_id": user_id},
+            {"$set": {"messages": [], "updated_at": datetime.utcnow()}},
+            upsert=True
+        )
+        return True
 
     def get_user_config(self, user_id: int) -> Dict[str, Any]:
         """Retrieves a user's configuration, providing defaults if none exists."""

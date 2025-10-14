@@ -3,11 +3,11 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-package-dir = {"core" = "src"}
-packages = ["core"]
+package-dir = {"ryuuko_api" = "src"}
+packages = ["ryuuko_api"]
 
 [project]
-name = "ryuuko-core"
+name = "ryuuko-api"
 version = "2.0.1" # Incrementing version
 authors = [
   { name="Zang Vũ", email="zvwgvx@polydevs.uk" },
@@ -28,6 +28,5 @@ dependencies = [
     "openai>=1.3.0"
 ]
 
-# SỬA LỖI: Tạo một lệnh chạy (script) có tên `ryuuko-api`
 [project.scripts]
-core = "core.__main__:main"
+ryuuko-api = "ryuuko_api.runner:main"

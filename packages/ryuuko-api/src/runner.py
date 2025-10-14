@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-from .utils.logger import setup_logger
+from ryuuko_api.utils.logger import setup_logger
 
 def main():
     """The main entry point for running the Uvicorn server."""
