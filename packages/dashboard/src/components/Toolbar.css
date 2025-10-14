@@ -1,0 +1,33 @@
+.toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1rem 2rem;
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.toolbar-button {
+  background-color: transparent;
+  border: 1px solid #646cff;
+  color: #646cff;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  border-radius: 8px;
+}
+
+.toolbar-button:hover {
+  border-color: #535bf2;
+}
+
+.toolbar-button.login {
+  background-color: #646cff;
+  color: white;
+}

@@ -4,6 +4,7 @@ from typing import Dict, Any, List, Optional, Set
 
 from fastapi import FastAPI, Request, HTTPException, Header, Depends
 from fastapi.responses import StreamingResponse
+from fastapi.middleware.cors import CORSMiddleware # NEW: Import CORS middleware
 from pydantic import BaseModel, Field
 
 # Import config first to ensure all environment variables are loaded and validated.
@@ -25,6 +26,22 @@ app = FastAPI(
     title="Ryuuko API",
     description="Core API Service for the Ryuuko Chatbot ecosystem.",
     version="2.0.1"
+)
+
+# --- NEW: CORS Middleware Configuration ---
+# This allows the frontend (running on a different port) to communicate with the API.
+origins = [
+    "http://localhost",
+    "http://localhost:5173", # Default Vite dev server
+    "http://localhost:3000", # Default Create React App dev server
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], # Allow all methods (GET, POST, etc.)
+    allow_headers=["*"], # Allow all headers (Content-Type, Authorization, etc.)
 )
 
 # --- NEW: Include Dashboard API Routers ---

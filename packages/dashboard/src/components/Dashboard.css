@@ -1,0 +1,39 @@
+.dashboard-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: left;
+}
+
+.user-info, .link-section {
+  background-color: #2f2f2f;
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.user-info h3, .link-section h3 {
+  margin-top: 0;
+  border-bottom: 1px solid #555;
+  padding-bottom: 0.5rem;
+}
+
+.link-code-display {
+  margin-top: 1rem;
+  background-color: #1a1a1a;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.link-code-display pre {
+  font-size: 2em;
+  color: #6bff95;
+  letter-spacing: 0.1em;
+  margin: 0.5rem 0;
+}
+
+.error-message {
+  color: #ff6b6b;
+}
