@@ -1,7 +1,7 @@
 # /packages/discord-bot/src/api_client.py
 import logging
 import httpx
-from typing import List, Dict, Any, AsyncGenerator, Optional, Tuple, Set
+from typing import List, Dict, Any, AsyncGenerator, Optional, Tuple
 
 from . import config
 
@@ -21,134 +21,78 @@ async def _handle_api_error(e: httpx.HTTPStatusError) -> str:
     logger.error(f"Core API Error ({e.response.status_code}): {error_detail}")
     return str(error_detail)
 
-# --- Chat Completions ---
-async def stream_chat_completions(payload: Dict[str, Any]) -> AsyncGenerator[bytes, None]:
-    headers = {**_get_auth_headers(), "Content-Type": "application/json", "Accept": "text/plain"}
-    if not config.CORE_API_KEY: yield b"Error: Core Service API Key is not configured."; return
-    try:
-        async with client.stream("POST", "/api/v1/chat/completions", headers=headers, json=payload) as response:
-            if response.status_code != 200:
-                error_body = await response.aread()
-                yield f"Error: Core API returned status {response.status_code}\n{error_body.decode()}".encode('utf-8')
-                return
-            async for chunk in response.aiter_bytes(): yield chunk
-    except httpx.RequestError as e:
-        yield f"Error: Could not connect to Core Service at {config.CORE_API_URL}".encode('utf-8')
+# --- User & Chat Functions ---
 
-# --- Public & User Functions ---
-async def list_available_models() -> Optional[List[Dict[str, Any]]]:
+async def get_dashboard_user_by_platform_id(platform: str, platform_user_id: int) -> Optional[Dict[str, Any]]:
+    if not config.CORE_API_KEY: return None
     try:
-        response = await client.get("/api/v1/models", headers=_get_auth_headers())
-        response.raise_for_status()
-        return response.json()
-    except (httpx.RequestError, httpx.HTTPStatusError): return None
-
-async def get_user_profile(user_id: int) -> Optional[Dict[str, Any]]:
-    try:
-        response = await client.get(f"/api/v1/users/{user_id}", headers=_get_auth_headers())
-        response.raise_for_status()
-        return response.json()
-    except (httpx.RequestError, httpx.HTTPStatusError): return None
-
-async def update_user_config(user_id: int, model: Optional[str] = None, system_prompt: Optional[str] = None) -> Tuple[bool, str]:
-    payload = {}
-    if model is not None: payload["model"] = model
-    if system_prompt is not None: payload["system_prompt"] = system_prompt
-    if not payload: return False, "No data provided."
-    try:
-        response = await client.put(f"/api/v1/users/{user_id}/config", headers=_get_auth_headers(), json=payload)
-        response.raise_for_status()
-        return True, response.json().get("message", "Success!")
-    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
-    except httpx.RequestError as e: return False, str(e)
-
-async def get_user_memory(user_id: int) -> Optional[List[Dict[str, Any]]]:
-    try:
-        response = await client.get(f"/api/v1/users/{user_id}/memory", headers=_get_auth_headers())
+        response = await client.get(f"/api/users/by-platform/{platform}/{platform_user_id}", headers=_get_auth_headers())
+        if response.status_code == 404: return None
         response.raise_for_status()
         return response.json()
     except (httpx.RequestError, httpx.HTTPStatusError) as e:
-        logger.error(f"Failed to get memory for user {user_id}: {e}")
+        logger.error(f"Error fetching dashboard user for {platform_user_id}: {e}")
         return None
 
-async def clear_user_memory(user_id: int) -> bool:
+async def stream_chat_completions(platform: str, platform_user_id: str, messages: List[Dict[str, Any]], model: Optional[str] = None) -> AsyncGenerator[bytes, None]:
+    headers = {**_get_auth_headers(), "Content-Type": "application/json", "Accept": "text/plain"}
+    if not config.CORE_API_KEY: yield b"Error: Core Service API Key is not configured."; return
+    payload = {"platform": platform, "platform_user_id": platform_user_id, "messages": messages, "model": model}
     try:
-        response = await client.delete(f"/api/v1/users/{user_id}/memory", headers=_get_auth_headers())
-        response.raise_for_status()
-        return True
-    except (httpx.RequestError, httpx.HTTPStatusError): return False
+        async with client.stream("POST", "/api/chat/completions", headers=headers, json=payload) as response:
+            if response.status_code != 200:
+                error_body = await response.aread()
+                yield f"Error: API returned status {response.status_code}\n{error_body.decode()}".encode('utf-8')
+                return
+            async for chunk in response.aiter_bytes(): yield chunk
+    except httpx.RequestError as e:
+        yield f"Error: Could not connect to the Core API at {config.CORE_API_URL}".encode('utf-8')
 
-# --- Admin Functions ---
-async def add_model(name: str, cost: int, level: int) -> Tuple[bool, str]:
-    payload = {"model_name": name, "credit_cost": cost, "access_level": level}
+# --- Account Linking ---
+
+async def link_account(code: str, platform: str, platform_user_id: str, display_name: str) -> Tuple[bool, str]:
+    payload = {"code": code, "platform": platform, "platform_user_id": platform_user_id, "platform_display_name": display_name}
     try:
-        response = await client.post("/api/v1/admin/models", headers=_get_auth_headers(), json=payload)
+        response = await client.post("/api/link/submit-code", headers=_get_auth_headers(), json=payload)
         response.raise_for_status()
-        return True, response.json().get("message", "Success!")
+        return True, response.json().get("message", "Account linked successfully!")
+    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
+    except httpx.RequestError as e: return False, f"Could not connect to the API: {e}"
+
+async def unlink_account(platform: str, platform_user_id: str) -> Tuple[bool, str]:
+    payload = {"platform": platform, "platform_user_id": platform_user_id}
+    try:
+        response = await client.post("/api/link/unlink", headers=_get_auth_headers(), json=payload)
+        response.raise_for_status()
+        return True, response.json().get("message", "Account unlinked successfully!")
+    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
+    except httpx.RequestError as e: return False, f"Could not connect to the API: {e}"
+
+# --- NEW: Admin Functions (using dashboard user_id) ---
+
+async def admin_add_credits(user_id: str, amount: int) -> Tuple[bool, str]:
+    try:
+        response = await client.post(f"/api/admin/users/{user_id}/credits/add", headers=_get_auth_headers(), json={"amount": amount})
+        response.raise_for_status()
+        res_json = response.json()
+        return True, f"Added {amount} credits to user {res_json.get('user_id')}. New balance: {res_json.get('new_value')}"
     except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
     except httpx.RequestError as e: return False, str(e)
 
-async def remove_model(name: str) -> Tuple[bool, str]:
+async def admin_set_credits(user_id: str, amount: int) -> Tuple[bool, str]:
     try:
-        response = await client.delete(f"/api/v1/admin/models/{name}", headers=_get_auth_headers())
+        response = await client.post(f"/api/admin/users/{user_id}/credits/set", headers=_get_auth_headers(), json={"amount": amount})
         response.raise_for_status()
-        return True, response.json().get("message", "Success!")
+        res_json = response.json()
+        return True, f"Set credits for user {res_json.get('user_id')} to {res_json.get('new_value')}."
     except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
     except httpx.RequestError as e: return False, str(e)
 
-async def add_user_credits(user_id: int, amount: int) -> Tuple[bool, str]:
+async def admin_set_level(user_id: str, level: int) -> Tuple[bool, str]:
     try:
-        response = await client.put(f"/api/v1/admin/users/{user_id}/credits/add", headers=_get_auth_headers(), json={"amount": amount})
+        response = await client.post(f"/api/admin/users/{user_id}/level/set", headers=_get_auth_headers(), json={"level": level})
         response.raise_for_status()
-        new_balance = response.json().get("new_balance", "N/A")
-        return True, f"Success! New balance: {new_balance}"
-    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
-    except httpx.RequestError as e: return False, str(e)
-
-async def deduct_user_credits(user_id: int, amount: int) -> Tuple[bool, str]:
-    try:
-        response = await client.put(f"/api/v1/admin/users/{user_id}/credits/deduct", headers=_get_auth_headers(), json={"amount": amount})
-        response.raise_for_status()
-        new_balance = response.json().get("new_balance", "N/A")
-        return True, f"Success! New balance: {new_balance}"
-    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
-    except httpx.RequestError as e: return False, str(e)
-
-async def set_user_credits(user_id: int, amount: int) -> Tuple[bool, str]:
-    try:
-        response = await client.put(f"/api/v1/admin/users/{user_id}/credits/set", headers=_get_auth_headers(), json={"amount": amount})
-        response.raise_for_status()
-        return True, response.json().get("message", "Success!")
-    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
-    except httpx.RequestError as e: return False, str(e)
-
-async def set_user_level(user_id: int, level: int) -> Tuple[bool, str]:
-    try:
-        response = await client.put(f"/api/v1/admin/users/{user_id}/level", headers=_get_auth_headers(), json={"level": level})
-        response.raise_for_status()
-        return True, response.json().get("message", "Success!")
-    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
-    except httpx.RequestError as e: return False, str(e)
-
-async def get_authorized_users() -> Optional[Set[int]]:
-    try:
-        response = await client.get("/api/v1/admin/auth/users", headers=_get_auth_headers())
-        response.raise_for_status()
-        return set(response.json())
-    except (httpx.RequestError, httpx.HTTPStatusError): return None
-
-async def add_authorized_user(user_id: int) -> Tuple[bool, str]:
-    try:
-        response = await client.post("/api/v1/admin/auth/users", headers=_get_auth_headers(), json={"user_id": user_id})
-        response.raise_for_status()
-        return True, response.json().get("message", "Success!")
-    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
-    except httpx.RequestError as e: return False, str(e)
-
-async def remove_authorized_user(user_id: int) -> Tuple[bool, str]:
-    try:
-        response = await client.delete(f"/api/v1/admin/auth/users/{user_id}", headers=_get_auth_headers())
-        response.raise_for_status()
-        return True, response.json().get("message", "Success!")
+        res_json = response.json()
+        return True, f"Set access level for user {res_json.get('user_id')} to {res_json.get('new_value')}."
     except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
     except httpx.RequestError as e: return False, str(e)

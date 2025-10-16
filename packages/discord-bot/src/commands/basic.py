@@ -1,123 +1,62 @@
 # /packages/discord-bot/src/commands/basic.py
-import time
 import logging
 import discord
-import asyncio
-import re
-from typing import Optional
 from discord.ext import commands
 
 from ..utils.embed import send_embed
 
 logger = logging.getLogger("DiscordBot.Commands.Basic")
 
-async def measure_external_ping(host: str) -> Optional[float]:
-    """Measures the latency to an external host using the system's ping command."""
-    try:
-        process = await asyncio.create_subprocess_shell(
-            f"ping -c 1 {host}",
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-        )
-        stdout, stderr = await process.communicate()
-
-        if process.returncode == 0:
-            match = re.search(r"time=([\d.]+)\s*ms", stdout.decode())
-            if match:
-                return float(match.group(1))
-    except (FileNotFoundError, Exception) as e:
-        logger.error(f"Ping measurement failed for {host}: {e}")
-    return None
+# --- A hardcoded version number for debugging purposes ---
+BOT_CODE_VERSION = "3.2.1-final"
 
 def setup_basic_commands(bot: commands.Bot, dependencies: dict):
-    """Registers basic informational commands with the bot."""
-
-    @bot.command(name="ping")
-    async def ping_command(ctx: commands.Context):
-        """Measures the bot's latency to Google, Cloudflare, and Discord."""
-        embed = discord.Embed(title="Pinging... 🏓", description="Measuring latencies...", color=discord.Color.blue())
-        message = await ctx.send(embed=embed)
-
-        # Measure latencies concurrently
-        google_task = asyncio.create_task(measure_external_ping("8.8.8.8"))
-        cloudflare_task = asyncio.create_task(measure_external_ping("1.1.1.1"))
-        
-        websocket_latency_ms = round(bot.latency * 1000) if bot.latency is not None else None
-
-        # Wait for external pings to complete
-        google_latency, cloudflare_latency = await asyncio.gather(google_task, cloudflare_task)
-        
-        # Format results
-        ws_latency_str = f"`{websocket_latency_ms}ms`" if websocket_latency_ms is not None else "N/A"
-        gg_latency_str = f"`{round(google_latency)}ms`" if google_latency is not None else "Failed"
-        cf_latency_str = f"`{round(cloudflare_latency)}ms`" if cloudflare_latency is not None else "Failed"
-
-        final_embed = discord.Embed(
-            title="Pong! 🏓",
-            description=(
-                f"**Google DNS:** {gg_latency_str}\n"
-                f"**Cloudflare DNS:** {cf_latency_str}\n"
-                f"**Discord WebSocket:** {ws_latency_str}"
-            ),
-            color=discord.Color.blue()
-        )
-        await message.edit(embed=final_embed)
+    """Registers basic, general-purpose commands."""
 
     @bot.command(name="help")
     async def help_command(ctx: commands.Context):
-        """Displays a list of available commands."""
-        is_owner = await bot.is_owner(ctx.author)
-
+        """Displays a comprehensive list of available commands."""
         embed = discord.Embed(
-            title="Ryuuko Bot Help",
-            description="Here are the available commands:",
+            title="Ryuuko Bot Commands",
+            description="Here is a list of commands you can use.",
             color=discord.Color.blue()
         )
 
-        embed.add_field(
-            name="👤 User Commands",
-            value=(
-                "`.ping` - Check bot's latency.\n"
-                "`.help` - Shows this help message.\n"
-                "`.models` - Lists all available AI models.\n"
-                "`.model <name>` - Set your preferred AI model.\n"
-                "`.sysprompt <prompt>` - Set your custom system prompt.\n"
-                "`.profile [user]` - Show your configuration profile.\n"
-                "`.clearmemory` - Clear your conversation history."
-            ),
-            inline=False
-        )
+        # User Commands
+        user_cmds = """
+        `,profile` - Displays your linked account profile.
+        `,link <code>` - (DM only) Links your Discord to your dashboard account.
+        `,unlink` - Unlinks your Discord account.
+        """
+        embed.add_field(name="👤 User Commands", value=user_cmds, inline=False)
 
-        if is_owner:
-            embed.add_field(
-                name="👑 Owner Commands",
-                value=(
-                    "`.auth <user>` - Authorize a user.\n"
-                    "`.deauth <user>` - De-authorize a user.\n"
-                    "`.auths` - List all authorized users.\n"
-                    "`.clearmemory [user]` - Clear a user's conversation memory."
-                ),
-                inline=False
-            )
-            embed.add_field(
-                name="🛠️ Model Management (Owner)",
-                value=(
-                    "`.addmodel <name> <cost> <level>` - Add a new model.\n"
-                    "`.removemodel <name>` - Remove an existing model."
-                ),
-                inline=False
-            )
-            embed.add_field(
-                name="💰 Credit & Access Management (Owner)",
-                value=(
-                    "`.addcredit <user> <amount>` - Add credits to a user.\n"
-                    "`.deductcredit <user> <amount>` - Deduct credits from a user.\n"
-                    "`.setcredit <user> <amount>` - Set a user's credit balance.\n"
-                    "`.setlevel <user> <level>` - Set a user's access level."
-                ),
-                inline=False
-            )
+        # Admin Commands (Only show to admins)
+        try:
+            from . import admin # Local import to avoid circular dependency
+            is_admin = await commands.check(admin.is_ryuuko_admin()).predicate(ctx)
+        except Exception:
+            is_admin = False
+        
+        if is_admin:
+            admin_cmds = """
+            `,addcredit <@user> <amount>` - Adds credits to a user.
+            `,setcredit <@user> <amount>` - Sets a user's credit balance.
+            `,setlevel <@user> <level>` - Sets a user's access level (0-3).
+            """
+            embed.add_field(name="🛠️ Admin Commands", value=admin_cmds, inline=False)
 
+        embed.set_footer(text=f"Ryuuko v{BOT_CODE_VERSION} | Use commands in DMs or by mentioning the bot.")
         await ctx.send(embed=embed)
 
-    logger.info("Basic commands have been registered.")
+    @bot.command(name="ping")
+    async def ping_command(ctx: commands.Context):
+        """Checks the bot's latency."""
+        latency = bot.latency * 1000  # Convert to milliseconds
+        await send_embed(ctx, "Ping", f"Pong! Latency is {latency:.2f}ms.", discord.Color.green())
+
+    @bot.command(name="version")
+    async def version_command(ctx: commands.Context):
+        """(DEBUG) Displays the current running code version of the bot."""
+        await send_embed(ctx, "Bot Version", f"Currently running code version: `{BOT_CODE_VERSION}`", discord.Color.purple())
+
+    logger.info(f"Basic commands have been registered (Code Version: {BOT_CODE_VERSION})")

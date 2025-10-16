@@ -19,7 +19,7 @@ def main():
     port = int(os.getenv("PORT", 8000))
 
     # 4. Run the Uvicorn server
-    # We now point to the factory function, which is more robust for reloading.
+    # The application factory will handle startup tasks like creating the admin user.
     uvicorn.run("ryuuko_api.main:app", host="0.0.0.0", port=port, reload=True)
 
 if __name__ == "__main__":

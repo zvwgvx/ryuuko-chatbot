@@ -9,90 +9,72 @@ from ..utils.embed import send_embed
 logger = logging.getLogger("DiscordBot.Commands.User")
 
 def setup_user_commands(bot: commands.Bot, dependencies: dict):
-    """Registers user-specific commands that interact with the Core API."""
+    """Registers user commands for account management."""
 
-    @bot.command(name="models")
-    async def show_models_command(ctx: commands.Context):
-        """Lists all available AI models by fetching from the Core API."""
-        all_models = await api_client.list_available_models()
-        if all_models is None:
-            await send_embed(ctx, title="Error", description="Could not retrieve the list of models from the Core API.", color=discord.Color.red())
-            return
-        if not all_models:
-            await send_embed(ctx, title="No Models Available", description="There are no models configured in the database.", color=discord.Color.blue())
-            return
+    @bot.command(name="link")
+    async def link_command(ctx: commands.Context, code: str):
+        """Links your Discord account to your dashboard account using a code."""
+        # The DM-only check has been removed to allow public linking.
 
-        sorted_models = sorted(
-            all_models,
-            key=lambda x: (-x.get("access_level", 0), -x.get("credit_cost", 0), x.get("model_name", ""))
+        # For security, we will still attempt to delete the user's message containing the code.
+        try:
+            await ctx.message.delete()
+        except (discord.Forbidden, discord.NotFound, discord.HTTPException):
+            # It's okay if we can't delete it (e.g., in DMs or if the bot lacks permissions).
+            pass
+
+        success, message = await api_client.link_account(
+            code=code,
+            platform="discord",
+            platform_user_id=str(ctx.author.id),
+            display_name=ctx.author.name
         )
 
-        embed = discord.Embed(
-            title="Available AI Models",
-            description="Models are grouped by access level.",
-            color=discord.Color.purple()
+        if success:
+            # Send a public confirmation.
+            await send_embed(ctx, title="Account Linked Successfully", description=message, color=discord.Color.green())
+        else:
+            await send_embed(ctx, title="Linking Failed", description=message, color=discord.Color.red())
+
+    @bot.command(name="unlink")
+    async def unlink_command(ctx: commands.Context):
+        """Unlinks your Discord account from the dashboard."""
+        profile = await api_client.get_dashboard_user_by_platform_id("discord", ctx.author.id)
+        if not profile:
+            await send_embed(ctx, title="Not Linked", description="Your account is not currently linked.", color=discord.Color.orange())
+            return
+
+        success, message = await api_client.unlink_account(
+            platform="discord",
+            platform_user_id=str(ctx.author.id)
         )
 
-        current_level = -1
-        field_value = ""
-        level_map = {0: "Basic (Lvl 0)", 1: "Advanced (Lvl 1)", 2: "Ultimate (Lvl 2)", 3: "Owner (Lvl 3)"}
-
-        for model in sorted_models:
-            access_level = model.get("access_level", 0)
-            if access_level != current_level:
-                if field_value:
-                    embed.add_field(name=level_map.get(current_level, f"Level {current_level}"), value=field_value, inline=False)
-                current_level = access_level
-                field_value = ""
-            
-            field_value += f"• `{model.get('model_name', 'N/A')}` ({model.get('credit_cost', 0)} credits)\n"
-        
-        if field_value:
-            embed.add_field(name=level_map.get(current_level, f"Level {current_level}"), value=field_value, inline=False)
-        
-        await ctx.send(embed=embed)
-
-    @bot.command(name="model")
-    async def set_model_command(ctx: commands.Context, *, model: str):
-        model_name = model.strip()
-        success, message = await api_client.update_user_config(ctx.author.id, model=model_name)
         if success:
-            await send_embed(ctx, title="Model Updated", description=f"Your preferred model has been updated to `{model_name}`.", color=discord.Color.green())
+            await send_embed(ctx, title="Account Unlinked", description=message, color=discord.Color.green())
         else:
-            await send_embed(ctx, title="Update Failed", description=message, color=discord.Color.red())
-
-    @bot.command(name="sysprompt")
-    async def set_sys_prompt_command(ctx: commands.Context, *, prompt: str):
-        success, message = await api_client.update_user_config(ctx.author.id, system_prompt=prompt)
-        if success:
-            await send_embed(ctx, title="System Prompt Updated", description="Your custom system prompt has been updated.", color=discord.Color.green())
-        else:
-            await send_embed(ctx, title="Update Failed", description=message, color=discord.Color.red())
-
+            await send_embed(ctx, title="Unlinking Failed", description=message, color=discord.Color.red())
+    
     @bot.command(name="profile")
-    async def show_profile_command(ctx: commands.Context, member: discord.Member = None):
-        target_user = member or ctx.author
-        if target_user != ctx.author and not await bot.is_owner(ctx.author):
-            await send_embed(ctx, title="Permission Denied", description="You can only view your own profile.", color=discord.Color.red())
+    async def profile_command(ctx: commands.Context):
+        """Displays your linked profile information."""
+        profile = await api_client.get_dashboard_user_by_platform_id("discord", ctx.author.id)
+        if not profile:
+            await send_embed(ctx, title="Profile Not Found", description="Your account is not linked. Use the `.link` command to link your account.", color=discord.Color.orange())
             return
 
-        profile_data = await api_client.get_user_profile(target_user.id)
-        if not profile_data:
-            await send_embed(ctx, title="Profile Not Found", description=f"Could not retrieve profile for {target_user.display_name}.", color=discord.Color.red())
-            return
+        embed = discord.Embed(title=f"Profile for {ctx.author.display_name}", color=discord.Color.blue())
+        if ctx.author.display_avatar:
+            embed.set_thumbnail(url=ctx.author.display_avatar.url)
+        
+        embed.add_field(name="Username", value=profile.get("username", "N/A"), inline=True)
+        embed.add_field(name="Access Level", value=profile.get("access_level", 0), inline=True)
+        embed.add_field(name="Credit Balance", value=f"{profile.get('credit', 0):,}", inline=True)
 
-        model = profile_data.get("model", "Not Set")
-        credit = profile_data.get("credit", 0)
-        access_level = profile_data.get("access_level", 0)
-        level_map = {0: "Basic", 1: "Advanced", 2: "Ultimate", 3: "Owner"}
-        level_desc = level_map.get(access_level, "Unknown")
-
-        embed = discord.Embed(title=f"Profile for {target_user.display_name}", color=discord.Color.green())
-        if target_user.display_avatar: embed.set_thumbnail(url=target_user.display_avatar.url)
-        embed.add_field(name="Current Model", value=f"`{model}`", inline=False)
-        embed.add_field(name="Credit Balance", value=str(credit), inline=True)
-        embed.add_field(name="Access Level", value=f"{level_desc} (Level {access_level})", inline=True)
+        linked_accounts = profile.get("linked_accounts", [])
+        if linked_accounts:
+            linked_str = "\n".join([f"- {acc.get('platform').capitalize()}: `{acc.get('platform_display_name')}`" for acc in linked_accounts])
+            embed.add_field(name="Linked Accounts", value=linked_str, inline=False)
 
         await ctx.send(embed=embed)
 
-    logger.info("User commands have been registered.")
+    logger.info("User commands (link, unlink, profile) have been registered.")

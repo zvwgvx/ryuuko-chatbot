@@ -1,10 +1,9 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
 from typing import List, Optional
-from jose import JWTError, jwt
 
-from .auth import OAUTH2_SCHEME, SECRET_KEY, ALGORITHM, TokenData
-from ..database import db_store # Import the shared db_store instance
+from .dependencies import get_current_user, verify_bot_api_key
+from ..database import db_store
 
 router = APIRouter()
 
@@ -18,32 +17,11 @@ class UserProfile(BaseModel):
     id: str
     username: str
     email: EmailStr
+    credit: int
+    access_level: int
     linked_accounts: List[LinkedAccount] = []
 
-# --- Dependency ---
-
-async def get_current_user(token: str = Depends(OAUTH2_SCHEME)):
-    """Decodes JWT token to get user ID, then fetches user from DB."""
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        user_id: str = payload.get("user_id")
-        if user_id is None:
-            raise credentials_exception
-        token_data = TokenData(user_id=user_id)
-    except JWTError:
-        raise credentials_exception
-    
-    user = db_store.get_dashboard_user_by_id(token_data.user_id)
-    if user is None:
-        raise credentials_exception
-    return user
-
-# --- Endpoint ---
+# --- Endpoints ---
 
 @router.get("/me", response_model=UserProfile)
 async def read_users_me(current_user: dict = Depends(get_current_user)):
@@ -51,11 +29,34 @@ async def read_users_me(current_user: dict = Depends(get_current_user)):
     user_id = str(current_user["_id"])
     linked_accounts = db_store.get_linked_accounts_for_user(user_id)
     
-    # We need to manually construct the response model as the DB dictionary is not directly compatible
-    user_profile = UserProfile(
+    return UserProfile(
         id=user_id,
         username=current_user["username"],
         email=current_user["email"],
+        credit=current_user.get("credit", 0),
+        access_level=current_user.get("access_level", 0),
         linked_accounts=[LinkedAccount(**acc) for acc in linked_accounts]
     )
-    return user_profile
+
+@router.get("/by-platform/{platform}/{platform_user_id}", response_model=UserProfile, dependencies=[Depends(verify_bot_api_key)])
+async def get_user_by_platform_id(platform: str, platform_user_id: str):
+    """(For Bots) Finds a dashboard user via their linked platform account."""
+    link = db_store.find_linked_account(platform, platform_user_id)
+    if not link:
+        raise HTTPException(status_code=404, detail="Linked account not found.")
+
+    user_id = str(link["user_id"])
+    user = db_store.get_dashboard_user_by_id(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User associated with link not found.")
+
+    linked_accounts = db_store.get_linked_accounts_for_user(user_id)
+
+    return UserProfile(
+        id=user_id,
+        username=user["username"],
+        email=user["email"],
+        credit=user.get("credit", 0),
+        access_level=user.get("access_level", 0),
+        linked_accounts=[LinkedAccount(**acc) for acc in linked_accounts]
+    )
