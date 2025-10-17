@@ -8,19 +8,23 @@ from ..utils.embed import send_embed
 
 logger = logging.getLogger("DiscordBot.Commands.User")
 
+# --- Plan Name Mapping ---
+PLAN_MAP = {
+    0: "Basic",
+    1: "Advanced",
+    2: "Ultimate",
+    3: "Owner" # Changed from Admin
+}
+
 def setup_user_commands(bot: commands.Bot, dependencies: dict):
     """Registers user commands for account management."""
 
     @bot.command(name="link")
     async def link_command(ctx: commands.Context, code: str):
         """Links your Discord account to your dashboard account using a code."""
-        # The DM-only check has been removed to allow public linking.
-
-        # For security, we will still attempt to delete the user's message containing the code.
         try:
             await ctx.message.delete()
         except (discord.Forbidden, discord.NotFound, discord.HTTPException):
-            # It's okay if we can't delete it (e.g., in DMs or if the bot lacks permissions).
             pass
 
         success, message = await api_client.link_account(
@@ -31,7 +35,6 @@ def setup_user_commands(bot: commands.Bot, dependencies: dict):
         )
 
         if success:
-            # Send a public confirmation.
             await send_embed(ctx, title="Account Linked Successfully", description=message, color=discord.Color.green())
         else:
             await send_embed(ctx, title="Linking Failed", description=message, color=discord.Color.red())
@@ -66,8 +69,11 @@ def setup_user_commands(bot: commands.Bot, dependencies: dict):
         if ctx.author.display_avatar:
             embed.set_thumbnail(url=ctx.author.display_avatar.url)
         
+        access_level = profile.get("access_level", 0)
+        plan_name = PLAN_MAP.get(access_level, "Unknown")
+
         embed.add_field(name="Username", value=profile.get("username", "N/A"), inline=True)
-        embed.add_field(name="Access Level", value=profile.get("access_level", 0), inline=True)
+        embed.add_field(name="Plan", value=plan_name, inline=True)
         embed.add_field(name="Credit Balance", value=f"{profile.get('credit', 0):,}", inline=True)
 
         linked_accounts = profile.get("linked_accounts", [])

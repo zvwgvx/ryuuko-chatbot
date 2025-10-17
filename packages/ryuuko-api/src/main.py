@@ -13,6 +13,7 @@ from .api import auth as auth_router
 from .api import users as users_router
 from .api import link as link_router
 from .api import admin as admin_router
+from .api import models as models_router # NEW: Import the models router
 from .api.dependencies import get_current_user, verify_bot_api_key
 from .providers import polydevs, aistudio, proxyvn
 
@@ -20,7 +21,7 @@ from .providers import polydevs, aistudio, proxyvn
 app = FastAPI(
     title="Ryuuko API",
     description="Core API Service for the Ryuuko Chatbot ecosystem.",
-    version="3.2.0" # Version bump for final auth fix
+    version="3.4.0" # Version bump for model endpoint
 )
 
 # --- CORS Middleware ---
@@ -37,6 +38,7 @@ app.include_router(auth_router.router, prefix="/api/auth", tags=["Dashboard Auth
 app.include_router(users_router.router, prefix="/api/users", tags=["Dashboard Users"])
 app.include_router(link_router.router, prefix="/api/link", tags=["Account Linking"])
 app.include_router(admin_router.router, prefix="/api/admin", tags=["Dashboard Admin"])
+app.include_router(models_router.router, prefix="/api/models", tags=["Models"]) # NEW: Include the models router
 
 # --- Provider Mapping ---
 PROVIDER_MAP = {"polydevs": polydevs.forward, "aistudio": aistudio.forward, "proxyvn": proxyvn.forward}

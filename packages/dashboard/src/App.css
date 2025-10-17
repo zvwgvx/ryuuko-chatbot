@@ -1,6 +1,23 @@
+/* Global Resets and Background */
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: #12121c;
+  color: #e0e0e0;
+  overflow-x: hidden; /* Prevent horizontal scrollbars */
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* Fullscreen Loading Indicator */
+.loading-fullscreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-size: 1.5rem;
+  color: #a0a0b0;
 }

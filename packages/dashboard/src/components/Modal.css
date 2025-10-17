@@ -1,31 +1,70 @@
+/* Modal Overlay with Frosted Glass Effect */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(10, 10, 10, 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
 }
 
+/* Modal Content - Wider and more spacious */
 .modal-content {
-  background-color: #2f2f2f;
-  padding: 2rem;
-  border-radius: 8px;
+  background: #1e1e2f; /* A darker, more professional shade */
+  padding: 2.5rem 3rem; /* More padding */
+  border-radius: 16px; /* More rounded corners */
   position: relative;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: 90%;
+  max-width: 700px; /* SIGNIFICANTLY WIDER */
+  transform: scale(0.95) translateY(10px);
+  opacity: 0;
+  animation: popIn 0.4s 0.1s forwards;
 }
 
+/* Close Button - More subtle and modern */
 .modal-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
+  top: 20px;
+  right: 20px;
+  background: #2a2a3f;
+  border: 1px solid #444;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  line-height: 30px;
+  text-align: center;
   color: #aaa;
   cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.modal-close:hover {
+  background-color: #ff6b6b;
+  color: white;
+  transform: rotate(90deg);
+}
+
+/* Keyframe animations for smooth entry */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popIn {
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
 }

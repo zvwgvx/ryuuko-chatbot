@@ -20,7 +20,6 @@ export const registerUser = (userData) => {
 };
 
 export const loginUser = (credentials) => {
-  // API expects form data for login
   const formData = new URLSearchParams();
   formData.append('username', credentials.username);
   formData.append('password', credentials.password);
@@ -38,6 +37,15 @@ export const getUserProfile = () => {
 
 export const generateLinkCode = () => {
   return apiClient.post('/api/link/generate-code');
+};
+
+export const updateUserConfig = (configData) => {
+  return apiClient.put('/api/users/config', configData);
+};
+
+// NEW: Function to get the list of available models
+export const getAvailableModels = () => {
+  return apiClient.get('/api/models');
 };
 
 export default apiClient;

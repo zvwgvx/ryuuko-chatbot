@@ -81,17 +81,23 @@ def setup_message_events(bot: commands.Bot, dependencies: dict):
         if message.author.bot:
             return
 
-        # If the message does not start with the command prefix, it cannot be a command.
-        # We check if it's an AI prompt and then stop processing.
-        if not message.content.startswith(bot.command_prefix):
-            is_dm = isinstance(message.channel, discord.DMChannel)
-            is_mention = bot.user in message.mentions
-            if is_dm or is_mention:
-                asyncio.create_task(handle_ai_prompt(message))
+        # This is the crucial part. We let discord.py process commands first.
+        # This will find and execute commands if the message is a valid command.
+        # If not, it will do nothing, and we can proceed.
+        await bot.process_commands(message)
+
+        # After the library has tried to process commands, we check if a command was actually found.
+        # If a command was found, we don't want to also treat it as a chat message.
+        ctx = await bot.get_context(message)
+        if ctx.valid: # .valid is True if a command was found, even if it failed checks.
             return
 
-        # If the message *does* start with the prefix, we let the commands framework handle it.
-        # This will correctly run the command or raise CommandNotFound, which is handled in main.py.
-        await bot.process_commands(message)
+        # If no command was found, THEN we can safely treat it as a potential AI prompt.
+        is_dm = isinstance(message.channel, discord.DMChannel)
+        is_mention = bot.user in message.mentions
+        
+        if is_dm or is_mention:
+            # It's not a command, but it is a DM or mention, so treat as AI prompt.
+            asyncio.create_task(handle_ai_prompt(message))
 
     logger.info("[OK] Final, most reliable message event listener has been registered.")

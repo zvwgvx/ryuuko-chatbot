@@ -1,39 +1,105 @@
-.dashboard-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+/* Main Dashboard Layout using CSS Grid */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr; /* Fixed width sidebar, flexible content */
+  grid-template-rows: 100vh; /* Full height */
+  grid-template-areas:
+    "sidebar content";
+  height: 100vh;
+  width: 100vw; /* Full viewport width */
+  max-width: 100%; /* Ensure it spans full width */
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Content Area Styling */
+.dashboard-content {
+  grid-area: content;
+  padding: 3rem 4rem;
+  overflow-y: auto; /* Allow content to scroll if it overflows */
+  background-color: #12121c; /* Match the body background */
+}
+
+.content-header {
+  margin-bottom: 2.5rem;
+}
+
+.content-header h1 {
+  font-size: 2.2rem;
+  margin: 0 0 0.5rem 0;
+  color: #e0e0e0;
+}
+
+.content-header p {
+  font-size: 1.1rem;
+  color: #a0a0b0;
+  margin: 0;
+}
+
+/* Card Design */
+.dashboard-card {
+  background: #1e1e2f;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
   padding: 2rem;
-  text-align: left;
+  margin-top: 1.5rem;
 }
 
-.user-info, .link-section {
-  background-color: #2f2f2f;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-top: 2rem;
-}
-
-.user-info h3, .link-section h3 {
+.dashboard-card h3 {
   margin-top: 0;
-  border-bottom: 1px solid #555;
-  padding-bottom: 0.5rem;
+  font-size: 1.5rem;
+  color: #e0e0e0;
+  border-bottom: 1px solid #3a3a5a;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-card .card-subtitle {
+  color: #a0a0b0;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Specific Card Content */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.info-grid p {
+  margin: 0;
+  background-color: #161625;
+  padding: 12px 15px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+}
+
+.info-grid p strong {
+  color: #a0a0b0;
+  margin-right: 8px;
 }
 
 .link-code-display {
-  margin-top: 1rem;
-  background-color: #1a1a1a;
-  padding: 1rem;
-  border-radius: 8px;
+  margin-top: 1.5rem;
+  background-color: #161625;
+  padding: 1.5rem;
+  border-radius: 12px;
   text-align: center;
+  border: 1px solid #3a3a5a;
+}
+
+.link-code-display p {
+  margin: 0;
+  color: #a0a0b0;
 }
 
 .link-code-display pre {
-  font-size: 2em;
-  color: #6bff95;
+  font-size: 2.5em;
+  color: #82f0a0;
   letter-spacing: 0.1em;
-  margin: 0.5rem 0;
-}
-
-.error-message {
-  color: #ff6b6b;
+  margin: 0.75rem 0;
+  font-weight: bold;
 }

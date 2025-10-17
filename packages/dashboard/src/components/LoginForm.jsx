@@ -6,10 +6,12 @@ const LoginForm = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setIsLoading(true);
 
     try {
       const response = await loginUser({ username, password });
@@ -18,34 +20,40 @@ const LoginForm = ({ onLoginSuccess }) => {
     } catch (err) {
       const errorMessage = err.response?.data?.detail || 'An unexpected error occurred.';
       setError(errorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
       <h2>Login</h2>
-      {error && <p style={{ color: '#ff6b6b' }}>{error}</p>}
+      {error && <p className="form-error">{error}</p>}
       <div className="form-group">
-        <label htmlFor="login-username">Username</label>
         <input 
           id="login-username" 
           type="text" 
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required 
+          placeholder=" "
         />
+        <label htmlFor="login-username">Username</label>
       </div>
       <div className="form-group">
-        <label htmlFor="login-password">Password</label>
         <input 
           id="login-password" 
           type="password" 
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required 
+          placeholder=" "
         />
+        <label htmlFor="login-password">Password</label>
       </div>
-      <button type="submit" className="form-button">Login</button>
+      <button type="submit" className="form-button" disabled={isLoading}>
+        {isLoading ? <div className="spinner"></div> : 'Login'}
+      </button>
     </form>
   );
 };

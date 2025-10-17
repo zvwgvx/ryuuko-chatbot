@@ -8,19 +8,18 @@ from ..utils.embed import send_embed
 
 logger = logging.getLogger("DiscordBot.Commands.Admin")
 
-# --- New Admin Check ---
-def is_ryuuko_admin():
+# --- New Owner Check ---
+def is_ryuuko_owner():
     """
     A command check that verifies if the author of a command is linked
-    to a user with admin-level access (level 3) in the Ryuuko dashboard system.
-    This check *only* returns True or False, it does not send messages.
+    to a user with owner-level access (level 3) in the Ryuuko dashboard system.
     """
     async def predicate(ctx: commands.Context) -> bool:
         user_profile = await api_client.get_dashboard_user_by_platform_id(
             platform="discord",
             platform_user_id=ctx.author.id
         )
-        # Admin access level is 3
+        # Access level 3 is now considered the Owner
         return user_profile and user_profile.get("access_level") == 3
     return commands.check(predicate)
 
@@ -33,11 +32,10 @@ async def get_target_dashboard_id(ctx: commands.Context, member: discord.Member)
     return target_profile.get("id")
 
 def setup_admin_commands(bot: commands.Bot, dependencies: dict):
-    """Registers administrative commands that interact with the Core API."""
+    """Registers owner-level administrative commands."""
 
-    # --- Credit & Level Management (Refactored) ---
     @bot.command(name="addcredit")
-    @is_ryuuko_admin()
+    @is_ryuuko_owner()
     async def add_credit_command(ctx: commands.Context, member: discord.Member, amount: int):
         if amount <= 0:
             await send_embed(ctx, title="Invalid Amount", description="Amount must be a positive number.", color=discord.Color.red())
@@ -54,7 +52,7 @@ def setup_admin_commands(bot: commands.Bot, dependencies: dict):
             await send_embed(ctx, title="Failed to Add Credits", description=message, color=discord.Color.red())
 
     @bot.command(name="setcredit")
-    @is_ryuuko_admin()
+    @is_ryuuko_owner()
     async def set_credit_command(ctx: commands.Context, member: discord.Member, amount: int):
         if amount < 0:
             await send_embed(ctx, title="Invalid Amount", description="Amount must be a non-negative number.", color=discord.Color.red())
@@ -71,7 +69,7 @@ def setup_admin_commands(bot: commands.Bot, dependencies: dict):
             await send_embed(ctx, title="Failed to Set Credits", description=message, color=discord.Color.red())
 
     @bot.command(name="setlevel")
-    @is_ryuuko_admin()
+    @is_ryuuko_owner()
     async def set_level_command(ctx: commands.Context, member: discord.Member, level: int):
         if level not in [0, 1, 2, 3]:
             await send_embed(ctx, title="Invalid Level", description="Access level must be 0, 1, 2, or 3.", color=discord.Color.red())
@@ -87,4 +85,4 @@ def setup_admin_commands(bot: commands.Bot, dependencies: dict):
         else:
             await send_embed(ctx, title="Failed to Set Level", description=message, color=discord.Color.red())
 
-    logger.info("Admin commands have been re-registered with the new, unified access checks.")
+    logger.info("Owner commands have been registered.")

@@ -56,36 +56,49 @@ class MongoDBStore:
             logger.exception(f"An unexpected error occurred during index initialization: {e}")
 
     # --- User Management ---
-    def create_dashboard_user(self, username: str, email: str, hashed_password: str, access_level: int = 0) -> Optional[str]:
+    def create_dashboard_user(self, username: str, email: str, hashed_password: str, first_name: str, last_name: str, dob: datetime, access_level: int = 0) -> Optional[str]:
+        """Creates a new user for the dashboard with expanded profile information."""
         try:
             result = self.db[self.COLLECTIONS['dashboard_users']].insert_one({
-                "username": username, "email": email, "hashed_password": hashed_password,
-                "credit": 0, "access_level": access_level,
-                "system_prompt": None, "model": None,
-                "created_at": datetime.utcnow(), "updated_at": datetime.utcnow()
+                "username": username,
+                "email": email,
+                "hashed_password": hashed_password,
+                "first_name": first_name,
+                "last_name": last_name,
+                "date_of_birth": dob,
+                "credit": 0,
+                "access_level": access_level,
+                "system_prompt": None,
+                "model": None,
+                "created_at": datetime.utcnow(),
+                "updated_at": datetime.utcnow()
             })
             return str(result.inserted_id)
-        except DuplicateKeyError: return None
+        except DuplicateKeyError:
+            return None
 
-    def create_or_update_admin_user(self, hashed_password: str):
-        """Ensures the admin user exists with correct credentials and permissions."""
-        admin_defaults = {
-            "username": "zvwgvx",
-            "email": "zvwgvx@polydevs.uk",
+    def create_or_update_owner_user(self, username: str, email: str, hashed_password: str):
+        """Ensures the owner user, defined by config, exists with correct credentials and permissions."""
+        owner_defaults = {
+            "username": username,
+            "email": email,
             "hashed_password": hashed_password,
+            "first_name": "Owner",
+            "last_name": "Account",
+            "date_of_birth": datetime(1970, 1, 1),
             "credit": 999999,
-            "access_level": 3, # Highest access level
+            "access_level": 3,
             "updated_at": datetime.utcnow()
         }
         self.db[self.COLLECTIONS['dashboard_users']].update_one(
-            {"username": "zvwgvx"},
+            {"username": username},
             {
-                "$set": admin_defaults,
+                "$set": owner_defaults,
                 "$setOnInsert": {"created_at": datetime.utcnow()}
             },
             upsert=True
         )
-        logger.info("Default admin user (zvwgvx) checked and ensured.")
+        logger.info(f"Default owner user ({username}) checked and ensured.")
 
     def get_dashboard_user_by_username(self, username: str) -> Optional[Dict[str, Any]]:
         return self.db[self.COLLECTIONS['dashboard_users']].find_one({"username": username})
@@ -93,6 +106,11 @@ class MongoDBStore:
     def get_dashboard_user_by_id(self, user_id: str) -> Optional[Dict[str, Any]]:
         try: return self.db[self.COLLECTIONS['dashboard_users']].find_one({"_id": ObjectId(user_id)})
         except Exception: return None
+
+    # --- Model Management ---
+    def get_all_models(self) -> List[Dict[str, Any]]:
+        """Retrieves a list of all supported models from the database."""
+        return list(self.db[self.COLLECTIONS['supported_models']].find({}, {"_id": 0}))
 
     # --- Account Linking ---
     def create_link_code(self, user_id: str) -> str:

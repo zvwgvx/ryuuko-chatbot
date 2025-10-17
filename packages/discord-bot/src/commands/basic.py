@@ -7,8 +7,8 @@ from ..utils.embed import send_embed
 
 logger = logging.getLogger("DiscordBot.Commands.Basic")
 
-# --- A hardcoded version number for debugging purposes ---
-BOT_CODE_VERSION = "3.2.1-final"
+# A hardcoded version number for debugging purposes
+BOT_CODE_VERSION = "3.3.0-owner-refactor"
 
 def setup_basic_commands(bot: commands.Bot, dependencies: dict):
     """Registers basic, general-purpose commands."""
@@ -25,25 +25,25 @@ def setup_basic_commands(bot: commands.Bot, dependencies: dict):
         # User Commands
         user_cmds = """
         `,profile` - Displays your linked account profile.
-        `,link <code>` - (DM only) Links your Discord to your dashboard account.
+        `,link <code>` - Links your Discord to your dashboard account.
         `,unlink` - Unlinks your Discord account.
         """
         embed.add_field(name="👤 User Commands", value=user_cmds, inline=False)
 
-        # Admin Commands (Only show to admins)
+        # Owner Commands (Only show to the owner)
         try:
             from . import admin # Local import to avoid circular dependency
-            is_admin = await commands.check(admin.is_ryuuko_admin()).predicate(ctx)
+            is_owner = await commands.check(admin.is_ryuuko_owner()).predicate(ctx)
         except Exception:
-            is_admin = False
+            is_owner = False
         
-        if is_admin:
-            admin_cmds = """
+        if is_owner:
+            owner_cmds = """
             `,addcredit <@user> <amount>` - Adds credits to a user.
             `,setcredit <@user> <amount>` - Sets a user's credit balance.
             `,setlevel <@user> <level>` - Sets a user's access level (0-3).
             """
-            embed.add_field(name="🛠️ Admin Commands", value=admin_cmds, inline=False)
+            embed.add_field(name="👑 Owner Commands", value=owner_cmds, inline=False)
 
         embed.set_footer(text=f"Ryuuko v{BOT_CODE_VERSION} | Use commands in DMs or by mentioning the bot.")
         await ctx.send(embed=embed)
