@@ -8,7 +8,7 @@ from ..utils.embed import send_embed
 logger = logging.getLogger("DiscordBot.Commands.Basic")
 
 # A hardcoded version number for debugging purposes
-BOT_CODE_VERSION = "3.3.0-owner-refactor"
+BOT_CODE_VERSION = "v2.3.2"
 
 def setup_basic_commands(bot: commands.Bot, dependencies: dict):
     """Registers basic, general-purpose commands."""
@@ -27,6 +27,8 @@ def setup_basic_commands(bot: commands.Bot, dependencies: dict):
         `,profile` - Displays your linked account profile.
         `,link <code>` - Links your Discord to your dashboard account.
         `,unlink` - Unlinks your Discord account.
+        `,memory` - Shows the last 10 messages in your history.
+        `,clear` - Permanently clears your conversation history.
         """
         embed.add_field(name="👤 User Commands", value=user_cmds, inline=False)
 
@@ -45,7 +47,7 @@ def setup_basic_commands(bot: commands.Bot, dependencies: dict):
             """
             embed.add_field(name="👑 Owner Commands", value=owner_cmds, inline=False)
 
-        embed.set_footer(text=f"Ryuuko v{BOT_CODE_VERSION} | Use commands in DMs or by mentioning the bot.")
+        embed.set_footer(text=f"Ryuuko {BOT_CODE_VERSION} | Use commands in DMs or by mentioning the bot.")
         await ctx.send(embed=embed)
 
     @bot.command(name="ping")

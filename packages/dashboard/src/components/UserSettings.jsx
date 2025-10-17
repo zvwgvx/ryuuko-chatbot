@@ -130,6 +130,8 @@ const UserSettings = ({ user }) => {
       <button onClick={handleSave} className="form-button" disabled={isLoading}>
         {isLoading ? <div className="spinner"></div> : 'Save Settings'}
       </button>
+
+      {/* The erroneous linked accounts display has been removed from here */}
     </div>
   );
 };

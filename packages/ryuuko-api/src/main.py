@@ -13,7 +13,8 @@ from .api import auth as auth_router
 from .api import users as users_router
 from .api import link as link_router
 from .api import admin as admin_router
-from .api import models as models_router # NEW: Import the models router
+from .api import models as models_router
+from .api import memory as memory_router # NEW: Import the memory router
 from .api.dependencies import get_current_user, verify_bot_api_key
 from .providers import polydevs, aistudio, proxyvn
 
@@ -21,7 +22,7 @@ from .providers import polydevs, aistudio, proxyvn
 app = FastAPI(
     title="Ryuuko API",
     description="Core API Service for the Ryuuko Chatbot ecosystem.",
-    version="3.4.0" # Version bump for model endpoint
+    version="3.5.0" # Version bump for memory endpoint
 )
 
 # --- CORS Middleware ---
@@ -38,7 +39,8 @@ app.include_router(auth_router.router, prefix="/api/auth", tags=["Dashboard Auth
 app.include_router(users_router.router, prefix="/api/users", tags=["Dashboard Users"])
 app.include_router(link_router.router, prefix="/api/link", tags=["Account Linking"])
 app.include_router(admin_router.router, prefix="/api/admin", tags=["Dashboard Admin"])
-app.include_router(models_router.router, prefix="/api/models", tags=["Models"]) # NEW: Include the models router
+app.include_router(models_router.router, prefix="/api/models", tags=["Models"])
+app.include_router(memory_router.router, prefix="/api/memory", tags=["Dashboard Memory"]) # NEW: Include the memory router
 
 # --- Provider Mapping ---
 PROVIDER_MAP = {"polydevs": polydevs.forward, "aistudio": aistudio.forward, "proxyvn": proxyvn.forward}

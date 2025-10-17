@@ -27,6 +27,16 @@ const Sidebar = ({ activeView, setActiveView, onLogout }) => {
             <span>Link Accounts</span>
           </a>
         </li>
+        {/* NEW: Memory Link */}
+        <li>
+          <a 
+            href="#memory"
+            className={activeView === 'memory' ? 'active' : ''}
+            onClick={(e) => { e.preventDefault(); setActiveView('memory'); }}
+          >
+            <span>Memory</span>
+          </a>
+        </li>
         <li>
           <a 
             href="#settings"

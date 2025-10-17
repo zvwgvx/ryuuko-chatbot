@@ -43,9 +43,17 @@ export const updateUserConfig = (configData) => {
   return apiClient.put('/api/users/config', configData);
 };
 
-// NEW: Function to get the list of available models
 export const getAvailableModels = () => {
   return apiClient.get('/api/models');
+};
+
+// UPDATED: Memory functions to use the new /dashboard sub-path
+export const getUserMemory = () => {
+  return apiClient.get('/api/memory/dashboard');
+};
+
+export const clearUserMemory = () => {
+  return apiClient.delete('/api/memory/dashboard');
 };
 
 export default apiClient;

@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from pydantic import BaseModel
+from typing import Optional
 
 from .dependencies import get_current_user, verify_bot_api_key
 from ..database import db_store
@@ -17,6 +18,7 @@ class SubmitCodeRequest(BaseModel):
     platform: str
     platform_user_id: str
     platform_display_name: str
+    platform_avatar_url: Optional[str] = None # NEW: Add avatar URL
 
 class UnlinkRequest(BaseModel):
     platform: str
@@ -46,7 +48,8 @@ async def submit_link_code(request: SubmitCodeRequest):
         user_id=user_id,
         platform=request.platform,
         platform_user_id=request.platform_user_id,
-        platform_display_name=request.platform_display_name
+        platform_display_name=request.platform_display_name,
+        platform_avatar_url=request.platform_avatar_url # NEW: Pass avatar URL
     )
 
     if not success:

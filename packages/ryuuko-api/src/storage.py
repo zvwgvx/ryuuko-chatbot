@@ -123,11 +123,19 @@ class MongoDBStore:
         doc = self.db[self.COLLECTIONS['link_codes']].find_one_and_delete({"code": code.upper()})
         return str(doc["user_id"]) if doc else None
 
-    def create_linked_account(self, user_id: str, platform: str, platform_user_id: str, platform_display_name: str) -> tuple[bool, str]:
+    def create_linked_account(self, user_id: str, platform: str, platform_user_id: str, platform_display_name: str, platform_avatar_url: Optional[str] = None) -> tuple[bool, str]:
         try:
             self.db[self.COLLECTIONS['linked_accounts']].update_one(
                 {"user_id": ObjectId(user_id), "platform": platform},
-                {"$set": {"platform_user_id": platform_user_id, "platform_display_name": platform_display_name, "updated_at": datetime.utcnow()}},
+                {
+                    "$set": {
+                        "platform_user_id": platform_user_id, 
+                        "platform_display_name": platform_display_name, 
+                        "platform_avatar_url": platform_avatar_url,
+                        "updated_at": datetime.utcnow()
+                    },
+                    "$setOnInsert": {"created_at": datetime.utcnow()}
+                },
                 upsert=True
             )
             return True, "Account linked successfully."
@@ -139,7 +147,12 @@ class MongoDBStore:
 
     def get_linked_accounts_for_user(self, user_id: str) -> List[Dict[str, Any]]:
         try:
-            return list(self.db[self.COLLECTIONS['linked_accounts']].find({"user_id": ObjectId(user_id)}, {"_id": 0, "user_id": 0}))
+            # Convert ObjectId to string for JSON serialization
+            accounts = list(self.db[self.COLLECTIONS['linked_accounts']].find({"user_id": ObjectId(user_id)}))
+            for acc in accounts:
+                acc['_id'] = str(acc['_id'])
+                acc['user_id'] = str(acc['user_id'])
+            return accounts
         except Exception as e:
             logger.error(f"Error retrieving linked accounts for user {user_id}: {e}")
             return []

@@ -50,8 +50,14 @@ async def stream_chat_completions(platform: str, platform_user_id: str, messages
 
 # --- Account Linking ---
 
-async def link_account(code: str, platform: str, platform_user_id: str, display_name: str) -> Tuple[bool, str]:
-    payload = {"code": code, "platform": platform, "platform_user_id": platform_user_id, "platform_display_name": display_name}
+async def link_account(code: str, platform: str, platform_user_id: str, display_name: str, avatar_url: Optional[str] = None) -> Tuple[bool, str]:
+    payload = {
+        "code": code, 
+        "platform": platform, 
+        "platform_user_id": platform_user_id, 
+        "platform_display_name": display_name,
+        "platform_avatar_url": avatar_url
+    }
     try:
         response = await client.post("/api/link/submit-code", headers=_get_auth_headers(), json=payload)
         response.raise_for_status()
@@ -68,7 +74,25 @@ async def unlink_account(platform: str, platform_user_id: str) -> Tuple[bool, st
     except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
     except httpx.RequestError as e: return False, f"Could not connect to the API: {e}"
 
-# --- NEW: Admin Functions (using dashboard user_id) ---
+# --- Memory Functions (NEW) ---
+
+async def get_memory(platform: str, platform_user_id: str) -> Tuple[bool, List[Dict[str, Any]]]:
+    try:
+        response = await client.get(f"/api/memory/{platform}/{platform_user_id}", headers=_get_auth_headers())
+        response.raise_for_status()
+        return True, response.json()
+    except httpx.HTTPStatusError as e: return False, [{"role": "error", "content": await _handle_api_error(e)}]
+    except httpx.RequestError as e: return False, [{"role": "error", "content": str(e)}]
+
+async def clear_memory(platform: str, platform_user_id: str) -> Tuple[bool, str]:
+    try:
+        response = await client.delete(f"/api/memory/{platform}/{platform_user_id}", headers=_get_auth_headers())
+        response.raise_for_status()
+        return True, response.json().get("message", "Memory cleared.")
+    except httpx.HTTPStatusError as e: return False, await _handle_api_error(e)
+    except httpx.RequestError as e: return False, str(e)
+
+# --- Admin Functions ---
 
 async def admin_add_credits(user_id: str, amount: int) -> Tuple[bool, str]:
     try:

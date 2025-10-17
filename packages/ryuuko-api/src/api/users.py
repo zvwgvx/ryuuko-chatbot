@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, EmailStr
 from typing import List, Optional
+from datetime import datetime
 
 from .dependencies import get_current_user, verify_bot_api_key
 from ..database import db_store
@@ -11,7 +12,13 @@ router = APIRouter()
 
 class LinkedAccount(BaseModel):
     platform: str
+    platform_user_id: str
     platform_display_name: Optional[str] = None
+    platform_avatar_url: Optional[str] = None
+    # FIX: Make created_at optional to handle legacy documents.
+    created_at: Optional[datetime] = None
+    # Add updated_at, which should always be present.
+    updated_at: datetime
 
 class UserProfile(BaseModel):
     id: str
