@@ -5,8 +5,28 @@ import UserSettings from './UserSettings';
 import './Dashboard.css';
 import './Form.css';
 
+// --- Self-contained, reliable SVG Icon Component ---
+const PlatformLogo = ({ platform, ...props }) => {
+  const logos = {
+    discord: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" {...props}>
+            <path fill="#5865F2" d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+        </svg>
+    ),
+    telegram: (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" {...props}>
+            <circle cx="24" cy="24" r="24" fill="#29B6F6"/>
+            <path fill="#FFFFFF" d="M33.95,15l-3.746,19.126c0,0-0.161,0.874-1.245,0.874c-0.576,0-0.873-0.274-0.873-0.274l-8.114-6.733 l-3.97-2.001l-5.095-1.355c0,0-0.907-0.262-0.907-1.012c0-0.625,0.933-0.923,0.933-0.923l21.316-8.468 c-0.001-0.001,0.651-0.235,1.126-0.234C33.667,14,34,14.125,34,14.5C34,14.75,33.95,15,33.95,15z"/>
+            <path fill="#B0BEC5" d="M23,30.505l-3.426,3.374c0,0-0.149,0.115-0.348,0.12c-0.069,0.002-0.143-0.009-0.219-0.043 l0.964-5.965L23,30.505z"/>
+            <path fill="#CFD8DC" d="M29.897,18.196c-0.169-0.22-0.481-0.26-0.701-0.093L16,26c0,0,2.106,5.892,2.427,6.912 c0.322,1.021,0.58,1.045,0.58,1.045l0.964-5.965l9.832-9.096C30.023,18.729,30.064,18.416,29.897,18.196z"/>
+        </svg>
+    ),
+  };
+  return logos[platform] || null;
+};
+
 const Dashboard = ({ user, onLogout }) => {
-  const [activeView, setActiveView] = useState('profile'); // 'profile', 'link', 'memory', or 'settings'
+  const [activeView, setActiveView] = useState('profile');
 
   const renderContent = () => {
     switch (activeView) {
@@ -62,13 +82,6 @@ const LinkAccountView = ({ user }) => {
   const [error, setError] = useState(null);
   const [isGenerating, setIsGenerating] = useState(false);
 
-  const PLATFORM_LOGOS = {
-    discord: "https://www.svgrepo.com/show/353655/discord-icon.svg",
-    facebook: "https://logotyp.us/files/facebook.svg",
-    telegram: "https://logotyp.us/files/telegram.svg",
-    zalo: "https://logotyp.us/files/zalo.svg",
-  };
-
   const handleGenerateCode = async () => {
     setError(null);
     setLinkCode(null);
@@ -97,7 +110,7 @@ const LinkAccountView = ({ user }) => {
             return (
               <div key={acc.platform} className="linked-account-card">
                 <div className="card-header">
-                  <img src={PLATFORM_LOGOS[acc.platform.toLowerCase()] || ''} alt={`${acc.platform} logo`} className="platform-logo" />
+                  <PlatformLogo platform={acc.platform.toLowerCase()} className="platform-logo" />
                   <span className="platform-title">{acc.platform}</span>
                 </div>
                 <div className="card-body">
@@ -111,7 +124,7 @@ const LinkAccountView = ({ user }) => {
                   <p className="link-date">{dateLabel}: {new Date(linkDate).toLocaleDateString()}</p>
                 </div>
               </div>
-            )
+            );
           })
         ) : (
           <div className="dashboard-card full-width">
@@ -138,17 +151,21 @@ const LinkAccountView = ({ user }) => {
   );
 };
 
-// A self-contained, crash-proof component for rendering message content.
 const MessageContent = ({ content }) => {
   try {
-    if (typeof content === 'string') return <p>{content}</p>;
+    if (typeof content === 'string') {
+      return <p>{content}</p>;
+    }
     if (Array.isArray(content)) {
       const elements = content.map((part, index) => {
         if (!part || typeof part !== 'object') return null;
         switch (part.type) {
-          case 'text': return <p key={index}>{typeof part.text === 'string' ? part.text : ''}</p>;
-          case 'image_url': return <p key={index} className="placeholder-content">[Image]</p>;
-          default: return null;
+          case 'text':
+            return <p key={index}>{typeof part.text === 'string' ? part.text : ''}</p>;
+          case 'image_url':
+            return <p key={index} className="placeholder-content">[Image]</p>;
+          default:
+            return null;
         }
       });
       const validElements = elements.filter(Boolean);
@@ -167,24 +184,31 @@ const MemoryView = () => {
   const [error, setError] = useState(null);
 
   const fetchMemory = async () => {
-    setIsLoading(true); setError(null);
+    setIsLoading(true);
+    setError(null);
     try {
       const response = await getUserMemory();
       setMemory(Array.isArray(response.data) ? response.data : []);
     } catch (err) {
       setError("Failed to load conversation memory.");
       setMemory([]);
-    } finally { setIsLoading(false); }
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  useEffect(() => { fetchMemory(); }, []);
+  useEffect(() => {
+    fetchMemory();
+  }, []);
 
   const handleClearMemory = async () => {
     if (window.confirm("Are you sure you want to permanently delete your entire conversation history?")) {
       try {
         await clearUserMemory();
         fetchMemory();
-      } catch (err) { setError("Failed to clear memory. Please try again."); }
+      } catch (err) {
+        setError("Failed to clear memory. Please try again.");
+      }
     }
   };
 
@@ -195,20 +219,31 @@ const MemoryView = () => {
         <p>Review and manage your conversation history.</p>
       </div>
       <div className="dashboard-card">
-        <div className="memory-toolbar"><h3>History</h3><button className="form-button danger" onClick={handleClearMemory} disabled={!memory || memory.length === 0}>Clear Memory</button></div>
+        <div className="memory-toolbar">
+            <h3>History</h3>
+            <button className="form-button danger" onClick={handleClearMemory} disabled={!memory || memory.length === 0}>
+                Clear Memory
+            </button>
+        </div>
         <div className="memory-log-container">
-          {isLoading ? <p>Loading memory...</p> : error ? <p className="form-error">{error}</p> : memory && memory.length > 0 ? (
+          {isLoading ? (
+            <p>Loading memory...</p>
+          ) : error ? (
+            <p className="form-error">{error}</p>
+          ) : memory && memory.length > 0 ? (
             memory.map((msg, index) => {
-              if (!msg || typeof msg.role !== 'string') return null;
-              const roleName = msg.role === 'user' ? 'You' : 'Ryuuko';
+              if (!msg || typeof msg.role !== 'string') {
+                return null;
+              }
               return (
                 <div key={index} className={`memory-message ${msg.role}`}>
-                  <span className="message-role">{roleName}</span>
                   <MessageContent content={msg.content} />
                 </div>
               );
             })
-          ) : <p>Your conversation memory is empty.</p>}
+          ) : (
+            <p>Your conversation memory is empty.</p>
+          )}
         </div>
       </div>
     </>

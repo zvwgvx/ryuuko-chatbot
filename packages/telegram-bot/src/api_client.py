@@ -1,11 +1,11 @@
-# /packages/discord-bot/src/api_client.py
+# /packages/telegram-bot/src/api_client.py
 import logging
 import httpx
 from typing import List, Dict, Any, AsyncGenerator, Optional, Tuple
 
 from . import config
 
-logger = logging.getLogger("DiscordBot.API")
+logger = logging.getLogger("TelegramBot.API")
 
 client = httpx.AsyncClient(base_url=config.CORE_API_URL, timeout=300.0)
 
@@ -96,7 +96,6 @@ async def clear_memory(platform: str, platform_user_id: str) -> Tuple[bool, str]
 
 async def get_available_models() -> Tuple[bool, List[Dict[str, Any]]]:
     try:
-        # CORRECTED: Added the authentication headers to the request
         response = await client.get("/api/models", headers=_get_auth_headers())
         response.raise_for_status()
         return True, response.json()

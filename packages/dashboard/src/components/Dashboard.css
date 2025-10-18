@@ -133,6 +133,7 @@
 .linked-account-card .platform-logo {
   width: 32px;
   height: 32px;
+  flex-shrink: 0;
 }
 
 .linked-account-card .platform-title {
@@ -234,12 +235,12 @@
     border-radius: 12px;
     max-width: 80%;
     line-height: 1.5;
-    position: relative; /* Needed for role label positioning */
+    position: relative;
 }
 
 .memory-message p {
     margin: 0;
-    white-space: pre-wrap; /* Preserve whitespace and newlines */
+    white-space: pre-wrap;
 }
 
 .memory-message.user {
@@ -272,7 +273,6 @@
     border: 1px solid #ffcc80;
 }
 
-/* NEW: Role label styles */
 .message-role {
     display: block;
     font-size: 0.75rem;

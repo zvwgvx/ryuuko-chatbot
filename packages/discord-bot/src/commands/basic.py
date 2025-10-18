@@ -8,7 +8,7 @@ from ..utils.embed import send_embed
 logger = logging.getLogger("DiscordBot.Commands.Basic")
 
 # A hardcoded version number for debugging purposes
-BOT_CODE_VERSION = "v2.3.2"
+BOT_CODE_VERSION = "v2.3.3"
 
 def setup_basic_commands(bot: commands.Bot, dependencies: dict):
     """Registers basic, general-purpose commands."""
@@ -29,6 +29,8 @@ def setup_basic_commands(bot: commands.Bot, dependencies: dict):
         `,unlink` - Unlinks your Discord account.
         `,memory` - Shows the last 10 messages in your history.
         `,clear` - Permanently clears your conversation history.
+        `,models` - Lists all available AI models.
+        `,model <name>` - Sets your preferred AI model.
         """
         embed.add_field(name="👤 User Commands", value=user_cmds, inline=False)
 

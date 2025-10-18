@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+# CORRECTED: Define that the `src` directory maps to the `telegram_bot` package
+package-dir = {"telegram_bot" = "src"}
+packages = ["telegram_bot"]
+
+[project]
+name = "ryuuko-telegram-bot"
+version = "1.0.1"
+description = "Telegram bot client for the Ryuuko ecosystem."
+authors = [
+    { name="Ryuuko AI" },
+]
+dependencies = [
+    "python-dotenv",
+    "python-telegram-bot[ext]",
+    "httpx"
+]
+
+# CORRECTED: The script `telegram-bot` now correctly points to the `main` function
+# inside the `__main__` module of the `telegram_bot` package.
+[project.scripts]
+telegram-bot = "telegram_bot.__main__:main"

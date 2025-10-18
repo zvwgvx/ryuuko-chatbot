@@ -4,6 +4,8 @@ from typing import List, Dict, Any
 
 from .dependencies import get_current_user, verify_bot_api_key
 from ..database import db_store
+# NEW: Import the memory manager
+from ..memory_manager import memory_manager
 
 router = APIRouter()
 
@@ -12,14 +14,15 @@ router = APIRouter()
 async def get_memory_dashboard(current_user: dict = Depends(get_current_user)):
     """(Dashboard) Fetches the entire conversation memory for the authenticated user."""
     user_id = str(current_user["_id"])
-    memory = db_store.get_user_memory(user_id)
-    return memory
+    # REFACTORED: Use MemoryManager
+    return memory_manager.get_history(user_id)
 
 @router.delete("/dashboard", status_code=status.HTTP_200_OK, dependencies=[Depends(get_current_user)])
 async def clear_memory_dashboard(current_user: dict = Depends(get_current_user)):
     """(Dashboard) Clears the entire conversation memory for the authenticated user."""
     user_id = str(current_user["_id"])
-    success = db_store.clear_user_memory(user_id)
+    # REFACTORED: Use MemoryManager
+    success = memory_manager.clear_history(user_id)
     if success:
         return {"message": "Your conversation memory has been cleared."}
     return {"message": "No conversation memory was found to clear."}
@@ -33,8 +36,8 @@ async def get_memory_bot(platform: str, platform_user_id: str):
         raise HTTPException(status_code=404, detail="Account not linked.")
     
     user_id = str(link["user_id"])
-    memory = db_store.get_user_memory(user_id)
-    return memory
+    # REFACTORED: Use MemoryManager
+    return memory_manager.get_history(user_id)
 
 @router.delete("/{platform}/{platform_user_id}", status_code=status.HTTP_200_OK, dependencies=[Depends(verify_bot_api_key)])
 async def clear_memory_bot(platform: str, platform_user_id: str):
@@ -44,7 +47,8 @@ async def clear_memory_bot(platform: str, platform_user_id: str):
         raise HTTPException(status_code=404, detail="Account not linked.")
 
     user_id = str(link["user_id"])
-    success = db_store.clear_user_memory(user_id)
+    # REFACTORED: Use MemoryManager
+    success = memory_manager.clear_history(user_id)
     if success:
         return {"message": "Your conversation memory has been cleared."}
     return {"message": "No conversation memory was found to clear."}

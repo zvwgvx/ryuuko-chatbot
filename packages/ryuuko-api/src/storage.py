@@ -49,6 +49,7 @@ class MongoDBStore:
             self.db[self.COLLECTIONS['dashboard_users']].create_index("email", unique=True)
             self.db[self.COLLECTIONS['linked_accounts']].create_index([("platform", 1), ("platform_user_id", 1)], unique=True)
             self.db[self.COLLECTIONS['user_memory']].create_index("user_id", unique=True)
+            self.db[self.COLLECTIONS['supported_models']].create_index("model_name", unique=True)
             logger.info("All database indexes ensured.")
         except OperationFailure as e:
             logger.warning(f"Could not create an index, it may already exist with different options: {e}")
@@ -112,6 +113,10 @@ class MongoDBStore:
         """Retrieves a list of all supported models from the database."""
         return list(self.db[self.COLLECTIONS['supported_models']].find({}, {"_id": 0}))
 
+    def get_model_by_name(self, model_name: str) -> Optional[Dict[str, Any]]:
+        """Retrieves a single model's details by its name."""
+        return self.db[self.COLLECTIONS['supported_models']].find_one({"model_name": model_name}, {"_id": 0})
+
     # --- Account Linking ---
     def create_link_code(self, user_id: str) -> str:
         import random, string
@@ -147,7 +152,6 @@ class MongoDBStore:
 
     def get_linked_accounts_for_user(self, user_id: str) -> List[Dict[str, Any]]:
         try:
-            # Convert ObjectId to string for JSON serialization
             accounts = list(self.db[self.COLLECTIONS['linked_accounts']].find({"user_id": ObjectId(user_id)}))
             for acc in accounts:
                 acc['_id'] = str(acc['_id'])

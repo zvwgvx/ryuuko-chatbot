@@ -9,12 +9,14 @@ from pydantic import BaseModel
 
 from . import config
 from .database import db_store
+# NEW: Import the memory manager
+from .memory_manager import memory_manager
 from .api import auth as auth_router
 from .api import users as users_router
 from .api import link as link_router
 from .api import admin as admin_router
 from .api import models as models_router
-from .api import memory as memory_router # NEW: Import the memory router
+from .api import memory as memory_router
 from .api.dependencies import get_current_user, verify_bot_api_key
 from .providers import polydevs, aistudio, proxyvn
 
@@ -22,7 +24,7 @@ from .providers import polydevs, aistudio, proxyvn
 app = FastAPI(
     title="Ryuuko API",
     description="Core API Service for the Ryuuko Chatbot ecosystem.",
-    version="3.5.0" # Version bump for memory endpoint
+    version="3.6.0" # Version bump for memory manager refactor
 )
 
 # --- CORS Middleware ---
@@ -40,7 +42,7 @@ app.include_router(users_router.router, prefix="/api/users", tags=["Dashboard Us
 app.include_router(link_router.router, prefix="/api/link", tags=["Account Linking"])
 app.include_router(admin_router.router, prefix="/api/admin", tags=["Dashboard Admin"])
 app.include_router(models_router.router, prefix="/api/models", tags=["Models"])
-app.include_router(memory_router.router, prefix="/api/memory", tags=["Dashboard Memory"]) # NEW: Include the memory router
+app.include_router(memory_router.router, prefix="/api/memory", tags=["Dashboard Memory"])
 
 # --- Provider Mapping ---
 PROVIDER_MAP = {"polydevs": polydevs.forward, "aistudio": aistudio.forward, "proxyvn": proxyvn.forward}
@@ -86,12 +88,13 @@ async def unified_chat_completions(request: UnifiedChatRequest, http_request: Re
     if not forward_fn or not provider_api_key:
         raise HTTPException(status_code=501, detail=f"Provider or API key for model '{model_to_use}' is not configured.")
 
-    history = db_store.get_user_memory(user_id)
+    # REFACTORED: Use MemoryManager to prepare the prompt
+    prompt_history = memory_manager.prepare_prompt_history(user_id, request.messages)
     system_prompt = user.get("system_prompt")
     
     provider_payload = {
         "model": model_to_use,
-        "messages": history + request.messages,
+        "messages": prompt_history,
         "config": {},
         "system_instruction": [system_prompt] if system_prompt else []
     }
@@ -101,8 +104,10 @@ async def unified_chat_completions(request: UnifiedChatRequest, http_request: Re
         response_content_bytes = b"".join([chunk async for chunk in streaming_response.body_iterator])
         final_response_text = response_content_bytes.decode('utf-8').strip()
         
-        db_store.add_message_to_memory(user_id, request.messages[-1])
-        db_store.add_message_to_memory(user_id, {"role": "assistant", "content": final_response_text})
+        # REFACTORED: Use MemoryManager to save the conversation
+        user_message = request.messages[-1]
+        memory_manager.add_message(user_id, user_message['role'], user_message['content'])
+        memory_manager.add_message(user_id, 'assistant', final_response_text)
         
         async def final_streamer():
             yield final_response_text.encode('utf-8')

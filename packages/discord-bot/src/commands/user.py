@@ -122,10 +122,8 @@ def setup_user_commands(bot: commands.Bot, dependencies: dict):
             role = "You" if raw_role == "user" else "Ryuuko" if raw_role == "assistant" else raw_role.capitalize()
             
             content = render_message_content(msg.get("content", ""))
-            # Sanitize content for a single-line code block
             sanitized_content = content.replace("`", "'").replace("\n", " ")
             
-            # CORRECTED FORMAT: **Role**: `Content`
             description_parts.append(f"**{role}**: `{sanitized_content}`")
 
         full_description = "\n".join(description_parts)
@@ -147,4 +145,56 @@ def setup_user_commands(bot: commands.Bot, dependencies: dict):
             else:
                 await send_embed(ctx, title="Clearing Failed", description=message, color=discord.Color.red())
 
-    logger.info("User commands (link, unlink, profile, memory, clear) have been registered.")
+    # --- Model Commands ---
+
+    @bot.command(name="models")
+    async def models_command(ctx: commands.Context):
+        """Lists all available AI models you can choose from."""
+        logger.info(f"`.models` command invoked by {ctx.author.name}")
+        success, models = await api_client.get_available_models()
+        
+        if not success:
+            logger.error("API call to get_available_models failed.")
+            await send_embed(ctx, title="Error", description="Could not fetch the list of available models.", color=discord.Color.red())
+            return
+        
+        logger.info(f"Successfully fetched {len(models)} models from the API.")
+
+        grouped_models = {}
+        for model in models:
+            level = model.get("access_level", 0)
+            if level not in grouped_models:
+                grouped_models[level] = []
+            grouped_models[level].append(model)
+
+        embed = discord.Embed(title="Available AI Models", description="Use `.model <name>` to set your preference.", color=discord.Color.purple())
+        
+        if not grouped_models:
+            embed.description = "No models are currently available."
+        else:
+            for level in sorted(grouped_models.keys(), reverse=True):
+                plan_name = PLAN_MAP.get(level, "Unknown Tier")
+                model_list = "\n".join([f"- `{m['model_name']}`" for m in grouped_models[level]])
+                embed.add_field(name=f"**{plan_name} Models**", value=model_list, inline=False)
+
+        await ctx.send(embed=embed)
+        logger.info("Sent `.models` embed to user.")
+
+    @bot.command(name="model")
+    async def model_command(ctx: commands.Context, *, model_name: str = None):
+        """Sets your preferred AI model for future conversations."""
+        logger.info(f"`.model` command invoked by {ctx.author.name} with argument: '{model_name}'")
+        if not model_name:
+            await send_embed(ctx, title="Usage", description="Please provide a model name. Example: `.model ryuuko-r1-vnm-mini`", color=discord.Color.orange())
+            return
+
+        async with ctx.typing():
+            success, message = await api_client.set_user_model("discord", str(ctx.author.id), model_name)
+            if success:
+                logger.info(f"Successfully set model for {ctx.author.name} to '{model_name}'. API response: {message}")
+                await send_embed(ctx, title="Model Updated", description=f"Your preferred model has been set to `{model_name}`.", color=discord.Color.green())
+            else:
+                logger.error(f"Failed to set model for {ctx.author.name}. API response: {message}")
+                await send_embed(ctx, title="Update Failed", description=message, color=discord.Color.red())
+
+    logger.info("User commands (link, unlink, profile, memory, clear, models, model) have been registered.")
