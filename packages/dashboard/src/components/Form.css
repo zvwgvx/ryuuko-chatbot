@@ -1,106 +1,369 @@
-/* General Form Styling */
+/* Lofi Professional Form - Soft & Smooth */
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Increased gap for floating labels */
+  gap: 1.5rem;
   width: 100%;
-  max-width: 450px;
+  max-width: 420px;
   margin: 0 auto;
+  padding: 2.5rem;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.6s var(--transition-base);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Remove gradient overlay */
+.form-container::before {
+  display: none;
+}
+
+.form-container > * {
+  position: relative;
+  z-index: 1;
 }
 
 .form-container h2 {
   text-align: center;
-  color: #e0e0e0;
-  margin-bottom: 15px;
-  font-weight: 600;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
 }
 
-/* --- Base Input & Label Styling --- */
-.form-group input,
-.form-group textarea,
-.form-group-static input,
-.form-group-static textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 10px;
-  border: 1px solid #3a3a5a;
-  background-color: #161625;
-  color: #e0e0e0;
-  font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  box-sizing: border-box;
-  font-family: inherit;
+/* Form subtitle */
+.form-container .form-subtitle {
+  font-size: 0.875rem;
+  text-align: center;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group-static input:focus,
-.form-group-static textarea:focus {
-  outline: none;
-  border-color: #7f5af0;
-}
-
-/* --- STYLE 1: FLOATING LABEL (Default for .form-group) --- */
+/* Form Group */
 .form-group {
   position: relative;
 }
 
-.form-group label {
-  position: absolute;
-  top: 14px;
-  left: 16px;
-  color: #8a8a9e;
-  pointer-events: none; /* Allows clicking through the label to the input */
-  transition: all 0.2s ease-out;
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-main);
+  font-size: 0.938rem;
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: 400;
 }
 
-/* The magic happens here: When the input is focused or has content... */
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+  border-color: var(--border-medium);
+  background: var(--bg-card);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  background: var(--bg-card);
+  border-color: var(--primary-solid);
+  box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.15);
+}
+
+/* Floating Label */
+.form-group label {
+  position: absolute;
+  top: 0.875rem;
+  left: 1rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  transition: all var(--transition-base);
+  background: transparent;
+  padding: 0 0.25rem;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
 .form-group input:focus + label,
 .form-group input:not(:placeholder-shown) + label,
 .form-group textarea:focus + label,
 .form-group textarea:not(:placeholder-shown) + label {
-  top: -10px; /* Move the label up */
-  left: 12px;
-  font-size: 0.8rem;
-  color: #7f5af0; /* Highlight color */
-  padding: 0 5px;
-  background-color: #1e1e2f; /* Match the modal/card background to cut through the border */
+  top: -0.625rem;
+  left: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--primary);
+  background: var(--bg-card);
+  font-weight: 600;
+  padding: 0 0.5rem;
 }
 
-/* --- STYLE 2: STATIC LABEL ON TOP (Variant) --- */
+/* Date Input */
+.form-group input[type="date"] {
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+/* Static Label Form Group */
 .form-group-static {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .form-group-static label {
-  color: #a0a0b0;
-  padding-left: 5px;
-  font-size: 0.9rem;
-  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
+.form-group-static input,
+.form-group-static textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-elevated);
+  color: var(--text-main);
+  font-size: 0.938rem;
+  transition: all var(--transition-base);
+  box-sizing: border-box;
+  font-family: inherit;
+  font-weight: 400;
+}
 
-/* --- Common Button & Message Styles (Unchanged) --- */
-.form-button { padding: 14px 20px; border-radius: 10px; border: none; background-color: #7f5af0; color: white; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.3s, transform 0.2s; display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px; }
-.form-button:hover { background-color: #6a48d0; }
-.form-button:active { transform: scale(0.98); }
-.form-button:disabled { background-color: #555; cursor: not-allowed; }
-.form-button.secondary { background-color: #3a3a5a; }
-.form-button.secondary:hover { background-color: #4a4a6a; }
-.form-navigation { display: flex; justify-content: space-between; gap: 15px; }
-.form-navigation .form-button { flex: 1; }
-.form-error, .form-success { text-align: center; padding: 12px; border-radius: 8px; font-weight: 500; margin-bottom: 0; }
-.form-error { background-color: rgba(255, 107, 107, 0.1); color: #ff8b8b; border: 1px solid rgba(255, 107, 107, 0.5); }
-.form-success { background-color: rgba(107, 255, 149, 0.1); color: #6bff95; border: 1px solid rgba(107, 255, 149, 0.5); }
-.step-indicator { display: flex; align-items: center; justify-content: center; margin-bottom: 25px; width: 100%; }
-.step { display: flex; flex-direction: column; align-items: center; color: #666; transition: color 0.4s; }
-.step.active { color: #e0e0e0; }
-.step-number { width: 30px; height: 30px; border-radius: 50%; background-color: #3a3a5a; color: #888; display: flex; align-items: center; justify-content: center; font-weight: bold; border: 2px solid #3a3a5a; transition: background-color 0.4s, border-color 0.4s, color 0.4s; }
-.step.active .step-number { background-color: #7f5af0; border-color: #7f5af0; color: white; }
-.step-label { margin-top: 8px; font-size: 0.8rem; font-weight: 500; }
-.step-connector { flex: 1; height: 2px; background-color: #3a3a5a; margin: 0 15px; margin-bottom: 25px; transition: background-color 0.4s; }
-.step-connector.active { background-color: #7f5af0; }
-.spinner { width: 20px; height: 20px; border: 3px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: #fff; animation: spin 1s ease-in-out infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
+/* Form Buttons */
+.form-button {
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: var(--primary);
+  color: #1e1e1e;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.form-button::before {
+  display: none;
+}
+
+.form-button:hover {
+  background: var(--primary-light);
+  filter: brightness(1.1);
+}
+
+.form-button:active {
+  transform: translateY(0);
+}
+
+.form-button:disabled {
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.form-button.secondary {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text-main);
+}
+
+.form-button.secondary:hover {
+  background: var(--bg-card);
+  border-color: var(--border-medium);
+}
+
+/* Form Navigation */
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.form-navigation .form-button {
+  flex: 1;
+  margin-top: 0;
+  font-size: 0.875rem;
+  padding: 0.813rem 1.25rem;
+}
+
+/* Error and Success Messages */
+.form-error,
+.form-success {
+  text-align: center;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  position: relative;
+  animation: slideDown 0.3s var(--transition-base);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-error {
+  background: rgba(245, 87, 108, 0.15);
+  color: #ff6b9d;
+  border: 1px solid rgba(245, 87, 108, 0.3);
+}
+
+.form-success {
+  background: rgba(67, 233, 123, 0.15);
+  color: #43e97b;
+  border: 1px solid rgba(67, 233, 123, 0.3);
+}
+
+/* Step Indicator */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-muted);
+  transition: all var(--transition-base);
+}
+
+.step.active {
+  color: var(--text-main);
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-elevated);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  border: 2px solid var(--border-subtle);
+  transition: all var(--transition-base);
+  position: relative;
+  font-size: 1rem;
+}
+
+.step.active .step-number {
+  background: var(--primary);
+  border-color: transparent;
+  color: var(--bg-main);
+  transform: scale(1.1);
+}
+
+.step-label {
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background: var(--bg-elevated);
+  margin: 0 1rem;
+  margin-bottom: 2rem;
+  transition: all var(--transition-base);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.step-connector.active {
+  background: var(--primary);
+}
+
+/* Loading Spinner */
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-container {
+    padding: 2rem 1.5rem;
+    max-width: 100%;
+  }
+
+  .form-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group-static input,
+  .form-group-static textarea {
+    padding: 0.75rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .form-button {
+    padding: 0.813rem 1.25rem;
+    font-size: 0.875rem;
+  }
+}

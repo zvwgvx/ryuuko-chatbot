@@ -1,83 +1,235 @@
-/* Sidebar Container */
+/* Lofi Professional Sidebar - Smooth & Chill */
 .sidebar {
-  grid-area: sidebar; /* For CSS Grid layout in Dashboard.css */
-  background-color: #1e1e2f;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 2rem 1.5rem;
+  grid-area: sidebar;
+  background: var(--bg-card);
+  border-right: 1px solid var(--border-subtle);
+  padding: 1.25rem 0;
   display: flex;
   flex-direction: column;
+  z-index: 10;
+  position: relative;
+  overflow-y: auto;
 }
 
+/* Remove gradient overlay */
+.sidebar::before {
+  display: none;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Sidebar Header */
 .sidebar-header {
-  text-align: center;
-  margin-bottom: 2.5rem;
+  padding: 0 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition-fast);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.sidebar-logo:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-subtle);
+}
+
+.logo-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 900;
+  font-size: 1.125rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.logo-icon-svg {
+  width: 24px;
+  height: 24px;
+  color: var(--primary);
 }
 
 .sidebar-header h2 {
   margin: 0;
-  color: #e0e0e0;
-  font-size: 1.5rem;
-  background: linear-gradient(90deg, #9f78f0, #7f5af0);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
-/* Navigation Links */
+/* Navigation */
 .sidebar-nav {
   list-style: none;
-  padding: 0;
+  padding: 0 1rem;
   margin: 0;
-  flex-grow: 1; /* Pushes the logout button to the bottom */
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .sidebar-nav li {
-  margin-bottom: 10px;
+  margin: 0;
 }
 
-.sidebar-nav a {
+.nav-link {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 12px 15px;
-  border-radius: 10px;
+  gap: 0.75rem;
+  padding: 0.625rem 0.75rem;
   text-decoration: none;
-  color: #a0a0b0;
+  color: var(--text-secondary);
   font-weight: 500;
-  transition: background-color 0.2s, color 0.2s;
+  font-size: 0.875rem;
+  position: relative;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border-left: 3px solid transparent;
+  margin-bottom: 2px;
 }
 
-.sidebar-nav a:hover {
-  background-color: #2a2a3f;
-  color: #ffffff;
+.nav-link:hover {
+  background: var(--bg-elevated);
+  color: var(--text-main);
 }
 
-.sidebar-nav a.active {
-  background-color: #7f5af0;
-  color: #ffffff;
-  box-shadow: 0 4px 15px -5px rgba(127, 90, 240, 0.5);
+.nav-link.active {
+  background: var(--bg-elevated);
+  color: var(--primary);
+  font-weight: 600;
+  border-left-color: var(--primary);
 }
 
-/* Logout Button at the bottom */
+/* Icon styling */
+.nav-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+  stroke-width: 2;
+}
+
+.nav-link:hover .nav-icon {
+  opacity: 1;
+}
+
+.nav-link.active .nav-icon {
+  opacity: 1;
+  color: var(--primary);
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 0 1rem;
+  margin-top: 1.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border-medium);
+  margin: 1.25rem 0;
+  border: none;
+}
+
+/* Logout Button */
 .logout-button {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 0.75rem;
   width: 100%;
-  padding: 12px 15px;
-  border-radius: 10px;
+  padding: 0.625rem 0.75rem;
   text-decoration: none;
-  color: #ff8b8b;
+  color: var(--text-secondary);
   font-weight: 500;
-  transition: background-color 0.2s, color 0.2s;
-  background: none;
-  border: none;
+  font-size: 0.875rem;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
   cursor: pointer;
-  font-size: 1rem;
   font-family: inherit;
   text-align: left;
+  transition: all var(--transition-fast);
 }
 
 .logout-button:hover {
-  background-color: rgba(255, 107, 107, 0.1);
-  color: #ff6b6b;
+  background: var(--bg-elevated);
+  color: var(--secondary);
+  border-color: var(--border-subtle);
+}
+
+.logout-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.logout-button:hover .logout-icon {
+  transform: translateX(2px);
+}
+
+/* Custom Scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    padding: 1.25rem 0;
+    border-right: none;
+    border-bottom: 1px solid var(--border-medium);
+  }
+
+  .sidebar-header {
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-nav,
+  .sidebar-footer {
+    padding: 0 1rem;
+  }
+
+  .sidebar-header h2 {
+    font-size: 1rem;
+  }
+
+  .nav-link,
+  .logout-button {
+    font-size: 0.813rem;
+    padding: 0.75rem 0.875rem;
+  }
 }

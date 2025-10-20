@@ -98,7 +98,9 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         db_store.create_or_update_owner_user(
             username=config.OWNER_USERNAME,
             email=config.OWNER_EMAIL,
-            hashed_password=owner_password_hash
+            hashed_password=owner_password_hash,
+            first_name=config.OWNER_FIRST_NAME,
+            last_name=config.OWNER_LAST_NAME
         )
 
     # --- Standard Authentication ---

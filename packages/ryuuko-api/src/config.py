@@ -32,6 +32,8 @@ if not BOT_API_KEY:
 OWNER_USERNAME = os.getenv("OWNER_USERNAME", "owner")
 OWNER_PASSWORD = os.getenv("OWNER_PASSWORD", "owner")
 OWNER_EMAIL = os.getenv("OWNER_EMAIL", "owner@example.com")
+OWNER_FIRST_NAME = os.getenv("OWNER_FIRST_NAME", "Owner")
+OWNER_LAST_NAME = os.getenv("OWNER_LAST_NAME", "Admin")
 
 # --- Cloudflare Turnstile Configuration ---
 CLOUDFLARE_TURNSTILE_SECRET_KEY = os.getenv("CLOUDFLARE_TURNSTILE_SECRET_KEY")

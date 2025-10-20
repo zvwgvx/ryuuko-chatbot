@@ -103,8 +103,7 @@ async def unified_chat_completions(request: UnifiedChatRequest, http_request: Re
         streaming_response = await forward_fn(http_request, provider_payload, provider_api_key)
         response_content_bytes = b"".join([chunk async for chunk in streaming_response.body_iterator])
         final_response_text = response_content_bytes.decode('utf-8').strip()
-        
-        # REFACTORED: Use MemoryManager to save the conversation
+
         user_message = request.messages[-1]
         memory_manager.add_message(user_id, user_message['role'], user_message['content'])
         memory_manager.add_message(user_id, 'assistant', final_response_text)
@@ -118,7 +117,7 @@ async def unified_chat_completions(request: UnifiedChatRequest, http_request: Re
         logging.getLogger("RyuukoAPI.API").exception(f"Error during provider call: {e}")
         raise HTTPException(status_code=500, detail=f"An internal error occurred while contacting the AI provider: {e}")
 
-# --- USER CONFIG ENDPOINTS ---
+
 class UserConfigUpdate(BaseModel):
     model: Optional[str] = None
     system_prompt: Optional[str] = None

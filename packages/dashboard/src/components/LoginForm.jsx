@@ -18,7 +18,7 @@ const LoginForm = ({ onLoginSuccess }) => {
       const { access_token } = response.data;
       onLoginSuccess(access_token);
     } catch (err) {
-      const errorMessage = err.response?.data?.detail || 'An unexpected error occurred.';
+      const errorMessage = err.response?.data?.detail || 'An unexpected error occurred. Please try again.';
       setError(errorMessage);
     } finally {
       setIsLoading(false);
@@ -27,32 +27,45 @@ const LoginForm = ({ onLoginSuccess }) => {
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
-      <h2>Login</h2>
-      {error && <p className="form-error">{error}</p>}
+      <h2>Welcome Back</h2>
+
+      {error && <div className="form-error">{error}</div>}
+
       <div className="form-group">
-        <input 
-          id="login-username" 
-          type="text" 
+        <input
+          id="login-username"
+          type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          required 
+          required
           placeholder=" "
+          autoComplete="username"
         />
         <label htmlFor="login-username">Username</label>
       </div>
+
       <div className="form-group">
-        <input 
-          id="login-password" 
-          type="password" 
+        <input
+          id="login-password"
+          type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required 
+          required
           placeholder=" "
+          autoComplete="current-password"
         />
         <label htmlFor="login-password">Password</label>
       </div>
+
       <button type="submit" className="form-button" disabled={isLoading}>
-        {isLoading ? <div className="spinner"></div> : 'Login'}
+        {isLoading ? (
+          <>
+            <div className="spinner"></div>
+            <span>Signing in...</span>
+          </>
+        ) : (
+          'Sign In'
+        )}
       </button>
     </form>
   );

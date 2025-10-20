@@ -17,7 +17,8 @@ authors = [
 dependencies = [
     "python-dotenv",
     "python-telegram-bot[ext]",
-    "httpx"
+    "httpx",
+    "Pillow"
 ]
 
 # CORRECTED: The script `telegram-bot` now correctly points to the `main` function

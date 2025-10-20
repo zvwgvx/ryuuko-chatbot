@@ -1,11 +1,65 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Import Inter (the missing font) and Pixel Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Press+Start+2P&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+:root {
+  /* Font Stacks */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-pixel: 'Press Start 2P', cursive;
+  --font-mono: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Monokai/Claude Pure Palette */
+  --primary: #E67E22;
+  --primary-solid: #E67E22;
+  --primary-light: #F39C12;
+  --primary-dark: #CA6F1E;
+  --secondary: #F92672;
+  --secondary-solid: #F92672;
+  --accent: #66D9EF;
+  --accent-solid: #66D9EF;
+  --success: #A6E22E;
+  --success-solid: #A6E22E;
+  --purple: #AE81FF;
+  --yellow: #E6DB74;
+
+  /* Backgrounds - Monokai Dark Gray */
+  --bg-main: #1e1e1e;
+  --bg-card: #272822;
+  --bg-elevated: #2e2e2a;
+  --bg-glass: rgba(39, 40, 34, 0.98);
+
+  /* Text - Monokai */
+  --text-main: #F8F8F2;
+  --text-secondary: #CFCFC2;
+  --text-muted: #75715E;
+  --text-bright: #FFFFFF;
+
+  /* UI Elements */
+  --border-subtle: rgba(117, 113, 94, 0.15);
+  --border-medium: rgba(117, 113, 94, 0.25);
+  --border-active: rgba(230, 126, 34, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.6);
+  --shadow-glow: none;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  font-weight: 500;
+
+  color-scheme: dark;
+  color: var(--text-main);
+  background-color: var(--bg-main);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,10 +67,59 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--bg-main);
+}
+
+/* Pixel Font Utility */
+.pixel-font {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  line-height: 1.8;
+  letter-spacing: 0.05em;
+}
+
+/* Gradient Text Utility */
+.gradient-text {
+  color: var(--primary);
+}
+
+/* Glass Morphism Utility */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Smooth Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}
+
+/* Selection */
+::selection {
+  background: rgba(253, 151, 31, 0.3);
+  color: var(--text-bright);
 }

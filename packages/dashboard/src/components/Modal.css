@@ -1,70 +1,83 @@
-/* Modal Overlay with Frosted Glass Effect */
+/* Lofi Professional Modal - Smooth & Chill */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(10, 10, 10, 0.5);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  opacity: 0;
-  animation: fadeIn 0.3s forwards;
+  animation: fadeIn 0.3s var(--transition-base);
 }
 
-/* Modal Content - Wider and more spacious */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content */
 .modal-content {
-  background: #1e1e2f; /* A darker, more professional shade */
-  padding: 2.5rem 3rem; /* More padding */
-  border-radius: 16px; /* More rounded corners */
+  background: var(--bg-card);
+  padding: 2.5rem 3rem;
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
   width: 90%;
-  max-width: 700px; /* SIGNIFICANTLY WIDER */
-  transform: scale(0.95) translateY(10px);
-  opacity: 0;
-  animation: popIn 0.4s 0.1s forwards;
+  max-width: 700px;
+  animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Close Button - More subtle and modern */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Close Button */
 .modal-close {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: #2a2a3f;
-  border: 1px solid #444;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 1.2rem;
-  line-height: 30px;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: rgba(245, 87, 108, 0.15);
+  border: 1px solid rgba(245, 87, 108, 0.3);
+  border-radius: var(--radius-sm);
+  width: 40px;
+  height: 40px;
+  font-size: 1.25rem;
+  line-height: 1;
   text-align: center;
-  color: #aaa;
+  color: var(--text-main);
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, transform 0.2s;
+  transition: all var(--transition-base);
+  font-weight: 700;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .modal-close:hover {
-  background-color: #ff6b6b;
+  background: var(--secondary);
+  border-color: transparent;
   color: white;
-  transform: rotate(90deg);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-/* Keyframe animations for smooth entry */
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes popIn {
-  to {
-    transform: scale(1) translateY(0);
-    opacity: 1;
-  }
+.modal-close:active {
+  transform: translateY(0);
 }

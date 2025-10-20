@@ -39,15 +39,15 @@ export const generateLinkCode = () => {
   return apiClient.post('/api/link/generate-code');
 };
 
-export const updateUserConfig = (configData) => {
-  return apiClient.put('/api/users/config', configData);
+// CORRECTED: Replaced old config update with the new unified profile update function
+export const updateUserProfile = (profileData) => {
+  return apiClient.put('/api/users/me', profileData);
 };
 
 export const getAvailableModels = () => {
   return apiClient.get('/api/models');
 };
 
-// UPDATED: Memory functions to use the new /dashboard sub-path
 export const getUserMemory = () => {
   return apiClient.get('/api/memory/dashboard');
 };

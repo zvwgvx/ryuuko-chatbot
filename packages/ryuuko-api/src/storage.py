@@ -78,14 +78,14 @@ class MongoDBStore:
         except DuplicateKeyError:
             return None
 
-    def create_or_update_owner_user(self, username: str, email: str, hashed_password: str):
+    def create_or_update_owner_user(self, username: str, email: str, hashed_password: str, first_name: str, last_name: str):
         """Ensures the owner user, defined by config, exists with correct credentials and permissions."""
         owner_defaults = {
             "username": username,
             "email": email,
             "hashed_password": hashed_password,
-            "first_name": "Owner",
-            "last_name": "Account",
+            "first_name": first_name,
+            "last_name": last_name,
             "date_of_birth": datetime(1970, 1, 1),
             "credit": 999999,
             "access_level": 3,
@@ -184,13 +184,27 @@ class MongoDBStore:
         result = self.db[self.COLLECTIONS['user_memory']].delete_one({"user_id": ObjectId(user_id)})
         return result.deleted_count > 0
 
-    # --- User Config ---
-    def update_user_config(self, user_id: str, model: Optional[str] = None, system_prompt: Optional[str] = None) -> bool:
-        update_data = {"updated_at": datetime.utcnow()}
-        if model is not None: update_data["model"] = model
-        if system_prompt is not None: update_data["system_prompt"] = system_prompt
-        result = self.db[self.COLLECTIONS['dashboard_users']].update_one({"_id": ObjectId(user_id)}, {"$set": update_data})
-        return result.modified_count > 0
+    # --- User Profile & Config ---
+    def update_user_profile(self, user_id: str, update_data: Dict[str, Any]) -> tuple[bool, str]:
+        """Updates a user's profile information."""
+        if not update_data:
+            return False, "No update data provided."
+
+        update_data["updated_at"] = datetime.utcnow()
+
+        try:
+            result = self.db[self.COLLECTIONS['dashboard_users']].update_one(
+                {"_id": ObjectId(user_id)},
+                {"$set": update_data}
+            )
+            if result.modified_count > 0:
+                return True, "Profile updated successfully."
+            return True, "Profile was not modified."
+        except DuplicateKeyError:
+            return False, "The specified email is already in use."
+        except Exception as e:
+            logger.error(f"Error updating profile for user {user_id}: {e}")
+            return False, "An internal error occurred during profile update."
 
     # --- Admin-specific Methods ---
     def admin_add_user_credit(self, user_id: str, amount: int) -> tuple[bool, int]:
