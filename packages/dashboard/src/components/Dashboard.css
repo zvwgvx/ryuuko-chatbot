@@ -20,6 +20,13 @@
   overflow-y: auto;
   background: var(--bg-main);
   position: relative;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.dashboard-content::-webkit-scrollbar {
+  display: none;
 }
 
 /* Remove gradient overlay */

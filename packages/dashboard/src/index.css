@@ -71,12 +71,23 @@
   box-sizing: border-box;
 }
 
+/* Hide all scrollbars globally */
+* {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+*::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
 body {
   margin: 0;
   padding: 0;
   min-width: 320px;
   min-height: 100vh;
   background: var(--bg-main);
+  overflow-x: hidden;
 }
 
 /* Pixel Font Utility */

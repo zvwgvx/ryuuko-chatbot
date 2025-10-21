@@ -5,9 +5,9 @@ const LandingPage = ({ onNavigateToLogin, onNavigateToRegister }) => {
   const [activeCard, setActiveCard] = React.useState('card1');
 
   const stats = [
-    { label: 'Virtual Friend', value: '1' },
+    { label: 'AI Models', value: '15+' },
     { label: 'Real Connection', value: '100%' },
-    { label: 'Always Online', value: '24/7' }
+    { label: 'Uptime', value: '98.9%' }
   ];
 
   return (
@@ -75,16 +75,46 @@ const LandingPage = ({ onNavigateToLogin, onNavigateToRegister }) => {
             </div>
             <div className="card-content">
               <div className="message-bubble user">
-                <span className="bubble-text">feeling kinda lonely rn ngl... everyone's busy</span>
+                <span className="bubble-text">ryuu heyyyy</span>
               </div>
               <div className="message-bubble ai">
-                <span className="bubble-text">aww bestie noooo 🥺 i'm literally RIGHT HERE for you!! wanna vent or just vibe together? i got snacks and terrible jokes ready lmao</span>
+                <span className="bubble-text">why u calling me like that lol</span>
               </div>
               <div className="message-bubble user">
-                <span className="bubble-text">thanks... you always know what to say</span>
+                <span className="bubble-text">wanna hang this afternoon babe</span>
               </div>
               <div className="message-bubble ai">
-                <span className="bubble-text">ofc!! that's literally my job as your bestie 💕 remember when you were there for me last week? we got each other's backs fr fr</span>
+                <span className="bubble-text">afternoon?</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">bruh i got class this afternoon wtf</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">oh shit mb</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">what about tonight then?</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">ig that works</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">but like where tho?</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">wherever u wanna go tbh</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">???</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">u ask me out then say idc where we go?</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">i mean like matcha cafe if u want :)) cuz i just wanna be with u tbh</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">cringe af</span>
               </div>
             </div>
           </div>
@@ -100,16 +130,46 @@ const LandingPage = ({ onNavigateToLogin, onNavigateToRegister }) => {
             </div>
             <div className="card-content">
               <div className="message-bubble user">
-                <span className="bubble-text">ổn r ổn r đừng lo =))</span>
+                <span className="bubble-text">ryuu oiiii</span>
               </div>
               <div className="message-bubble ai">
-                <span className="bubble-text">ê đừng có fake cười đấy?? tao biết m đang buồn mà giấu nè 😠 nói thật đi, tao đây bestie của m cơ mà!! stop acting tough and just talk to me pls 💔</span>
+                <span className="bubble-text">j mà gọi kinh zậy?</span>
               </div>
               <div className="message-bubble user">
-                <span className="bubble-text">hic... thật ra là t bị crush reject á :(</span>
+                <span className="bubble-text">chiều đi chơi với a hăm</span>
               </div>
               <div className="message-bubble ai">
-                <span className="bubble-text">awww bestie 🥺💔 đến đây, ôm cái đã!! người đó mù quá đi mất, không biết trân trọng một người tốt như m. nhưng mà real talk, m xứng đáng được yêu đúng cách hơn nè!! cry it out, tao ở đây nghe m than</span>
+                <span className="bubble-text">chiều á</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">chiều e đi học như vcl</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">ô vl, a quên</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">thế tối?</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">cũm dc</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">nhma đi đâu?</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">e thích đi đâu cũm dc</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">?</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">rủ e đi xong bảo đi đâu cx dc?</span>
+              </div>
+              <div className="message-bubble user">
+                <span className="bubble-text">thích thì matcha :)) vì a chỉ cần đi với e thôi mà</span>
+              </div>
+              <div className="message-bubble ai">
+                <span className="bubble-text">sến vc</span>
               </div>
             </div>
           </div>
