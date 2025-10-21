@@ -88,15 +88,19 @@ async def unified_chat_completions(request: UnifiedChatRequest, http_request: Re
     if not forward_fn or not provider_api_key:
         raise HTTPException(status_code=501, detail=f"Provider or API key for model '{model_to_use}' is not configured.")
 
-    # REFACTORED: Use MemoryManager to prepare the prompt
-    prompt_history = memory_manager.prepare_prompt_history(user_id, request.messages)
+    # REFACTORED: Use MemoryManager to prepare the prompt with system prompt embedded
     system_prompt = user.get("system_prompt")
-    
+    prompt_history = memory_manager.prepare_prompt_history(
+        user_id=user_id,
+        new_messages=request.messages,
+        system_prompt=system_prompt
+    )
+
     provider_payload = {
         "model": model_to_use,
         "messages": prompt_history,
         "config": {},
-        "system_instruction": [system_prompt] if system_prompt else []
+        "system_instruction": []  # System prompt now embedded in messages
     }
 
     try:

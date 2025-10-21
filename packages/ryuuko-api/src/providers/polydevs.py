@@ -86,8 +86,8 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
     key = api_key or os.getenv("POLYDEVS_API_KEY")
     if not key: return JSONResponse({"ok": False, "error": "api_key_not_provided"}, status_code=403)
 
-    try:
-        client = AsyncOpenAI(api_key=key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+    try: #https://generativelanguage.googleapis.com/v1beta/openai/
+        client = AsyncOpenAI(api_key=key, base_url="https://proxyvn.top/")
     except Exception as e:
         return JSONResponse({"ok": False, "error": "client_initialization_failed", "detail": str(e)}, status_code=500)
 

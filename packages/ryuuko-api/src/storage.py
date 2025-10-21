@@ -24,7 +24,9 @@ class MongoDBStore:
             'linked_accounts': 'linked_accounts',
             'link_codes': 'temp_link_codes',
             'user_memory': 'user_memory',
-            'supported_models': 'supported_models'
+            'supported_models': 'supported_models',
+            'memory_nodes': 'memory_nodes',
+            'memory_summaries': 'memory_summaries'
         }
         self._connect()
         self._initialize_indexes()
@@ -50,6 +52,9 @@ class MongoDBStore:
             self.db[self.COLLECTIONS['linked_accounts']].create_index([("platform", 1), ("platform_user_id", 1)], unique=True)
             self.db[self.COLLECTIONS['user_memory']].create_index("user_id", unique=True)
             self.db[self.COLLECTIONS['supported_models']].create_index("model_name", unique=True)
+            # New indexes for hierarchical memory system
+            self.db[self.COLLECTIONS['memory_nodes']].create_index([("user_id", 1), ("timestamp", -1)])
+            self.db[self.COLLECTIONS['memory_summaries']].create_index("user_id", unique=True)
             logger.info("All database indexes ensured.")
         except OperationFailure as e:
             logger.warning(f"Could not create an index, it may already exist with different options: {e}")
@@ -168,12 +173,25 @@ class MongoDBStore:
         )
         return result.deleted_count > 0
 
-    # --- Memory Management ---
+    # --- DEPRECATED: Legacy Memory Management (DO NOT USE) ---
+    # These methods are kept for backward compatibility only.
+    # Use hierarchical memory system (memory_nodes + memory_summaries) instead.
+
     def get_user_memory(self, user_id: str) -> List[Dict[str, Any]]:
+        """
+        DEPRECATED: Use memory_manager.get_history() instead.
+        This uses the old linear memory system.
+        """
+        logger.warning("get_user_memory() is DEPRECATED - use memory_manager.get_history()")
         result = self.db[self.COLLECTIONS['user_memory']].find_one({"user_id": ObjectId(user_id)})
         return result.get("messages", []) if result else []
 
     def add_message_to_memory(self, user_id: str, message: Dict[str, Any]):
+        """
+        DEPRECATED: Use memory_manager.add_message() instead.
+        This uses the old linear memory system.
+        """
+        logger.warning("add_message_to_memory() is DEPRECATED - use memory_manager.add_message()")
         self.db[self.COLLECTIONS['user_memory']].update_one(
             {"user_id": ObjectId(user_id)},
             {"$push": {"messages": message}, "$set": {"updated_at": datetime.utcnow()}},
@@ -181,6 +199,11 @@ class MongoDBStore:
         )
 
     def clear_user_memory(self, user_id: str) -> bool:
+        """
+        DEPRECATED: Use memory_manager.clear_history() instead.
+        This uses the old linear memory system.
+        """
+        logger.warning("clear_user_memory() is DEPRECATED - use memory_manager.clear_history()")
         result = self.db[self.COLLECTIONS['user_memory']].delete_one({"user_id": ObjectId(user_id)})
         return result.deleted_count > 0
 
@@ -223,6 +246,207 @@ class MongoDBStore:
         result = self.db[self.COLLECTIONS['dashboard_users']].update_one(
             {"_id": ObjectId(user_id)}, {"$set": {"access_level": level, "updated_at": datetime.utcnow()}})
         return result.modified_count > 0
+
+    # --- Hierarchical Memory System: Memory Nodes ---
+    def add_memory_node(
+        self,
+        user_id: str,
+        role: str,
+        text_content: str,
+        semantic_vector: List[float]
+    ) -> str:
+        """
+        Add a new memory node with semantic embedding.
+
+        Args:
+            user_id: User ID
+            role: Message role ('user' or 'assistant')
+            text_content: Text content of the message
+            semantic_vector: Embedding vector for the text
+
+        Returns:
+            Inserted document ID as string
+        """
+        try:
+            result = self.db[self.COLLECTIONS['memory_nodes']].insert_one({
+                "user_id": ObjectId(user_id),
+                "timestamp": datetime.utcnow(),
+                "role": role,
+                "text_content": text_content,
+                "semantic_vector": semantic_vector
+            })
+            return str(result.inserted_id)
+        except Exception as e:
+            logger.error(f"Error adding memory node for user {user_id}: {e}")
+            raise
+
+    def get_recent_memory_nodes(
+        self,
+        user_id: str,
+        limit: int = 10
+    ) -> List[Dict[str, Any]]:
+        """
+        Get the most recent memory nodes for a user (sliding window).
+
+        Args:
+            user_id: User ID
+            limit: Number of recent nodes to retrieve
+
+        Returns:
+            List of memory node documents
+        """
+        try:
+            nodes = list(
+                self.db[self.COLLECTIONS['memory_nodes']]
+                .find({"user_id": ObjectId(user_id)})
+                .sort("timestamp", -1)
+                .limit(limit)
+            )
+            # Reverse to get chronological order
+            nodes.reverse()
+            return nodes
+        except Exception as e:
+            logger.error(f"Error retrieving recent memory nodes for user {user_id}: {e}")
+            return []
+
+    def search_similar_memory_nodes(
+        self,
+        user_id: str,
+        query_vector: List[float],
+        limit: int = 10,
+        exclude_recent: int = 10
+    ) -> List[Dict[str, Any]]:
+        """
+        Search for similar memory nodes using cosine similarity (RAG retrieval).
+
+        Args:
+            user_id: User ID
+            query_vector: Query embedding vector
+            limit: Number of similar nodes to retrieve
+            exclude_recent: Exclude this many most recent messages from search
+
+        Returns:
+            List of similar memory node documents with similarity scores
+        """
+        try:
+            import numpy as np
+
+            # Get all nodes except recent ones
+            all_nodes = list(
+                self.db[self.COLLECTIONS['memory_nodes']]
+                .find({"user_id": ObjectId(user_id)})
+                .sort("timestamp", -1)
+                .skip(exclude_recent)
+            )
+
+            if not all_nodes:
+                return []
+
+            # Compute similarities
+            query_vec = np.array(query_vector)
+            similarities = []
+
+            for node in all_nodes:
+                node_vec = np.array(node['semantic_vector'])
+
+                # Cosine similarity
+                dot_product = np.dot(query_vec, node_vec)
+                norm_query = np.linalg.norm(query_vec)
+                norm_node = np.linalg.norm(node_vec)
+
+                if norm_query == 0 or norm_node == 0:
+                    similarity = 0.0
+                else:
+                    similarity = dot_product / (norm_query * norm_node)
+
+                similarities.append({
+                    'node': node,
+                    'similarity': float(similarity)
+                })
+
+            # Sort by similarity (highest first) and return top N
+            similarities.sort(key=lambda x: x['similarity'], reverse=True)
+            top_similar = similarities[:limit]
+
+            # Return just the nodes with their similarity scores
+            return [
+                {**item['node'], 'similarity_score': item['similarity']}
+                for item in top_similar
+            ]
+
+        except Exception as e:
+            logger.error(f"Error searching similar memory nodes for user {user_id}: {e}")
+            return []
+
+    def clear_memory_nodes(self, user_id: str) -> bool:
+        """Clear all memory nodes for a user."""
+        try:
+            result = self.db[self.COLLECTIONS['memory_nodes']].delete_many(
+                {"user_id": ObjectId(user_id)}
+            )
+            return result.deleted_count > 0
+        except Exception as e:
+            logger.error(f"Error clearing memory nodes for user {user_id}: {e}")
+            return False
+
+    # --- Hierarchical Memory System: Summaries ---
+    def get_memory_summary(self, user_id: str) -> Optional[str]:
+        """
+        Get the contextual summary for a user.
+
+        Args:
+            user_id: User ID
+
+        Returns:
+            Summary text or None if not exists
+        """
+        try:
+            result = self.db[self.COLLECTIONS['memory_summaries']].find_one(
+                {"user_id": ObjectId(user_id)}
+            )
+            return result.get("summary_text") if result else None
+        except Exception as e:
+            logger.error(f"Error retrieving memory summary for user {user_id}: {e}")
+            return None
+
+    def update_memory_summary(self, user_id: str, summary_text: str) -> bool:
+        """
+        Update or create the contextual summary for a user.
+
+        Args:
+            user_id: User ID
+            summary_text: New summary text
+
+        Returns:
+            True if successful
+        """
+        try:
+            self.db[self.COLLECTIONS['memory_summaries']].update_one(
+                {"user_id": ObjectId(user_id)},
+                {
+                    "$set": {
+                        "summary_text": summary_text,
+                        "updated_at": datetime.utcnow()
+                    },
+                    "$setOnInsert": {"created_at": datetime.utcnow()}
+                },
+                upsert=True
+            )
+            return True
+        except Exception as e:
+            logger.error(f"Error updating memory summary for user {user_id}: {e}")
+            return False
+
+    def clear_memory_summary(self, user_id: str) -> bool:
+        """Clear the memory summary for a user."""
+        try:
+            result = self.db[self.COLLECTIONS['memory_summaries']].delete_one(
+                {"user_id": ObjectId(user_id)}
+            )
+            return result.deleted_count > 0
+        except Exception as e:
+            logger.error(f"Error clearing memory summary for user {user_id}: {e}")
+            return False
 
     def close(self):
         if self.client: self.client.close()
