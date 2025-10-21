@@ -42,11 +42,11 @@
   --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.6);
   --shadow-glow: none;
 
-  /* Border Radius */
-  --radius-sm: 4px;
-  --radius-md: 6px;
-  --radius-lg: 8px;
-  --radius-xl: 12px;
+  /* Border Radius - Increased for softer look */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
 
   /* Transitions */
   --transition-fast: 0.15s ease;

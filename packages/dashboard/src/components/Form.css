@@ -8,11 +8,18 @@
   margin: 0 auto;
   padding: 2.5rem;
   background: var(--bg-card);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-xl);
   border: 1px solid var(--border-subtle);
   position: relative;
   overflow: hidden;
   animation: fadeIn 0.6s var(--transition-base);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  transition: all var(--transition-base);
+}
+
+.form-container:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
 }
 
 @keyframes fadeIn {
@@ -85,6 +92,8 @@
 .form-group textarea:hover {
   border-color: var(--border-medium);
   background: var(--bg-card);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .form-group input:focus,
@@ -92,7 +101,8 @@
   outline: none;
   background: var(--bg-card);
   border-color: var(--primary-solid);
-  box-shadow: 0 0 0 2px rgba(230, 126, 34, 0.15);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
 }
 
 /* Floating Label */
@@ -159,20 +169,21 @@
 
 /* Form Buttons */
 .form-button {
-  padding: 0.75rem 1.25rem;
-  border-radius: var(--radius-sm);
+  padding: 0.875rem 1.5rem;
+  border-radius: var(--radius-md);
   border: none;
   background: var(--primary);
   color: #1e1e1e;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
   margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.2);
 }
 
 .form-button::before {
@@ -181,11 +192,13 @@
 
 .form-button:hover {
   background: var(--primary-light);
-  filter: brightness(1.1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
 }
 
 .form-button:active {
-  transform: translateY(0);
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 1px 4px rgba(230, 126, 34, 0.2);
 }
 
 .form-button:disabled {
@@ -199,11 +212,14 @@
   background: var(--bg-elevated);
   border: 1px solid var(--border-medium);
   color: var(--text-main);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .form-button.secondary:hover {
   background: var(--bg-card);
-  border-color: var(--border-medium);
+  border-color: var(--primary);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Form Navigation */

@@ -20,9 +20,15 @@
   background: var(--bg-glass);
   backdrop-filter: blur(16px);
   border: 1px solid var(--border-medium);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  transition: all var(--transition-base);
+}
+
+.settings-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
 }
 
 /* Settings Section */

@@ -72,8 +72,8 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
             )
             async for chunk in stream:
                 if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
-                    yield chunk.choices[0].delta.content.encode("utf-8")
+                    yield chunk.choices[0].delta.content.encode("utf-8", errors="surrogatepass")
         except Exception as e:
-            yield (json.dumps({"ok": False, "error": "upstream_error", "detail": str(e)}) + "\n").encode("utf-8")
+            yield (json.dumps({"ok": False, "error": "upstream_error", "detail": str(e)}) + "\n").encode("utf-8", errors="surrogatepass")
 
     return StreamingResponse(streamer(), media_type="text/plain; charset=utf-8")

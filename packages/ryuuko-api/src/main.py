@@ -102,14 +102,21 @@ async def unified_chat_completions(request: UnifiedChatRequest, http_request: Re
     try:
         streaming_response = await forward_fn(http_request, provider_payload, provider_api_key)
         response_content_bytes = b"".join([chunk async for chunk in streaming_response.body_iterator])
-        final_response_text = response_content_bytes.decode('utf-8').strip()
+        final_response_text = response_content_bytes.decode('utf-8', errors='surrogatepass').strip()
+
+        # Clean surrogates before saving to MongoDB (MongoDB doesn't accept surrogates)
+        clean_response_text = final_response_text.encode('utf-8', errors='replace').decode('utf-8', errors='replace')
 
         user_message = request.messages[-1]
-        memory_manager.add_message(user_id, user_message['role'], user_message['content'])
-        memory_manager.add_message(user_id, 'assistant', final_response_text)
-        
+        # Clean user content as well if it's a string (for MongoDB safety)
+        user_content = user_message['content']
+        if isinstance(user_content, str):
+            user_content = user_content.encode('utf-8', errors='replace').decode('utf-8', errors='replace')
+        memory_manager.add_message(user_id, user_message['role'], user_content)
+        memory_manager.add_message(user_id, 'assistant', clean_response_text)
+
         async def final_streamer():
-            yield final_response_text.encode('utf-8')
+            yield clean_response_text.encode('utf-8')
             
         return StreamingResponse(final_streamer(), media_type="text/plain; charset=utf-8")
 

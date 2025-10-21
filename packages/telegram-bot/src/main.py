@@ -88,7 +88,7 @@ async def chat_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         full_response = ""
         async for chunk in response_stream:
-            full_response += chunk.decode('utf-8')
+            full_response += chunk.decode('utf-8', errors='surrogatepass')
 
         if full_response:
             # MODIFIED: Split response by newline and send as separate messages
@@ -133,7 +133,7 @@ async def photo_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         full_response = ""
         async for chunk in response_stream:
-            full_response += chunk.decode('utf-8')
+            full_response += chunk.decode('utf-8', errors='surrogatepass')
 
         if full_response:
             # MODIFIED: Split response by newline and send as separate messages

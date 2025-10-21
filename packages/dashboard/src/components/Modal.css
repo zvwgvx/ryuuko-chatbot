@@ -29,8 +29,8 @@
   padding: 2.5rem 3rem;
   position: relative;
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   width: 90%;
   max-width: 700px;
   animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -54,9 +54,9 @@
   right: 1.25rem;
   background: rgba(245, 87, 108, 0.15);
   border: 1px solid rgba(245, 87, 108, 0.3);
-  border-radius: var(--radius-sm);
-  width: 40px;
-  height: 40px;
+  border-radius: var(--radius-md);
+  width: 44px;
+  height: 44px;
   font-size: 1.25rem;
   line-height: 1;
   text-align: center;
@@ -74,8 +74,8 @@
   background: var(--secondary);
   border-color: transparent;
   color: white;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-2px) rotate(90deg);
+  box-shadow: 0 4px 12px rgba(245, 87, 108, 0.4);
 }
 
 .modal-close:active {

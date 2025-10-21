@@ -42,7 +42,7 @@ async def stream_chat_completions(platform: str, platform_user_id: str, messages
         async with client.stream("POST", "/api/chat/completions", headers=headers, json=payload) as response:
             if response.status_code != 200:
                 error_body = await response.aread()
-                yield f"Error: API returned status {response.status_code}\n{error_body.decode()}".encode('utf-8')
+                yield f"Error: API returned status {response.status_code}\n{error_body.decode('utf-8', errors='replace')}".encode('utf-8')
                 return
             async for chunk in response.aiter_bytes(): yield chunk
     except httpx.RequestError as e:

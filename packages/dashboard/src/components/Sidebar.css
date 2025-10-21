@@ -3,6 +3,8 @@
   grid-area: sidebar;
   background: var(--bg-card);
   border-right: 1px solid var(--border-subtle);
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
   padding: 1.25rem 0;
   display: flex;
   flex-direction: column;
@@ -92,23 +94,26 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.625rem 0.75rem;
+  padding: 0.75rem 1rem;
   text-decoration: none;
   color: var(--text-secondary);
   font-weight: 500;
   font-size: 0.875rem;
   position: relative;
-  transition: all var(--transition-fast);
+  transition: all var(--transition-base);
   cursor: pointer;
   border-radius: var(--radius-sm);
   background: transparent;
   border-left: 3px solid transparent;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
+  transform-origin: left center;
 }
 
 .nav-link:hover {
   background: var(--bg-elevated);
   color: var(--text-main);
+  transform: translateX(4px);
+  border-left-color: rgba(230, 126, 34, 0.3);
 }
 
 .nav-link.active {
@@ -116,6 +121,7 @@
   color: var(--primary);
   font-weight: 600;
   border-left-color: var(--primary);
+  box-shadow: 0 2px 8px rgba(230, 126, 34, 0.15);
 }
 
 /* Icon styling */
@@ -124,17 +130,19 @@
   height: 18px;
   flex-shrink: 0;
   opacity: 0.7;
-  transition: opacity var(--transition-fast);
+  transition: all var(--transition-base);
   stroke-width: 2;
 }
 
 .nav-link:hover .nav-icon {
   opacity: 1;
+  transform: scale(1.1);
 }
 
 .nav-link.active .nav-icon {
   opacity: 1;
   color: var(--primary);
+  transform: scale(1.05);
 }
 
 /* Sidebar Footer */

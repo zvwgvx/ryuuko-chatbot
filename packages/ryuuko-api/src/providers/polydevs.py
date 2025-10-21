@@ -85,7 +85,7 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
     
     key = api_key or os.getenv("POLYDEVS_API_KEY")
     if not key: return JSONResponse({"ok": False, "error": "api_key_not_provided"}, status_code=403)
-    
+
     try:
         client = AsyncOpenAI(api_key=key, base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
     except Exception as e:
@@ -110,8 +110,8 @@ async def forward(request: Request, data: Dict, api_key: Optional[str]):
             stream = await client.chat.completions.create(model=final_model, messages=messages, temperature=config.get("temperature"), top_p=config.get("top_p"), stream=True)
             async for chunk in stream:
                 if chunk.choices and chunk.choices[0].delta and chunk.choices[0].delta.content:
-                    yield chunk.choices[0].delta.content.encode("utf-8")
+                    yield chunk.choices[0].delta.content.encode("utf-8", errors="surrogatepass")
         except Exception as e:
-            yield (json.dumps({"ok": False, "error": "upstream_error", "detail": str(e)}) + "\n").encode("utf-8")
+            yield (json.dumps({"ok": False, "error": "upstream_error", "detail": str(e)}) + "\n").encode("utf-8", errors="surrogatepass")
 
     return StreamingResponse(streamer(), media_type="text/plain; charset=utf-8")
