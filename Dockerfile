@@ -4,7 +4,7 @@
 # This stage installs dependencies for a specific package into a virtual environment.
 # It leverages Docker caching, so dependencies are only re-installed if the
 # package's pyproject.toml changes.
-FROM python:3.11-slim-bookworm AS builder
+FROM python:3.13.9-slim-bookworm AS builder
 
 # ARG to specify which package to build.
 # This can be set during the build process, e.g., --build-arg PACKAGE_NAME=bot
@@ -31,7 +31,7 @@ RUN pip install .
 # STAGE 2: Final Stage
 # =================================================================
 # This stage creates the final, lean image for running the application.
-FROM python:3.11-slim-bookworm
+FROM python:3.13.9-slim-bookworm
 
 # ARG to specify which package to run (must be the same as in the builder stage)
 ARG PACKAGE_NAME
