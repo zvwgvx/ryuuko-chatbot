@@ -1,110 +1,412 @@
-# Deployment Guide v2.0.0
+# Deployment Guide v3.0.0
 
-This document provides instructions for deploying the Ryuuko Bot v2.0.0 ecosystem to a production environment. This architecture requires running two separate, persistent services: the **Core Service** and the **Discord Bot**.
+This document provides instructions for deploying the Ryuuko Chatbot ecosystem to a production environment. The system consists of multiple independent services that can be deployed separately: **Core API Service**, **Discord Bot**, **Telegram Bot**, and **Web Dashboard**.
 
-## 1. Server Preparation
+## Prerequisites
 
--   **Environment**: A Linux VPS (e.g., Ubuntu 22.04) is recommended for 24/7 uptime.
--   **Prerequisites**: Ensure your server has Python 3.11+, `git`, and a firewall (like `ufw`) configured.
--   **Installation**: Follow the installation steps in `SETUP.md` to clone the repository, create a virtual environment, and install all dependencies for both `core` and `discord-bot`.
+- **Linux VPS** (Ubuntu 22.04 LTS recommended) or similar server
+- **Python 3.11+** installed
+- **Git** installed
+- **MongoDB** instance (Atlas or self-hosted)
+- **Node.js 18+** (only for Web Dashboard)
+- **Nginx** or **Caddy** (recommended for reverse proxy)
+- **Domain name** (optional but recommended for HTTPS)
 
-## 2. Using `systemd` for Service Management
+## Deployment Options
 
-To ensure both services run continuously and restart automatically, we will create a `systemd` service file for each.
+This guide covers two deployment methods:
+1. **systemd Services** (recommended for VPS/dedicated servers)
+2. **Docker** (recommended for containerized deployments)
 
-### A. Core Service (`ryuuko-core.service`)
+---
 
-This service runs the FastAPI backend API.
+## Method 1: systemd Service Deployment
 
-1.  **Create the service file:**
-    ```sh
-    sudo nano /etc/systemd/system/ryuuko-ryuuko-api.service
-    ```
+This method runs services as persistent systemd services with automatic restart on failure.
 
-2.  **Paste the following configuration.** Replace `/path/to/ryuuko` and `your_user` with your actual project path and username.
+### Step 1: Server Preparation
 
-    ```ini
-    [Unit]
-    Description=Ryuuko Core API Service
-    After=network.target
+#### Update System
+```bash
+sudo apt update && sudo apt upgrade -y
+```
 
-    [Service]
-    User=your_user
-    Group=your_user
-    WorkingDirectory=/path/to/ryuuko
-    # Command to run the Core Service module
-    ExecStart=/path/to/ryuuko/.venv/bin/python3 -m core
-    Restart=always
-    RestartSec=10
+#### Install Python 3.11+ (if not available)
+```bash
+sudo apt install python3.11 python3.11-venv python3-pip -y
+```
 
-    [Install]
-    WantedBy=multi-user.target
-    ```
+#### Install Node.js (for Web Dashboard)
+```bash
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+sudo apt install -y nodejs
+```
 
-### B. Discord Bot Service (`ryuuko-discord.service`)
+#### Configure Firewall
+```bash
+sudo ufw allow 22/tcp      # SSH
+sudo ufw allow 80/tcp      # HTTP
+sudo ufw allow 443/tcp     # HTTPS
+sudo ufw enable
+```
 
-This service runs the Discord client, which connects to the Core Service.
+### Step 2: Clone and Install
 
-1.  **Create the service file:**
-    ```sh
-    sudo nano /etc/systemd/system/ryuuko-discord.service
-    ```
+#### Create Deployment User (recommended for security)
+```bash
+sudo useradd -m -s /bin/bash ryuuko
+sudo su - ryuuko
+```
 
-2.  **Paste the following configuration.** Again, replace the placeholder paths and username.
+#### Clone Repository
+```bash
+cd ~
+git clone https://github.com/zvwgvx/ryuuko-chatbot
+cd ryuuko-chatbot
+```
 
-    ```ini
-    [Unit]
-    Description=Ryuuko Discord Bot Client
-    # Ensure the Core Service is started first
-    After=network.target ryuuko-core.service
-    Requires=ryuuko-core.service
+#### Create Virtual Environment
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+```
 
-    [Service]
-    User=your_user
-    Group=your_user
-    WorkingDirectory=/path/to/ryuuko
-    # Command to run the Discord Bot module
-    ExecStart=/path/to/ryuuko/.venv/bin/python3 -m discord_bot
-    Restart=always
-    RestartSec=10
+#### Install Python Packages
+```bash
+# Core API (required)
+pip install -e ./packages/ryuuko-api
 
-    [Install]
-    WantedBy=multi-user.target
-    ```
+# Discord bot (optional)
+pip install -e ./packages/discord-bot
 
-### C. Managing the Services
+# Telegram bot (optional)
+pip install -e ./packages/telegram-bot
+```
 
-After creating both files, run the following commands:
+#### Install Dashboard Dependencies (optional)
+```bash
+cd packages/dashboard
+npm install
+npm run build  # Creates optimized production build
+cd ../..
+```
 
-```sh
-# Reload systemd to recognize the new services
+### Step 3: Environment Configuration
+
+Create `.env` files for each service. **Important**: Use production-grade values!
+
+#### Core API (.env)
+```bash
+nano packages/ryuuko-api/.env
+```
+
+```env
+# MongoDB Connection (use MongoDB Atlas or self-hosted)
+MONGODB_CONNECTION_STRING=mongodb+srv://username:password@cluster.mongodb.net/ryuuko
+
+# API Security - GENERATE STRONG KEYS!
+CORE_API_KEY=your-secure-random-key-minimum-32-characters-long
+
+# LLM Provider API Keys
+GEMINI_API_KEY=your-production-gemini-key
+POLYDEVS_API_KEY=your-production-polydevs-key
+PROXYVN_API_KEY=your-production-proxyvn-key
+
+# JWT Secret - GENERATE STRONG KEY!
+SECRET_KEY=your-jwt-secret-minimum-32-characters-long
+
+# Server Configuration
+HOST=127.0.0.1  # Localhost only (behind reverse proxy)
+PORT=8000
+```
+
+#### Discord Bot (.env)
+```bash
+nano packages/discord-bot/.env
+```
+
+```env
+DISCORD_TOKEN=your-production-discord-token
+CORE_API_URL=http://127.0.0.1:8000
+CORE_API_KEY=<same-as-core-api>
+```
+
+#### Telegram Bot (.env)
+```bash
+nano packages/telegram-bot/.env
+```
+
+```env
+TELEGRAM_TOKEN=your-production-telegram-token
+CORE_API_URL=http://127.0.0.1:8000
+CORE_API_KEY=<same-as-core-api>
+```
+
+#### Secure .env Files
+```bash
+chmod 600 packages/ryuuko-api/.env
+chmod 600 packages/discord-bot/.env
+chmod 600 packages/telegram-bot/.env
+```
+
+### Step 4: Create systemd Services
+
+Exit from ryuuko user back to your sudo user:
+```bash
+exit
+```
+
+#### A. Core API Service
+
+Create service file:
+```bash
+sudo nano /etc/systemd/system/ryuuko-api.service
+```
+
+```ini
+[Unit]
+Description=Ryuuko Core API Service
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ryuuko
+Group=ryuuko
+WorkingDirectory=/home/ryuuko/ryuuko-chatbot
+Environment="PATH=/home/ryuuko/ryuuko-chatbot/.venv/bin"
+ExecStart=/home/ryuuko/ryuuko-chatbot/.venv/bin/python3 -m ryuuko_api
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### B. Discord Bot Service
+
+```bash
+sudo nano /etc/systemd/system/ryuuko-discord.service
+```
+
+```ini
+[Unit]
+Description=Ryuuko Discord Bot Client
+After=network.target ryuuko-api.service
+Wants=network-online.target
+Requires=ryuuko-api.service
+
+[Service]
+Type=simple
+User=ryuuko
+Group=ryuuko
+WorkingDirectory=/home/ryuuko/ryuuko-chatbot
+Environment="PATH=/home/ryuuko/ryuuko-chatbot/.venv/bin"
+ExecStart=/home/ryuuko/ryuuko-chatbot/.venv/bin/python3 -m discord_bot
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+#### C. Telegram Bot Service
+
+```bash
+sudo nano /etc/systemd/system/ryuuko-telegram.service
+```
+
+```ini
+[Unit]
+Description=Ryuuko Telegram Bot Client
+After=network.target ryuuko-api.service
+Wants=network-online.target
+Requires=ryuuko-api.service
+
+[Service]
+Type=simple
+User=ryuuko
+Group=ryuuko
+WorkingDirectory=/home/ryuuko/ryuuko-chatbot
+Environment="PATH=/home/ryuuko/ryuuko-chatbot/.venv/bin"
+ExecStart=/home/ryuuko/ryuuko-chatbot/.venv/bin/python3 -m telegram_bot
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
+```
+
+### Step 5: Enable and Start Services
+
+```bash
+# Reload systemd daemon
 sudo systemctl daemon-reload
 
-# Enable both services to start on boot
-sudo systemctl enable ryuuko-ryuuko-api.service
-sudo systemctl enable ryuuko-discord.service
+# Enable services (start on boot)
+sudo systemctl enable ryuuko-api.service
+sudo systemctl enable ryuuko-discord.service   # Optional
+sudo systemctl enable ryuuko-telegram.service  # Optional
 
-# Start both services immediately
-sudo systemctl start ryuuko-ryuuko-api.service
-sudo systemctl start ryuuko-discord.service
+# Start services
+sudo systemctl start ryuuko-api.service
+sudo systemctl start ryuuko-discord.service    # Optional
+sudo systemctl start ryuuko-telegram.service   # Optional
 ```
 
-To check the status or view logs for a service, use:
+### Step 6: Verify Services
 
-```sh
-sudo systemctl status ryuuko-ryuuko-api
-journalctl -u ryuuko-ryuuko-api -f
-
+```bash
+# Check status
+sudo systemctl status ryuuko-api
 sudo systemctl status ryuuko-discord
-journalctl -u ryuuko-discord -f
+sudo systemctl status ryuuko-telegram
+
+# View logs
+sudo journalctl -u ryuuko-api -f
+sudo journalctl -u ryuuko-discord -f
+sudo journalctl -u ryuuko-telegram -f
 ```
 
-## 3. Security Best Practices
+---
 
--   **Firewall**: Configure your firewall to only allow traffic on necessary ports. The Core Service runs on port 8000, but you should ideally place it behind a reverse proxy like Nginx or Caddy and only expose ports 80/443.
--   **Restrictive Permissions**: Ensure your `.env` files are not world-readable. Set permissions to `600`.
-    ```sh
-    chmod 600 /path/to/ryuuko/packages/ryuuko-api/.env
-    chmod 600 /path/to/ryuuko/packages/discord-bot/.env
-    ```
--   **Dedicated User**: Run the services under a dedicated, non-root user account.
+## Method 2: Docker Deployment
+
+Docker provides containerized deployment for easier management and portability.
+
+### Step 1: Install Docker
+
+```bash
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+# Install Docker Compose
+sudo apt install docker-compose -y
+
+# Add user to docker group
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+### Step 2: Build Docker Images
+
+#### Build Core API
+```bash
+docker build --build-arg PACKAGE_NAME=ryuuko-api -t ryuuko-api:latest .
+```
+
+#### Build Discord Bot
+```bash
+docker build --build-arg PACKAGE_NAME=discord-bot -t ryuuko-discord-bot:latest .
+```
+
+#### Build Telegram Bot
+```bash
+docker build --build-arg PACKAGE_NAME=telegram-bot -t ryuuko-telegram-bot:latest .
+```
+
+### Step 3: Create Docker Compose File
+
+```bash
+nano docker-compose.yml
+```
+
+```yaml
+version: '3.8'
+
+services:
+  api:
+    image: ryuuko-api:latest
+    container_name: ryuuko-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./packages/ryuuko-api/.env
+    networks:
+      - ryuuko-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  discord-bot:
+    image: ryuuko-discord-bot:latest
+    container_name: ryuuko-discord
+    restart: unless-stopped
+    env_file:
+      - ./packages/discord-bot/.env
+    depends_on:
+      - api
+    networks:
+      - ryuuko-network
+
+  telegram-bot:
+    image: ryuuko-telegram-bot:latest
+    container_name: ryuuko-telegram
+    restart: unless-stopped
+    env_file:
+      - ./packages/telegram-bot/.env
+    depends_on:
+      - api
+    networks:
+      - ryuuko-network
+
+networks:
+  ryuuko-network:
+    driver: bridge
+```
+
+### Step 4: Run with Docker Compose
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+---
+
+## Security & Monitoring
+
+### SSL Setup with Let's Encrypt
+
+```bash
+sudo apt install certbot python3-certbot-nginx -y
+sudo certbot --nginx -d api.yourdomain.com
+```
+
+### Regular Updates
+
+```bash
+# systemd
+sudo su - ryuuko
+cd ~/ryuuko-chatbot
+git pull origin main
+source .venv/bin/activate
+pip install -e ./packages/ryuuko-api --upgrade
+exit
+sudo systemctl restart ryuuko-api
+
+# Docker
+git pull origin main
+docker-compose build
+docker-compose down && docker-compose up -d
+```
+
+---
+
+**Your Ryuuko Chatbot ecosystem is now deployed!** 🚀
