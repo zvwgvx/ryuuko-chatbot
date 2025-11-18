@@ -25,24 +25,47 @@ Unsure where to begin contributing? You can start by looking through `good first
 1.  **Fork the repository** on GitHub.
 2.  **Clone your fork** locally:
     ```bash
-    git clone https://github.com/zvwgvx/ryuuko-chatbot.git
+    git clone https://github.com/YOUR_USERNAME/ryuuko-chatbot.git
     cd ryuuko-chatbot
     ```
 3.  **Create a new branch** for your changes:
     ```bash
-    git checkout -b your-feature-branch
+    git checkout -b feature/your-feature-name
+    # Or for bug fixes:
+    git checkout -b fix/bug-description
     ```
-4.  **Install dependencies**:
+4.  **Set up virtual environment**:
     ```bash
-    pip install -r requirements.txt
+    python3 -m venv .venv
+    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
     ```
-5.  **Set up your environment**:
-    -   Create a `.env` file in the project root.
-    -   Add your `DISCORD_TOKEN` and `MONGODB_CONNECTION_STRING`.
+5.  **Install dependencies** (install only what you need):
+    ```bash
+    # Core API (required for most development)
+    pip install -e ./packages/ryuuko-api
+
+    # Optional: Discord bot client
+    pip install -e ./packages/discord-bot
+
+    # Optional: Telegram bot client
+    pip install -e ./packages/telegram-bot
+
+    # Optional: Dashboard (requires Node.js)
+    cd packages/dashboard && npm install && cd ../..
+    ```
+6.  **Configure environment variables**:
+
+    See `docs/SETUP.md` for detailed configuration instructions. At minimum, create:
+
+    `packages/ryuuko-api/.env`:
     ```env
-    DISCORD_TOKEN=your_discord_bot_token
-    MONGODB_CONNECTION_STRING=your_mongodb_connection_string
+    MONGODB_CONNECTION_STRING=mongodb://localhost:27017/ryuuko
+    CORE_API_KEY=your-development-api-key
+    GEMINI_API_KEY=your-gemini-key  # Or other LLM provider
+    SECRET_KEY=your-jwt-secret-key
     ```
+
+    If testing Discord/Telegram bots, create their respective `.env` files as documented in `docs/SETUP.md`.
 
 ## Coding Style
 
